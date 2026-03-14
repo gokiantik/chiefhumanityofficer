@@ -783,408 +783,6 @@ body.id-active .lang-id-inline { display: inline; }
 body.id-active .lang-en-inline { display: none; }
 .lang-id-inline { display: none; }
 </style>
-
-/* ── ZI ZHU ZHE ARTICLE CARD ── */
-.cafe-divider {
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
-}
-
-.cafe-section {
-  position: relative;
-  z-index: 1;
-  padding: 80px 40px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.cafe-section-title {
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  letter-spacing: 3px;
-  color: var(--gold);
-  text-transform: uppercase;
-  text-align: center;
-  margin-bottom: 48px;
-}
-
-/* Article card — preview only */
-.cafe-card {
-  position: relative;
-  padding: 40px 44px;
-  border: 1px solid rgba(201,168,76,0.18);
-  border-radius: 12px;
-  background: rgba(26,46,69,0.4);
-  backdrop-filter: blur(8px);
-  cursor: pointer;
-  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s, transform 0.3s;
-  overflow: hidden;
-}
-
-.cafe-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.cafe-card:hover {
-  border-color: rgba(201,168,76,0.4);
-  background: rgba(26,46,69,0.65);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 30px rgba(201,168,76,0.07);
-  transform: translateY(-3px);
-}
-.cafe-card:hover::before { opacity: 1; }
-
-.cafe-card-top {
-  display: flex;
-  align-items: flex-start;
-  gap: 24px;
-  margin-bottom: 20px;
-}
-
-.cafe-card-icon {
-  font-family: 'Noto Serif SC', serif;
-  font-size: 36px;
-  color: var(--gold);
-  line-height: 1;
-  flex-shrink: 0;
-  opacity: 0.85;
-}
-
-.cafe-card-date {
-  font-family: 'Cinzel', serif;
-  font-size: 10px;
-  letter-spacing: 3px;
-  color: var(--gold-dk);
-  margin-bottom: 8px;
-  text-transform: uppercase;
-}
-
-.cafe-card-title {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(15px, 2vw, 20px);
-  font-weight: 600;
-  color: var(--cream);
-  margin-bottom: 6px;
-  letter-spacing: 0.5px;
-  line-height: 1.3;
-}
-
-.cafe-card-subtitle {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 16px;
-  color: var(--gold-lt);
-}
-
-.cafe-card-brief {
-  font-size: 14px;
-  line-height: 1.85;
-  color: var(--muted);
-  margin-bottom: 28px;
-  border-left: 2px solid rgba(201,168,76,0.25);
-  padding-left: 18px;
-}
-
-.cafe-card-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.cafe-card-tags {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.cafe-tag-pill {
-  font-family: 'Cinzel', serif;
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  padding: 4px 12px;
-  border: 1px solid rgba(201,168,76,0.2);
-  border-radius: 20px;
-  color: var(--muted);
-}
-
-.cafe-read-btn {
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  letter-spacing: 2px;
-  padding: 9px 24px;
-  border: 1px solid rgba(201,168,76,0.5);
-  border-radius: 24px;
-  background: rgba(201,168,76,0.08);
-  color: var(--gold-lt);
-  transition: all 0.25s;
-  white-space: nowrap;
-}
-
-.cafe-card:hover .cafe-read-btn {
-  background: rgba(201,168,76,0.18);
-  border-color: var(--gold);
-  color: var(--gold);
-}
-
-/* ── ARTICLE MODAL ── */
-.article-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(8,16,28,0.88);
-  z-index: 4000;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 40px 20px;
-  backdrop-filter: blur(8px);
-  overflow-y: auto;
-}
-.article-overlay.open { display: flex; }
-
-.article-modal {
-  background: linear-gradient(160deg, #0F2035 0%, #1A3050 100%);
-  border: 1px solid rgba(201,168,76,0.25);
-  border-radius: 16px;
-  padding: 52px 56px 48px;
-  max-width: 760px;
-  width: 100%;
-  position: relative;
-  box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 40px rgba(201,168,76,0.06);
-  margin: auto;
-}
-
-.article-close {
-  position: absolute;
-  top: 20px; right: 24px;
-  background: none;
-  border: none;
-  color: var(--muted);
-  font-size: 24px;
-  cursor: pointer;
-  transition: color 0.2s;
-  line-height: 1;
-}
-.article-close:hover { color: var(--gold); }
-
-.article-lang-bar {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 32px;
-}
-
-.article-lang-btn {
-  font-family: 'Cinzel', serif;
-  font-size: 10px;
-  letter-spacing: 2px;
-  padding: 5px 16px;
-  border: 1px solid rgba(201,168,76,0.3);
-  border-radius: 20px;
-  background: transparent;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.article-lang-btn.active, .article-lang-btn:hover {
-  border-color: var(--gold);
-  color: var(--gold);
-  background: rgba(201,168,76,0.08);
-}
-
-.article-meta {
-  font-family: 'Cinzel', serif;
-  font-size: 10px;
-  letter-spacing: 3px;
-  color: var(--gold-dk);
-  margin-bottom: 12px;
-  text-transform: uppercase;
-}
-
-.article-title {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(20px, 3vw, 28px);
-  font-weight: 600;
-  color: var(--cream);
-  line-height: 1.3;
-  margin-bottom: 8px;
-}
-
-.article-subtitle {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 19px;
-  color: var(--gold-lt);
-  margin-bottom: 32px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid rgba(201,168,76,0.15);
-}
-
-.article-body p {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 17px;
-  line-height: 1.9;
-  color: var(--cream-dk);
-  margin-bottom: 18px;
-}
-
-.article-pullquote {
-  border-left: 3px solid var(--gold);
-  padding: 16px 24px;
-  margin: 28px 0;
-  background: rgba(201,168,76,0.05);
-  border-radius: 0 8px 8px 0;
-}
-
-.article-pullquote p {
-  font-family: 'Cormorant Garamond', serif !important;
-  font-style: italic;
-  font-size: 21px !important;
-  color: var(--gold-lt) !important;
-  line-height: 1.5 !important;
-  margin-bottom: 6px !important;
-}
-
-.article-pullquote cite {
-  font-size: 11px;
-  letter-spacing: 2px;
-  color: var(--muted);
-  font-style: normal;
-  font-family: 'Cinzel', serif;
-}
-
-.article-quadrants {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin: 24px 0;
-}
-
-.article-q {
-  padding: 16px 18px;
-  border: 1px solid rgba(201,168,76,0.15);
-  border-radius: 8px;
-  background: rgba(201,168,76,0.03);
-}
-
-.article-q-label {
-  font-family: 'Cinzel', serif;
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: var(--gold);
-  margin-bottom: 5px;
-  text-transform: uppercase;
-}
-
-.article-q-desc {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.6;
-  font-family: 'Cormorant Garamond', serif;
-}
-
-.article-connections {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin: 28px 0;
-}
-
-.article-connection {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 18px;
-  border: 1px solid rgba(201,168,76,0.15);
-  border-radius: 10px;
-  background: rgba(26,46,69,0.5);
-  flex: 1;
-  min-width: 180px;
-}
-
-.article-conn-icon {
-  font-size: 20px;
-  color: var(--gold);
-  flex-shrink: 0;
-}
-
-.article-conn-label {
-  font-family: 'Cinzel', serif;
-  font-size: 9px;
-  letter-spacing: 2px;
-  color: var(--muted);
-  margin-bottom: 3px;
-}
-
-.article-conn-name {
-  font-size: 13px;
-  color: var(--cream-dk);
-  font-family: 'Cormorant Garamond', serif;
-}
-
-.article-cta-row {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 32px;
-  padding-top: 24px;
-  border-top: 1px solid rgba(201,168,76,0.12);
-}
-
-.article-cta-btn {
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  letter-spacing: 2px;
-  padding: 10px 26px;
-  border: 1px solid rgba(201,168,76,0.5);
-  border-radius: 24px;
-  background: rgba(201,168,76,0.1);
-  color: var(--gold-lt);
-  text-decoration: none;
-  transition: all 0.25s;
-  cursor: pointer;
-}
-.article-cta-btn:hover {
-  background: rgba(201,168,76,0.22);
-  border-color: var(--gold);
-  color: var(--gold);
-}
-.article-cta-btn.primary {
-  background: rgba(201,168,76,0.15);
-  border-color: var(--gold);
-  color: var(--gold);
-}
-
-/* ── ARTICLE MODAL LANG SCOPING ── */
-/* Default: show EN, hide ID inside modal */
-#articleOverlay .lang-id { display: none; }
-#articleOverlay .lang-en { display: block; }
-
-/* When modal is ID mode */
-#articleOverlay.id-active .lang-en { display: none; }
-#articleOverlay.id-active .lang-id { display: block; }
-
-/* Inline variants inside modal */
-#articleOverlay .lang-id-inline { display: none; }
-#articleOverlay .lang-en-inline { display: inline; }
-#articleOverlay.id-active .lang-en-inline { display: none; }
-#articleOverlay.id-active .lang-id-inline { display: inline; }
-
-@media (max-width: 768px) {
-  .cafe-section { padding: 60px 24px; }
-  .cafe-card { padding: 28px 24px; }
-  .article-modal { padding: 40px 24px 36px; }
-  .article-quadrants { grid-template-columns: 1fr; }
-  .article-connections { flex-direction: column; }
-  .cafe-card-top { flex-direction: column; gap: 12px; }
-}
-</style>
 </head>
 <body>
 
@@ -1335,146 +933,14 @@ body.id-active .lang-en-inline { display: none; }
   </div>
 </section>
 
-
-<!-- ── ZI ZHU ZHE ARTICLE CARD SECTION ── -->
-<div class="cafe-divider"></div>
-
-<section class="cafe-section" id="zi-zhu-zhe">
-  <div class="cafe-section-title lang-en">Latest · From The Café</div>
-  <div class="cafe-section-title lang-id">Terbaru · Dari Kafe</div>
-
-  <!-- Article Preview Card -->
-  <div class="cafe-card" onclick="openArticle()">
-    <div class="cafe-card-top">
-      <div class="cafe-card-icon">自主者</div>
-      <div>
-        <div class="cafe-card-date lang-en">1 March 2026 · LinkedIn · WIB</div>
-        <div class="cafe-card-date lang-id">1 Maret 2026 · LinkedIn · WIB</div>
-        <div class="cafe-card-title lang-en">A Conversation with Marshall Goldsmith &amp; Pak Sukarela Batunanggar at Zi Zhu Zhe 自主者</div>
-        <div class="cafe-card-title lang-id">Ngobrol Bersama Marshall Goldsmith &amp; Pak Sukarela Batunanggar di Zi Zhu Zhe 自主者</div>
-        <div class="cafe-card-subtitle lang-en">Superhero Café Inside — Grand Opening</div>
-        <div class="cafe-card-subtitle lang-id">Superhero Café Inside — Pembukaan Resmi</div>
-      </div>
-    </div>
-
-    <p class="cafe-card-brief lang-en">
-      Three days ago, a single survey question from Marshall Goldsmith kept knocking at the door of my mind. Today that question has crystallised into something real — a digital café on LinkedIn, born from the "cognitive nudge" of a local friend, and a prophecy written 22 years ago that has finally come true.
-    </p>
-    <p class="cafe-card-brief lang-id">
-      Tiga hari lalu, satu pertanyaan survei dari Marshall Goldsmith terus mengetuk pintu pikiran saya. Hari ini pertanyaan itu telah mengkristal menjadi sesuatu yang nyata — sebuah kafe digital di LinkedIn, lahir dari "sodokan kognitif" seorang sahabat lokal, dan nubuat yang ditulis 22 tahun lalu yang akhirnya terwujud.
-    </p>
-
-    <div class="cafe-card-footer">
-      <div class="cafe-card-tags">
-        <span class="cafe-tag-pill">自主者</span>
-        <span class="cafe-tag-pill lang-en">Cognitive Leadership</span>
-        <span class="cafe-tag-pill lang-id">Kepemimpinan Kognitif</span>
-        <span class="cafe-tag-pill">LinkedIn</span>
-      </div>
-      <div class="cafe-read-btn lang-en">Read Full Article →</div>
-      <div class="cafe-read-btn lang-id">Baca Artikel Lengkap →</div>
-    </div>
+<!-- ── FOOTER ── -->
+<footer>
+  <span class="footer-star">✦</span>
+  <div class="footer-text">
+    © 2026 Go Kian Tik (Mbah Hogi Bejo™) &nbsp;·&nbsp; 自主者 Superhero Café Inside<br>
+    Chief Humanity Officer In Action Series &nbsp;·&nbsp; CC BY-NC-ND 4.0
   </div>
-
-</section>
-
-<!-- ── ARTICLE MODAL ── -->
-<div class="article-overlay" id="articleOverlay" onclick="closeArticleOutside(event)">
-  <div class="article-modal">
-    <button class="article-close" onclick="closeArticle()">✕</button>
-
-    <!-- In-modal language toggle -->
-    <div class="article-lang-bar">
-      <button class="article-lang-btn active" id="art-btn-en" onclick="setArticleLang('en')">EN</button>
-      <button class="article-lang-btn" id="art-btn-id" onclick="setArticleLang('id')">ID</button>
-    </div>
-
-    <div class="article-meta lang-en">1 March 2026 · Zi Zhu Zhe 自主者 · LinkedIn</div>
-    <div class="article-meta lang-id">1 Maret 2026 · Zi Zhu Zhe 自主者 · LinkedIn</div>
-
-    <div class="article-title lang-en">A Conversation with Marshall Goldsmith &amp; Pak Sukarela Batunanggar at Zi Zhu Zhe 自主者</div>
-    <div class="article-title lang-id">Ngobrol Bersama Marshall Goldsmith &amp; Pak Sukarela Batunanggar di Zi Zhu Zhe 自主者</div>
-
-    <div class="article-subtitle lang-en">Superhero Café Inside — Grand Opening · Where Sovereigns Gather</div>
-    <div class="article-subtitle lang-id">Superhero Café Inside — Pembukaan Resmi · Tempat Para Berdaulat Berkumpul</div>
-
-    <div class="article-body">
-
-      <p class="lang-en">Three days ago, Marshall Goldsmith opened a survey with a single question that kept knocking at the door of my mind — and has not stopped since. Because I am a <em>thinker who acts</em>, the answer could not remain only in my head. It had to be made real.</p>
-      <p class="lang-id">Tiga hari lalu, Marshall Goldsmith membuka sebuah survei dengan satu pertanyaan yang terus mengetuk pintu pikiran saya — dan belum berhenti hingga kini. Karena saya adalah seorang <em>pemikir yang bertindak</em>, jawaban itu tidak bisa hanya tinggal di kepala. Ia harus diwujudkan.</p>
-
-      <div class="article-pullquote">
-        <p>Intellectually connected. Cognitively friendship.</p>
-        <cite class="lang-en">— A verse written at age 32, twenty-two years ago</cite>
-        <cite class="lang-id">— Syair yang saya tulis saat berumur 32 tahun, 22 tahun silam</cite>
-      </div>
-
-      <p class="lang-en">That verse was not merely words. It was a prophecy. In fewer than 25 days, it has found its form: a connection with <strong>Pak Sukarela Batunanggar</strong> as my first local cognitive friend in +62, and with <strong>Sir Marshall Goldsmith</strong> on the global stage.</p>
-      <p class="lang-id">Syair itu bukan sekadar kata-kata. Ia adalah nubuat. Dalam kurang dari 25 hari, nubuat itu telah menemukan wujudnya: terhubung dengan <strong>Pak Sukarela Batunanggar</strong> sebagai sahabat kognitif lokal pertama di negeri +62, dan dengan <strong>Sir Marshall Goldsmith</strong> dalam cakupan global.</p>
-
-      <p class="lang-en">The café itself was born from a "cognitive ball nudge" — <em>sodokan bola kognitif</em> — by Pak Sukarela, after his extensive comment on one of my writings, which finally pushed me to open this space officially.</p>
-      <p class="lang-id">Kafe ini lahir dari sebuah "sodokan bola kognitif" dari Pak Sukarela — setelah komentarnya yang panjang pada tulisan saya — yang akhirnya mendorong saya membuka ruang ini secara resmi.</p>
-
-      <p class="lang-en">Today, <strong>1 March 2026</strong>, <em>Zi Zhu Zhe 自主者</em> officially opens its first digital space on LinkedIn — a café for 1.3 billion professionals to pause, breathe, and converse across all four quadrants of professional life:</p>
-      <p class="lang-id">Hari ini, <strong>1 Maret 2026</strong>, <em>Zi Zhu Zhe 自主者</em> resmi membuka lapak digitalnya yang pertama di LinkedIn — sebuah kafe untuk 1,3 miliar profesional untuk berhenti sejenak dan ngobrol dari keempat kuadran kehidupan profesional:</p>
-
-      <div class="article-quadrants">
-        <div class="article-q">
-          <div class="article-q-label">Employee</div>
-          <div class="article-q-desc lang-en">Navigating the ecosystem of organisations, structures and dynamics — with all its VUCA and SWOT.</div>
-          <div class="article-q-desc lang-id">Menavigasi ekosistem organisasi, struktur, dan dinamikanya — dengan VUCA dan SWOT masing-masing.</div>
-        </div>
-        <div class="article-q">
-          <div class="article-q-label">Business Owner</div>
-          <div class="article-q-desc lang-en">Commanding the 5M — Man, Machine, Method, Material, Money — at every scale.</div>
-          <div class="article-q-desc lang-id">Mengendalikan 5M — Man, Machine, Method, Material, Money — di setiap skala.</div>
-        </div>
-        <div class="article-q">
-          <div class="article-q-label">Self-Employed</div>
-          <div class="article-q-desc lang-en">Independent in expertise, sovereign in every decision made.</div>
-          <div class="article-q-desc lang-id">Mandiri dalam keahlian, berdaulat dalam setiap keputusan yang dibuat.</div>
-        </div>
-        <div class="article-q">
-          <div class="article-q-label">Investor</div>
-          <div class="article-q-desc lang-en">Letting capital work while thinking further ahead — patient and strategic.</div>
-          <div class="article-q-desc lang-id">Membiarkan modal bekerja sambil berpikir lebih jauh ke depan — sabar dan strategis.</div>
-        </div>
-      </div>
-
-      <p class="lang-en">Each quadrant carries its own obstacles, its own SWOT, its own VUCA. <em>Zi Zhu Zhe</em> is not here to provide all the answers — but to accompany the conversation. Here, I, <strong>Go Kian Tik || The Sovereign One</strong>, am ready to sit with you.</p>
-      <p class="lang-id">Setiap kuadran membawa rintangannya sendiri, SWOT-nya sendiri, VUCA-nya sendiri. <em>Zi Zhu Zhe</em> hadir bukan untuk memberi semua jawaban — melainkan untuk menemani percakapan. Di sinilah saya, <strong>Go Kian Tik || The Sovereign One</strong>, siap duduk bersama Anda.</p>
-
-      <div class="article-connections">
-        <div class="article-connection">
-          <div class="article-conn-icon">✦</div>
-          <div>
-            <div class="article-conn-label lang-en">Global Cognitive Friend</div>
-            <div class="article-conn-label lang-id">Sahabat Kognitif Global</div>
-            <div class="article-conn-name">Marshall Goldsmith</div>
-          </div>
-        </div>
-        <div class="article-connection">
-          <div class="article-conn-icon">✦</div>
-          <div>
-            <div class="article-conn-label lang-en">Local Cognitive Friend · +62</div>
-            <div class="article-conn-label lang-id">Sahabat Kognitif Lokal · +62</div>
-            <div class="article-conn-name">Pak Sukarela Batunanggar</div>
-          </div>
-        </div>
-      </div>
-
-      <p class="lang-en">The door of this digital café is open. Walk in, order your digital coffee, and let us begin.</p>
-      <p class="lang-id">Pintu kafe digital ini terbuka. Masuk, pesan kopi digital Anda, dan mari kita mulai ngobrol.</p>
-
-      <div class="article-cta-row">
-        <a href="https://www.linkedin.com/in/gokiantik" target="_blank" class="article-cta-btn primary lang-en">☕ Enter the Café on LinkedIn →</a>
-        <a href="https://www.linkedin.com/in/gokiantik" target="_blank" class="article-cta-btn primary lang-id">☕ Masuk Kafe di LinkedIn →</a>
-        <a href="https://bit.ly/superherocafeinside" target="_blank" class="article-cta-btn">Superhero Café Inside</a>
-      </div>
-
-    </div>
-  </div>
-</div>
+</footer>
 
 <!-- ── 12 NENG MODAL ── -->
 <div class="neng-overlay" id="nengOverlay" onclick="closeNengOutside(event)">
@@ -1640,17 +1106,132 @@ body.id-active .lang-en-inline { display: none; }
     </div>
 
   </div>
+</div>
+<div class="neng-overlay" id="nengOverlay" onclick="closeNengOutside(event)">
+  <div class="neng-modal">
+    <button class="neng-close" onclick="closeNeng()">✕</button>
+
+    <div class="neng-header">
+      <div class="neng-header-zh">陶朱公 · 十二能</div>
+      <div class="neng-header-title">Tao Zhu Gong · 12 Néng</div>
+      <div class="neng-header-sub lang-en">The 12 Capacities of Stable Power — from 《經商寶典》 Golden Rules of Business Success (~500 BC)</div>
+      <div class="neng-header-sub lang-id">12 Kapasitas Kekuatan yang Stabil — dari 《經商寶典》 Pedoman Emas Kesuksesan Bisnis (~500 SM)</div>
+    </div>
+
+    <div class="neng-grid">
+
+      <div class="neng-item">
+        <div class="neng-num">能 01</div>
+        <div class="neng-zh">能識人</div>
+        <div class="neng-pinyin">Néng shí rén</div>
+        <div class="neng-en lang-en">Ability to know people's character — perceive evidence of character from experience.</div>
+        <div class="neng-id lang-id">Kemampuan mengenali karakter seseorang — membaca watak dari pengalaman.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 02</div>
+        <div class="neng-zh">能接納</div>
+        <div class="neng-pinyin">Néng jiē nà</div>
+        <div class="neng-en lang-en">Ability to handle people — never prejudge; receive all with courtesy and openness.</div>
+        <div class="neng-id lang-id">Kemampuan menerima orang — tidak menghakimi; menyambut semua dengan sopan dan terbuka.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 03</div>
+        <div class="neng-zh">能安業</div>
+        <div class="neng-pinyin">Néng ān yè</div>
+        <div class="neng-en lang-en">Ability to stay focused — avoid restlessness; commitment to one's path is a great virtue.</div>
+        <div class="neng-id lang-id">Kemampuan untuk tetap fokus — hindari kegelisahan; komitmen pada jalur adalah kebajikan besar.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 04</div>
+        <div class="neng-zh">能整頓</div>
+        <div class="neng-pinyin">Néng zhěng dùn</div>
+        <div class="neng-en lang-en">Ability to be organized — orderly presentation wins hearts and minds.</div>
+        <div class="neng-id lang-id">Kemampuan untuk terorganisir — kerapian presentasi memenangkan hati dan pikiran.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 05</div>
+        <div class="neng-zh">能敏捷</div>
+        <div class="neng-pinyin">Néng mǐn jié</div>
+        <div class="neng-en lang-en">Ability to be adaptable and swift — hesitation leads to no achievement; respond with agility.</div>
+        <div class="neng-id lang-id">Kemampuan adaptif dan cepat — ragu-ragu tidak menghasilkan apa-apa; respons dengan kelincahan.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 06</div>
+        <div class="neng-zh">能討賬</div>
+        <div class="neng-pinyin">Néng tǎo zhàng</div>
+        <div class="neng-en lang-en">Ability to collect debts diligently — without collections, liquidity and trust are damaged.</div>
+        <div class="neng-id lang-id">Kemampuan menagih dengan tekun — tanpa penagihan, likuiditas dan kepercayaan rusak.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 07</div>
+        <div class="neng-zh">能用人</div>
+        <div class="neng-pinyin">Néng yòng rén</div>
+        <div class="neng-en lang-en">Ability to employ people well — deploy talent according to their strengths; great things depend on this.</div>
+        <div class="neng-id lang-id">Kemampuan menggunakan orang dengan tepat — tempatkan bakat sesuai kekuatan; hal-hal besar bergantung pada ini.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 08</div>
+        <div class="neng-zh">能辯論</div>
+        <div class="neng-pinyin">Néng biàn lùn</div>
+        <div class="neng-en lang-en">Ability to articulate — illuminate the path to prosperity; clear thinking dispels confusion.</div>
+        <div class="neng-id lang-id">Kemampuan mengartikulasikan — terangi jalan menuju kemakmuran; pemikiran jernih mengusir kebingungan.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 09</div>
+        <div class="neng-zh">能辦貨</div>
+        <div class="neng-pinyin">Néng bàn huò</div>
+        <div class="neng-en lang-en">Ability to procure wisely — do not be overly strict in purchasing; understand true value.</div>
+        <div class="neng-id lang-id">Kemampuan pengadaan yang bijak — jangan terlalu ketat dalam pembelian; pahami nilai sejati.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 10</div>
+        <div class="neng-zh">能知機</div>
+        <div class="neng-pinyin">Néng zhī jī</div>
+        <div class="neng-en lang-en">Ability to read the moment — know when to sell and when to hold; this is the mark of true wisdom.</div>
+        <div class="neng-id lang-id">Kemampuan membaca momen — tahu kapan menjual dan kapan menahan; inilah tanda kebijaksanaan sejati.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 11</div>
+        <div class="neng-zh">能倡率</div>
+        <div class="neng-pinyin">Néng chàng shuài</div>
+        <div class="neng-en lang-en">Ability to lead by example — embody the principles yourself; authentic leadership creates loyalty.</div>
+        <div class="neng-id lang-id">Kemampuan memimpin dengan teladan — wujudkan prinsip dalam dirimu sendiri; kepemimpinan otentik menciptakan loyalitas.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 12</div>
+        <div class="neng-zh">能運數</div>
+        <div class="neng-pinyin">Néng yùn shù</div>
+        <div class="neng-en lang-id">Ability to manage numbers wisely — calibrate between abundance and scarcity; act from the middle way.</div>
+        <div class="neng-id lang-id">Kemampuan mengelola angka dengan bijak — kalibrasi antara kelimpahan dan kelangkaan; bertindak dari jalan tengah.</div>
+      </div>
+
+    </div>
+
+    <div class="neng-footer">
+      <div class="neng-footer-text lang-en">
+        SOURCE: 陶朱公《經商寶典》· Fan Li (范蠡) · Spring & Autumn Period ~500 BC<br>
+        "Gong is simply Qi that has finally become established." — Go Kian Tik
+      </div>
+      <div class="neng-footer-text lang-id">
+        SUMBER: 陶朱公《經商寶典》· Fan Li (范蠡) · Periode Musim Semi & Gugur ~500 SM<br>
+        "Gōng pada hakikatnya adalah Qi yang akhirnya menjadi mapan." — Go Kian Tik
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
-/* ── LANGUAGE ── */
-function setLang(lang) {
-  const body = document.body;
-  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-  document.getElementById('btn-id').classList.toggle('active', lang === 'id');
-  body.classList.toggle('id-active', lang === 'id');
-}
-
-/* ── NENG MODAL ── */
 function openNeng() {
   goLayer(0);
   document.getElementById('nengOverlay').classList.add('open');
@@ -1672,35 +1253,25 @@ function goLayer(n) {
   document.getElementById('dot-' + n).classList.add('active');
   document.querySelector('.neng-modal').scrollTop = 0;
 }
-
-/* ── ARTICLE MODAL ── */
-function openArticle() {
-  document.getElementById('articleOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-  // Sync article lang with page lang
-  const isId = document.body.classList.contains('id-active');
-  setArticleLang(isId ? 'id' : 'en');
-}
-function closeArticle() {
-  document.getElementById('articleOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-function closeArticleOutside(e) {
-  if (e.target === document.getElementById('articleOverlay')) closeArticle();
-}
-function setArticleLang(lang) {
-  const modal = document.getElementById('articleOverlay');
-  modal.classList.toggle('id-active', lang === 'id');
-  document.getElementById('art-btn-en').classList.toggle('active', lang === 'en');
-  document.getElementById('art-btn-id').classList.toggle('active', lang === 'id');
-}
-
-/* ── KEYBOARD CLOSE ── */
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') { closeNeng(); closeArticle(); }
+  if (e.key === 'Escape') closeNeng();
 });
+</script>
+  const body = document.body;
+  const btnEn = document.getElementById('btn-en');
+  const btnId = document.getElementById('btn-id');
+  if (lang === 'id') {
+    body.classList.add('id-active');
+    btnId.classList.add('active');
+    btnEn.classList.remove('active');
+  } else {
+    body.classList.remove('id-active');
+    btnEn.classList.add('active');
+    btnId.classList.remove('active');
+  }
+}
 
-/* ── SCROLL REVEAL ── */
+// Intersection Observer for scroll reveal
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -1710,10 +1281,10 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.menu-card, .cafe-card').forEach(card => {
+document.querySelectorAll('.menu-card').forEach(card => {
   card.style.opacity = '0';
   card.style.transform = 'translateY(24px)';
-  card.style.transition = 'opacity 0.7s ease, transform 0.7s ease, border-color 0.3s, background 0.3s, box-shadow 0.3s, transform 0.3s';
+  card.style.transition = 'opacity 0.7s ease, transform 0.7s ease, border-color 0.3s, background 0.3s, box-shadow 0.3s';
   observer.observe(card);
 });
 </script>
