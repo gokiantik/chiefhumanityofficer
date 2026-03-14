@@ -782,6 +782,256 @@ body.id-active .lang-id { display: block; }
 body.id-active .lang-id-inline { display: inline; }
 body.id-active .lang-en-inline { display: none; }
 .lang-id-inline { display: none; }
+
+/* ── ZI ZHU ZHE CAFE SECTION ── */
+.cafe-section {
+  position: relative;
+  z-index: 1;
+  padding: 80px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.cafe-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
+  margin-bottom: 80px;
+}
+
+.cafe-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.cafe-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.cafe-zh-bg {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 72px;
+  color: var(--gold);
+  opacity: 0.06;
+  letter-spacing: 12px;
+  line-height: 1;
+  margin-bottom: -24px;
+  user-select: none;
+}
+
+.cafe-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(20px, 3vw, 30px);
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+
+.cafe-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--gold-lt);
+  margin-bottom: 20px;
+}
+
+.cafe-intro {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 620px;
+  margin: 0 auto;
+  line-height: 1.85;
+}
+
+/* Opening story */
+.cafe-story {
+  background: rgba(26,46,69,0.4);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 12px;
+  padding: 40px 44px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cafe-story::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.cafe-story-date {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold-dk);
+  margin-bottom: 20px;
+}
+
+.cafe-pullquote {
+  border-left: 2px solid var(--gold);
+  padding: 16px 20px;
+  margin: 24px 0;
+  background: rgba(201,168,76,0.04);
+  border-radius: 0 8px 8px 0;
+}
+
+.cafe-pullquote p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: var(--gold-lt);
+  line-height: 1.6;
+  margin-bottom: 6px;
+}
+
+.cafe-pullquote cite {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  font-style: normal;
+  font-family: 'Cinzel', serif;
+}
+
+.cafe-body-text {
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--cream-dk);
+  margin-bottom: 16px;
+}
+
+/* Quadrant grid */
+.cafe-quadrants {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 32px 0;
+}
+
+.cafe-q {
+  padding: 18px 20px;
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 10px;
+  background: rgba(201,168,76,0.03);
+  transition: border-color 0.3s, background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.cafe-q:hover {
+  border-color: rgba(201,168,76,0.35);
+  background: rgba(201,168,76,0.07);
+}
+
+.cafe-q-label {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.cafe-q-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* CTA */
+.cafe-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.cafe-cta-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  padding: 10px 28px;
+  border: 1px solid rgba(201,168,76,0.5);
+  border-radius: 24px;
+  background: rgba(201,168,76,0.08);
+  color: var(--gold-lt);
+  text-decoration: none;
+  transition: all 0.25s;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.cafe-cta-btn:hover {
+  background: rgba(201,168,76,0.18);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.cafe-cta-btn.primary {
+  background: rgba(201,168,76,0.15);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.cafe-cta-btn.primary:hover {
+  background: rgba(201,168,76,0.28);
+}
+
+/* Connections */
+.cafe-connections {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 36px;
+}
+
+.cafe-connection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: 10px;
+  background: rgba(26,46,69,0.3);
+  flex: 1;
+  min-width: 200px;
+}
+
+.cafe-connection-icon {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.cafe-connection-label {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+
+.cafe-connection-name {
+  font-size: 13px;
+  color: var(--cream-dk);
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .cafe-section { padding: 60px 24px; }
+  .cafe-quadrants { grid-template-columns: 1fr; }
+  .cafe-story { padding: 28px 24px; }
+  .cafe-connections { flex-direction: column; }
+}
 </style>
 </head>
 <body>
@@ -931,6 +1181,121 @@ body.id-active .lang-en-inline { display: none; }
     </div>
 
   </div>
+</section>
+
+<!-- ── ZI ZHU ZHE CAFE SECTION ── -->
+<div class="cafe-divider"></div>
+
+<section class="cafe-section" id="zi-zhu-zhe">
+
+  <div class="cafe-header">
+    <div class="cafe-tag lang-en">Digital Café · Now Open · 1 March 2026</div>
+    <div class="cafe-tag lang-id">Kafe Digital · Kini Dibuka · 1 Maret 2026</div>
+    <div class="cafe-zh-bg">自主者</div>
+    <h2 class="cafe-title">Zi Zhu Zhe 自主者</h2>
+    <div class="cafe-subtitle lang-en">Superhero Café Inside — Where Sovereigns Gather</div>
+    <div class="cafe-subtitle lang-id">Superhero Café Inside — Tempat Para Berdaulat Berkumpul</div>
+    <p class="cafe-intro lang-en">A digital café on LinkedIn for 1.3 billion professionals — a space to pause, think, and converse across all four quadrants of professional life.</p>
+    <p class="cafe-intro lang-id">Kafe digital di LinkedIn untuk 1,3 miliar profesional — ruang untuk berhenti sejenak, berpikir, dan ngobrol dari keempat kuadran kehidupan profesional.</p>
+  </div>
+
+  <!-- Opening Story -->
+  <div class="cafe-story">
+    <div class="cafe-story-date lang-en">1 MARCH 2026 · WIB · GMT+7</div>
+    <div class="cafe-story-date lang-id">1 MARET 2026 · WIB · GMT+7</div>
+
+    <p class="cafe-body-text lang-en">
+      Three days ago, Marshall Goldsmith opened a survey with a single question that kept knocking on the door of my mind — and has not stopped since. Because I am a <em>thinker who acts</em>, the answer could not remain only in my head. It had to be made real.
+    </p>
+    <p class="cafe-body-text lang-id">
+      Tiga hari lalu, Marshall Goldsmith membuka sebuah survei dengan satu pertanyaan yang terus mengetuk pintu pikiran saya — dan belum berhenti hingga kini. Karena saya adalah seorang <em>pemikir yang bertindak</em>, jawaban itu tidak bisa hanya tinggal di kepala. Ia harus diwujudkan.
+    </p>
+
+    <div class="cafe-pullquote">
+      <p>Intellectually connected. Cognitively friendship.</p>
+      <cite lang-en>— A verse written at age 32, 22 years ago</cite>
+      <cite class="lang-id">— Syair yang saya tulis saat berumur 32 tahun, 22 tahun silam</cite>
+    </div>
+
+    <p class="cafe-body-text lang-en">
+      That verse was not merely words. It was a prophecy. In fewer than 25 days, it has found its form: a connection with <strong>Pak Sukarela Batunanggar</strong> as my first local cognitive friend in +62, and with <strong>Sir Marshall Goldsmith</strong> on the global stage.
+    </p>
+    <p class="cafe-body-text lang-id">
+      Syair itu bukan sekadar kata-kata. Ia adalah nubuat. Dalam kurang dari 25 hari, nubuat itu telah menemukan wujudnya: terhubung dengan <strong>Pak Sukarela Batunanggar</strong> sebagai sahabat kognitif lokal pertama di negeri +62, dan dengan <strong>Sir Marshall Goldsmith</strong> dalam cakupan global.
+    </p>
+
+    <p class="cafe-body-text lang-en">
+      The café itself was born from a "cognitive ball nudge" by Pak Sukarela — after his extensive comment on one of my posts — which finally pushed me to open this space officially.
+    </p>
+    <p class="cafe-body-text lang-id">
+      Kafe ini lahir dari "sodokan bola kognitif" Pak Sukarela — setelah komentar panjangnya pada tulisan saya — yang akhirnya mendorong saya membuka ruang ini secara resmi.
+    </p>
+
+    <!-- Four Quadrants -->
+    <div class="cafe-quadrants">
+      <div class="cafe-q">
+        <div class="cafe-q-label">Employee</div>
+        <div class="cafe-q-desc lang-en">Navigating the ecosystem of organisations, structures, and dynamics.</div>
+        <div class="cafe-q-desc lang-id">Menavigasi ekosistem organisasi, struktur, dan dinamikanya.</div>
+      </div>
+      <div class="cafe-q">
+        <div class="cafe-q-label">Business Owner</div>
+        <div class="cafe-q-desc lang-en">Commanding 5M: Man, Machine, Method, Material, Money.</div>
+        <div class="cafe-q-desc lang-id">Mengendalikan 5M: Man, Machine, Method, Material, Money.</div>
+      </div>
+      <div class="cafe-q">
+        <div class="cafe-q-label">Self-Employed</div>
+        <div class="cafe-q-desc lang-en">Independent in expertise, autonomous in every decision.</div>
+        <div class="cafe-q-desc lang-id">Mandiri dalam keahlian, otonom dalam setiap keputusan.</div>
+      </div>
+      <div class="cafe-q">
+        <div class="cafe-q-label">Investor</div>
+        <div class="cafe-q-desc lang-en">Letting capital work while thinking further ahead.</div>
+        <div class="cafe-q-desc lang-id">Membiarkan modal bekerja sambil berpikir lebih jauh ke depan.</div>
+      </div>
+    </div>
+
+    <p class="cafe-body-text lang-en">
+      Each quadrant carries its own obstacles, its own SWOT, its own VUCA. <em>Zi Zhu Zhe</em> is here not to provide all the answers — but to accompany the conversation.
+    </p>
+    <p class="cafe-body-text lang-id">
+      Setiap kuadran membawa rintangannya sendiri, SWOT-nya sendiri, VUCA-nya sendiri. <em>Zi Zhu Zhe</em> hadir bukan untuk memberi semua jawaban — melainkan untuk menemani percakapan.
+    </p>
+
+    <!-- Connections -->
+    <div class="cafe-connections">
+      <div class="cafe-connection">
+        <div class="cafe-connection-icon">✦</div>
+        <div>
+          <div class="cafe-connection-label lang-en">Global Cognitive Friend</div>
+          <div class="cafe-connection-label lang-id">Sahabat Kognitif Global</div>
+          <div class="cafe-connection-name">Marshall Goldsmith</div>
+        </div>
+      </div>
+      <div class="cafe-connection">
+        <div class="cafe-connection-icon">✦</div>
+        <div>
+          <div class="cafe-connection-label lang-en">Local Cognitive Friend · +62</div>
+          <div class="cafe-connection-label lang-id">Sahabat Kognitif Lokal · +62</div>
+          <div class="cafe-connection-name">Pak Sukarela Batunanggar</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cafe-cta-row">
+      <a href="https://www.linkedin.com/in/gokiantik" target="_blank" class="cafe-cta-btn primary">
+        <span class="lang-en-inline">☕ Enter Zi Zhu Zhe Café →</span>
+        <span class="lang-id-inline">☕ Masuk Kafe Zi Zhu Zhe →</span>
+      </a>
+      <a href="https://bit.ly/superherocafeinside" target="_blank" class="cafe-cta-btn">
+        <span class="lang-en-inline">Superhero Café Inside</span>
+        <span class="lang-id-inline">Superhero Café Inside</span>
+      </a>
+    </div>
+
+  </div>
+
 </section>
 
 <!-- ── FOOTER ── -->
@@ -1107,131 +1472,26 @@ body.id-active .lang-en-inline { display: none; }
 
   </div>
 </div>
-<div class="neng-overlay" id="nengOverlay" onclick="closeNengOutside(event)">
-  <div class="neng-modal">
-    <button class="neng-close" onclick="closeNeng()">✕</button>
 
-    <div class="neng-header">
-      <div class="neng-header-zh">陶朱公 · 十二能</div>
-      <div class="neng-header-title">Tao Zhu Gong · 12 Néng</div>
-      <div class="neng-header-sub lang-en">The 12 Capacities of Stable Power — from 《經商寶典》 Golden Rules of Business Success (~500 BC)</div>
-      <div class="neng-header-sub lang-id">12 Kapasitas Kekuatan yang Stabil — dari 《經商寶典》 Pedoman Emas Kesuksesan Bisnis (~500 SM)</div>
-    </div>
 
-    <div class="neng-grid">
 
-      <div class="neng-item">
-        <div class="neng-num">能 01</div>
-        <div class="neng-zh">能識人</div>
-        <div class="neng-pinyin">Néng shí rén</div>
-        <div class="neng-en lang-en">Ability to know people's character — perceive evidence of character from experience.</div>
-        <div class="neng-id lang-id">Kemampuan mengenali karakter seseorang — membaca watak dari pengalaman.</div>
-      </div>
-
-      <div class="neng-item">
-        <div class="neng-num">能 02</div>
-        <div class="neng-zh">能接納</div>
-        <div class="neng-pinyin">Néng jiē nà</div>
-        <div class="neng-en lang-en">Ability to handle people — never prejudge; receive all with courtesy and openness.</div>
-        <div class="neng-id lang-id">Kemampuan menerima orang — tidak menghakimi; menyambut semua dengan sopan dan terbuka.</div>
-      </div>
-
-      <div class="neng-item">
-        <div class="neng-num">能 03</div>
-        <div class="neng-zh">能安業</div>
-        <div class="neng-pinyin">Néng ān yè</div>
-        <div class="neng-en lang-en">Ability to stay focused — avoid restlessness; commitment to one's path is a great virtue.</div>
-        <div class="neng-id lang-id">Kemampuan untuk tetap fokus — hindari kegelisahan; komitmen pada jalur adalah kebajikan besar.</div>
-      </div>
-
-      <div class="neng-item">
-        <div class="neng-num">能 04</div>
-        <div class="neng-zh">能整頓</div>
-        <div class="neng-pinyin">Néng zhěng dùn</div>
-        <div class="neng-en lang-en">Ability to be organized — orderly presentation wins hearts and minds.</div>
-        <div class="neng-id lang-id">Kemampuan untuk terorganisir — kerapian presentasi memenangkan hati dan pikiran.</div>
-      </div>
-
-      <div class="neng-item">
-        <div class="neng-num">能 05</div>
-        <div class="neng-zh">能敏捷</div>
-        <div class="neng-pinyin">Néng mǐn jié</div>
-        <div class="neng-en lang-en">Ability to be adaptable and swift — hesitation leads to no achievement; respond with agility.</div>
-        <div class="neng-id lang-id">Kemampuan adaptif dan cepat — ragu-ragu tidak menghasilkan apa-apa; respons dengan kelincahan.</div>
-      </div>
-
-      <div class="neng-item">
-        <div class="neng-num">能 06</div>
-        <div class="neng-zh">能討賬</div>
-        <div class="neng-pinyin">Néng tǎo zhàng</div>
-        <div class="neng-en lang-en">Ability to collect debts diligently — without collections, liquidity and trust are damaged.</div>
-        <div class="neng-id lang-id">Kemampuan menagih dengan tekun — tanpa penagihan, likuiditas dan kepercayaan rusak.</div>
-      </div>
-
-      <div class="neng-item">
-        <div class="neng-num">能 07</div>
-        <div class="neng-zh">能用人</div>
-        <div class="neng-pinyin">Néng yòng rén</div>
-        <div class="neng-en lang-en">Ability to employ people well — deploy talent according to their strengths; great things depend on this.</div>
-        <div class="neng-id lang-id">Kemampuan menggunakan orang dengan tepat — tempatkan bakat sesuai kekuatan; hal-hal besar bergantung pada ini.</div>
-      </div>
-
-      <div class="neng-item">
-        <div class="neng-num">能 08</div>
-        <div class="neng-zh">能辯論</div>
-        <div class="neng-pinyin">Néng biàn lùn</div>
-        <div class="neng-en lang-en">Ability to articulate — illuminate the path to prosperity; clear thinking dispels confusion.</div>
-        <div class="neng-id lang-id">Kemampuan mengartikulasikan — terangi jalan menuju kemakmuran; pemikiran jernih mengusir kebingungan.</div>
-      </div>
-
-      <div class="neng-item">
-        <div class="neng-num">能 09</div>
-        <div class="neng-zh">能辦貨</div>
-        <div class="neng-pinyin">Néng bàn huò</div>
-        <div class="neng-en lang-en">Ability to procure wisely — do not be overly strict in purchasing; understand true value.</div>
-        <div class="neng-id lang-id">Kemampuan pengadaan yang bijak — jangan terlalu ketat dalam pembelian; pahami nilai sejati.</div>
-      </div>
-
-      <div class="neng-item">
-        <div class="neng-num">能 10</div>
-        <div class="neng-zh">能知機</div>
-        <div class="neng-pinyin">Néng zhī jī</div>
-        <div class="neng-en lang-en">Ability to read the moment — know when to sell and when to hold; this is the mark of true wisdom.</div>
-        <div class="neng-id lang-id">Kemampuan membaca momen — tahu kapan menjual dan kapan menahan; inilah tanda kebijaksanaan sejati.</div>
-      </div>
-
-      <div class="neng-item">
-        <div class="neng-num">能 11</div>
-        <div class="neng-zh">能倡率</div>
-        <div class="neng-pinyin">Néng chàng shuài</div>
-        <div class="neng-en lang-en">Ability to lead by example — embody the principles yourself; authentic leadership creates loyalty.</div>
-        <div class="neng-id lang-id">Kemampuan memimpin dengan teladan — wujudkan prinsip dalam dirimu sendiri; kepemimpinan otentik menciptakan loyalitas.</div>
-      </div>
-
-      <div class="neng-item">
-        <div class="neng-num">能 12</div>
-        <div class="neng-zh">能運數</div>
-        <div class="neng-pinyin">Néng yùn shù</div>
-        <div class="neng-en lang-id">Ability to manage numbers wisely — calibrate between abundance and scarcity; act from the middle way.</div>
-        <div class="neng-id lang-id">Kemampuan mengelola angka dengan bijak — kalibrasi antara kelimpahan dan kelangkaan; bertindak dari jalan tengah.</div>
-      </div>
-
-    </div>
-
-    <div class="neng-footer">
-      <div class="neng-footer-text lang-en">
-        SOURCE: 陶朱公《經商寶典》· Fan Li (范蠡) · Spring & Autumn Period ~500 BC<br>
-        "Gong is simply Qi that has finally become established." — Go Kian Tik
-      </div>
-      <div class="neng-footer-text lang-id">
-        SUMBER: 陶朱公《經商寶典》· Fan Li (范蠡) · Periode Musim Semi & Gugur ~500 SM<br>
-        "Gōng pada hakikatnya adalah Qi yang akhirnya menjadi mapan." — Go Kian Tik
-      </div>
-    </div>
-  </div>
-</div>
 
 <script>
+function setLang(lang) {
+  const body = document.body;
+  const btnEn = document.getElementById('btn-en');
+  const btnId = document.getElementById('btn-id');
+  if (lang === 'id') {
+    body.classList.add('id-active');
+    btnId.classList.add('active');
+    btnEn.classList.remove('active');
+  } else {
+    body.classList.remove('id-active');
+    btnEn.classList.add('active');
+    btnId.classList.remove('active');
+  }
+}
+
 function openNeng() {
   goLayer(0);
   document.getElementById('nengOverlay').classList.add('open');
@@ -1256,22 +1516,8 @@ function goLayer(n) {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeNeng();
 });
-</script>
-  const body = document.body;
-  const btnEn = document.getElementById('btn-en');
-  const btnId = document.getElementById('btn-id');
-  if (lang === 'id') {
-    body.classList.add('id-active');
-    btnId.classList.add('active');
-    btnEn.classList.remove('active');
-  } else {
-    body.classList.remove('id-active');
-    btnEn.classList.add('active');
-    btnId.classList.remove('active');
-  }
-}
 
-// Intersection Observer for scroll reveal
+// Scroll reveal for cards
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -1281,7 +1527,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.menu-card').forEach(card => {
+document.querySelectorAll('.menu-card, .cafe-story, .cafe-q').forEach(card => {
   card.style.opacity = '0';
   card.style.transform = 'translateY(24px)';
   card.style.transition = 'opacity 0.7s ease, transform 0.7s ease, border-color 0.3s, background 0.3s, box-shadow 0.3s';

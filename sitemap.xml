@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Main Landing Page -->
   <url>
     <loc>https://gokiantik.github.io/chiefhumanityofficer/</loc>
     <lastmod>2026-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- CHO Ep11 Interactive Diagram -->
   <url>
     <loc>https://gokiantik.github.io/chiefhumanityofficer/CHO_Ep11_Diagram_Interactive.html</loc>
     <lastmod>2026-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- Zi Zhu Zhe Cafe Section (anchor on main page) -->
+  <url>
+    <loc>https://gokiantik.github.io/chiefhumanityofficer/#zi-zhu-zhe</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
 </urlset>
