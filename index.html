@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Go Kian Tik — The Sovereign One</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Noto+Serif+SC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold:    #C9A84C;
+  --gold-lt: #E8C97A;
+  --gold-dk: #8B6914;
+  --navy:    #0D1B2A;
+  --navy-md: #1A2E45;
+  --navy-lt: #243B55;
+  --cream:   #F5F0E8;
+  --cream-dk:#DDD5C0;
+  --text:    #EDE8DC;
+  --muted:   #9B9280;
+  --teal:    #1D9E75;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  background: var(--navy);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 50%, rgba(29,158,117,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 30% 50%, rgba(201,168,76,0.06) 0%, transparent 60%),
+    linear-gradient(160deg, #0D1B2A 0%, #1A2E45 50%, #0D1B2A 100%);
+  z-index: 0;
+}
+
+/* Subtle wave lines decoration */
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      -30deg,
+      transparent,
+      transparent 60px,
+      rgba(201,168,76,0.025) 60px,
+      rgba(201,168,76,0.025) 61px
+    );
+  z-index: 0;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  max-width: 1100px;
+  width: 100%;
+  padding: 60px 40px;
+  align-items: center;
+}
+
+/* ── LEFT: TEXT ── */
+.hero-text { padding-right: 40px; }
+
+.series-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.2s forwards;
+}
+
+.hero-name {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 600;
+  color: var(--cream);
+  line-height: 1.15;
+  margin-bottom: 8px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.4s forwards;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 2.5vw, 28px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--gold-lt);
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.5s forwards;
+}
+
+.divider-gold {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.6s forwards;
+}
+
+.philosophy-intro {
+  font-size: clamp(14px, 1.6vw, 17px);
+  line-height: 1.85;
+  color: var(--cream-dk);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.7s forwards;
+}
+
+.yi-ban {
+  font-family: 'Noto Serif SC', serif;
+  font-style: italic;
+  color: var(--gold-lt);
+}
+
+/* ── THREE PILLARS ── */
+.pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.85s forwards;
+}
+
+.pillar {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border-left: 2px solid transparent;
+  border-radius: 0 6px 6px 0;
+  transition: border-color 0.3s, background 0.3s;
+  background: rgba(201,168,76,0.03);
+}
+
+.pillar:hover {
+  border-left-color: var(--gold);
+  background: rgba(201,168,76,0.06);
+}
+
+.pillar-num {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  padding-top: 3px;
+  min-width: 18px;
+}
+
+.pillar-body {}
+
+.pillar-title {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold-lt);
+  margin-bottom: 4px;
+}
+
+.pillar-zh {
+  font-family: 'Noto Serif SC', serif;
+  color: var(--gold);
+  margin-left: 6px;
+  font-weight: 300;
+}
+
+.pillar-text {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.bottom-line {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--cream-dk);
+  font-style: italic;
+  border-left: 2px solid var(--gold-dk);
+  padding-left: 16px;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 1.0s forwards;
+}
+
+.gong-quote {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--gold);
+  text-align: center;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 1.1s forwards;
+}
+
+/* ── RIGHT: IMAGE ── */
+.hero-image {
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 1.2s ease 0.6s forwards;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 12px;
+  display: block;
+  margin: 0 auto;
+  box-shadow:
+    0 0 60px rgba(201,168,76,0.12),
+    0 0 120px rgba(29,158,117,0.06);
+}
+
+.image-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110%;
+  height: 110%;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.15);
+  pointer-events: none;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+/* ── LANG TOGGLE ── */
+.lang-toggle {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  z-index: 100;
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease 1.2s forwards;
+}
+
+.lang-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 6px 14px;
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 20px;
+  background: rgba(13,27,42,0.8);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+}
+
+.lang-btn.active, .lang-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(201,168,76,0.08);
+}
+
+/* ── MENU SECTION ── */
+.menu-section {
+  position: relative;
+  z-index: 1;
+  padding: 80px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.menu-section-title {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.menu-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
+  margin-bottom: 80px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 80px;
+}
+
+.menu-card {
+  position: relative;
+  padding: 36px 32px;
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 12px;
+  background: rgba(26,46,69,0.4);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.menu-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.menu-card:hover {
+  border-color: rgba(201,168,76,0.35);
+  background: rgba(26,46,69,0.7);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 30px rgba(201,168,76,0.06);
+}
+
+.menu-card:hover::before { opacity: 1; }
+
+.menu-card-icon {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 32px;
+  color: var(--gold);
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.menu-card-title {
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.menu-card-subtitle {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--gold-lt);
+  margin-bottom: 16px;
+}
+
+.menu-card-desc {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.channel-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.channel-link {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  padding: 5px 12px;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 16px;
+  color: var(--gold-lt);
+  text-decoration: none;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.channel-link:hover {
+  background: rgba(201,168,76,0.12);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.channel-link.teal {
+  border-color: rgba(29,158,117,0.4);
+  color: #5DCAA5;
+}
+
+.channel-link.teal:hover {
+  background: rgba(29,158,117,0.1);
+  border-color: var(--teal);
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid rgba(201,168,76,0.1);
+  padding: 40px;
+  text-align: center;
+}
+
+.footer-star {
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.footer-text {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 2;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1px;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+  50%       { transform: translate(-50%, -50%) scale(1.04); opacity: 0.6; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    padding: 80px 24px 40px;
+  }
+  .hero-text { padding-right: 0; margin-bottom: 40px; }
+  .hero-image { order: -1; }
+  .hero-image img { max-width: 320px; }
+  .menu-grid { grid-template-columns: 1fr; }
+  .menu-section { padding: 60px 24px; }
+  footer { padding: 32px 24px; }
+}
+
+/* ── LANGUAGE SWITCHING ── */
+.lang-id { display: none; }
+body.id-active .lang-en { display: none; }
+body.id-active .lang-id { display: block; }
+body.id-active .lang-id-inline { display: inline; }
+body.id-active .lang-en-inline { display: none; }
+.lang-id-inline { display: none; }
+</style>
+</head>
+<body>
+
+<!-- Language Toggle -->
+<div class="lang-toggle">
+  <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+  <button class="lang-btn" onclick="setLang('id')" id="btn-id">ID</button>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+
+    <!-- LEFT: Text -->
+    <div class="hero-text">
+      <div class="series-tag">Chief Humanity Officer · 自主者 Superhero Café Inside</div>
+
+      <h1 class="hero-name">Go Kian Tik</h1>
+
+      <div class="hero-title">
+        <span class="lang-en-inline">The Sovereign One</span>
+        <span class="lang-id-inline">Sang Yang Berdaulat</span>
+      </div>
+
+      <div class="divider-gold"></div>
+
+      <!-- EN -->
+      <p class="philosophy-intro lang-en">
+        A philosophy of self-mastery that transforms life from a game of chance into a masterpiece of conscious design. Built upon the harmony of <span class="yi-ban">Yī Bàn Yǒu Wǒ, Yī Bàn Yǒu Tiān</span> — balancing human agency with the flow of the Transcendent.
+      </p>
+      <!-- ID -->
+      <p class="philosophy-intro lang-id">
+        Sebuah filsafat penguasaan diri yang mengubah hidup dari permainan kebetulan menjadi mahakarya rancangan sadar. Dibangun di atas harmoni <span class="yi-ban">Yī Bàn Yǒu Wǒ, Yī Bàn Yǒu Tiān</span> — keseimbangan antara daya kehendak manusia dan aliran Yang Transenden.
+      </p>
+
+      <!-- THREE PILLARS -->
+      <div class="pillars">
+        <!-- Pillar 1 -->
+        <div class="pillar">
+          <span class="pillar-num">01</span>
+          <div class="pillar-body">
+            <div class="pillar-title">Zì Zhǔ <span class="pillar-zh">自主</span> · <span class="lang-en-inline">Sovereignty</span><span class="lang-id-inline">Kedaulatan</span></div>
+            <div class="pillar-text lang-en">Life begins by restoring the heart (Xiū Xīn). To lead the world, one must first be the undisputed master of their own intentions and conscience.</div>
+            <div class="pillar-text lang-id">Hidup dimulai dengan memulihkan hati (Xiū Xīn). Untuk memimpin dunia, seseorang harus terlebih dahulu menjadi penguasa mutlak atas niat dan suara nuraninya sendiri.</div>
+          </div>
+        </div>
+        <!-- Pillar 2 -->
+        <div class="pillar">
+          <span class="pillar-num">02</span>
+          <div class="pillar-body">
+            <div class="pillar-title">Wěn Liàng <span class="pillar-zh">稳量</span> · <span class="lang-en-inline">Precision</span><span class="lang-id-inline">Presisi</span></div>
+            <div class="pillar-text lang-en">Viewing life through the lens of cause and effect. Every opportunity is met with Stable Capacity — a calculated, precise response that eliminates chaos and minimizes error.</div>
+            <div class="pillar-text lang-id">Memandang hidup melalui hukum sebab–akibat. Setiap peluang direspons dengan Kapasitas yang Stabil — tindakan terukur, presisi, meniadakan kekacauan, meminimalkan kesalahan.</div>
+          </div>
+        </div>
+        <!-- Pillar 3 -->
+        <div class="pillar">
+          <span class="pillar-num">03</span>
+          <div class="pillar-body">
+            <div class="pillar-title">Xiāo Yáo <span class="pillar-zh">逍遥</span> · <span class="lang-en-inline">Mastery</span><span class="lang-id-inline">Kemahiran</span></div>
+            <div class="pillar-text lang-en">The ultimate freedom to "surf" life's challenges with joy. Achieved when skill (Néng) meets Gōng — Qi that has been disciplined and established into stable power.</div>
+            <div class="pillar-text lang-id">Kebebasan tertinggi untuk "berselancar" di atas tantangan hidup dengan kegembiraan. Tercapai ketika kemampuan (Néng) bertemu Gōng — Qi yang telah dilatih dan ditegakkan menjadi kekuatan yang stabil.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom line -->
+      <div class="bottom-line lang-en">
+        A Sovereign One does not wait for the storm to pass. With a restored heart and established energy, they possess the <em>kedaulatan</em> (sovereignty) to turn every wave of fate into a purposeful maneuver.
+      </div>
+      <div class="bottom-line lang-id">
+        Seorang Yang Berdaulat tidak menunggu badai berlalu. Dengan hati yang telah dipulihkan dan energi yang telah mapan, ia memiliki kedaulatan untuk mengubah setiap gelombang takdir menjadi manuver yang bermakna.
+      </div>
+
+      <div class="gong-quote">
+        <span class="lang-en-inline">"Gong is simply Qi that has finally become established."</span>
+        <span class="lang-id-inline">"Gōng pada hakikatnya adalah Qi yang akhirnya menjadi mapan."</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: Image -->
+    <div class="hero-image">
+      <div class="image-ring"></div>
+      <img src="Go_Kian_Tik_The_Sovereign_One.png" alt="Go Kian Tik — The Sovereign One" loading="eager">
+    </div>
+
+  </div>
+</section>
+
+<!-- ── MENU SECTION ── -->
+<div class="menu-divider"></div>
+
+<section class="menu-section">
+  <div class="menu-section-title lang-en">Enter · Choose Your Path</div>
+  <div class="menu-section-title lang-id">Masuk · Pilih Jalanmu</div>
+
+  <div class="menu-grid">
+
+    <!-- Card 1: Zì Zhǔ Zhě Community & Channels -->
+    <div class="menu-card">
+      <div class="menu-card-icon">自主者</div>
+      <div class="menu-card-title">Zì Zhǔ Zhě 自主者</div>
+      <div class="menu-card-subtitle lang-en">Superhero Café Inside — Community & Channels</div>
+      <div class="menu-card-subtitle lang-id">Superhero Café Inside — Komunitas & Kanal</div>
+      <p class="menu-card-desc lang-en">
+        The living community of The Sovereign One. Pancaran sosial — ideas, conversations, and insights broadcast across platforms. For those ready to think, create, and grow.
+      </p>
+      <p class="menu-card-desc lang-id">
+        Komunitas hidup dari The Sovereign One. Pancaran sosial — gagasan, percakapan, dan wawasan yang disebarkan ke berbagai platform. Untuk mereka yang siap berpikir, berkarya, dan bertumbuh.
+      </p>
+      <div class="channel-links">
+        <a href="https://bit.ly/superherocafeinside" target="_blank" class="channel-link">Superhero Café</a>
+        <a href="https://www.linkedin.com/in/gokiantik" target="_blank" class="channel-link">LinkedIn</a>
+        <a href="https://substack.com/@gokiantik" target="_blank" class="channel-link">Substack EN</a>
+        <a href="https://buymeacoffee.com/gokiantik" target="_blank" class="channel-link">BMAC</a>
+        <a href="https://trakteer.id/gokiantik" target="_blank" class="channel-link teal">Trakteer ID</a>
+        <a href="https://medium.com/@gokiantik" target="_blank" class="channel-link">Medium</a>
+        <a href="https://youtube.com/@gokiantik" target="_blank" class="channel-link">YouTube</a>
+      </div>
+    </div>
+
+    <!-- Card 2: Think n Thought — Academic -->
+    <div class="menu-card">
+      <div class="menu-card-icon">✦</div>
+      <div class="menu-card-title">Think n Thought</div>
+      <div class="menu-card-subtitle lang-en">Academic Works — DOI · SSRN</div>
+      <div class="menu-card-subtitle lang-id">Karya Akademis — DOI · SSRN</div>
+      <p class="menu-card-desc lang-en">
+        The Chief Humanity Officer In Action Series — documented evidence of human-AI collaboration producing civilization-scale conclusions. Peer-accessible working papers and thought leadership, permanently archived.
+      </p>
+      <p class="menu-card-desc lang-id">
+        Chief Humanity Officer In Action Series — bukti terdokumentasi dari kolaborasi manusia-AI yang menghasilkan kesimpulan berskala peradaban. Working paper dan kepemimpinan pemikiran yang dapat diakses publik, diarsipkan secara permanen.
+      </p>
+      <div class="channel-links">
+        <a href="https://zenodo.org/search?q=gokiantik" target="_blank" class="channel-link">Zenodo DOI</a>
+        <a href="https://ssrn.com/author=gokiantik" target="_blank" class="channel-link">SSRN</a>
+        <a href="https://github.com/gokiantik/chiefhumanityofficer" target="_blank" class="channel-link teal">GitHub · CHO</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span class="footer-star">✦</span>
+  <div class="footer-text">
+    © 2026 Go Kian Tik (Mbah Hogi Bejo™) &nbsp;·&nbsp; 自主者 Superhero Café Inside<br>
+    Chief Humanity Officer In Action Series &nbsp;·&nbsp; CC BY-NC-ND 4.0
+  </div>
+</footer>
+
+<script>
+function setLang(lang) {
+  const body = document.body;
+  const btnEn = document.getElementById('btn-en');
+  const btnId = document.getElementById('btn-id');
+  if (lang === 'id') {
+    body.classList.add('id-active');
+    btnId.classList.add('active');
+    btnEn.classList.remove('active');
+  } else {
+    body.classList.remove('id-active');
+    btnEn.classList.add('active');
+    btnId.classList.remove('active');
+  }
+}
+
+// Intersection Observer for scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.menu-card').forEach(card => {
+  card.style.opacity = '0';
+  card.style.transform = 'translateY(24px)';
+  card.style.transition = 'opacity 0.7s ease, transform 0.7s ease, border-color 0.3s, background 0.3s, box-shadow 0.3s';
+  observer.observe(card);
+});
+</script>
+</body>
+</html>
