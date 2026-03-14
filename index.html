@@ -513,7 +513,169 @@ footer {
   footer { padding: 32px 24px; }
 }
 
-/* ── LANGUAGE SWITCHING ── */
+/* ── NENG BUTTON ── */
+.neng-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  padding: 6px 16px;
+  border: 1px solid rgba(201,168,76,0.5);
+  border-radius: 20px;
+  background: rgba(201,168,76,0.06);
+  color: var(--gold-lt);
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.neng-btn:hover {
+  background: rgba(201,168,76,0.16);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ── NENG MODAL ── */
+.neng-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(8,16,28,0.85);
+  z-index: 3000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(6px);
+}
+.neng-overlay.open { display: flex; }
+
+.neng-modal {
+  background: linear-gradient(160deg, #0F2035 0%, #1A3050 100%);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 16px;
+  padding: 36px 32px 28px;
+  max-width: 680px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 40px rgba(201,168,76,0.08);
+}
+
+.neng-close {
+  position: absolute;
+  top: 16px; right: 20px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 22px;
+  cursor: pointer;
+  transition: color 0.2s;
+  line-height: 1;
+}
+.neng-close:hover { color: var(--gold); }
+
+.neng-header {
+  text-align: center;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+}
+
+.neng-header-zh {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 28px;
+  color: var(--gold);
+  margin-bottom: 6px;
+  letter-spacing: 4px;
+}
+
+.neng-header-title {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--gold-lt);
+  margin-bottom: 4px;
+}
+
+.neng-header-sub {
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.neng-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.neng-item {
+  padding: 14px 16px;
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: 10px;
+  background: rgba(201,168,76,0.03);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.neng-item:hover {
+  border-color: rgba(201,168,76,0.3);
+  background: rgba(201,168,76,0.07);
+}
+
+.neng-num {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--gold-dk);
+  margin-bottom: 4px;
+}
+
+.neng-zh {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px;
+  color: var(--gold);
+  margin-bottom: 4px;
+  letter-spacing: 2px;
+}
+
+.neng-pinyin {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--gold-lt);
+  margin-bottom: 6px;
+}
+
+.neng-en {
+  font-size: 12px;
+  color: var(--cream-dk);
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
+.neng-id {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.neng-footer {
+  text-align: center;
+  padding-top: 16px;
+  border-top: 1px solid rgba(201,168,76,0.15);
+}
+
+.neng-footer-text {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+}
+
+@media (max-width: 560px) {
+  .neng-grid { grid-template-columns: 1fr; }
+  .neng-modal { padding: 28px 20px 20px; }
+}
 .lang-id { display: none; }
 body.id-active .lang-en { display: none; }
 body.id-active .lang-id { display: block; }
@@ -543,7 +705,7 @@ body.id-active .lang-en-inline { display: none; }
 
       <div class="hero-title">
         <span class="lang-en-inline">The Sovereign One</span>
-        <span class="lang-id-inline">Sang Berdaulat</span>
+        <span class="lang-id-inline">Sang Yang Berdaulat</span>
       </div>
 
       <div class="divider-gold"></div>
@@ -573,8 +735,14 @@ body.id-active .lang-en-inline { display: none; }
           <span class="pillar-num">02</span>
           <div class="pillar-body">
             <div class="pillar-title">Wěn Liàng <span class="pillar-zh">稳量</span> · <span class="lang-en-inline">Precision</span><span class="lang-id-inline">Presisi</span></div>
-            <div class="pillar-text lang-en">Viewing life through the lens of cause and effect. Every opportunity is met with Stable Capacity — a calculated, precise response that eliminates chaos and minimizes error.</div>
-            <div class="pillar-text lang-id">Memandang hidup melalui hukum sebab–akibat. Setiap peluang direspons dengan Kapasitas yang Stabil — tindakan terukur, presisi, meniadakan kekacauan, meminimalkan kesalahan.</div>
+            <div class="pillar-text lang-en">Viewing life through the lens of cause and effect. Every opportunity is met with Stable Capacity — <em>Néng</em> (能), the 12 capacities of Tao Zhu Gong, disciplined into precise and purposeful action.</div>
+            <div class="pillar-text lang-id">Memandang hidup melalui hukum sebab–akibat. Setiap peluang direspons dengan Kapasitas yang Stabil — <em>Néng</em> (能), 12 kapasitas Tao Zhu Gong yang telah dilatih menjadi tindakan yang presisi dan bermakna.</div>
+            <div style="margin-top:10px">
+              <button onclick="openNeng()" class="neng-btn">
+                <span class="lang-en-inline">陶朱公 · 12 Néng ↗</span>
+                <span class="lang-id-inline">陶朱公 · 12 Néng ↗</span>
+              </button>
+            </div>
           </div>
         </div>
         <!-- Pillar 3 -->
@@ -674,8 +842,147 @@ body.id-active .lang-en-inline { display: none; }
   </div>
 </footer>
 
+<!-- ── 12 NENG MODAL ── -->
+<div class="neng-overlay" id="nengOverlay" onclick="closeNengOutside(event)">
+  <div class="neng-modal">
+    <button class="neng-close" onclick="closeNeng()">✕</button>
+
+    <div class="neng-header">
+      <div class="neng-header-zh">陶朱公 · 十二能</div>
+      <div class="neng-header-title">Tao Zhu Gong · 12 Néng</div>
+      <div class="neng-header-sub lang-en">The 12 Capacities of Stable Power — from 《經商寶典》 Golden Rules of Business Success (~500 BC)</div>
+      <div class="neng-header-sub lang-id">12 Kapasitas Kekuatan yang Stabil — dari 《經商寶典》 Pedoman Emas Kesuksesan Bisnis (~500 SM)</div>
+    </div>
+
+    <div class="neng-grid">
+
+      <div class="neng-item">
+        <div class="neng-num">能 01</div>
+        <div class="neng-zh">能識人</div>
+        <div class="neng-pinyin">Néng shí rén</div>
+        <div class="neng-en lang-en">Ability to know people's character — perceive evidence of character from experience.</div>
+        <div class="neng-id lang-id">Kemampuan mengenali karakter seseorang — membaca watak dari pengalaman.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 02</div>
+        <div class="neng-zh">能接納</div>
+        <div class="neng-pinyin">Néng jiē nà</div>
+        <div class="neng-en lang-en">Ability to handle people — never prejudge; receive all with courtesy and openness.</div>
+        <div class="neng-id lang-id">Kemampuan menerima orang — tidak menghakimi; menyambut semua dengan sopan dan terbuka.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 03</div>
+        <div class="neng-zh">能安業</div>
+        <div class="neng-pinyin">Néng ān yè</div>
+        <div class="neng-en lang-en">Ability to stay focused — avoid restlessness; commitment to one's path is a great virtue.</div>
+        <div class="neng-id lang-id">Kemampuan untuk tetap fokus — hindari kegelisahan; komitmen pada jalur adalah kebajikan besar.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 04</div>
+        <div class="neng-zh">能整頓</div>
+        <div class="neng-pinyin">Néng zhěng dùn</div>
+        <div class="neng-en lang-en">Ability to be organized — orderly presentation wins hearts and minds.</div>
+        <div class="neng-id lang-id">Kemampuan untuk terorganisir — kerapian presentasi memenangkan hati dan pikiran.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 05</div>
+        <div class="neng-zh">能敏捷</div>
+        <div class="neng-pinyin">Néng mǐn jié</div>
+        <div class="neng-en lang-en">Ability to be adaptable and swift — hesitation leads to no achievement; respond with agility.</div>
+        <div class="neng-id lang-id">Kemampuan adaptif dan cepat — ragu-ragu tidak menghasilkan apa-apa; respons dengan kelincahan.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 06</div>
+        <div class="neng-zh">能討賬</div>
+        <div class="neng-pinyin">Néng tǎo zhàng</div>
+        <div class="neng-en lang-en">Ability to collect debts diligently — without collections, liquidity and trust are damaged.</div>
+        <div class="neng-id lang-id">Kemampuan menagih dengan tekun — tanpa penagihan, likuiditas dan kepercayaan rusak.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 07</div>
+        <div class="neng-zh">能用人</div>
+        <div class="neng-pinyin">Néng yòng rén</div>
+        <div class="neng-en lang-en">Ability to employ people well — deploy talent according to their strengths; great things depend on this.</div>
+        <div class="neng-id lang-id">Kemampuan menggunakan orang dengan tepat — tempatkan bakat sesuai kekuatan; hal-hal besar bergantung pada ini.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 08</div>
+        <div class="neng-zh">能辯論</div>
+        <div class="neng-pinyin">Néng biàn lùn</div>
+        <div class="neng-en lang-en">Ability to articulate — illuminate the path to prosperity; clear thinking dispels confusion.</div>
+        <div class="neng-id lang-id">Kemampuan mengartikulasikan — terangi jalan menuju kemakmuran; pemikiran jernih mengusir kebingungan.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 09</div>
+        <div class="neng-zh">能辦貨</div>
+        <div class="neng-pinyin">Néng bàn huò</div>
+        <div class="neng-en lang-en">Ability to procure wisely — do not be overly strict in purchasing; understand true value.</div>
+        <div class="neng-id lang-id">Kemampuan pengadaan yang bijak — jangan terlalu ketat dalam pembelian; pahami nilai sejati.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 10</div>
+        <div class="neng-zh">能知機</div>
+        <div class="neng-pinyin">Néng zhī jī</div>
+        <div class="neng-en lang-en">Ability to read the moment — know when to sell and when to hold; this is the mark of true wisdom.</div>
+        <div class="neng-id lang-id">Kemampuan membaca momen — tahu kapan menjual dan kapan menahan; inilah tanda kebijaksanaan sejati.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 11</div>
+        <div class="neng-zh">能倡率</div>
+        <div class="neng-pinyin">Néng chàng shuài</div>
+        <div class="neng-en lang-en">Ability to lead by example — embody the principles yourself; authentic leadership creates loyalty.</div>
+        <div class="neng-id lang-id">Kemampuan memimpin dengan teladan — wujudkan prinsip dalam dirimu sendiri; kepemimpinan otentik menciptakan loyalitas.</div>
+      </div>
+
+      <div class="neng-item">
+        <div class="neng-num">能 12</div>
+        <div class="neng-zh">能運數</div>
+        <div class="neng-pinyin">Néng yùn shù</div>
+        <div class="neng-en lang-id">Ability to manage numbers wisely — calibrate between abundance and scarcity; act from the middle way.</div>
+        <div class="neng-id lang-id">Kemampuan mengelola angka dengan bijak — kalibrasi antara kelimpahan dan kelangkaan; bertindak dari jalan tengah.</div>
+      </div>
+
+    </div>
+
+    <div class="neng-footer">
+      <div class="neng-footer-text lang-en">
+        SOURCE: 陶朱公《經商寶典》· Fan Li (范蠡) · Spring & Autumn Period ~500 BC<br>
+        "Gong is simply Qi that has finally become established." — Go Kian Tik
+      </div>
+      <div class="neng-footer-text lang-id">
+        SUMBER: 陶朱公《經商寶典》· Fan Li (范蠡) · Periode Musim Semi & Gugur ~500 SM<br>
+        "Gōng pada hakikatnya adalah Qi yang akhirnya menjadi mapan." — Go Kian Tik
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-function setLang(lang) {
+function openNeng() {
+  document.getElementById('nengOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeNeng() {
+  document.getElementById('nengOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeNengOutside(e) {
+  if (e.target === document.getElementById('nengOverlay')) closeNeng();
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeNeng();
+});
+</script>
   const body = document.body;
   const btnEn = document.getElementById('btn-en');
   const btnId = document.getElementById('btn-id');
