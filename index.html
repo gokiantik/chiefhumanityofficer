@@ -1161,6 +1161,21 @@ body.id-active .lang-en-inline { display: none; }
   color: var(--gold);
 }
 
+/* ── ARTICLE MODAL LANG SCOPING ── */
+/* Default: show EN, hide ID inside modal */
+#articleOverlay .lang-id { display: none; }
+#articleOverlay .lang-en { display: block; }
+
+/* When modal is ID mode */
+#articleOverlay.id-active .lang-en { display: none; }
+#articleOverlay.id-active .lang-id { display: block; }
+
+/* Inline variants inside modal */
+#articleOverlay .lang-id-inline { display: none; }
+#articleOverlay .lang-en-inline { display: inline; }
+#articleOverlay.id-active .lang-en-inline { display: none; }
+#articleOverlay.id-active .lang-id-inline { display: inline; }
+
 @media (max-width: 768px) {
   .cafe-section { padding: 60px 24px; }
   .cafe-card { padding: 28px 24px; }
