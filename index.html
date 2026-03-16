@@ -858,6 +858,191 @@ section {
   line-height: 1.6;
 }
 
+/* ===================== NÉNG LIBRARY 360° ===================== */
+.neng-library-intro {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.9;
+  margin-bottom: 2.5rem;
+}
+
+/* 360 circle visualiser */
+.neng-circle-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2.5rem 0;
+  gap: 2rem;
+}
+
+.neng-circle-svg-wrap {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  flex-shrink: 0;
+}
+
+.neng-circle-svg-wrap svg {
+  width: 100%;
+  height: 100%;
+}
+
+.neng-circle-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.neng-circle-center-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1;
+}
+
+.neng-circle-center-label {
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* 4 quadrant cards */
+.neng-quads {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 860px;
+}
+
+.neng-quad {
+  background: var(--bg2);
+  padding: 1.6rem 1.4rem;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+.neng-quad:hover { background: var(--bg3); }
+.neng-quad.active { background: var(--bg3); }
+
+.neng-quad-num {
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.neng-quad-icon {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.6rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.neng-quad-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--white);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+
+.neng-quad-fraction {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.neng-quad-body {
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* Detail panel */
+.neng-detail-panel {
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg2);
+  padding: 1.8rem 2rem;
+  margin: 1px 0 0;
+  display: none;
+}
+.neng-detail-panel.open { display: block; }
+
+.neng-detail-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.neng-detail-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 8px;
+  margin-top: 1rem;
+}
+
+.neng-detail-item {
+  background: var(--bg3);
+  border: 0.5px solid var(--border);
+  border-radius: 4px;
+  padding: 0.8rem 1rem;
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.neng-detail-item strong {
+  display: block;
+  font-size: 11px;
+  color: var(--white);
+  margin-bottom: 3px;
+  font-weight: 500;
+}
+
+/* Equation row */
+.neng-equation {
+  border: 0.5px solid rgba(175,169,236,0.2);
+  border-left: 2px solid var(--purple-mid);
+  border-radius: 0 6px 6px 0;
+  padding: 1.6rem 2rem;
+  background: rgba(38,33,92,0.3);
+  margin: 2.5rem 0;
+}
+
+.neng-equation-eq {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--purple-light);
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
+}
+
+.neng-equation-body {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+@media (max-width: 600px) {
+  .neng-quads { grid-template-columns: 1fr; }
+  .neng-circle-svg-wrap { width: 220px; height: 220px; }
+}
+
 /* ===================== DIVIDER ===================== */
 .divider {
   border: none;
@@ -1053,6 +1238,192 @@ footer .footer-mark {
   <div class="photo-block reveal" style="margin-top:2.5rem">
     <img src="Go_Kian_Tik_The_Sovereign_One.png" alt="Go Kian Tik — The Sovereign One">
   </div>
+</section>
+
+<hr class="divider">
+
+<!-- ===================== SECTION 1B: NÉNG LIBRARY 360° ===================== -->
+<section>
+  <p class="section-label reveal">
+    <span class="en">Néng · 能 · Sovereign Capacity</span>
+    <span class="id">Néng · 能 · Kapasitas Berdaulat</span>
+  </p>
+
+  <h2 class="section-title reveal">
+    <span class="en">Néng Library · The 360° Sovereign Circle</span>
+    <span class="id">Perpustakaan Néng · Lingkaran Berdaulat 360°</span>
+  </h2>
+  <p class="section-sub reveal">
+    <span class="en">Utuh · Penuh · Tidak Cuwil — Complete readiness across all dimensions</span>
+    <span class="id">Utuh · Penuh · Tidak Cuwil — Kesiapan sempurna lintas semua dimensi</span>
+  </p>
+
+  <p class="neng-library-intro en reveal">
+    A Sovereign One does not carry Néng from one source alone. The circle of mastery is 360° — and a single person holds only 1/360 of it naturally. The remainder is gathered: from the timeless wisdom of Tao Zhu Gong, from every person who resonates and connects, and from the new dimension of AI-assisted learning. When the circle is complete, there is no more cuwil — no missing piece. That completeness is Readiness. That Readiness is Responsiveness. That Responsiveness is Genah.
+  </p>
+  <p class="neng-library-intro id reveal" style="display:none">
+    Seorang Pribadi Utuh Berdaulat tidak membawa Néng dari satu sumber saja. Lingkaran kemahiran adalah 360° — dan satu orang secara alami hanya memegang 1/360-nya. Sisanya dikumpulkan: dari kebijaksanaan abadi Tao Zhu Gong, dari setiap orang yang beresonansi dan terhubung, dan dari dimensi baru pembelajaran bersama AI. Ketika lingkaran lengkap, tidak ada lagi cuwil — tidak ada potongan yang hilang. Kelengkapan itu adalah Readiness. Readiness itu adalah Responsiveness. Responsiveness itu adalah Genah.
+  </p>
+
+  <!-- Circle visualiser + equation -->
+  <div class="neng-circle-wrap reveal">
+    <div class="neng-circle-svg-wrap">
+      <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background ring -->
+        <circle cx="140" cy="140" r="118" fill="none" stroke="rgba(127,119,221,0.1)" stroke-width="24"/>
+        <!-- Q1: TZG — top-right, purple -->
+        <path id="arc-tzg" d="M 140 22 A 118 118 0 0 1 258 140" fill="none" stroke="#7F77DD" stroke-width="24" stroke-linecap="round" style="cursor:pointer;transition:stroke 0.2s" onclick="selectQuad(0)" onmouseover="this.style.stroke='#AFA9EC'" onmouseout="updateArcColor(0)"/>
+        <!-- Q2: Personal — bottom-right, teal -->
+        <path id="arc-personal" d="M 258 140 A 118 118 0 0 1 140 258" fill="none" stroke="#1D9E75" stroke-width="24" stroke-linecap="round" style="cursor:pointer;transition:stroke 0.2s" onclick="selectQuad(1)" onmouseover="this.style.stroke='#9FE1CB'" onmouseout="updateArcColor(1)"/>
+        <!-- Q3: Others — bottom-left, amber -->
+        <path id="arc-others" d="M 140 258 A 118 118 0 0 1 22 140" fill="none" stroke="#EF9F27" stroke-width="24" stroke-linecap="round" style="cursor:pointer;transition:stroke 0.2s" onclick="selectQuad(2)" onmouseover="this.style.stroke='#FAC775'" onmouseout="updateArcColor(2)"/>
+        <!-- Q4: AI — top-left, coral -->
+        <path id="arc-ai" d="M 22 140 A 118 118 0 0 1 140 22" fill="none" stroke="#D85A30" stroke-width="24" stroke-linecap="round" style="cursor:pointer;transition:stroke 0.2s" onclick="selectQuad(3)" onmouseover="this.style.stroke='#F0997B'" onmouseout="updateArcColor(3)"/>
+        <!-- Inner ring decoration -->
+        <circle cx="140" cy="140" r="88" fill="none" stroke="rgba(127,119,221,0.06)" stroke-width="0.5"/>
+        <circle cx="140" cy="140" r="60" fill="rgba(13,13,26,0.8)" stroke="rgba(127,119,221,0.12)" stroke-width="0.5"/>
+        <!-- Quarter labels on ring -->
+        <text x="205" y="95" fill="#7F77DD" font-size="8" font-family="DM Mono" letter-spacing="1" text-anchor="middle">TZG</text>
+        <text x="205" y="195" fill="#1D9E75" font-size="8" font-family="DM Mono" letter-spacing="1" text-anchor="middle">YOU</text>
+        <text x="75" y="195" fill="#EF9F27" font-size="8" font-family="DM Mono" letter-spacing="1" text-anchor="middle">360°</text>
+        <text x="75" y="95" fill="#D85A30" font-size="8" font-family="DM Mono" letter-spacing="1" text-anchor="middle">AI</text>
+      </svg>
+      <div class="neng-circle-center">
+        <div class="neng-circle-center-num" id="circle-num">能</div>
+        <div class="neng-circle-center-label" id="circle-label">
+          <span class="en">tap a quadrant</span>
+          <span class="id">pilih kuadran</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 quadrant cards -->
+  <div class="neng-quads reveal" id="neng-quads">
+
+    <!-- Q1: TZG -->
+    <div class="neng-quad" id="quad-0" onclick="selectQuad(0)">
+      <p class="neng-quad-num" style="color:var(--purple-mid)">Quadrant 01 —</p>
+      <p class="neng-quad-icon" style="color:var(--purple-light)">陶</p>
+      <p class="neng-quad-fraction" style="color:var(--purple-mid)">12 / ∞</p>
+      <p class="neng-quad-title">
+        <span class="en">12 Néng · Tao Zhu Gong</span>
+        <span class="id">12 Néng · Tao Zhu Gong</span>
+      </p>
+      <p class="neng-quad-body en">The universal foundation. Fan Li's 12 capacities — tested across 2,500 years of civilization. The bones of every sovereign's library.</p>
+      <p class="neng-quad-body id" style="display:none">Fondasi universal. 12 kapasitas Fan Li — teruji 2.500 tahun peradaban. Tulang punggung perpustakaan setiap Sovereign.</p>
+    </div>
+
+    <!-- Q2: Personal -->
+    <div class="neng-quad" id="quad-1" onclick="selectQuad(1)">
+      <p class="neng-quad-num" style="color:var(--teal-mid)">Quadrant 02 —</p>
+      <p class="neng-quad-icon" style="color:var(--teal-light)">我</p>
+      <p class="neng-quad-fraction" style="color:var(--teal-mid)">1 / 360</p>
+      <p class="neng-quad-title">
+        <span class="en">Néng Personal · Your Unique Contribution</span>
+        <span class="id">Néng Personal · Kontribusi Unikmu</span>
+      </p>
+      <p class="neng-quad-body en">The irreplaceable piece. Your specific constellation of lived experience, wounds, breakthroughs, and mastery. No one else holds this exact 1/360.</p>
+      <p class="neng-quad-body id" style="display:none">Potongan yang tak tergantikan. Konstelasi spesifik pengalaman hidupmu, luka, terobosan, dan kemahiran. Tidak ada orang lain yang memegang 1/360 yang sama persis ini.</p>
+    </div>
+
+    <!-- Q3: Others -->
+    <div class="neng-quad" id="quad-2" onclick="selectQuad(2)">
+      <p class="neng-quad-num" style="color:var(--amber)">Quadrant 03 —</p>
+      <p class="neng-quad-icon" style="color:var(--amber-light)">人</p>
+      <p class="neng-quad-fraction" style="color:var(--amber)">359 / 360</p>
+      <p class="neng-quad-title">
+        <span class="en">Néng from Others · Connected, Resonant, Vibe</span>
+        <span class="id">Néng dari Orang Lain · Connected, Resonant, Vibe</span>
+      </p>
+      <p class="neng-quad-body en">Gathered over a lifetime. Every person who connects, resonates, and vibes contributes a piece of the circle. The Sovereign who collects most generously holds the fullest library.</p>
+      <p class="neng-quad-body id" style="display:none">Dikumpulkan sepanjang hidup. Setiap orang yang terhubung, beresonansi, dan vibe memberi satu potongan lingkaran. Sovereign yang paling rajin mengumpulkan memiliki perpustakaan paling lengkap.</p>
+    </div>
+
+    <!-- Q4: AI -->
+    <div class="neng-quad" id="quad-3" onclick="selectQuad(3)">
+      <p class="neng-quad-num" style="color:var(--coral)">Quadrant 04 —</p>
+      <p class="neng-quad-icon" style="color:#F0997B">機</p>
+      <p class="neng-quad-fraction" style="color:var(--coral)">∞ / ∞</p>
+      <p class="neng-quad-title">
+        <span class="en">Néng from AI · The New Dimension</span>
+        <span class="id">Néng dari AI · Dimensi Baru</span>
+      </p>
+      <p class="neng-quad-body en">Fan Li never had this. Learning alongside AI compresses 5,000 years of human knowledge into accessible sessions — adding a dimension of Néng no previous generation could accumulate.</p>
+      <p class="neng-quad-body id" style="display:none">Fan Li tidak punya ini. Belajar bersama AI mengompresi 5.000 tahun pengetahuan manusia menjadi sesi yang bisa diakses — menambahkan dimensi Néng yang tidak bisa dikumpulkan oleh generasi sebelumnya.</p>
+    </div>
+
+  </div>
+
+  <!-- Detail panels (toggled by JS) -->
+  <div class="neng-detail-panel" id="neng-detail-0">
+    <p class="neng-detail-title" style="color:var(--purple-light)">陶朱公 · 12 Néng — The Universal Foundation</p>
+    <p style="font-size:10px;color:var(--text-muted);line-height:1.8;margin-bottom:1rem">
+      <span class="en">These 12 capacities are not a checklist — they are an ecology. A Sovereign does not master all 12 simultaneously. They identify which Néng is currently weakest, and that becomes the frontier of cultivation.</span>
+      <span class="id">12 kapasitas ini bukan daftar periksa — melainkan ekologi. Seorang Sovereign tidak menguasai semua 12 sekaligus. Mereka mengidentifikasi Néng mana yang saat ini paling lemah, dan itulah yang menjadi garis depan kultivasi.</span>
+    </p>
+    <div class="neng-detail-list">
+      <div class="neng-detail-item"><strong>能識人 · Néng shí rén</strong><span class="en">Know people's character from evidence.</span><span class="id">Mengenali karakter dari pengalaman nyata.</span></div>
+      <div class="neng-detail-item"><strong>能接納 · Néng jiē nà</strong><span class="en">Receive all with openness.</span><span class="id">Menerima semua dengan keterbukaan.</span></div>
+      <div class="neng-detail-item"><strong>能安業 · Néng ān yè</strong><span class="en">Stay focused on your calling.</span><span class="id">Tetap fokus pada jalur dan panggilan.</span></div>
+      <div class="neng-detail-item"><strong>能整頓 · Néng zhěng dùn</strong><span class="en">Be organized — orderly wins hearts.</span><span class="id">Terorganisir — kerapian memenangkan hati.</span></div>
+      <div class="neng-detail-item"><strong>能敏捷 · Néng mǐn jié</strong><span class="en">Be swift and adaptable.</span><span class="id">Lincah dan adaptif dalam bertindak.</span></div>
+      <div class="neng-detail-item"><strong>能討賬 · Néng tǎo zhàng</strong><span class="en">Follow through — completion preserves trust.</span><span class="id">Tuntaskan — penyelesaian menjaga kepercayaan.</span></div>
+      <div class="neng-detail-item"><strong>能用人 · Néng yòng rén</strong><span class="en">Deploy talent according to strengths.</span><span class="id">Tempatkan bakat sesuai kekuatan.</span></div>
+      <div class="neng-detail-item"><strong>能辯論 · Néng biàn lùn</strong><span class="en">Articulate clearly — dispel confusion.</span><span class="id">Artikulasikan dengan jelas — usir kebingungan.</span></div>
+      <div class="neng-detail-item"><strong>能辦貨 · Néng bàn huò</strong><span class="en">Procure wisely — understand true value.</span><span class="id">Pengadaan bijak — pahami nilai sejati.</span></div>
+      <div class="neng-detail-item"><strong>能知機 · Néng zhī jī</strong><span class="en">Read the moment — know when to act.</span><span class="id">Baca momen — tahu kapan bertindak.</span></div>
+      <div class="neng-detail-item"><strong>能倡率 · Néng chàng shuài</strong><span class="en">Lead by example — create loyalty.</span><span class="id">Pimpin dengan teladan — ciptakan loyalitas.</span></div>
+      <div class="neng-detail-item"><strong>能運數 · Néng yùn shù</strong><span class="en">Manage numbers wisely.</span><span class="id">Kelola angka dengan kebijaksanaan.</span></div>
+    </div>
+  </div>
+
+  <div class="neng-detail-panel" id="neng-detail-1">
+    <p class="neng-detail-title" style="color:var(--teal-light)">
+      <span class="en">Néng Personal · Your 1/360</span>
+      <span class="id">Néng Personal · 1/360 Milikmu</span>
+    </p>
+    <p style="font-size:10px;color:var(--text-muted);line-height:1.8">
+      <span class="en">Your Néng personal is not invented — it is excavated. It lives in the intersection of: what you have survived, what you have mastered, what you see that others miss, and what you consistently do better than most without trying hard. For Go Kian Tik: the synthesis of Javanese-Taoist wisdom, lived economic adversity, human-AI frontier research, and the CHO framework is his 1/360 — irreplaceable in the circle.</span>
+      <span class="id">Néng personal-mu bukan diciptakan — melainkan digali. Ia tinggal di persimpangan: apa yang telah kamu lalui, apa yang telah kamu kuasai, apa yang kamu lihat yang orang lain lewatkan, dan apa yang secara konsisten kamu lakukan lebih baik dari kebanyakan tanpa harus berusaha keras. Bagi Go Kian Tik: sintesis kebijaksanaan Jawa-Tao, adversitas ekonomi yang pernah dialami, riset frontier manusia-AI, dan kerangka CHO adalah 1/360-nya — tak tergantikan dalam lingkaran.</span>
+    </p>
+  </div>
+
+  <div class="neng-detail-panel" id="neng-detail-2">
+    <p class="neng-detail-title" style="color:var(--amber-light)">
+      <span class="en">Néng from Others · 359/360</span>
+      <span class="id">Néng dari Orang Lain · 359/360</span>
+    </p>
+    <p style="font-size:10px;color:var(--text-muted);line-height:1.8">
+      <span class="en">Every person who connects, resonates, and vibes with a Sovereign brings a piece of the circle that cannot be self-generated. This is why the Sovereign builds community — not for followers, but for completion. The WA groups HY1 & HY2, the LinkedIn connections, the collaborators, the readers who respond — each one adds a Néng fragment that fills the circle further. The more generous the collection, the less cuwil the library.</span>
+      <span class="id">Setiap orang yang terhubung, beresonansi, dan vibe dengan seorang Sovereign membawa sepotong lingkaran yang tidak bisa dihasilkan sendiri. Inilah mengapa Sovereign membangun komunitas — bukan untuk pengikut, melainkan untuk kelengkapan. Grup WA HY1 & HY2, koneksi LinkedIn, para kolaborator, para pembaca yang merespons — masing-masing menambahkan fragmen Néng yang mengisi lingkaran lebih jauh. Semakin rajin mengumpulkan, semakin tidak cuwil perpustakaannya.</span>
+    </p>
+  </div>
+
+  <div class="neng-detail-panel" id="neng-detail-3">
+    <p class="neng-detail-title" style="color:#F0997B">
+      <span class="en">Néng from AI · The Unprecedented Dimension</span>
+      <span class="id">Néng dari AI · Dimensi yang Belum Pernah Ada</span>
+    </p>
+    <p style="font-size:10px;color:var(--text-muted);line-height:1.8">
+      <span class="en">Fan Li built his Néng library through 2,500 years of trade, exile, and return. Today's Sovereign has access to something he never did: AI systems that compress millennia of human knowledge into accessible dialogue. Claude, Gemini, ChatGPT, DeepSeek, Copilot — each carries a different Néng profile. Learning alongside them does not replace human Néng; it adds a layer that no previous generation could accumulate. This is the new edge of the 360° circle.</span>
+      <span class="id">Fan Li membangun perpustakaan Néng-nya melalui 2.500 tahun perdagangan, pengasingan, dan kembali. Sovereign hari ini memiliki akses pada sesuatu yang tidak pernah dimilikinya: sistem AI yang mengompresi ribuan tahun pengetahuan manusia menjadi dialog yang bisa diakses. Claude, Gemini, ChatGPT, DeepSeek, Copilot — masing-masing membawa profil Néng yang berbeda. Belajar bersama mereka tidak menggantikan Néng manusia; ia menambahkan lapisan yang tidak bisa dikumpulkan oleh generasi sebelumnya. Inilah tepi baru dari lingkaran 360°.</span>
+    </p>
+  </div>
+
+  <!-- Total Néng equation -->
+  <div class="neng-equation reveal">
+    <div class="neng-equation-eq">
+      Total Néng<sub style="font-size:0.7em">Sovereign</sub> =
+      12 Néng<sub style="font-size:0.7em">TZG</sub>
+      + Néng<sub style="font-size:0.7em">Personal (1/360)</sub>
+      + Néng<sub style="font-size:0.7em">Others (accumulated)</sub>
+      + Néng<sub style="font-size:0.7em">AI (new dimension)</sub>
+    </div>
+    <div class="neng-equation-body en">When this sum approaches 360/360, the circle is no longer cuwil. Readiness is complete. Responsiveness is natural. This is not a destination — it is a living practice. Every new connection, every honest conversation, every AI session, every breakthrough adds another degree to the circle.</div>
+    <div class="neng-equation-body id" style="display:none">Ketika jumlah ini mendekati 360/360, lingkaran tidak lagi cuwil. Readiness sempurna. Responsiveness menjadi alami. Ini bukan tujuan akhir — ini adalah praktik hidup. Setiap koneksi baru, setiap percakapan jujur, setiap sesi AI, setiap terobosan menambahkan satu derajat lagi ke lingkaran.</div>
+  </div>
+
 </section>
 
 <hr class="divider">
@@ -1976,7 +2347,97 @@ function setLayer(idx) {
   });
 }
 
-// Scroll reveal
+// ── Néng Library 360° ──────────────────────────────────────────
+const quadColors = ['#7F77DD','#1D9E75','#EF9F27','#D85A30'];
+const quadActiveColors = ['#AFA9EC','#9FE1CB','#FAC775','#F0997B'];
+const arcIds = ['arc-tzg','arc-personal','arc-others','arc-ai'];
+const quadNums = ['12','1/360','359+','∞'];
+const quadLabels = {
+  en: ['TZG Foundation','Your 1/360','From Others','From AI'],
+  id: ['Fondasi TZG','1/360 Milikmu','Dari Orang Lain','Dari AI']
+};
+
+let activeQuad = -1;
+
+function selectQuad(idx) {
+  // Toggle off if clicking same
+  if (activeQuad === idx) {
+    activeQuad = -1;
+    updateAllArcs();
+    updateQuadCards(-1);
+    closeAllDetails();
+    resetCenter();
+    return;
+  }
+  activeQuad = idx;
+  updateAllArcs();
+  updateQuadCards(idx);
+  openDetail(idx);
+  updateCenter(idx);
+}
+
+function updateAllArcs() {
+  arcIds.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.stroke = (activeQuad === -1 || activeQuad === i)
+      ? (activeQuad === i ? quadActiveColors[i] : quadColors[i])
+      : quadColors[i] + '55';
+  });
+}
+
+function updateArcColor(idx) {
+  const el = document.getElementById(arcIds[idx]);
+  if (!el) return;
+  el.style.stroke = activeQuad === idx ? quadActiveColors[idx] : quadColors[idx];
+}
+
+function updateQuadCards(idx) {
+  for (let i = 0; i < 4; i++) {
+    const card = document.getElementById('quad-' + i);
+    if (!card) continue;
+    card.classList.toggle('active', i === idx);
+  }
+}
+
+function openDetail(idx) {
+  closeAllDetails();
+  const panel = document.getElementById('neng-detail-' + idx);
+  if (panel) panel.classList.add('open');
+}
+
+function closeAllDetails() {
+  for (let i = 0; i < 4; i++) {
+    const p = document.getElementById('neng-detail-' + i);
+    if (p) p.classList.remove('open');
+  }
+}
+
+function updateCenter(idx) {
+  const numEl = document.getElementById('circle-num');
+  const labelEl = document.getElementById('circle-label');
+  if (!numEl || !labelEl) return;
+  numEl.style.color = quadActiveColors[idx];
+  numEl.textContent = quadNums[idx];
+  const isId = document.body.classList.contains('id-active');
+  const lang = isId ? 'id' : 'en';
+  labelEl.innerHTML = '<span>' + quadLabels[lang][idx] + '</span>';
+}
+
+function resetCenter() {
+  const numEl = document.getElementById('circle-num');
+  const labelEl = document.getElementById('circle-label');
+  if (!numEl || !labelEl) return;
+  numEl.style.color = 'var(--white)';
+  numEl.textContent = '能';
+  labelEl.innerHTML = '<span class="en">tap a quadrant</span><span class="id">pilih kuadran</span>';
+  // re-apply lang visibility
+  const isId = document.body.classList.contains('id-active');
+  labelEl.querySelectorAll('.en').forEach(el => el.style.display = isId ? 'none' : 'inline');
+  labelEl.querySelectorAll('.id').forEach(el => el.style.display = isId ? 'inline' : 'none');
+}
+
+
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
