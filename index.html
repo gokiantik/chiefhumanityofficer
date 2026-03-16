@@ -723,6 +723,141 @@ section {
   line-height: 1.6;
 }
 
+/* ===================== HUMANITY RANK SECTION ===================== */
+.humanity-intro {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.9;
+  margin-bottom: 2.5rem;
+  max-width: 720px;
+}
+
+.formula-humanity {
+  border: 0.5px solid rgba(239,159,39,0.25);
+  border-left: 2px solid var(--amber);
+  border-radius: 0 6px 6px 0;
+  padding: 1.8rem 2rem;
+  background: rgba(65,36,2,0.25);
+  margin: 2.5rem 0;
+}
+
+.formula-humanity .formula-eq {
+  color: var(--amber-light);
+}
+
+.formula-humanity .formula-desc {
+  color: var(--amber-light);
+  opacity: 0.8;
+}
+
+.diag-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 2rem 0;
+}
+
+.diag-card {
+  background: var(--bg2);
+  padding: 1.6rem 1.4rem;
+  transition: background 0.2s;
+  position: relative;
+}
+.diag-card:hover { background: var(--bg3); }
+
+.diag-num {
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.diag-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--white);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.diag-body {
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.diag-ref {
+  font-size: 9px;
+  color: var(--amber);
+  letter-spacing: 0.08em;
+  margin-top: 0.6rem;
+  opacity: 0.7;
+}
+
+.diag-card a.diag-link {
+  display: inline-block;
+  margin-top: 0.8rem;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--amber-light);
+  border: 0.5px solid rgba(239,159,39,0.3);
+  padding: 3px 10px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.diag-card a.diag-link:hover {
+  border-color: var(--amber);
+  color: var(--white);
+}
+
+.humanity-spectrum {
+  display: flex;
+  gap: 1px;
+  background: var(--border);
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 2rem 0;
+}
+
+.spectrum-step {
+  flex: 1;
+  padding: 1.2rem 0.8rem;
+  background: var(--bg2);
+  text-align: center;
+  transition: background 0.2s;
+  position: relative;
+}
+.spectrum-step:hover { background: var(--bg3); }
+
+.spectrum-exp {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.spectrum-label {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.spectrum-body {
+  font-size: 9px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
 /* ===================== DIVIDER ===================== */
 .divider {
   border: none;
@@ -985,6 +1120,217 @@ footer .footer-mark {
     <div class="formula-desc en">When measured in the right composition, the ingredients above produce a result that surpasses any calculation. Human consciousness multiplied by AI's calculation, raised to the power of humanity — yet still less than Transcendence. The formula reminds us: there is always something beyond the computable.</div>
     <div class="formula-desc id" style="display:none">Ketika ditakar dalam komposisi yang tepat, bahan-bahan di atas menghasilkan formula yang melampaui kalkulasi manapun. Kesadaran manusia dikalikan perhitungan AI, dipangkatkan kemanusiaan — namun tetap lebih kecil dari Transenden. Formula ini mengingatkan: selalu ada sesuatu yang melampaui yang bisa dihitung.</div>
   </div>
+</section>
+
+<hr class="divider">
+
+<!-- ===================== SECTION 2B: HUMANITY AS EVOLUTIONARY RANK ===================== -->
+<section>
+  <p class="section-label reveal">
+    <span class="en">Grand Formula · Deep Dive</span>
+    <span class="id">Grand Formula · Eksplorasi Mendalam</span>
+  </p>
+
+  <h2 class="section-title reveal">
+    <span class="en">Humanity as an Evolutionary Rank</span>
+    <span class="id">Humanity sebagai Pangkat yang Evolutif</span>
+  </h2>
+  <p class="section-sub reveal">
+    <span class="en">Humanity is not a constant — it is the variable that determines civilizational trajectory.</span>
+    <span class="id">Humanity bukan konstanta — ia adalah variabel yang menentukan trajektori peradaban.</span>
+  </p>
+
+  <p class="humanity-intro en reveal">
+    In the Grand Formula <em>(Consciousness × Calculation)^Humanity &lt; Transcendence</em>, most attention falls on Consciousness and Calculation. Yet the exponent — Humanity — is the decisive variable. A small Humanity means even great Consciousness × Calculation yields little. A growing Humanity means the formula's output scales exponentially. Nine civilizational diagnostics reveal where Humanity currently stands — and what it takes to raise it.
+  </p>
+  <p class="humanity-intro id reveal" style="display:none">
+    Dalam Grand Formula <em>(Consciousness × Calculation)^Humanity &lt; Transcendence</em>, perhatian kebanyakan tertuju pada Consciousness dan Calculation. Padahal eksponen — Humanity — adalah variabel penentu. Humanity yang kecil berarti Consciousness × Calculation yang besar pun menghasilkan sedikit. Humanity yang tumbuh berarti output formula meningkat secara eksponensial. Sembilan diagnosis peradaban mengungkapkan di mana Humanity kini berdiri — dan apa yang dibutuhkan untuk menaikkannya.
+  </p>
+
+  <!-- Exponent spectrum -->
+  <div class="humanity-spectrum reveal">
+    <div class="spectrum-step">
+      <div class="spectrum-exp" style="color:var(--coral)">^1</div>
+      <div class="spectrum-label" style="color:var(--coral)">
+        <span class="en">Reactive</span>
+        <span class="id">Reaktif</span>
+      </div>
+      <div class="spectrum-body">
+        <span class="en">Ruwet · Fear · Survival · LoC &lt;200</span>
+        <span class="id">Ruwet · Takut · Bertahan</span>
+      </div>
+    </div>
+    <div class="spectrum-step">
+      <div class="spectrum-exp" style="color:var(--amber)">^2</div>
+      <div class="spectrum-label" style="color:var(--amber)">
+        <span class="en">Aware</span>
+        <span class="id">Sadar</span>
+      </div>
+      <div class="spectrum-body">
+        <span class="en">OTW Genah · Johari open · LoC 200–400</span>
+        <span class="id">OTW Genah · Johari terbuka</span>
+      </div>
+    </div>
+    <div class="spectrum-step">
+      <div class="spectrum-exp" style="color:var(--teal-mid)">^3</div>
+      <div class="spectrum-label" style="color:var(--teal-mid)">
+        <span class="en">Sovereign</span>
+        <span class="id">Berdaulat</span>
+      </div>
+      <div class="spectrum-body">
+        <span class="en">Genah · Rogers Early Adopter · LoC 400–540</span>
+        <span class="id">Genah · Early Adopter</span>
+      </div>
+    </div>
+    <div class="spectrum-step">
+      <div class="spectrum-exp" style="color:var(--purple-light)">^∞</div>
+      <div class="spectrum-label" style="color:var(--purple-light)">
+        <span class="en">Transcendent</span>
+        <span class="id">Transenden</span>
+      </div>
+      <div class="spectrum-body">
+        <span class="en">Zi Zhu Zhe · LoC 540–1000</span>
+        <span class="id">Zi Zhu Zhe · LoC 540–1000</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9 diagnosis cards -->
+  <div class="diag-grid reveal">
+
+    <!-- 1 -->
+    <div class="diag-card">
+      <p class="diag-num">Diagnosis 01 —</p>
+      <p class="diag-title">
+        <span class="en">Hawkins LoC: 85% of humanity below 200</span>
+        <span class="id">Hawkins LoC: 85% umat manusia di bawah 200</span>
+      </p>
+      <p class="diag-body en">David Hawkins' Map of Consciousness calibrates human consciousness on a scale of 1–1000. Shame (20), Fear (100), Anger (150) anchor the lower rungs. Courage (200) is the threshold of constructive power. Only ~15% of humanity crosses it — making Humanity as an exponent a fraction for most, not a multiplier.</p>
+      <p class="diag-body id" style="display:none">Peta Kesadaran David Hawkins mengkalibrasi kesadaran manusia pada skala 1–1000. Malu (20), Ketakutan (100), Kemarahan (150) mendominasi lapisan bawah. Keberanian (200) adalah ambang daya konstruktif. Hanya ~15% umat manusia melampauinya — menjadikan Humanity sebagai eksponen berupa pecahan bagi kebanyakan, bukan pengali.</p>
+      <p class="diag-ref">ref · Hawkins, D.R. — Power vs. Force (1995)</p>
+    </div>
+
+    <!-- 2 -->
+    <div class="diag-card">
+      <p class="diag-num">Diagnosis 02 —</p>
+      <p class="diag-title">
+        <span class="en">Johari Window: most live in quadrant 1 & 3</span>
+        <span class="id">Johari Window: kebanyakan hidup di kuadran 1 & 3</span>
+      </p>
+      <p class="diag-body en">The Johari Window maps self-awareness into four quadrants. Most people spend their lives in Q1 (known to self, known to others) and Q3 (unknown to self, known to others — the blind spot). Q4 — the Unknown Arena — remains sealed. Yet it is precisely Q4 where the AHA Moment lives. Humanity as an exponent rises only when the Unknown begins to be explored.</p>
+      <p class="diag-body id" style="display:none">Johari Window memetakan kesadaran diri ke dalam empat kuadran. Kebanyakan orang menghabiskan hidupnya di K1 (diketahui diri, diketahui orang lain) dan K3 (tidak diketahui diri, diketahui orang lain — titik buta). K4 — Arena yang Tidak Diketahui — tetap tertutup. Namun justru di K4 itulah Momen AHA tinggal. Humanity sebagai eksponen naik hanya ketika Yang Tidak Diketahui mulai dijelajahi.</p>
+      <p class="diag-ref">ref · Luft & Ingham — Johari Window (1955)</p>
+    </div>
+
+    <!-- 3 -->
+    <div class="diag-card">
+      <p class="diag-num">Diagnosis 03 —</p>
+      <p class="diag-title">
+        <span class="en">Rogers Diffusion: only 2.5% are Innovators</span>
+        <span class="id">Difusi Rogers: hanya 2,5% yang menjadi Innovator</span>
+      </p>
+      <p class="diag-body en">Everett Rogers' Diffusion of Innovations shows that in any paradigm shift, only 2.5% are Innovators — those who generate the new idea. 13.5% are Early Adopters. The majority (68%) follow once the path is proven. Raising Humanity means increasing the density of Early Adopters and Innovators in the system — not waiting for the Late Majority to move first.</p>
+      <p class="diag-body id" style="display:none">Difusi Inovasi Everett Rogers menunjukkan bahwa dalam setiap pergeseran paradigma, hanya 2,5% adalah Innovator — mereka yang menghasilkan gagasan baru. 13,5% adalah Early Adopter. Mayoritas (68%) mengikuti setelah jalur terbukti. Menaikkan Humanity berarti meningkatkan kepadatan Early Adopter dan Innovator dalam sistem — bukan menunggu Late Majority bergerak lebih dulu.</p>
+      <p class="diag-ref">ref · Rogers, E.M. — Diffusion of Innovations (1962)</p>
+    </div>
+
+    <!-- 4 -->
+    <div class="diag-card">
+      <p class="diag-num">Diagnosis 04 —</p>
+      <p class="diag-title">
+        <span class="en">8 billion humans — but how many are truly present?</span>
+        <span class="id">8 miliar manusia — tapi berapa yang benar-benar hadir?</span>
+      </p>
+      <p class="diag-body en">The planet holds 8,000,000,000 human bodies. Each carries the same biological hardware. Yet "presence" — the full activation of consciousness, intention, and sovereign choice — belongs to a much smaller number. The CHO question is not "how many people exist?" but "how many are living at full Humanity?" Every person who crosses that threshold raises the civilizational exponent.</p>
+      <p class="diag-body id" style="display:none">Bumi menampung 8.000.000.000 tubuh manusia. Masing-masing membawa perangkat biologis yang sama. Namun "kehadiran" — aktivasi penuh kesadaran, niat, dan pilihan berdaulat — dimiliki oleh jumlah yang jauh lebih kecil. Pertanyaan CHO bukan "berapa banyak orang yang ada?" melainkan "berapa banyak yang hidup dengan Humanity penuh?" Setiap orang yang melampaui ambang itu menaikkan eksponen peradaban.</p>
+      <p class="diag-ref">ref · UN World Population · 2024</p>
+    </div>
+
+    <!-- 5 -->
+    <div class="diag-card">
+      <p class="diag-num">Diagnosis 05 —</p>
+      <p class="diag-title">
+        <span class="en">LinkedIn 1.3M: reach without depth</span>
+        <span class="id">LinkedIn 1,3M: jangkauan tanpa kedalaman</span>
+      </p>
+      <p class="diag-body en">1.3 million impressions on a single LinkedIn post is a data point, not an outcome. Reach is a measure of Calculation — algorithmic amplification. Depth is a measure of Humanity — how many readers actually shifted? The CHO framework distinguishes: Calculation spreads content; Humanity transforms receivers. The gap between 1.3M and actual transformation is the Humanity deficit in the system.</p>
+      <p class="diag-body id" style="display:none">1,3 juta impresi dalam satu posting LinkedIn adalah data point, bukan hasil. Jangkauan adalah ukuran Calculation — amplifikasi algoritmik. Kedalaman adalah ukuran Humanity — berapa banyak pembaca yang benar-benar berubah? Kerangka CHO membedakan: Calculation menyebarkan konten; Humanity mentransformasi penerima. Jarak antara 1,3M dan transformasi nyata adalah defisit Humanity dalam sistem.</p>
+      <p class="diag-ref">ref · Go Kian Tik — LinkedIn field data · 2024–2026</p>
+    </div>
+
+    <!-- 6 -->
+    <div class="diag-card">
+      <p class="diag-num">Diagnosis 06 —</p>
+      <p class="diag-title">
+        <span class="en">AI compresses 5,000 years into 1 hour</span>
+        <span class="id">AI mengompresi 5.000 tahun menjadi 1 jam</span>
+      </p>
+      <p class="diag-body en">A single AI session can synthesize insights from five millennia of human knowledge — philosophy, neuroscience, economics, Taoist principles — in under an hour. This is Calculation at its maximum. But compressed knowledge without a sovereign processor produces noise, not wisdom. The CHO paper "Acknowledgment to the Architects of AI" documents this precisely: the bottleneck is never the tool — it is the Humanity of the human holding it.</p>
+      <p class="diag-body id" style="display:none">Satu sesi AI dapat mensintesis wawasan dari lima milenium pengetahuan manusia — filsafat, neurosains, ekonomi, prinsip Taoisme — dalam waktu kurang dari satu jam. Ini adalah Calculation pada puncaknya. Namun pengetahuan yang dikompresi tanpa prosesor berdaulat menghasilkan kebisingan, bukan kebijaksanaan. Paper CHO "Acknowledgment to the Architects of AI" mendokumentasikan ini dengan tepat: hambatannya tidak pernah pada alatnya — melainkan pada Humanity dari manusia yang memegangnya.</p>
+      <a href="https://doi.org/10.5281/zenodo.18965525" target="_blank" class="diag-link">DOI · Ep.2 ↗</a>
+    </div>
+
+    <!-- 7 -->
+    <div class="diag-card">
+      <p class="diag-num">Diagnosis 07 —</p>
+      <p class="diag-title">
+        <span class="en">Ruwet → OTW Genah → Genah: coherence as the Humanity metric</span>
+        <span class="id">Ruwet → OTW Genah → Genah: koherensi sebagai metrik Humanity</span>
+      </p>
+      <p class="diag-body en">The triadic framework of human self-coherence maps Humanity concretely: Ruwet (Humanity^1, systemic dissonance), OTW Genah (Humanity^2, active self-organisation), Genah (Humanity^3+, full 360° coherence). A person's position in this spectrum determines how powerfully the Grand Formula operates in their life. Raising Humanity means moving from Ruwet toward Genah — across all seven layers of self-language.</p>
+      <p class="diag-body id" style="display:none">Kerangka triadic koherensi diri manusia memetakan Humanity secara konkret: Ruwet (Humanity^1, disonansi sistemik), OTW Genah (Humanity^2, pengorganisasian diri aktif), Genah (Humanity^3+, koherensi penuh 360°). Posisi seseorang dalam spektrum ini menentukan seberapa kuat Grand Formula beroperasi dalam hidupnya. Menaikkan Humanity berarti bergerak dari Ruwet menuju Genah — di tujuh lapisan bahasa diri.</p>
+      <a href="https://doi.org/10.5281/zenodo.18973106" target="_blank" class="diag-link">DOI · Ep.6 ↗</a>
+    </div>
+
+    <!-- 8 -->
+    <div class="diag-card">
+      <p class="diag-num">Diagnosis 08 —</p>
+      <p class="diag-title">
+        <span class="en">The CHO role: a position that does not yet exist</span>
+        <span class="id">Peran CHO: posisi yang belum ada</span>
+      </p>
+      <p class="diag-body en">Chief Humanity Officer is not a job title. It is a civilizational function. While organizations optimize for financial capital, intellectual capital, and social capital, no institution yet systematically invests in raising the Humanity exponent of its people. The CHO In Action Series was written to name this gap — and begin filling it with documented methodology, not motivation.</p>
+      <p class="diag-body id" style="display:none">Chief Humanity Officer bukan jabatan. Ia adalah fungsi peradaban. Sementara organisasi mengoptimalkan modal finansial, modal intelektual, dan modal sosial, belum ada institusi yang secara sistematis berinvestasi dalam menaikkan eksponen Humanity orang-orangnya. Seri CHO In Action ditulis untuk menamakan kekosongan ini — dan mulai mengisinya dengan metodologi terdokumentasi, bukan motivasi.</p>
+      <a href="https://doi.org/10.5281/zenodo.18935427" target="_blank" class="diag-link">DOI · Ep.0 ↗</a>
+    </div>
+
+    <!-- 9 -->
+    <div class="diag-card">
+      <p class="diag-num">Diagnosis 09 —</p>
+      <p class="diag-title">
+        <span class="en">The Transcendence ceiling: why Humanity must remain the exponent</span>
+        <span class="id">Batas Transenden: mengapa Humanity harus tetap menjadi eksponen</span>
+      </p>
+      <p class="diag-body en">The formula's less-than sign (&lt; Transcendence) is not a failure condition. It is a structural truth: no matter how high Humanity rises, there remains something beyond calculation. This ceiling preserves humility. The sovereign individual who has raised their Humanity to its fullest is not arrogant — they are awed. That awe is the final marker of true Humanity.</p>
+      <p class="diag-body id" style="display:none">Tanda kurang dari (&lt; Transenden) dalam formula bukan kondisi gagal. Ini adalah kebenaran struktural: betapapun tinggi Humanity naik, selalu ada sesuatu di balik kalkulasi. Batas ini menjaga kerendahan hati. Individu berdaulat yang telah menaikkan Humanity-nya sepenuhnya bukan sombong — mereka takjub. Kekaguman itu adalah penanda terakhir dari Humanity yang sejati.</p>
+      <p class="diag-ref">ref · Go Kian Tik — Grand Formula · CHO Sovereign CF</p>
+    </div>
+
+  </div>
+
+  <!-- Anchor formula -->
+  <div class="formula-humanity reveal">
+    <div class="formula-eq">(Consciousness × Calculation)^Humanity &lt; Transcendence</div>
+    <div class="formula-desc en">Humanity is not a given — it is a rank earned through coherence, self-research, and the disciplined raising of consciousness. The nine diagnostics above are not symptoms to treat — they are coordinates for navigation. Every person who raises their Humanity exponent raises the civilizational formula for everyone.</div>
+    <div class="formula-desc id" style="display:none">Humanity bukan pemberian — ia adalah pangkat yang diraih melalui koherensi, riset diri, dan peningkatan kesadaran yang disiplin. Sembilan diagnosis di atas bukan gejala yang perlu diobati — melainkan koordinat untuk navigasi. Setiap orang yang menaikkan eksponen Humanity-nya menaikkan formula peradaban untuk semua.</div>
+  </div>
+
+  <!-- Paper links -->
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:1.5rem" class="reveal">
+    <a href="https://doi.org/10.5281/zenodo.18965525" target="_blank" style="font-size:9px;letter-spacing:0.12em;color:var(--amber-light);border:0.5px solid rgba(239,159,39,0.3);padding:5px 14px;border-radius:2px;text-decoration:none;transition:all 0.2s" onmouseover="this.style.borderColor='var(--amber)';this.style.color='var(--white)'" onmouseout="this.style.borderColor='rgba(239,159,39,0.3)';this.style.color='var(--amber-light)'">
+      <span class="en">Paper: 1 hour = 5,000 years · DOI Ep.2 ↗</span>
+      <span class="id">Paper: 1 jam = 5.000 tahun · DOI Ep.2 ↗</span>
+    </a>
+    <a href="https://doi.org/10.5281/zenodo.18973106" target="_blank" style="font-size:9px;letter-spacing:0.12em;color:var(--amber-light);border:0.5px solid rgba(239,159,39,0.3);padding:5px 14px;border-radius:2px;text-decoration:none;transition:all 0.2s" onmouseover="this.style.borderColor='var(--amber)';this.style.color='var(--white)'" onmouseout="this.style.borderColor='rgba(239,159,39,0.3)';this.style.color='var(--amber-light)'">
+      <span class="en">Paper: Ruwet · OTW Genah · Genah · DOI Ep.6 ↗</span>
+      <span class="id">Paper: Ruwet · OTW Genah · Genah · DOI Ep.6 ↗</span>
+    </a>
+    <a href="https://zenodo.org/search?q=gokiantik" target="_blank" style="font-size:9px;letter-spacing:0.12em;color:var(--text-muted);border:0.5px solid var(--border);padding:5px 14px;border-radius:2px;text-decoration:none;transition:all 0.2s" onmouseover="this.style.borderColor='var(--purple-mid)';this.style.color='var(--white)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'">
+      <span class="en">All publications · Zenodo ↗</span>
+      <span class="id">Semua publikasi · Zenodo ↗</span>
+    </a>
+  </div>
+
 </section>
 
 <hr class="divider">
