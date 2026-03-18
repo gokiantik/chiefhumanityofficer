@@ -1,0 +1,419 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=DM+Sans:wght@300;400;500&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A84C;--gold-light:#E8D08A;--dark:#1A1A2E;--mid:#2E4057;
+  --cream:#F8F4EE;--text:var(--color-text-primary);--sub:var(--color-text-secondary);
+  --surface:var(--color-background-primary);--surface2:var(--color-background-secondary);
+  --border:var(--color-border-tertiary);
+}
+
+.wbp-root{font-family:'DM Sans',sans-serif;padding:0 0 2rem;max-width:700px;margin:0 auto}
+
+/* ── HERO ── */
+.hero{text-align:center;padding:2.5rem 1.5rem 2rem;border-bottom:0.5px solid var(--border)}
+.hero-tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:.75rem}
+.hero-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--text);line-height:1.2;margin-bottom:.4rem}
+.hero-sub{font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:var(--sub);margin-bottom:1rem}
+.hero-formula{display:inline-block;font-size:1.1rem;font-weight:500;color:var(--gold);letter-spacing:.05em;padding:.4rem 1.2rem;border:1px solid var(--gold-light);border-radius:24px;background:transparent}
+.hero-author{font-size:12px;color:var(--sub);margin-top:.75rem}
+
+/* ── TABS ── */
+.tab-bar{display:flex;gap:0;border-bottom:0.5px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex:1;min-width:90px;padding:.65rem .5rem;font-size:12px;font-weight:500;color:var(--sub);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:color .2s,border-color .2s}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+.tab-btn:hover:not(.active){color:var(--text)}
+
+/* ── PANELS ── */
+.panel{display:none;padding:1.5rem}
+.panel.active{display:block}
+
+/* ── ABSTRACT ── */
+.abstract-body{font-size:14px;line-height:1.75;color:var(--text);margin-bottom:1.25rem}
+.kw-block{font-size:12px;color:var(--sub);line-height:1.8;padding:.75rem 1rem;background:var(--surface2);border-radius:8px;border-left:3px solid var(--gold)}
+.kw-block strong{color:var(--text)}
+
+/* ── DIAGRAM TABS ── */
+.diag-tabs{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap}
+.diag-btn{font-size:12px;padding:.3rem .85rem;border:0.5px solid var(--border);border-radius:20px;cursor:pointer;background:none;color:var(--sub);transition:all .2s}
+.diag-btn.active{background:var(--gold);color:#fff;border-color:var(--gold)}
+.diag-view{min-height:320px}
+
+/* ── NETWORK SVG ── */
+.net-svg{width:100%;overflow:visible}
+
+/* ── PHILOSOPHY CARDS ── */
+.phil-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.25rem}
+.phil-card{padding:1rem;background:var(--surface2);border-radius:10px;border:0.5px solid var(--border);cursor:pointer;transition:border-color .2s}
+.phil-card:hover{border-color:var(--gold)}
+.phil-card.active{border-color:var(--gold);background:var(--surface)}
+.phil-icon{font-size:20px;margin-bottom:.4rem}
+.phil-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:.2rem}
+.phil-sub{font-size:11px;color:var(--sub)}
+.phil-detail{padding:1rem;background:var(--surface2);border-radius:10px;border-left:3px solid var(--gold);font-size:13px;line-height:1.7;color:var(--text);min-height:80px;transition:opacity .3s}
+
+/* ── ECOSYSTEM ── */
+.eco-layers{display:flex;flex-direction:column;gap:10px;margin-bottom:1.25rem}
+.eco-layer{padding:.85rem 1rem;border-radius:8px;border:0.5px solid var(--border);display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .2s}
+.eco-layer:hover{border-color:var(--gold)}
+.eco-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.eco-label{font-size:13px;font-weight:500;color:var(--text)}
+.eco-desc{font-size:12px;color:var(--sub);margin-left:auto;text-align:right;max-width:200px}
+.eco-bar-wrap{margin-top:1rem}
+.eco-bar-label{display:flex;justify-content:space-between;font-size:11px;color:var(--sub);margin-bottom:4px}
+.eco-bar-track{height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.eco-bar-fill{height:100%;border-radius:3px;transition:width 1s ease}
+
+/* ── AI SESSION LOG ── */
+.ai-log{display:flex;flex-direction:column;gap:8px}
+.ai-entry{display:flex;gap:10px;align-items:flex-start;padding:.75rem;border-radius:8px;background:var(--surface2);border:0.5px solid var(--border);cursor:pointer;transition:border-color .2s}
+.ai-entry:hover{border-color:var(--gold)}
+.ai-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;color:#fff}
+.ai-name{font-size:12px;font-weight:500;color:var(--text)}
+.ai-note{font-size:11px;color:var(--sub);margin-top:2px}
+.ai-status{font-size:10px;margin-left:auto;padding:.2rem .5rem;border-radius:10px;align-self:center;white-space:nowrap}
+
+/* ── METADATA TABLE ── */
+.meta-table{width:100%;border-collapse:collapse;font-size:12px}
+.meta-table td{padding:.5rem .75rem;border-bottom:0.5px solid var(--border);vertical-align:top}
+.meta-table td:first-child{color:var(--sub);width:40%;font-weight:500}
+.meta-table td:last-child{color:var(--text)}
+.doi-link{color:var(--gold);text-decoration:none;font-size:11px}
+.doi-link:hover{text-decoration:underline}
+.badge{display:inline-block;font-size:10px;padding:.15rem .5rem;border-radius:10px;font-weight:500}
+
+/* ── QUOTE ── */
+.blockquote{padding:1rem 1.25rem;border-left:3px solid var(--gold);background:var(--surface2);border-radius:0 8px 8px 0;font-family:'Playfair Display',serif;font-size:13px;font-style:italic;line-height:1.7;color:var(--text);margin-top:1rem}
+.blockquote cite{display:block;font-style:normal;font-size:11px;color:var(--sub);margin-top:.5rem;font-family:'DM Sans',sans-serif}
+</style>
+
+<div class="wbp-root">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">CHO In Action Series · Working Paper · March 2026</div>
+    <div class="hero-title">Walking Books Philosophy</div>
+    <div class="hero-sub">Toward a Relational Epistemology of Human Identity and Knowledge</div>
+    <div class="hero-formula">1/360 + 359/360 = 360/360</div>
+    <div class="hero-author">Go Kian Tik (Mbah Hogi Bejo™) &nbsp;·&nbsp; Chief Humanity Officer &nbsp;·&nbsp; 自主者 Sovereign One</div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('abstract',this)">Abstract</button>
+    <button class="tab-btn" onclick="switchTab('diagram',this)">Diagram</button>
+    <button class="tab-btn" onclick="switchTab('philosophy',this)">Philosophy</button>
+    <button class="tab-btn" onclick="switchTab('ecosystem',this)">Ecosystem</button>
+    <button class="tab-btn" onclick="switchTab('ai-session',this)">AI Session</button>
+    <button class="tab-btn" onclick="switchTab('metadata',this)">Metadata</button>
+  </div>
+
+  <!-- ABSTRACT -->
+  <div class="panel active" id="tab-abstract">
+    <p class="abstract-body">
+      This paper introduces <strong>Walking Books Philosophy (WBP)</strong> — a conceptual framework that interprets human beings as "living books" within a distributed ecosystem of knowledge. Each individual is understood as a complete yet partial contributor to the totality of human knowledge, symbolized through the formulation <strong>1/360 + 359/360 = 360/360</strong>.
+    </p>
+    <p class="abstract-body">
+      Drawing from reflective and autoethnographic inquiry, WBP aligns with relational philosophies such as Ubuntu, while extending them into a meta-epistemological structure focused on knowledge production, collaboration, and meaning-making. The concept of <strong>conscious life mindset</strong> describes a non-competitive, non-violent orientation toward knowledge and coexistence.
+    </p>
+    <p class="abstract-body">
+      Rather than a fixed theory, WBP is proposed as a living framework — an evolving "walking book" that invites continuous interpretation, dialogue, and co-creation across human and AI intelligences.
+    </p>
+    <div class="kw-block">
+      <strong>Keywords: </strong>Walking Books Philosophy · Relational Epistemology · Knowledge Ecosystem · Identity · Ubuntu · Collective Intelligence · Conscious Life Mindset · Autoethnography · Human-AI Collaboration
+    </div>
+    <div class="blockquote">
+      "Every human being is a walking book. No single book contains the whole library. But every book, in its completeness, contributes to a library that no single book can be without."
+      <cite>— Go Kian Tik (Mbah Hogi Bejo™)</cite>
+    </div>
+  </div>
+
+  <!-- DIAGRAM -->
+  <div class="panel" id="tab-diagram">
+    <div class="diag-tabs">
+      <button class="diag-btn active" onclick="switchDiag('concept',this)">1/360 Concept</button>
+      <button class="diag-btn" onclick="switchDiag('network',this)">Relational Network</button>
+      <button class="diag-btn" onclick="switchDiag('ubuntu',this)">Ubuntu Extension</button>
+    </div>
+    <div class="diag-view" id="diag-view"></div>
+  </div>
+
+  <!-- PHILOSOPHY -->
+  <div class="panel" id="tab-philosophy">
+    <div class="phil-grid">
+      <div class="phil-card active" onclick="showPhil('mindset',this)">
+        <div class="phil-icon">🧘</div>
+        <div class="phil-title">Conscious Life Mindset</div>
+        <div class="phil-sub">Core orientation</div>
+      </div>
+      <div class="phil-card" onclick="showPhil('ubuntu',this)">
+        <div class="phil-icon">🌍</div>
+        <div class="phil-title">Ubuntu Resonance</div>
+        <div class="phil-sub">"I am because we are"</div>
+      </div>
+      <div class="phil-card" onclick="showPhil('zizhu',this)">
+        <div class="phil-icon">自</div>
+        <div class="phil-title">Zì Zhǔ Zhě</div>
+        <div class="phil-sub">The Sovereign One</div>
+      </div>
+      <div class="phil-card" onclick="showPhil('grand',this)">
+        <div class="phil-icon">∧</div>
+        <div class="phil-title">Grand Formula</div>
+        <div class="phil-sub">(C × Calc)^H &lt; T</div>
+      </div>
+    </div>
+    <div class="phil-detail" id="phil-detail">
+      The <strong>Conscious Life Mindset</strong> operates across four dimensions: non-violence in thought and action; non-competitive coexistence; authentic self-expression; and collaborative contribution. An individual operating within this mindset does not seek dominance, but participation — analogous to a musician who performs solo yet chooses to contribute harmoniously within an orchestra.
+    </div>
+    <button style="margin-top:1rem;font-size:12px;padding:.4rem 1rem;border:0.5px solid var(--border);border-radius:20px;background:none;color:var(--sub);cursor:pointer" onclick="sendPrompt('Tell me more about the philosophical foundations of Walking Books Philosophy')">Explore deeper ↗</button>
+  </div>
+
+  <!-- ECOSYSTEM -->
+  <div class="panel" id="tab-ecosystem">
+    <p style="font-size:13px;color:var(--sub);margin-bottom:1rem;line-height:1.6">Knowledge emerges through interaction among four domains. Each layer contributes a distinct form of epistemic energy to the collective library.</p>
+    <div class="eco-layers">
+      <div class="eco-layer">
+        <div class="eco-dot" style="background:#C9A84C"></div>
+        <div>
+          <div class="eco-label">Independent Researchers</div>
+          <div class="phil-sub" style="font-size:11px;color:var(--sub);margin-top:2px">Authenticity · Novelty · Lived experience</div>
+        </div>
+        <div class="eco-desc">Bring the 1/360 voice</div>
+      </div>
+      <div class="eco-layer">
+        <div class="eco-dot" style="background:#2E4057"></div>
+        <div>
+          <div class="eco-label">Institutional Researchers</div>
+          <div class="phil-sub" style="font-size:11px;color:var(--sub);margin-top:2px">Infrastructure · Data · Peer validation</div>
+        </div>
+        <div class="eco-desc">Build the scaffolding</div>
+      </div>
+      <div class="eco-layer">
+        <div class="eco-dot" style="background:#1D9E75"></div>
+        <div>
+          <div class="eco-label">AI Systems</div>
+          <div class="phil-sub" style="font-size:11px;color:var(--sub);margin-top:2px">Accelerator · Eskalator · Amplifier</div>
+        </div>
+        <div class="eco-desc">Traverse the library</div>
+      </div>
+      <div class="eco-layer">
+        <div class="eco-dot" style="background:#7F77DD"></div>
+        <div>
+          <div class="eco-label">Communities of Practice</div>
+          <div class="phil-sub" style="font-size:11px;color:var(--sub);margin-top:2px">Testing · Transmission · Application</div>
+        </div>
+        <div class="eco-desc">Sustain the flow</div>
+      </div>
+    </div>
+    <div class="eco-bar-wrap">
+      <div style="font-size:12px;font-weight:500;color:var(--text);margin-bottom:.75rem">Collective Knowledge Contribution</div>
+      <div style="margin-bottom:8px">
+        <div class="eco-bar-label"><span>Independent</span><span id="b1v">1/360 per voice, ∞ voices</span></div>
+        <div class="eco-bar-track"><div class="eco-bar-fill" id="b1" style="width:0;background:#C9A84C"></div></div>
+      </div>
+      <div style="margin-bottom:8px">
+        <div class="eco-bar-label"><span>Institutional</span><span>Systematic depth</span></div>
+        <div class="eco-bar-track"><div class="eco-bar-fill" id="b2" style="width:0;background:#2E4057"></div></div>
+      </div>
+      <div style="margin-bottom:8px">
+        <div class="eco-bar-label"><span>AI Amplification</span><span>360° synthesis</span></div>
+        <div class="eco-bar-track"><div class="eco-bar-fill" id="b3" style="width:0;background:#1D9E75"></div></div>
+      </div>
+      <div>
+        <div class="eco-bar-label"><span>Community</span><span>Living transmission</span></div>
+        <div class="eco-bar-track"><div class="eco-bar-fill" id="b4" style="width:0;background:#7F77DD"></div></div>
+      </div>
+    </div>
+    <button style="margin-top:1.25rem;font-size:12px;padding:.4rem 1rem;border:0.5px solid var(--border);border-radius:20px;background:none;color:var(--sub);cursor:pointer" onclick="sendPrompt('How does the Walking Books Philosophy knowledge ecosystem relate to distributed cognition theory?')">Compare with distributed cognition ↗</button>
+  </div>
+
+  <!-- AI SESSION LOG -->
+  <div class="panel" id="tab-ai-session">
+    <p style="font-size:13px;color:var(--sub);margin-bottom:1rem;line-height:1.6">This paper was co-created across five AI systems in a single research session — itself an enactment of the knowledge ecosystem it describes.</p>
+    <div class="ai-log">
+      <div class="ai-entry" onclick="sendPrompt('What was the role of the raw research phase in developing Walking Books Philosophy?')">
+        <div class="ai-avatar" style="background:#888">01</div>
+        <div>
+          <div class="ai-name">Raw Research Notes</div>
+          <div class="ai-note">Walking Books Philosophy genesis · 1/360 formulation · Dual Universe hypothesis</div>
+        </div>
+        <div class="ai-status" style="background:var(--color-background-success);color:var(--color-text-success)">Seed</div>
+      </div>
+      <div class="ai-entry" onclick="sendPrompt('Why did Gemini get stuck in a video loop during this session?')">
+        <div class="ai-avatar" style="background:#4285F4">G</div>
+        <div>
+          <div class="ai-name">Gemini (CHO Lab Gem)</div>
+          <div class="ai-note">Synthesized 4 pillars · Then stuck in video-only loop · "I'm stuck with you today"</div>
+        </div>
+        <div class="ai-status" style="background:var(--color-background-warning);color:var(--color-text-warning)">Mandek</div>
+      </div>
+      <div class="ai-entry" onclick="sendPrompt('What did DeepSeek contribute to the Walking Books Philosophy paper development?')">
+        <div class="ai-avatar" style="background:#1A7AE8">DS</div>
+        <div>
+          <div class="ai-name">DeepSeek</div>
+          <div class="ai-note">Continued enrichment from Gemini handover · Deepened philosophical grounding</div>
+        </div>
+        <div class="ai-status" style="background:var(--color-background-success);color:var(--color-text-success)">Active</div>
+      </div>
+      <div class="ai-entry" onclick="sendPrompt('What did ChatGPT produce for the Walking Books Philosophy paper?')">
+        <div class="ai-avatar" style="background:#10A37F">GP</div>
+        <div>
+          <div class="ai-name">ChatGPT (Prof GP)</div>
+          <div class="ai-note">Full paper draft · Academic structure · 2 diagrams · SSRN metadata · "Geser ke Claude"</div>
+        </div>
+        <div class="ai-status" style="background:var(--color-background-success);color:var(--color-text-success)">Draft ✓</div>
+      </div>
+      <div class="ai-entry" onclick="sendPrompt('What is Claude adding to the Walking Books Philosophy paper that the other AIs did not?')">
+        <div class="ai-avatar" style="background:#C9A84C">C</div>
+        <div>
+          <div class="ai-name">Claude (This session)</div>
+          <div class="ai-note">Refined paper · CHO template · Embedded diagrams · DOCX final · This artifact ecosystem</div>
+        </div>
+        <div class="ai-status" style="background:var(--color-background-info);color:var(--color-text-info)">Now ✦</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- METADATA -->
+  <div class="panel" id="tab-metadata">
+    <table class="meta-table">
+      <tr><td>Title</td><td>Walking Books Philosophy: Toward a Relational Epistemology of Human Identity and Knowledge</td></tr>
+      <tr><td>Series</td><td>CHO In Action Series · Working Paper</td></tr>
+      <tr><td>Author</td><td>Go Kian Tik</td></tr>
+      <tr><td>Pen Name</td><td>Mbah Hogi Bejo™</td></tr>
+      <tr><td>Community</td><td>自主者 Superhero Café Inside</td></tr>
+      <tr><td>AI Collaborators</td><td>Claude · ChatGPT · DeepSeek · Gemini</td></tr>
+      <tr><td>Date</td><td>March 18, 2026 · Depok, Indonesia</td></tr>
+      <tr><td>Document Type</td><td>Working Paper · Conceptual Framework · Philosophy of Knowledge</td></tr>
+      <tr><td>Platforms</td><td>Zenodo &nbsp;<span class="badge" style="background:var(--color-background-info);color:var(--color-text-info)">DOI</span>&nbsp; SSRN &nbsp;<span class="badge" style="background:var(--color-background-success);color:var(--color-text-success)">Preprint</span></td></tr>
+      <tr><td>License</td><td>CC BY 4.0</td></tr>
+      <tr><td>Related DOIs</td><td>
+        <a class="doi-link" href="https://doi.org/10.5281/zenodo.18935427" target="_blank">Ep.0 — CHO Origin</a><br>
+        <a class="doi-link" href="https://doi.org/10.5281/zenodo.18965525" target="_blank">Ep.1 EN — The Sovereign One</a><br>
+        <a class="doi-link" href="https://doi.org/10.5281/zenodo.18935892" target="_blank">Ep.11 — The Sovereign One v3</a>
+      </td></tr>
+      <tr><td>Copyright</td><td>© 2026 Go Kian Tik. All rights reserved.</td></tr>
+    </table>
+    <button style="margin-top:1.25rem;font-size:12px;padding:.4rem 1rem;border:0.5px solid var(--gold);border-radius:20px;background:none;color:var(--gold);cursor:pointer;font-weight:500" onclick="sendPrompt('Help me write a LinkedIn DOI announcement post for Walking Books Philosophy paper')">Draft LinkedIn DOI announcement ↗</button>
+  </div>
+
+</div>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'ecosystem') animateBars();
+  if (id === 'diagram') renderDiag('concept');
+}
+
+const philData = {
+  mindset: 'The <strong>Conscious Life Mindset</strong> operates across four dimensions: non-violence in thought and action; non-competitive coexistence; authentic self-expression; and collaborative contribution. An individual operating within this mindset does not seek dominance, but participation — analogous to a musician who performs solo yet chooses to contribute harmoniously within an orchestra.',
+  ubuntu: '<strong>Ubuntu</strong> ("I am because we are") teaches that identity is constituted through relationship. WBP extends this into epistemology: not just <em>who we are</em>, but <em>what we know</em> emerges through relational completeness. Where Ubuntu gives us ethical interdependence, WBP gives us epistemic interdependence — a structural map of how the collective library is built.',
+  zizhu: '<strong>Zì Zhǔ Zhě (自主者)</strong> — The Sovereign One — is the human who has cultivated inner sovereignty before holding the amplifier of AI. In the context of WBP, the Sovereign One is the walking book that knows its own 1/360: complete in itself, unafraid of the 359/360, and capable of contributing authentically rather than competitively.',
+  grand: 'The <strong>Grand Formula</strong> (Consciousness × Calculation)^Humanity &lt; Transcendence is not a poetic statement — it is an architectural map. In WBP terms: Consciousness is the walking book (1/360, mature, sovereign); Calculation is AI traversing the full library (360/360); Humanity as the exponent is what happens when sovereign humans hold powerful AI — civilization-scale insight becomes possible.'
+};
+
+function showPhil(key, card) {
+  document.querySelectorAll('.phil-card').forEach(c => c.classList.remove('active'));
+  card.classList.add('active');
+  document.getElementById('phil-detail').innerHTML = philData[key];
+}
+
+let barsAnimated = false;
+function animateBars() {
+  if (barsAnimated) return;
+  barsAnimated = true;
+  setTimeout(() => { document.getElementById('b1').style.width = '72%'; }, 100);
+  setTimeout(() => { document.getElementById('b2').style.width = '58%'; }, 200);
+  setTimeout(() => { document.getElementById('b3').style.width = '88%'; }, 300);
+  setTimeout(() => { document.getElementById('b4').style.width = '64%'; }, 400);
+}
+
+const diagData = {
+  concept: `<svg width="100%" viewBox="0 0 680 340">
+  <defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+  <circle cx="340" cy="170" r="130" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity=".4"/>
+  <circle cx="340" cy="170" r="90" fill="none" stroke="#C9A84C" stroke-width="1" opacity=".25"/>
+  <circle cx="340" cy="170" r="42" fill="#C9A84C" opacity=".12"/>
+  <circle cx="340" cy="170" r="42" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+  <text text-anchor="middle" dominant-baseline="central" x="340" y="163" font-size="14" font-weight="500" fill="#C9A84C">1/360</text>
+  <text text-anchor="middle" dominant-baseline="central" x="340" y="179" font-size="11" fill="#C9A84C" opacity=".8">Wo · 我 · Self</text>
+  <text text-anchor="middle" dominant-baseline="central" x="340" y="240" font-size="12" fill="var(--color-text-secondary)">1/360 · Ni · 你 · You</text>
+  <text text-anchor="middle" dominant-baseline="central" x="340" y="290" font-size="12" fill="var(--color-text-secondary)">358/360 · Ren · 人 · Humanity</text>
+  <text text-anchor="middle" dominant-baseline="central" x="340" y="315" font-size="11" fill="var(--color-text-secondary)" opacity=".6">360/360 = Relational Unity</text>
+  <line x1="340" y1="38" x2="340" y2="128" stroke="#C9A84C" stroke-width="0.5" stroke-dasharray="3 3" opacity=".4" marker-end="url(#arr)"/>
+  <text text-anchor="middle" x="340" y="30" font-size="11" fill="var(--color-text-secondary)" opacity=".7">Complete in self</text>
+  <line x1="464" y1="98" x2="395" y2="145" stroke="#C9A84C" stroke-width="0.5" stroke-dasharray="3 3" opacity=".4" marker-end="url(#arr)"/>
+  <text x="468" y="95" font-size="11" fill="var(--color-text-secondary)" opacity=".7">Incomplete without others</text>
+</svg>`,
+  network: `<svg width="100%" viewBox="0 0 680 320">
+  <defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+  <circle cx="340" cy="160" r="28" fill="#C9A84C" opacity=".15"/><circle cx="340" cy="160" r="28" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+  <text text-anchor="middle" dominant-baseline="central" x="340" y="155" font-size="12" font-weight="500" fill="#C9A84C">1/360</text>
+  <text text-anchor="middle" dominant-baseline="central" x="340" y="169" font-size="10" fill="#C9A84C" opacity=".8">Individual</text>
+  <circle cx="340" cy="60" r="20" fill="none" stroke="var(--color-border-secondary)" stroke-width="1"/>
+  <text text-anchor="middle" dominant-baseline="central" x="340" y="60" font-size="10" fill="var(--color-text-secondary)">Human</text>
+  <circle cx="480" cy="120" r="20" fill="none" stroke="var(--color-border-secondary)" stroke-width="1"/>
+  <text text-anchor="middle" dominant-baseline="central" x="480" y="120" font-size="10" fill="var(--color-text-secondary)">AI</text>
+  <circle cx="480" cy="200" r="20" fill="none" stroke="var(--color-border-secondary)" stroke-width="1"/>
+  <text text-anchor="middle" dominant-baseline="central" x="480" y="200" font-size="10" fill="var(--color-text-secondary)">Knowledge</text>
+  <circle cx="340" cy="260" r="20" fill="none" stroke="var(--color-border-secondary)" stroke-width="1"/>
+  <text text-anchor="middle" dominant-baseline="central" x="340" y="260" font-size="10" fill="var(--color-text-secondary)">Community</text>
+  <circle cx="200" cy="200" r="20" fill="none" stroke="var(--color-border-secondary)" stroke-width="1"/>
+  <text text-anchor="middle" dominant-baseline="central" x="200" y="200" font-size="10" fill="var(--color-text-secondary)">Ecosystem</text>
+  <circle cx="200" cy="120" r="20" fill="none" stroke="var(--color-border-secondary)" stroke-width="1"/>
+  <text text-anchor="middle" dominant-baseline="central" x="200" y="120" font-size="10" fill="var(--color-text-secondary)">Ubuntu</text>
+  <line x1="340" y1="132" x2="340" y2="80" stroke="#C9A84C" stroke-width="1" opacity=".5" marker-end="url(#arr)"/>
+  <line x1="364" y1="148" x2="460" y2="128" stroke="#C9A84C" stroke-width="1" opacity=".5" marker-end="url(#arr)"/>
+  <line x1="364" y1="172" x2="460" y2="192" stroke="#C9A84C" stroke-width="1" opacity=".5" marker-end="url(#arr)"/>
+  <line x1="340" y1="188" x2="340" y2="240" stroke="#C9A84C" stroke-width="1" opacity=".5" marker-end="url(#arr)"/>
+  <line x1="316" y1="172" x2="220" y2="192" stroke="#C9A84C" stroke-width="1" opacity=".5" marker-end="url(#arr)"/>
+  <line x1="316" y1="148" x2="220" y2="128" stroke="#C9A84C" stroke-width="1" opacity=".5" marker-end="url(#arr)"/>
+  <text text-anchor="middle" x="340" y="300" font-size="11" fill="var(--color-text-secondary)" opacity=".7">Relational Unity (360/360) — Individual Node in collective field</text>
+</svg>`,
+  ubuntu: `<svg width="100%" viewBox="0 0 680 300">
+  <rect x="60" y="40" width="260" height="200" rx="14" fill="none" stroke="#2E4057" stroke-width="1" opacity=".4"/>
+  <text text-anchor="middle" x="190" y="68" font-size="13" font-weight="500" fill="var(--color-text-primary)">Ubuntu Philosophy</text>
+  <text text-anchor="middle" x="190" y="90" font-size="11" fill="var(--color-text-secondary)">"I am because we are"</text>
+  <rect x="80" y="105" width="220" height="36" rx="6" fill="none" stroke="#2E4057" stroke-width="0.5" opacity=".4"/>
+  <text text-anchor="middle" dominant-baseline="central" x="190" y="123" font-size="11" fill="var(--color-text-secondary)">Ethical interdependence</text>
+  <rect x="80" y="151" width="220" height="36" rx="6" fill="none" stroke="#2E4057" stroke-width="0.5" opacity=".4"/>
+  <text text-anchor="middle" dominant-baseline="central" x="190" y="169" font-size="11" fill="var(--color-text-secondary)">Social solidarity</text>
+  <rect x="80" y="197" width="220" height="36" rx="6" fill="none" stroke="#2E4057" stroke-width="0.5" opacity=".4"/>
+  <text text-anchor="middle" dominant-baseline="central" x="190" y="215" font-size="11" fill="var(--color-text-secondary)">Empathy &amp; community</text>
+  <line x1="320" y1="140" x2="356" y2="140" stroke="#C9A84C" stroke-width="1.5" stroke-dasharray="4 3" opacity=".7" marker-end="url(#arru)"/>
+  <defs><marker id="arru" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+  <text text-anchor="middle" x="340" y="132" font-size="10" fill="#C9A84C" opacity=".8">extends</text>
+  <rect x="360" y="40" width="260" height="200" rx="14" fill="none" stroke="#C9A84C" stroke-width="1.2"/>
+  <text text-anchor="middle" x="490" y="68" font-size="13" font-weight="500" fill="var(--color-text-primary)">Walking Books Philosophy</text>
+  <text text-anchor="middle" x="490" y="90" font-size="11" fill="var(--color-text-secondary)">1/360 + 359/360 = 360/360</text>
+  <rect x="380" y="105" width="220" height="36" rx="6" fill="#C9A84C" opacity=".08"/>
+  <rect x="380" y="105" width="220" height="36" rx="6" fill="none" stroke="#C9A84C" stroke-width="0.5"/>
+  <text text-anchor="middle" dominant-baseline="central" x="490" y="123" font-size="11" fill="#C9A84C">Epistemic interdependence</text>
+  <rect x="380" y="151" width="220" height="36" rx="6" fill="#C9A84C" opacity=".08"/>
+  <rect x="380" y="151" width="220" height="36" rx="6" fill="none" stroke="#C9A84C" stroke-width="0.5"/>
+  <text text-anchor="middle" dominant-baseline="central" x="490" y="169" font-size="11" fill="#C9A84C">Knowledge ecosystem structure</text>
+  <rect x="380" y="197" width="220" height="36" rx="6" fill="#C9A84C" opacity=".08"/>
+  <rect x="380" y="197" width="220" height="36" rx="6" fill="none" stroke="#C9A84C" stroke-width="0.5"/>
+  <text text-anchor="middle" dominant-baseline="central" x="490" y="215" font-size="11" fill="#C9A84C">AI-human co-creation layer</text>
+  <text text-anchor="middle" x="340" y="270" font-size="11" fill="var(--color-text-secondary)" opacity=".7">WBP transforms Ubuntu's relational ethics into a structural epistemology</text>
+</svg>`
+};
+
+function renderDiag(key) {
+  document.getElementById('diag-view').innerHTML = diagData[key];
+}
+function switchDiag(key, btn) {
+  document.querySelectorAll('.diag-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderDiag(key);
+}
+
+renderDiag('concept');
+</script>

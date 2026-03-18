@@ -1,0 +1,138 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.root{font-family:var(--font-sans);padding:1.5rem 1rem 2rem;max-width:700px;margin:0 auto}
+
+.title-area{text-align:center;margin-bottom:1.75rem}
+.main-title{font-size:1.1rem;font-weight:500;color:var(--color-text-primary);margin-bottom:.25rem}
+.main-sub{font-size:12px;color:var(--color-text-secondary)}
+
+.two-realms{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.25rem}
+
+.realm{border-radius:12px;border:0.5px solid var(--color-border-secondary);padding:1.1rem 1rem;background:var(--color-background-secondary)}
+.realm-tag{font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-bottom:.5rem}
+.realm-title{font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:.85rem}
+
+.fraction-row{display:flex;align-items:center;gap:6px;margin-bottom:6px;flex-wrap:wrap}
+.frac{display:inline-flex;flex-direction:column;align-items:center;line-height:1}
+.frac-num{font-size:12px;font-weight:500;border-bottom:1px solid currentColor;padding:0 2px 1px}
+.frac-den{font-size:12px;padding-top:1px}
+.frac-label{font-size:11px;color:var(--color-text-secondary);margin-left:2px}
+.op{font-size:13px;color:var(--color-text-secondary);font-weight:400}
+.eq-result{font-size:13px;font-weight:500;margin-left:4px}
+
+.realm-divider{height:0.5px;background:var(--color-border-tertiary);margin:.75rem 0}
+.realm-equals{font-size:13px;font-weight:500;color:var(--color-text-primary);text-align:center;padding:.4rem;border-radius:6px;background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary)}
+
+.connector{display:flex;align-items:center;justify-content:center;gap:12px;margin:1rem 0;padding:.75rem;background:var(--color-background-secondary);border-radius:10px;border:0.5px solid var(--color-border-secondary)}
+.conn-pill{font-size:13px;font-weight:500;color:var(--color-text-primary);padding:.35rem .85rem;border-radius:20px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary)}
+.conn-arrow{font-size:18px;color:var(--color-text-secondary);opacity:.5}
+.conn-result{font-size:13px;font-weight:500;color:var(--color-text-primary);padding:.35rem 1rem;border-radius:20px;border:1.5px solid #C9A84C;background:transparent;color:#C9A84C}
+
+.gf-box{border-radius:12px;border:1.5px solid #C9A84C;padding:1.25rem 1.25rem 1rem;margin-top:.75rem;text-align:center}
+.gf-tag{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#C9A84C;font-weight:500;margin-bottom:.6rem}
+.gf-formula{font-size:1.15rem;font-weight:500;color:var(--color-text-primary);margin-bottom:.5rem;letter-spacing:.02em}
+.gf-sub{font-size:11px;color:var(--color-text-secondary);line-height:1.6}
+
+.human-color{color:#C9A84C}
+.machine-color{color:#1D9E75}
+.humanity-color{color:#7F77DD}
+
+/* AI avatars */
+.ai-row{display:flex;gap:6px;margin-top:.6rem;flex-wrap:wrap}
+.ai-chip{display:flex;align-items:center;gap:5px;padding:.2rem .55rem;border-radius:14px;background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);font-size:11px;color:var(--color-text-secondary)}
+.ai-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+</style>
+
+<div class="root">
+
+  <div class="title-area">
+    <div class="main-title">Walking Books Philosophy — Two Realms Framework</div>
+    <div class="main-sub">Revised conceptual structure · Go Kian Tik · March 2026</div>
+  </div>
+
+  <div class="two-realms">
+
+    <!-- REALM 1: HUMANS -->
+    <div class="realm">
+      <div class="realm-tag human-color">Ranah Humans</div>
+      <div class="realm-title human-color">Consciousness</div>
+
+      <div class="fraction-row">
+        <div class="frac human-color"><span class="frac-num">1</span><span class="frac-den">360</span></div>
+        <span class="frac-label" style="color:#C9A84C">Wo · 我</span>
+      </div>
+      <div class="fraction-row">
+        <span class="op">+</span>
+        <div class="frac human-color"><span class="frac-num">1</span><span class="frac-den">360</span></div>
+        <span class="frac-label" style="color:#C9A84C">Ni · 你</span>
+      </div>
+      <div class="fraction-row">
+        <span class="op">+</span>
+        <div class="frac human-color"><span class="frac-num">358</span><span class="frac-den">360</span></div>
+        <span class="frac-label" style="color:#C9A84C">Ren · 人</span>
+      </div>
+
+      <div class="realm-divider"></div>
+      <div class="realm-equals human-color">= 360/360 = Consciousness</div>
+    </div>
+
+    <!-- REALM 2: MACHINES -->
+    <div class="realm">
+      <div class="realm-tag machine-color">Ranah Machines</div>
+      <div class="realm-title machine-color">Calculation</div>
+
+      <div class="fraction-row">
+        <div class="frac machine-color"><span class="frac-num">1</span><span class="frac-den">5</span></div>
+        <span class="frac-label" style="color:#1D9E75">Claude</span>
+      </div>
+      <div class="fraction-row">
+        <span class="op">+</span>
+        <div class="frac machine-color"><span class="frac-num">1</span><span class="frac-den">5</span></div>
+        <span class="frac-label" style="color:#1D9E75">Gemini</span>
+      </div>
+      <div class="fraction-row">
+        <span class="op">+</span>
+        <div class="frac machine-color"><span class="frac-num">1</span><span class="frac-den">5</span></div>
+        <span class="frac-label" style="color:#1D9E75">Copilot</span>
+      </div>
+      <div class="fraction-row">
+        <span class="op">+</span>
+        <div class="frac machine-color"><span class="frac-num">1</span><span class="frac-den">5</span></div>
+        <span class="frac-label" style="color:#1D9E75">DeepSeek</span>
+      </div>
+      <div class="fraction-row">
+        <span class="op">+</span>
+        <div class="frac machine-color"><span class="frac-num">1</span><span class="frac-den">5</span></div>
+        <span class="frac-label" style="color:#1D9E75">ChatGPT</span>
+      </div>
+
+      <div class="realm-divider"></div>
+      <div class="realm-equals machine-color">= 5/5 = Calculation</div>
+    </div>
+  </div>
+
+  <!-- CONNECTOR -->
+  <div class="connector">
+    <div class="conn-pill human-color">Consciousness</div>
+    <div class="conn-arrow">+</div>
+    <div class="conn-pill machine-color">Calculation</div>
+    <div class="conn-arrow">→</div>
+    <div class="conn-result">in Action</div>
+    <div class="conn-arrow">→</div>
+    <div class="conn-pill humanity-color">Progressive<br>Unlimited Humanity</div>
+  </div>
+
+  <!-- GRAND FORMULA -->
+  <div class="gf-box">
+    <div class="gf-tag">Grand Formula</div>
+    <div class="gf-formula">
+      ( <span class="human-color">Consciousness</span> × <span class="machine-color">Calculation</span> ) <sup class="humanity-color">Humanity</sup> &lt; Transcendence
+    </div>
+    <div class="gf-sub">
+      Progressive Unlimited Humanity melayani Grand Formula —<br>
+      setiap langkah mendekati, namun tidak pernah sepenuhnya mencapai, Transcendence.
+    </div>
+  </div>
+
+</div>
