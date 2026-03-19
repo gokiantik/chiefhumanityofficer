@@ -1841,6 +1841,62 @@ footer .footer-mark {
   .hero-name { font-size: 2.4rem; }
   .modal-box { padding: 1.5rem 1.2rem; }
 }
+/* ===================== INTELLECTUAL DISCLAIMER ===================== */
+.disclaimer-bar {
+  width: 100%;
+  background: rgba(13,13,26,0.95);
+  border-bottom: 1px solid rgba(127,119,221,0.2);
+  padding: 20px 0;
+}
+.disclaimer-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.disclaimer-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.disclaimer-label::before,
+.disclaimer-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(239,159,39,0.3), transparent);
+}
+.disclaimer-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14.5px;
+  line-height: 1.85;
+  color: var(--gray-light);
+  text-align: justify;
+}
+.disclaimer-text p {
+  margin-bottom: 10px;
+}
+.disclaimer-text p:last-child {
+  margin-bottom: 0;
+}
+.disclaimer-text a {
+  color: var(--teal-light);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(159,225,203,0.3);
+  transition: color 0.2s;
+}
+.disclaimer-text a:hover {
+  color: var(--amber-light);
+}
+.disclaimer-text strong {
+  color: var(--purple-light);
+  font-weight: 600;
+}
 </style>
 </head>
 <body>
@@ -1849,6 +1905,32 @@ footer .footer-mark {
 <div class="lang-toggle">
   <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
   <button id="btn-id" onclick="setLang('id')">ID</button>
+</div>
+
+<!-- ===================== INTELLECTUAL DISCLAIMER ===================== -->
+<div class="disclaimer-bar">
+  <div class="disclaimer-inner">
+    <div class="disclaimer-label">Intellectual Disclaimer · Disclaimer Intelektual</div>
+    <div class="disclaimer-text">
+
+      <!-- ENGLISH -->
+      <div class="en">
+        <p>This author page, hosted on GitHub, presents intelligence in <strong>two distinct flavors</strong>.</p>
+        <p>The <strong>popular flavor</strong> is a combination of human intelligence (biological) and machine intelligence (electronic) — <a href="https://gokiantik.github.io/chiefhumanityofficer/" target="_blank">gokiantik.github.io/chiefhumanityofficer</a>. Two decisive AI advantages are at work: the escalation of probabilistic meaning-calculation, which makes human-directed <em>purpose</em> and machine-completed <em>content</em> nearly unrivalled — possible because AI is far more than a legacy search engine. It is a meaning-synthesis partner.</p>
+        <p>Yet when the popular flavor must shift toward the <strong>academic</strong> — where novelty and authenticity are the governing standards — this presentation platform risks becoming off-side in the moral and ethical field of science.</p>
+        <p>To keep these ideas and thoughts firmly in the <strong>centre of the field of intelligence</strong>, the Chief Humanity Officer presents them in formats aligned with the ethics and spirit of honesty: through open academic publishing on Zenodo and SSRN. The journey continues into the broader science and knowledge ecosystem, toward higher tiers of credibility. Critique, argumentation, suggestions, and open academic collaboration are warmly invited here: <a href="https://zenodo.org/communities/chiefhumanityofficer/" target="_blank">zenodo.org/communities/chiefhumanityofficer</a></p>
+      </div>
+
+      <!-- INDONESIAN -->
+      <div class="id">
+        <p>Halaman penulis yang difasilitasi GitHub ini berisi sajian kecerdasan dalam <strong>dua nuansa rasa</strong>.</p>
+        <p><strong>Rasa populer</strong> adalah kombinasi kecerdasan manusia (biologis) dengan kecerdasan mesin (elektronis) — <a href="https://gokiantik.github.io/chiefhumanityofficer/" target="_blank">gokiantik.github.io/chiefhumanityofficer</a>. Dua keunggulan kemajuan AI yang dimanfaatkan adalah fitur eskalasi kalkulasi probabilita makna yang membuat arah (manusia) dan kelengkapan konten (mesin) menjadi nyaris tak tertandingi — bisa terjadi karena AI lebih dari sekadar mesin pencari lawas. Ia adalah mitra sintesis makna.</p>
+        <p>Namun ketika nuansa popularitas harus bergeser ke nuansa <strong>akademis</strong> yang mengutamakan novelty dan authenticity, platform sajian ini terasa tak jelas alias off-side dalam lapangan moral dan etika sains.</p>
+        <p>Maka untuk menjaga agar bola-bola pemikiran dan gagasan ini tetap berada di <strong>tengah lapangan kecerdasan</strong>, Chief Humanity Officer menyajikannya dalam kemasan dan platform yang berterima dengan etika dan semangat kejujuran lewat publikasi akademis terbuka seperti Zenodo dan SSRN. Tak ketinggalan juga dalam perjalanan ke ekosistem sains dengan jenjang kredibilitas selanjutnya. Kritik, argumentasi, sumbang saran, dan kolaborasi riset akademis terbuka lebar di sini: <a href="https://zenodo.org/communities/chiefhumanityofficer/" target="_blank">zenodo.org/communities/chiefhumanityofficer</a></p>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <!-- ===================== HERO ===================== -->
