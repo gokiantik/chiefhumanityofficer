@@ -1,48 +1,47 @@
-<!-- PASTE INI tepat sebelum tag penutup </body> di file walking-books-philosophy.html -->
+<!-- PASTE INI tepat sebelum tag penutup </body> 
+     di file walking-books-philosophy.html di GitHub -->
 
-<!-- Floating Button: View Poster -->
 <style>
-  .poster-fab {
-    position: fixed;
-    bottom: 32px;
-    right: 32px;
-    z-index: 9999;
-    background: #F5C842;
-    color: #0D0D2B;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    padding: 12px 22px;
-    border-radius: 40px;
-    text-decoration: none;
-    box-shadow: 0 4px 24px rgba(245,200,66,0.25);
-    transition: transform 0.15s, box-shadow 0.15s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border: none;
-    cursor: pointer;
-  }
-  .poster-fab:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(245,200,66,0.35);
-  }
-  .poster-fab .fab-icon {
-    font-size: 16px;
-  }
-  /* Label bilingual: ikut toggle EN/ID halaman jika ada, default EN */
-  .poster-fab .fab-en { display: inline; }
-  .poster-fab .fab-id { display: none; }
-  [lang="id"] .poster-fab .fab-en { display: none; }
-  [lang="id"] .poster-fab .fab-id { display: inline; }
+.poster-fab {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 9999;
+  background: #F5C842;
+  color: #0D0D2B;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 12px 22px;
+  border-radius: 40px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.15s;
+}
+.poster-fab:hover { transform: translateY(-2px); }
 </style>
 
 <a class="poster-fab"
-   href="https://claude.ai"
-   target="_blank"
+   href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-poster.html"
    title="View Interactive Poster · Lihat Poster Interaktif">
-  <span class="fab-icon">✦</span>
-  <span class="fab-en">View Poster</span>
-  <span class="fab-id">Lihat Poster</span>
+  ✦ <span class="fab-en">View Poster</span><span class="fab-id" style="display:none">Lihat Poster</span>
 </a>
+
+<script>
+/* Ikut toggle EN/ID yang sudah ada di halaman */
+(function() {
+  var en = document.querySelector('.fab-en');
+  var id = document.querySelector('.fab-id');
+  var orig = window.setLang || function(){};
+  window.setLang = function(lang) {
+    orig(lang);
+    if (en && id) {
+      en.style.display = lang === 'id' ? 'none' : 'inline';
+      id.style.display = lang === 'id' ? 'inline' : 'none';
+    }
+  };
+})();
+</script>
