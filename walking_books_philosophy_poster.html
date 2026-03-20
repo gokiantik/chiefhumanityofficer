@@ -1,12 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Walking Books Philosophy — Poster · Go Kian Tik</title>
+<meta name="description" content="Walking Books Philosophy visual poster by Go Kian Tik (Mbah Hogi Bejo™) · Chief Humanity Officer · 2026">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #07071a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 32px 16px 64px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .back-bar {
+    width: 100%;
+    max-width: 680px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  .back-link {
+    font-size: 12px;
+    color: #F5C84299;
+    text-decoration: none;
+    letter-spacing: 1px;
+    border: 1px solid #F5C84233;
+    border-radius: 20px;
+    padding: 5px 14px;
+    transition: all 0.2s;
+  }
+  .back-link:hover { color: #F5C842; border-color: #F5C84266; }
   .poster {
     background: #0D0D2B;
     color: #fff;
-    font-family: 'Space Grotesk', sans-serif;
     padding: 48px 40px;
     max-width: 680px;
-    margin: 0 auto;
+    width: 100%;
     border-radius: 16px;
   }
   .toggle-bar { display: flex; justify-content: center; gap: 0; margin-bottom: 28px; }
@@ -16,70 +53,86 @@
     cursor: pointer; transition: all 0.2s; font-family: inherit;
   }
   .toggle-btn:first-child { border-radius: 20px 0 0 20px; border-right: none; }
-  .toggle-btn:last-child { border-radius: 0 20px 20px 0; border-left: none; }
+  .toggle-btn:last-child  { border-radius: 0 20px 20px 0; border-left: none; }
   .toggle-btn.active { background: #F5C842; color: #0D0D2B; }
   .chinese { font-size: 52px; font-weight: 700; color: #F5C842; letter-spacing: 8px; text-align: center; margin-bottom: 2px; line-height: 1; }
-  .pinyin { font-size: 13px; color: #F5C84299; text-align: center; letter-spacing: 4px; margin-bottom: 4px; }
+  .pinyin  { font-size: 13px; color: #F5C84299; text-align: center; letter-spacing: 4px; margin-bottom: 4px; }
   .main-title { font-size: 28px; font-weight: 700; text-align: center; color: #fff; margin-bottom: 4px; }
-  .subtitle { font-size: 13px; color: #aaa; text-align: center; margin-bottom: 8px; letter-spacing: 1px; }
-  .author { font-size: 12px; color: #F5C84299; text-align: center; margin-bottom: 32px; }
-  .divider { border: none; border-top: 1px solid #ffffff22; margin: 20px 0; }
+  .subtitle   { font-size: 13px; color: #aaa; text-align: center; margin-bottom: 8px; letter-spacing: 1px; }
+  .author     { font-size: 12px; color: #F5C84299; text-align: center; margin-bottom: 32px; }
+  .divider    { border: none; border-top: 1px solid #ffffff22; margin: 20px 0; }
   .section-label { font-size: 10px; letter-spacing: 3px; color: #aaa; text-transform: uppercase; margin-bottom: 10px; }
   .formula-row { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
   .frac-box { background: #1A1A40; border: 1px solid #3A3A70; border-radius: 10px; padding: 10px 14px; text-align: center; min-width: 80px; }
-  .frac-top { font-size: 18px; font-weight: 700; line-height: 1; }
-  .frac-bot { font-size: 11px; color: #888; margin-top: 2px; }
+  .frac-top   { font-size: 18px; font-weight: 700; line-height: 1; }
+  .frac-bot   { font-size: 11px; color: #888; margin-top: 2px; }
   .frac-label { font-size: 11px; color: #F5C842; margin-top: 3px; font-weight: 500; }
   .wo { border-color: #F5C842; } .wo .frac-top { color: #F5C842; }
   .ni { border-color: #42D4F5; } .ni .frac-top { color: #42D4F5; }
-  .ren { border-color: #A78BFA; } .ren .frac-top { color: #A78BFA; }
-  .eq-symbol { font-size: 22px; color: #ffffff66; font-weight: 300; }
+  .ren{ border-color: #A78BFA; } .ren .frac-top{ color: #A78BFA; }
+  .eq-symbol  { font-size: 22px; color: #ffffff66; font-weight: 300; }
   .result-box { background: #1a1a40; border: 1px solid #7C3AED66; border-radius: 10px; padding: 10px 18px; text-align: center; }
   .result-top { font-size: 22px; font-weight: 700; color: #C084FC; line-height: 1; }
   .result-bot { font-size: 11px; color: #A78BFA99; margin-top: 3px; }
   .realms { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; margin: 20px 0; }
   .realm { border-radius: 12px; padding: 16px; }
-  .realm-human { background: #1A1208; border: 1px solid #F5C84255; }
+  .realm-human   { background: #1A1208; border: 1px solid #F5C84255; }
   .realm-machine { background: #081520; border: 1px solid #42D4F555; }
   .realm-title { font-size: 11px; letter-spacing: 2px; font-weight: 700; margin-bottom: 10px; }
-  .realm-human .realm-title { color: #F5C842; }
+  .realm-human .realm-title   { color: #F5C842; }
   .realm-machine .realm-title { color: #42D4F5; }
   .realm-formula { font-size: 17px; font-weight: 700; line-height: 1.8; }
-  .realm-human .realm-formula { color: #F5C842; }
+  .realm-human .realm-formula   { color: #F5C842; }
   .realm-machine .realm-formula { color: #42D4F5; }
   .realm-result { font-size: 12px; margin-top: 8px; color: #888; }
-  .connector { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .connector  { display: flex; flex-direction: column; align-items: center; gap: 4px; }
   .conn-label { font-size: 10px; color: #ffffff44; letter-spacing: 1px; writing-mode: vertical-rl; }
-  .conn-line { width: 1px; height: 40px; background: linear-gradient(to bottom, #F5C84255, #42D4F555); }
-  .progress-band { background: #0A1A10; border: 1px solid #1D9E7555; border-radius: 12px; padding: 14px 20px; text-align: center; margin: 10px 0; }
+  .conn-line  { width: 1px; height: 40px; background: linear-gradient(to bottom, #F5C84255, #42D4F555); }
+  .progress-band  { background: #0A1A10; border: 1px solid #1D9E7555; border-radius: 12px; padding: 14px 20px; text-align: center; margin: 10px 0; }
   .progress-label { font-size: 10px; letter-spacing: 3px; color: #1D9E75; margin-bottom: 4px; }
   .progress-value { font-size: 18px; font-weight: 700; color: #5DCAA5; }
-  .progress-sub { font-size: 11px; color: #5DCAA599; margin-top: 4px; }
-  .grand-band { background: #100820; border: 1px solid #7C3AED55; border-radius: 12px; padding: 18px 20px; text-align: center; margin: 20px 0; }
-  .grand-label { font-size: 10px; letter-spacing: 3px; color: #7C3AED; margin-bottom: 8px; }
-  .grand-formula { font-size: 22px; font-weight: 700; color: #fff; line-height: 1.5; }
+  .grand-band   { background: #100820; border: 1px solid #7C3AED55; border-radius: 12px; padding: 18px 20px; text-align: center; margin: 20px 0; }
+  .grand-label  { font-size: 10px; letter-spacing: 3px; color: #7C3AED; margin-bottom: 8px; }
+  .grand-formula{ font-size: 22px; font-weight: 700; color: #fff; line-height: 1.5; }
   .grand-formula sup { font-size: 13px; color: #C084FC; }
-  .grand-sub { font-size: 11px; color: #666; margin-top: 6px; }
+  .grand-sub    { font-size: 11px; color: #666; margin-top: 6px; }
   .principles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
-  .prin-card { background: #0F1020; border: 1px solid #2a2a50; border-radius: 10px; padding: 12px 14px; }
+  .prin-card  { background: #0F1020; border: 1px solid #2a2a50; border-radius: 10px; padding: 12px 14px; }
   .prin-title { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-  .prin-desc { font-size: 11px; color: #777; line-height: 1.5; }
-  .quote-block { background: #0F1020; border-left: 3px solid #F5C842; border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 20px 0; }
+  .prin-desc  { font-size: 11px; color: #777; line-height: 1.5; }
+  .quote-block{ background: #0F1020; border-left: 3px solid #F5C842; border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 20px 0; }
   .quote-text { font-size: 13px; color: #ddd; line-height: 1.7; font-style: italic; }
   .quote-attr { font-size: 11px; color: #F5C84299; margin-top: 8px; }
   .tag { display: inline-block; background: #1a1a40; border: 1px solid #3a3a70; border-radius: 20px; font-size: 10px; color: #888; padding: 2px 9px; margin: 2px; }
-  .footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 24px; }
-  .footer-left { font-size: 11px; color: #555; line-height: 1.8; }
+  .footer       { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 24px; }
+  .footer-left  { font-size: 11px; color: #555; line-height: 1.8; }
   .footer-right { font-size: 11px; color: #555; text-align: right; line-height: 1.8; }
+  .back-btn {
+    display: inline-block; margin-top: 28px; margin-bottom: 8px;
+    font-size: 12px; font-weight: 700; letter-spacing: 2px; font-family: inherit;
+    color: #0D0D2B; background: #F5C842; border: none; border-radius: 20px;
+    padding: 8px 28px; text-decoration: none; cursor: pointer; text-align: center;
+  }
+  @media (max-width: 520px) {
+    .poster { padding: 32px 20px; }
+    .realms { grid-template-columns: 1fr; }
+    .principles { grid-template-columns: 1fr; }
+    .chinese { font-size: 36px; }
+  }
 </style>
+</head>
+<body>
+
+<div class="back-bar">
+  <a class="back-link" href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-philosophy.html">
+    ← <span data-en="Back to Full Paper" data-id="Kembali ke Makalah">Back to Full Paper</span>
+  </a>
+  <a class="back-link" href="https://gokiantik.github.io/chiefhumanityofficer/">
+    ← <span data-en="CHO Home" data-id="Beranda CHO">CHO Home</span>
+  </a>
+</div>
 
 <div class="poster">
-
-  <div style="text-align:center; margin-bottom:16px;">
-    <a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-philosophy.html" target="_blank" style="font-size:11px; color:#F5C84299; text-decoration:none; letter-spacing:2px; border:1px solid #F5C84233; border-radius:20px; padding:5px 16px; transition:all 0.2s;">
-      ↗ gokiantik.github.io · Walking Books Philosophy
-    </a>
-  </div>
 
   <div class="toggle-bar">
     <button class="toggle-btn active" onclick="setLang('en')" id="btn-en">EN</button>
@@ -152,7 +205,10 @@
   <div class="grand-band">
     <div class="grand-label" data-en="GRAND FORMULA" data-id="GRAND FORMULA">GRAND FORMULA</div>
     <div class="grand-formula">
-      ( <span data-en="Consciousness" data-id="Kesadaran">Consciousness</span> × <span data-en="Calculation" data-id="Kalkulasi">Calculation</span> )<sup data-en="Humanity" data-id="Kemanusiaan">Humanity</sup> &lt; <span data-en="Transcendence" data-id="Transendensi">Transcendence</span>
+      ( <span data-en="Consciousness" data-id="Kesadaran">Consciousness</span>
+      × <span data-en="Calculation" data-id="Kalkulasi">Calculation</span> )<sup
+      data-en="Humanity" data-id="Kemanusiaan">Humanity</sup>
+      &lt; <span data-en="Transcendence" data-id="Transendensi">Transcendence</span>
     </div>
     <div class="grand-sub" data-en="No matter how high Humanity rises, something beyond calculation always remains." data-id="Seberapa tinggi pun Kemanusiaan meningkat, selalu ada sesuatu di luar kalkulasi.">No matter how high Humanity rises, something beyond calculation always remains.</div>
   </div>
@@ -180,7 +236,11 @@
   </div>
 
   <div class="quote-block">
-    <div class="quote-text" data-en='"Every human being is a walking book. No single book contains the whole library. But every book, in its completeness, contributes to a library that no single book can be without."' data-id='"Setiap manusia adalah buku berjalan. Tidak ada satu buku pun yang memuat seluruh perpustakaan. Namun setiap buku, dalam kelengkapannya, berkontribusi pada perpustakaan yang tanpanya tidak ada satu buku pun dapat ada."'>"Every human being is a walking book. No single book contains the whole library. But every book, in its completeness, contributes to a library that no single book can be without."</div>
+    <div class="quote-text"
+      data-en='"Every human being is a walking book. No single book contains the whole library. But every book, in its completeness, contributes to a library that no single book can be without."'
+      data-id='"Setiap manusia adalah buku berjalan. Tidak ada satu buku pun yang memuat seluruh perpustakaan. Namun setiap buku, dalam kelengkapannya, berkontribusi pada perpustakaan yang tanpanya tidak ada satu buku pun dapat ada."'>
+      "Every human being is a walking book. No single book contains the whole library. But every book, in its completeness, contributes to a library that no single book can be without."
+    </div>
     <div class="quote-attr">— Go Kian Tik (Mbah Hogi Bejo™)</div>
   </div>
 
@@ -193,8 +253,9 @@
   <span class="tag" data-en="Human-AI Collaboration" data-id="Kolaborasi Manusia-AI">Human-AI Collaboration</span>
   <span class="tag" data-en="Transcendence" data-id="Transendensi">Transcendence</span>
 
-  <div style="text-align:center; margin-top:28px; margin-bottom:8px;">
-    <a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-philosophy.html" target="_blank" style="display:inline-block; font-size:12px; font-weight:700; letter-spacing:2px; font-family:inherit; color:#0D0D2B; background:#F5C842; border:none; border-radius:20px; padding:8px 28px; text-decoration:none; cursor:pointer;">
+  <div style="text-align:center;">
+    <a class="back-btn"
+       href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-philosophy.html">
       <span data-en="← Back to Full Paper" data-id="← Kembali ke Makalah Lengkap">← Back to Full Paper</span>
     </a>
   </div>
@@ -222,3 +283,5 @@ function setLang(lang) {
   document.getElementById('btn-id').classList.toggle('active', lang === 'id');
 }
 </script>
+</body>
+</html>
