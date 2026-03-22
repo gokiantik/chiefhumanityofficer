@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHO Ecosystem · UN Open Source Week 2026 · Go Kian Tik</title>
+<meta name="description" content="CHO Ecosystem Proposal — UN Open Source Week 2026. From Laggard to Dignity. Go Kian Tik (Mbah Hogi Bejo™).">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#fafaf9;color:#1a1a18;min-height:100vh;padding:2.5rem 1rem 3rem;
+}
+@media(prefers-color-scheme:dark){
+  body{background:#111110;color:#e8e6e0}
+  .card{background:#1c1c1a;border-color:#2e2e2c}
+  .metric{background:#1c1c1a}
+  .formula-box{background:#1c1c1a}
+  .highlight-box{background:#1c1c1a}
+  .tab-nav button{border-color:#2e2e2c;color:#888780}
+  .tab-nav button.active{background:#2e2e2c;color:#e8e6e0;border-color:#444441}
+  .doi-row:nth-child(even){background:#181816}
+  .prog-track{background:#2e2e2c}
+  .timeline::before{background:#2e2e2c}
+  .t-item::before{background:#111110;border-color:#444441}
+  .top-bar{border-color:#2e2e2c}
+  .tab-nav{border-color:#2e2e2c}
+  .problem-row{border-color:#2e2e2c}
+  .doi-row{border-color:#2e2e2c}
+  .card-sub{color:#888780}
+  .formula-sub{color:#888780}
+  .main-sub{color:#888780}
+  .t-desc{color:#888780}
+  .problem-desc{color:#888780}
+  .metric-lbl{color:#888780}
+  .section-label{color:#888780}
+  .eyebrow{color:#888780}
+  .back-link{color:#888780;border-color:#2e2e2c}
+  .back-link:hover{color:#e8e6e0;border-color:#444441;background:#1c1c1a}
+}
+
+.eco{width:100%;max-width:780px;margin:0 auto}
+
+.lang-toggle{
+  position:fixed;top:1.2rem;right:1.5rem;z-index:100;
+  display:flex;gap:6px;
+}
+.lang-toggle button{
+  background:none;border:0.5px solid #d3d1c7;
+  color:#888780;font-family:inherit;
+  font-size:10px;letter-spacing:.12em;padding:4px 10px;
+  cursor:pointer;border-radius:3px;transition:all .2s;
+}
+.lang-toggle button.active{border-color:#185fa5;color:#185fa5}
+@media(prefers-color-scheme:dark){
+  .lang-toggle button{border-color:#2e2e2c;color:#888780}
+  .lang-toggle button.active{border-color:#378add;color:#85b7eb}
+}
+
+.back-link{
+  position:fixed;top:1.2rem;left:1.5rem;z-index:100;
+  font-size:10px;letter-spacing:.1em;color:#888780;
+  border:0.5px solid #d3d1c7;border-radius:3px;
+  padding:4px 10px;text-decoration:none;transition:all .2s;
+}
+.back-link:hover{color:#1a1a18;border-color:#888780}
+
+/* bilingual */
+.id{display:none}
+body.id-active .en{display:none}
+body.id-active .id{display:inline}
+body.id-active .id-block{display:block}
+body.id-active .en-block{display:none}
+.id-block{display:none}
+
+.top-bar{margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:0.5px solid #d3d1c7;margin-top:1rem}
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#888780;margin-bottom:.4rem}
+.main-title{font-size:22px;font-weight:500;line-height:1.3;margin-bottom:.35rem}
+.main-sub{font-size:13px;color:#5f5e5a}
+
+.tab-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem;border-bottom:0.5px solid #d3d1c7;padding-bottom:1rem}
+.tab-nav button{font-size:12px;padding:5px 12px;border-radius:8px;border:0.5px solid #b4b2a9;background:transparent;color:#5f5e5a;cursor:pointer;transition:all .15s}
+.tab-nav button.active{background:#f1efe8;color:#1a1a18;border-color:#888780;font-weight:500}
+@media(prefers-color-scheme:dark){
+  .tab-nav button{border-color:#2e2e2c;color:#888780}
+  .tab-nav button.active{background:#2e2e2c;color:#e8e6e0;border-color:#444441}
+}
+
+.panel{display:none}.panel.active{display:block}
+.section-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#888780;margin-bottom:.75rem}
+.card{background:#fff;border:0.5px solid #d3d1c7;border-radius:12px;padding:1rem 1.25rem;margin-bottom:.75rem}
+.card-title{font-size:14px;font-weight:500;margin-bottom:.25rem}
+.card-sub{font-size:12px;color:#5f5e5a;line-height:1.65}
+
+.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem}
+.metric{background:#f1efe8;border-radius:8px;padding:.75rem;text-align:center}
+.metric-val{font-size:22px;font-weight:500;display:block}
+.metric-lbl{font-size:11px;color:#888780;display:block;margin-top:2px}
+
+.formula-box{background:#f1efe8;border-left:3px solid #185fa5;border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:1rem 0}
+@media(prefers-color-scheme:dark){.formula-box{border-left-color:#378add}}
+.formula-main{font-size:18px;font-weight:500;color:#185fa5;font-style:italic;margin-bottom:.4rem;font-family:Georgia,serif}
+@media(prefers-color-scheme:dark){.formula-main{color:#85b7eb}}
+.formula-sub{font-size:12px;color:#5f5e5a;line-height:1.6}
+
+.highlight-box{background:#f1efe8;border-radius:12px;padding:1rem;margin:1rem 0}
+.highlight-main{font-size:15px;font-weight:500;font-style:italic;line-height:1.6;font-family:Georgia,serif;text-align:center}
+
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:8px;margin:2px;border:0.5px solid}
+.tag-blue{background:#e6f1fb;color:#0c447c;border-color:#b5d4f4}
+.tag-green{background:#eaf3de;color:#27500a;border-color:#c0dd97}
+.tag-warn{background:#faeeda;color:#633806;border-color:#fac775}
+.tag-gray{background:#f1efe8;color:#444441;border-color:#d3d1c7}
+@media(prefers-color-scheme:dark){
+  .tag-blue{background:#042c53;color:#85b7eb;border-color:#185fa5}
+  .tag-green{background:#173404;color:#97c459;border-color:#3b6d11}
+  .tag-warn{background:#412402;color:#ef9f27;border-color:#854f0b}
+  .tag-gray{background:#2c2c2a;color:#b4b2a9;border-color:#444441}
+}
+
+.evidence-badge{display:inline-flex;align-items:center;font-size:11px;padding:3px 10px;border-radius:8px;background:#eaf3de;color:#27500a;border:0.5px solid #c0dd97}
+@media(prefers-color-scheme:dark){.evidence-badge{background:#173404;color:#97c459;border-color:#3b6d11}}
+
+.problem-row{display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 0;border-bottom:0.5px solid #d3d1c7}
+.problem-row:last-child{border-bottom:none}
+.problem-num{font-size:20px;font-weight:500;color:#b4b2a9;min-width:28px;line-height:1.3}
+.problem-title{font-size:13px;font-weight:500;margin-bottom:.2rem}
+.problem-desc{font-size:12px;color:#5f5e5a;line-height:1.5}
+.risk{font-size:11px;color:#854f0b;margin-top:.25rem}
+@media(prefers-color-scheme:dark){.risk{color:#ef9f27}}
+
+.doi-row{display:flex;align-items:flex-start;gap:.75rem;padding:.5rem .75rem;border-bottom:0.5px solid #d3d1c7}
+.doi-row:last-child{border-bottom:none}
+.doi-num{font-size:11px;color:#888780;min-width:60px;font-family:monospace;padding-top:2px}
+.doi-title{font-size:13px;font-weight:500;margin-bottom:.15rem}
+.doi-sub{font-size:11px;color:#888780;line-height:1.4}
+.doi-new{background:#eaf3de;border-radius:8px;border:0.5px solid #c0dd97}
+@media(prefers-color-scheme:dark){.doi-new{background:#173404;border-color:#3b6d11}}
+.doi-new .doi-num,.doi-new .doi-title,.doi-new .doi-sub{color:#27500a}
+@media(prefers-color-scheme:dark){.doi-new .doi-num,.doi-new .doi-title,.doi-new .doi-sub{color:#97c459}}
+
+.timeline{position:relative;padding-left:1.5rem}
+.timeline::before{content:'';position:absolute;left:7px;top:8px;bottom:8px;width:0.5px;background:#d3d1c7}
+.t-item{position:relative;margin-bottom:1rem}
+.t-item::before{content:'';position:absolute;left:-1.3rem;top:5px;width:8px;height:8px;border-radius:50%;background:#fafaf9;border:1.5px solid #888780}
+@media(prefers-color-scheme:dark){.t-item::before{background:#111110}}
+.t-time{font-size:11px;font-family:monospace;color:#185fa5;margin-bottom:.2rem}
+@media(prefers-color-scheme:dark){.t-time{color:#85b7eb}}
+.t-title{font-size:13px;font-weight:500;margin-bottom:.15rem}
+.t-desc{font-size:12px;color:#5f5e5a;line-height:1.5}
+
+.prog-row{display:flex;align-items:center;gap:.75rem;margin:.4rem 0}
+.prog-label{font-size:11px;color:#5f5e5a;min-width:130px}
+.prog-track{flex:1;height:5px;background:#d3d1c7;border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;border-radius:3px;background:#185fa5}
+@media(prefers-color-scheme:dark){.prog-fill{background:#378add}}
+.prog-val{font-size:12px;font-weight:500;min-width:20px;text-align:right;color:#27500a}
+@media(prefers-color-scheme:dark){.prog-val{color:#97c459}}
+
+.footer{margin-top:2rem;padding-top:1rem;border-top:0.5px solid #d3d1c7;text-align:center;font-size:11px;color:#888780}
+@media(prefers-color-scheme:dark){.footer{border-color:#2e2e2c}}
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">← index</a>
+
+<div class="lang-toggle">
+  <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+  <button id="btn-id" onclick="setLang('id')">ID</button>
+</div>
+
+<div class="eco">
+
+  <div class="top-bar">
+    <div class="eyebrow">
+      <span class="en">UN Open Source Week 2026 · 26 June · Virtual · Deadline 31 March 2026</span>
+      <span class="id">UN Open Source Week 2026 · 26 Juni · Virtual · Batas Waktu 31 Maret 2026</span>
+    </div>
+    <div class="main-title">
+      <span class="en">From Laggard to Dignity</span>
+      <span class="id">Dari Laggard Menuju Martabat</span>
+    </div>
+    <div class="main-sub">
+      <span class="en">CHO Open Source Framework · Go Kian Tik (Mbah Hogi Bejo™) · Depok, Indonesia · Global South</span>
+      <span class="id">Kerangka CHO Open Source · Go Kian Tik (Mbah Hogi Bejo™) · Depok, Indonesia · Global South</span>
+    </div>
+  </div>
+
+  <nav class="tab-nav">
+    <button class="active" onclick="show('overview',this)">
+      <span class="en">Summary</span><span class="id">Ringkasan</span>
+    </button>
+    <button onclick="show('problems',this)">
+      <span class="en">6 Problems</span><span class="id">6 Masalah</span>
+    </button>
+    <button onclick="show('evidence',this)">
+      <span class="en">Evidence</span><span class="id">Bukti Empiris</span>
+    </button>
+    <button onclick="show('formula',this)">
+      <span class="en">Grand Formula</span><span class="id">Grand Formula</span>
+    </button>
+    <button onclick="show('dois',this)">
+      <span class="en">14 DOI</span><span class="id">14 DOI</span>
+    </button>
+    <button onclick="show('session',this)">
+      <span class="en">45-Min Session</span><span class="id">Sesi 45 Menit</span>
+    </button>
+  </nav>
+
+  <!-- ── OVERVIEW ── -->
+  <div id="panel-overview" class="panel active">
+    <div class="metric-grid">
+      <div class="metric">
+        <span class="metric-val">14</span>
+        <span class="metric-lbl"><span class="en">DOI Publications</span><span class="id">Publikasi DOI</span></span>
+      </div>
+      <div class="metric">
+        <span class="metric-val">8B</span>
+        <span class="metric-lbl"><span class="en">Humans addressed</span><span class="id">Manusia yang dituju</span></span>
+      </div>
+      <div class="metric">
+        <span class="metric-val">45'</span>
+        <span class="metric-lbl"><span class="en">Virtual session</span><span class="id">Sesi Virtual</span></span>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="highlight-main">
+        <span class="en">"What if AI's greatest contribution is not for those already empowered — but for the 8 billion never counted?"</span>
+        <span class="id">"Bagaimana jika kontribusi terbesar AI bukan untuk yang sudah berdaya — melainkan untuk 8 miliar manusia yang tidak pernah dihitung?"</span>
+      </div>
+    </div>
+
+    <div class="section-label"><span class="en">SDG Alignment</span><span class="id">Keselarasan SDG</span></div>
+    <div style="margin-bottom:1rem">
+      <span class="tag tag-blue"><span class="en">SDG 4 · Quality Education</span><span class="id">SDG 4 · Pendidikan Berkualitas</span></span>
+      <span class="tag tag-blue"><span class="en">SDG 10 · Reduced Inequalities</span><span class="id">SDG 10 · Pengurangan Ketimpangan</span></span>
+      <span class="tag tag-blue"><span class="en">SDG 17 · Partnerships</span><span class="id">SDG 17 · Kemitraan Global</span></span>
+    </div>
+
+    <div class="section-label"><span class="en">Track Alignment</span><span class="id">Jalur Tematik</span></div>
+    <div style="margin-bottom:1rem">
+      <span class="tag tag-green"><span class="en">AI &amp; Open Collaboration</span><span class="id">AI &amp; Kolaborasi Terbuka</span></span>
+      <span class="tag tag-green"><span class="en">Digital Inclusion</span><span class="id">Inklusi Digital</span></span>
+      <span class="tag tag-green"><span class="en">Global South Perspective</span><span class="id">Perspektif Global South</span></span>
+    </div>
+
+    <div class="formula-box">
+      <div class="formula-main">
+        <span class="en">( Consciousness × Calculation ) ^ Humanity &lt; Transcendence</span>
+        <span class="id">( Kesadaran × Kalkulasi ) ^ Kemanusiaan &lt; Transendensi</span>
+      </div>
+      <div class="formula-sub">
+        <span class="en">Grand Formula · Go Kian Tik (Mbah Hogi Bejo™) · 2026<br>Humanity as exponent — not a constant, not an add-on, but a civilizational multiplier</span>
+        <span class="id">Grand Formula · Go Kian Tik (Mbah Hogi Bejo™) · 2026<br>Kemanusiaan sebagai eksponen — bukan konstanta, bukan pelengkap, melainkan pengali peradaban</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="en">Presenter</span><span class="id">Presenter</span></div>
+      <div class="card-sub">
+        Go Kian Tik · Chief Humanity Officer · gokiantik@gmail.com<br><br>
+        <span class="tag tag-gray">gokiantik.github.io/chiefhumanityofficer</span>
+        <span class="tag tag-gray">zenodo.org/communities/chiefhumanityofficer</span>
+        <span class="tag tag-gray">github.com/gokiantik/chiefhumanityofficer</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 6 PROBLEMS ── -->
+  <div id="panel-problems" class="panel">
+    <div class="section-label">
+      <span class="en">6 Interconnected Civilizational Problems</span>
+      <span class="id">6 Masalah Peradaban yang Saling Terhubung</span>
+    </div>
+    <div class="card" style="padding:.75rem 1rem">
+
+      <div class="problem-row">
+        <div class="problem-num">1</div>
+        <div>
+          <div class="problem-title"><span class="en">Rogers Diffusion Gap</span><span class="id">Kesenjangan Difusi Rogers</span></div>
+          <div class="problem-desc"><span class="en">~50% of 8 billion humans (Late Majority + Laggards) resist AI adoption</span><span class="id">~50% dari 8 miliar manusia (Late Majority + Laggard) menolak adopsi AI</span></div>
+          <div class="risk"><span class="en">↑ AI acceleration only benefits Innovators — deepening inequality</span><span class="id">↑ Akselerasi AI hanya menguntungkan Inovator — memperdalam ketimpangan</span></div>
+        </div>
+      </div>
+
+      <div class="problem-row">
+        <div class="problem-num">2</div>
+        <div>
+          <div class="problem-title"><span class="en">Hawkins Consciousness Gap</span><span class="id">Kesenjangan Kesadaran Hawkins</span></div>
+          <div class="problem-desc"><span class="en">70–80% of humanity operates at LoC &lt;200 — fear, anger, apathy</span><span class="id">70–80% umat manusia beroperasi di LoC &lt;200 — rasa takut, marah, apatis</span></div>
+          <div class="risk"><span class="en">↑ LLMs mirror user consciousness — amplifying dysfunction at scale</span><span class="id">↑ LLM mencerminkan kesadaran penggunanya — memperkuat disfungsi skala besar</span></div>
+        </div>
+      </div>
+
+      <div class="problem-row">
+        <div class="problem-num">3</div>
+        <div>
+          <div class="problem-title"><span class="en">Johari Blindness — Unknown Arena</span><span class="id">Kebutaan Johari — Unknown Arena</span></div>
+          <div class="problem-desc"><span class="en">Unknown Area dominates the universal human condition</span><span class="id">Unknown Area mendominasi kondisi universal manusia</span></div>
+          <div class="risk"><span class="en">↑ AI confirms existing worldviews instead of opening the Unknown Arena</span><span class="id">↑ AI mengonfirmasi pandangan yang ada — bukan membuka Unknown Arena</span></div>
+        </div>
+      </div>
+
+      <div class="problem-row">
+        <div class="problem-num">4</div>
+        <div>
+          <div class="problem-title"><span class="en">Sovereignty Gap · Kupu-Kupu Malam</span><span class="id">Sovereignty Gap · Kupu-Kupu Malam</span></div>
+          <div class="problem-desc"><span class="en">Most marginalised population: Decision Power ≠ Consequence Ownership</span><span class="id">Populasi paling terpinggirkan: Kekuatan Memutuskan ≠ Kepemilikan Konsekuensi</span></div>
+          <div class="risk"><span class="en">↑ AI accelerates those holding choices — externalising consequences to the powerless</span><span class="id">↑ AI mempercepat yang memegang pilihan — mengeksternalisasi konsekuensi kepada yang tak berdaya</span></div>
+        </div>
+      </div>
+
+      <div class="problem-row">
+        <div class="problem-num">5</div>
+        <div>
+          <div class="problem-title"><span class="en">NLP Gap · Deep ≠ Surface Structure</span><span class="id">Kesenjangan NLP · Deep ≠ Surface Structure</span></div>
+          <div class="problem-desc"><span class="en">Every human communication loses meaning in translation</span><span class="id">Setiap komunikasi manusia kehilangan makna dalam terjemahan</span></div>
+          <div class="risk"><span class="en">↑ AI answers Surface Structure for Deep Structure needs — without NLP bridging</span><span class="id">↑ AI menjawab Surface Structure untuk kebutuhan Deep Structure — tanpa jembatan NLP</span></div>
+        </div>
+      </div>
+
+      <div class="problem-row">
+        <div class="problem-num">6</div>
+        <div>
+          <div class="problem-title"><span class="en">Kiyosaki/Maslow Gap</span><span class="id">Kesenjangan Kiyosaki/Maslow</span></div>
+          <div class="problem-desc"><span class="en">1.3 billion employee mindset — 4.5 billion elderly &amp; children uncounted</span><span class="id">1,3 miliar employee mindset — 4,5 miliar lansia &amp; anak tidak dihitung</span></div>
+          <div class="risk"><span class="en">↑ AI-driven economic shifts displace workers without sovereignty maturity to navigate them</span><span class="id">↑ Pergeseran ekonomi AI menggeser karyawan tanpa kematangan kedaulatan</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── EVIDENCE ── -->
+  <div id="panel-evidence" class="panel">
+    <div class="section-label">
+      <span class="en">Empirical Evidence — Two Datasets</span>
+      <span class="id">Bukti Empiris — Dua Dataset</span>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem">
+        <div class="card-title">
+          <span class="en">Dataset 1 · Ep.2 · 6 March 2026</span>
+          <span class="id">Dataset 1 · Ep.2 · 6 Maret 2026</span>
+        </div>
+        <span class="evidence-badge">Timestamped · Reproducible</span>
+      </div>
+      <div class="card-sub" style="margin-bottom:.75rem">
+        <span class="en">1 hour · 6 simple prompts · conclusion absent from any AI training data</span>
+        <span class="id">1 jam · 6 prompt sederhana · kesimpulan tidak ada dalam training data AI manapun</span>
+      </div>
+      <div class="timeline">
+        <div class="t-item">
+          <div class="t-time"><span class="en">Prompts 1–3</span><span class="id">Prompt 1–3</span></div>
+          <div class="t-title"><span class="en">History of written communication</span><span class="id">Sejarah komunikasi tertulis</span></div>
+          <div class="t-desc"><span class="en">5,000 years of communication technology — from Sumerian clay tablets to the internet</span><span class="id">5.000 tahun teknologi komunikasi — dari tanah liat Sumeria ke internet</span></div>
+        </div>
+        <div class="t-item">
+          <div class="t-time"><span class="en">Prompt 4 — Inflection Point</span><span class="id">Prompt 4 — Inflection Point</span></div>
+          <div class="t-title"><span class="en">Separating two variables</span><span class="id">Pemisahan dua variabel</span></div>
+          <div class="t-desc"><span class="en">Speed of delivery vs speed of comprehension — treated as one for 5,000 years</span><span class="id">Kecepatan pengiriman vs kecepatan pemahaman — yang 5.000 tahun selalu diperlakukan sebagai satu</span></div>
+        </div>
+        <div class="t-item">
+          <div class="t-time"><span class="en">Prompt 6 — Conclusion Emerges</span><span class="id">Prompt 6 — Kesimpulan Muncul</span></div>
+          <div class="t-title"><span class="en">Not from database — from reasoning</span><span class="id">Bukan dari database — dari reasoning</span></div>
+          <div class="t-desc"><span class="en">For the first time in history, the speed of one human deeply understanding something and the speed of all civilization understanding the same thing became nearly identical</span><span class="id">Untuk pertama kali dalam sejarah, kecepatan satu manusia memahami dan kecepatan peradaban memahami hal yang sama menjadi hampir identik</span></div>
+        </div>
+      </div>
+      <div style="margin-top:.75rem;font-size:11px;color:#185fa5;font-family:monospace">DOI: 10.5281/zenodo.18965525</div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem">
+        <div class="card-title">
+          <span class="en">Dataset 2 · 22 March 2026 · Food Court, Depok</span>
+          <span class="id">Dataset 2 · 22 Maret 2026 · Food Court Depok</span>
+        </div>
+        <span class="evidence-badge">Ecological validity</span>
+      </div>
+      <div class="card-sub" style="margin-bottom:.75rem">
+        <span class="en">30 minutes · no agenda · no script · on a used food tray</span>
+        <span class="id">30 menit · tanpa agenda · tanpa skrip · di atas nampan bekas makan</span>
+      </div>
+      <div class="highlight-box" style="text-align:left;padding:.75rem 1rem;margin:.75rem 0">
+        <div style="font-size:12px;line-height:1.7;color:#5f5e5a">
+          <span class="en">
+            E=mc² → Unknown Area (m) × (AI + Humanity)² (c²) = Civilizational Impact (E)<br>
+            Laozi → ontological foundation: why Humanity is exclusively human<br>
+            UN recruitment → demonstration of 渡己 → 渡人 in a real trajectory
+          </span>
+          <span class="id">
+            E=mc² → Unknown Area (m) × (AI + Humanity)² (c²) = Impact Peradaban (E)<br>
+            Laozi → fondasi ontologis mengapa Humanity eksklusif milik manusia<br>
+            UN recruitment → demonstrasi 渡己 → 渡人 dalam trajektori nyata
+          </span>
+        </div>
+      </div>
+      <div style="font-size:12px;color:#5f5e5a;margin:.75rem 0 .5rem">
+        <span class="en">4 User Quality Filters (Ep.301) occurred naturally:</span>
+        <span class="id">4 Filter Kualitas Pengguna (Ep.301) terjadi alami:</span>
+      </div>
+      <div class="prog-row"><div class="prog-label"><span class="en">Rogers — Innovator</span><span class="id">Rogers — Innovator</span></div><div class="prog-track"><div class="prog-fill" style="width:95%"></div></div><div class="prog-val">✓</div></div>
+      <div class="prog-row"><div class="prog-label"><span class="en">Hawkins LoC ≥ 400</span><span class="id">Hawkins LoC ≥ 400</span></div><div class="prog-track"><div class="prog-fill" style="width:95%"></div></div><div class="prog-val">✓</div></div>
+      <div class="prog-row"><div class="prog-label"><span class="en">Johari — Reflective</span><span class="id">Johari — Reflektif</span></div><div class="prog-track"><div class="prog-fill" style="width:95%"></div></div><div class="prog-val">✓</div></div>
+      <div class="prog-row"><div class="prog-label"><span class="en">Ruwet → Genah</span><span class="id">Ruwet → Genah</span></div><div class="prog-track"><div class="prog-fill" style="width:95%"></div></div><div class="prog-val">✓</div></div>
+      <div style="font-size:12px;color:#3b6d11;margin-top:.75rem;font-style:italic">
+        <span class="en">This is not a replication of Ep.2. This is ecological validation — the methodology lives outside academia.</span>
+        <span class="id">Ini bukan replikasi Ep.2. Ini validasi ekologis — metodologi hidup di luar akademia.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FORMULA ── -->
+  <div id="panel-formula" class="panel">
+    <div class="section-label">
+      <span class="en">Grand Formula — Operational Architecture</span>
+      <span class="id">Grand Formula — Arsitektur Operasional</span>
+    </div>
+    <div class="formula-box">
+      <div class="formula-main">
+        <span class="en">( Consciousness × Calculation ) ^ Humanity &lt; Transcendence</span>
+        <span class="id">( Kesadaran × Kalkulasi ) ^ Kemanusiaan &lt; Transendensi</span>
+      </div>
+      <div class="formula-sub">
+        <span class="en">Not a poetic statement. An operational architecture already running and documented.</span>
+        <span class="id">Bukan pernyataan puitis. Peta arsitektur yang sudah beroperasi dan terdokumentasi.</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="en">Consciousness (360/360)</span><span class="id">Kesadaran (360/360)</span></div>
+      <div class="card-sub">
+        <span class="en">The 360/360 field of 8 billion walking books — every human is 1/360, complete and irreducible. "No single book contains the entire library. Yet every book, in its completeness, contributes to the library without which no book could exist."</span>
+        <span class="id">Medan 360/360 dari 8 miliar buku berjalan — setiap manusia adalah 1/360, lengkap dan tak tereduksi. "Tidak ada satu buku yang mengandung seluruh perpustakaan. Namun setiap buku, dalam kelengkapannya, berkontribusi pada perpustakaan yang tanpanya tidak ada buku bisa ada."</span>
+      </div>
+      <div style="margin-top:.5rem">
+        <span class="tag tag-green"><span class="en">Ubuntu: I am because we are</span><span class="id">Ubuntu: Saya ada karena kita ada</span></span>
+        <span class="tag tag-gray">DOI: 10.5281/zenodo.19084212</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="en">Calculation (5/5)</span><span class="id">Kalkulasi (5/5)</span></div>
+      <div class="card-sub">
+        <span class="en">Five AI systems (Claude, Gemini, Copilot, DeepSeek, ChatGPT) each contribute different epistemic capacities. No single AI is complete alone — just as no human is 360/360.</span>
+        <span class="id">Lima sistem AI (Claude, Gemini, Copilot, DeepSeek, ChatGPT) masing-masing menyumbangkan kapasitas epistemik yang berbeda. Tidak ada satu AI yang lengkap sendirian — seperti tidak ada satu manusia yang 360/360.</span>
+      </div>
+      <div style="margin-top:.5rem">
+        <span class="tag tag-blue"><span class="en">Ep.2 · 6 prompts · 1 hour</span><span class="id">Ep.2 · 6 prompt · 1 jam</span></span>
+        <span class="tag tag-blue"><span class="en">Dataset 22/3/2026</span><span class="id">Dataset 22/3/2026</span></span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="en">^Humanity (exponent)</span><span class="id">^Kemanusiaan (eksponen)</span></div>
+      <div class="card-sub">
+        <span class="en">Written above, not beside. Not an adder — a civilizational multiplier.<br><br>
+          Humanity^0 = extreme Sovereignty Gap (Kupu-Kupu Malam)<br>
+          Humanity^1 = beginning to enter Calculation<br>
+          Humanity^n = exponential toward Transcendence</span>
+        <span class="id">Ditulis di atas, bukan di samping. Bukan penambah — pengali peradaban.<br><br>
+          Humanity^0 = Sovereignty Gap ekstrem (Kupu-Kupu Malam)<br>
+          Humanity^1 = mulai masuk Kalkulasi<br>
+          Humanity^n = eksponensial menuju Transendensi</span>
+      </div>
+      <div style="margin-top:.5rem">
+        <span class="tag tag-warn"><span class="en">Ep.301 · Consciousness as Exponent</span><span class="id">Ep.301 · Kesadaran sebagai Eksponen</span></span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">&lt; <span class="en">Transcendence</span><span class="id">Transendensi</span></div>
+      <div class="card-sub">
+        <span class="en">The structural reminder: the formula is never finished. Not a failure condition — a truth that keeps humility alive. There is always a 1/360 not yet counted. There is always a new horizon.</span>
+        <span class="id">Pengingat struktural: formula tidak pernah selesai. Bukan kondisi gagal — kebenaran yang menjaga kerendahan hati. Selalu ada 1/360 yang belum dihitung. Selalu ada cakrawala baru.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 14 DOIs ── -->
+  <div id="panel-dois" class="panel">
+    <div class="section-label">
+      <span class="en">14 Open Access Publications · CC BY / CC BY-NC-ND</span>
+      <span class="id">14 Publikasi Open Access · CC BY / CC BY-NC-ND</span>
+    </div>
+    <div class="card" style="padding:.5rem .75rem">
+      <div class="doi-row"><div class="doi-num">Ep.0</div><div><div class="doi-title"><span class="en">Chief Humanity Officer — The Position Doesn't Exist Yet</span><span class="id">Chief Humanity Officer — Jabatan yang Belum Ada</span></div><div class="doi-sub"><span class="en">Manifesto · Foundation · </span><span class="id">Manifesto · Fondasi · </span>DOI: 10.5281/zenodo.18935427</div></div></div>
+      <div class="doi-row"><div class="doi-num">Ep.1</div><div><div class="doi-title">AHA Moment in the Unknown Arena</div><div class="doi-sub"><span class="en">Johari + AI + Universal Awakening · </span><span class="id">Johari + AI + Sadar Jagat Raya · </span>DOI: 10.5281/zenodo.18961213</div></div></div>
+      <div class="doi-row"><div class="doi-num">Ep.2</div><div><div class="doi-title">Acknowledgment to the Architects of AI</div><div class="doi-sub"><span class="en">6 prompts · 1 hour · 5,000-year conclusion · </span><span class="id">6 prompt · 1 jam · kesimpulan 5.000 tahun · </span>DOI: 10.5281/zenodo.18965525</div></div></div>
+      <div class="doi-row"><div class="doi-num">Ep.3</div><div><div class="doi-title">Rainbow, Billiards, and Neng</div><div class="doi-sub"><span class="en">Rainbow Spectrum + Billiard Table + Tao Zhu Gong · </span><span class="id">Pelangi + Biliar + Tao Zhu Gong · </span>DOI: 10.5281/zenodo.18972039</div></div></div>
+      <div class="doi-row"><div class="doi-num">Ep.4</div><div><div class="doi-title"><span class="en">Arm Wrestling at Superhero Café</span><span class="id">Panco di Superhero Café</span></div><div class="doi-sub"><span class="en">Claude vs ChatGPT · Zi Zhu Zhe drinks coffee · </span><span class="id">Claude vs ChatGPT · Zi Zhu Zhe minum kopi · </span>DOI: 10.5281/zenodo.18973106</div></div></div>
+      <div class="doi-row"><div class="doi-num">Ep.11</div><div><div class="doi-title">The Sovereign One</div><div class="doi-sub">Zì Zhǔ · Wěn Liàng · Xiāo Yáo · DOI: 10.5281/zenodo.18935892</div></div></div>
+      <div class="doi-row"><div class="doi-num">FBB</div><div><div class="doi-title"><span class="en">Philosophy of Walking Books</span><span class="id">Filsafat Buku Berjalan</span></div><div class="doi-sub"><span class="en">1/360 · Ubuntu · 360° consciousness · </span><span class="id">1/360 · Ubuntu · 360 derajat kesadaran · </span>DOI: 10.5281/zenodo.19084212</div></div></div>
+      <div class="doi-row"><div class="doi-num">NLP</div><div><div class="doi-title">Ruwet–OTW Genah–Genah</div><div class="doi-sub"><span class="en">Cross-language NLP framework · </span><span class="id">Kerangka NLP lintas bahasa · </span>DOI: 10.5281/zenodo.19002243</div></div></div>
+      <div class="doi-row"><div class="doi-num">Ep.19</div><div><div class="doi-title">GIGO and the Human Processor</div><div class="doi-sub"><span class="en">Peer review Meriel B. · Days 1–10 · </span><span class="id">Tinjauan sejawat Meriel B. · Hari 1–10 · </span>DOI: 10.5281/zenodo.19099778</div></div></div>
+      <div class="doi-row"><div class="doi-num">Ep.20</div><div><div class="doi-title">From Meta-Bias to the Mirror</div><div class="doi-sub"><span class="en">Days 11–13 · Soul Document · </span><span class="id">Hari 11–13 · Soul Document · </span>DOI: 10.5281/zenodo.19158062</div></div></div>
+      <div class="doi-row"><div class="doi-num">KKM</div><div><div class="doi-title"><span class="en">Kupu-Kupu Malam &amp; Sovereignty Gap</span><span class="id">Kupu-Kupu Malam &amp; Sovereignty Gap</span></div><div class="doi-sub"><span class="en">Humanity^0 · Digital inclusion · </span><span class="id">Humanity^0 · Inklusi digital · </span>DOI: 10.5281/zenodo.19152827</div></div></div>
+      <div class="doi-row"><div class="doi-num">Ep.301</div><div><div class="doi-title">Consciousness as the Exponent</div><div class="doi-sub"><span class="en">4 Quality Filters · Rogers · Hawkins · </span><span class="id">4 Filter Kualitas · Rogers · Hawkins · </span>DOI: 10.5281/zenodo.19161186</div></div></div>
+      <div class="doi-row doi-new">
+        <div class="doi-num"><span class="en">NEW</span><span class="id">BARU</span></div>
+        <div>
+          <div class="doi-title"><span class="en">Dataset 22 March 2026 — Ecological Validation</span><span class="id">Dataset 22 Maret 2026 — Validasi Ekologis</span></div>
+          <div class="doi-sub"><span class="en">E=mc² + Johari + Laozi + Grand Formula · Forthcoming · Open access</span><span class="id">E=mc² + Johari + Laozi + Grand Formula · Akan diterbitkan · Open access</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SESSION PLAN ── -->
+  <div id="panel-session" class="panel">
+    <div class="section-label">
+      <span class="en">45-Minute Session Plan · Virtual · 26 June 2026</span>
+      <span class="id">Rencana Sesi 45 Menit · Virtual · 26 Juni 2026</span>
+    </div>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-time"><span class="en">0–5 min</span><span class="id">0–5 menit</span></div>
+        <div class="t-title"><span class="en">Opening — The Question</span><span class="id">Pembuka — Pertanyaan</span></div>
+        <div class="t-desc"><span class="en">What if AI's greatest contribution is not for those already empowered? Live demo: gokiantik.github.io/chiefhumanityofficer</span><span class="id">Bagaimana jika kontribusi terbesar AI bukan untuk yang sudah berdaya? Demo langsung: gokiantik.github.io/chiefhumanityofficer</span></div>
+      </div>
+      <div class="t-item">
+        <div class="t-time"><span class="en">5–15 min</span><span class="id">5–15 menit</span></div>
+        <div class="t-title"><span class="en">6 Civilizational Problems</span><span class="id">6 Masalah Peradaban</span></div>
+        <div class="t-desc"><span class="en">Quick diagnosis: Rogers · Hawkins · Johari · Sovereignty Gap · NLP Bridge · Kiyosaki/Maslow</span><span class="id">Diagnosis cepat: Rogers · Hawkins · Johari · Sovereignty Gap · NLP Bridge · Kiyosaki/Maslow</span></div>
+      </div>
+      <div class="t-item">
+        <div class="t-time"><span class="en">15–22 min</span><span class="id">15–22 menit</span></div>
+        <div class="t-title"><span class="en">Empirical Evidence — 2 Datasets</span><span class="id">Bukti Empiris — 2 Dataset</span></div>
+        <div class="t-desc"><span class="en">Ep.2: 6 prompts × 1 hour → 5,000-year conclusion. Dataset 22 March: 30 min food court → ecological validation. Not a claim. Timestamped. Reproducible.</span><span class="id">Ep.2: 6 prompt × 1 jam → kesimpulan 5.000 tahun. Dataset 22 Maret: 30 menit food court → validasi ekologis. Bukan klaim. Timestamped. Reproducible.</span></div>
+      </div>
+      <div class="t-item">
+        <div class="t-time"><span class="en">22–30 min</span><span class="id">22–30 menit</span></div>
+        <div class="t-title"><span class="en">Grand Formula in Action</span><span class="id">Grand Formula dalam Aksi</span></div>
+        <div class="t-desc"><span class="en">Live demo: Walking Books Philosophy. 5-AI methodology demonstrated. NLP as the missing bridge at 8 billion scale.</span><span class="id">Demo Filsafat Buku Berjalan. Metodologi 5-AI. NLP sebagai jembatan yang hilang pada skala 8 miliar.</span></div>
+      </div>
+      <div class="t-item">
+        <div class="t-time"><span class="en">30–35 min</span><span class="id">30–35 menit</span></div>
+        <div class="t-title"><span class="en">Kupu-Kupu Malam · Sovereignty Gap</span><span class="id">Kupu-Kupu Malam · Sovereignty Gap</span></div>
+        <div class="t-desc"><span class="en">The most extreme test case. From Humanity^0 to Humanity^1. What digital dignity means for those never counted.</span><span class="id">Kasus uji paling ekstrem. Dari Humanity^0 ke Humanity^1. Martabat digital bagi yang tidak terhitung.</span></div>
+      </div>
+      <div class="t-item">
+        <div class="t-time"><span class="en">35–45 min</span><span class="id">35–45 menit</span></div>
+        <div class="t-title"><span class="en">Open Q&amp;A + Collaboration</span><span class="id">Tanya Jawab + Kolaborasi Terbuka</span></div>
+        <div class="t-desc"><span class="en">Every participant is 1/360. Invitation: zenodo.org/communities/chiefhumanityofficer</span><span class="id">Setiap peserta adalah 1/360. Ajakan: zenodo.org/communities/chiefhumanityofficer</span></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:1rem;text-align:center;padding:1.25rem">
+      <div style="font-size:22px;font-weight:500;font-family:Georgia,serif;margin-bottom:.3rem">自主者</div>
+      <div style="font-size:12px;color:#5f5e5a">渡己 → 渡人 · <span class="en">Master yourself → Serve others</span><span class="id">Kuasai dirimu → Layani orang lain</span></div>
+      <div style="margin-top:.75rem;font-size:13px;font-style:italic;color:#888780">
+        <span class="en">( Consciousness × Calculation ) ^ Humanity &lt; Transcendence</span>
+        <span class="id">( Kesadaran × Kalkulasi ) ^ Kemanusiaan &lt; Transendensi</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2026 Go Kian Tik | 自主者 Superhero Café Inside | CC BY-NC-ND 4.0<br>
+    gokiantik@gmail.com · buymeacoffee.com/gokiantik · substack.com/@gokiantik
+  </div>
+
+</div>
+
+<script>
+function setLang(lang) {
+  document.body.classList.toggle('id-active', lang === 'id');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-id').classList.toggle('active', lang === 'id');
+  document.querySelectorAll('.id').forEach(el => {
+    el.style.display = lang === 'id' ? 'inline' : 'none';
+  });
+  document.querySelectorAll('.en').forEach(el => {
+    el.style.display = lang === 'en' ? 'inline' : 'none';
+  });
+  document.querySelectorAll('.id-block').forEach(el => {
+    el.style.display = lang === 'id' ? 'block' : 'none';
+  });
+  document.querySelectorAll('.en-block').forEach(el => {
+    el.style.display = lang === 'en' ? 'block' : 'none';
+  });
+}
+
+function show(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+setLang('en');
+</script>
+</body>
+</html>
