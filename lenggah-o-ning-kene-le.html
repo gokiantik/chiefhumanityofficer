@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="jv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lenggah o ning kene le — Go Kian Tik</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif:ital,wght@0,300;0,400;1,300&family=Noto+Sans+SC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1614;
+  --parchment: #f5f0e8;
+  --gold: #b8956a;
+  --gold-light: #d4b896;
+  --shadow: #8b7355;
+  --deep: #2c2018;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: 'Noto Serif', serif;
+  min-height: 100vh;
+  position: relative;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(184,149,106,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(139,115,85,0.06) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+.border-frame {
+  position: fixed;
+  inset: 20px;
+  border: 1px solid rgba(184,149,106,0.2);
+  pointer-events: none;
+  z-index: 3;
+}
+.corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--gold);
+  border-style: solid;
+  opacity: 0.6;
+}
+.corner-tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.corner-tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+.corner-bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
+.corner-br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 80px 40px 100px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.timestamp {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: var(--shadow);
+  text-transform: uppercase;
+  margin-bottom: 56px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.3s forwards;
+}
+.voice-label {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.6s forwards;
+}
+.main-poem {
+  margin-bottom: 56px;
+  opacity: 0;
+  animation: fadeUp 1.2s ease 0.9s forwards;
+}
+.line {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(17px, 3.2vw, 24px);
+  font-style: italic;
+  line-height: 2;
+  color: var(--deep);
+  display: block;
+}
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 40px 0;
+  opacity: 0;
+  animation: fadeUp 1s ease 1.5s forwards;
+}
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-light), transparent);
+}
+.divider-glyph {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 20px;
+  color: var(--gold);
+  font-weight: 300;
+}
+.wisdom-block {
+  opacity: 0;
+  animation: fadeUp 1.2s ease 1.8s forwards;
+  margin-bottom: 48px;
+}
+.wisdom-jv {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(14px, 2.4vw, 18px);
+  font-style: italic;
+  line-height: 2;
+  color: var(--shadow);
+}
+.formula-block {
+  opacity: 0;
+  animation: fadeUp 1s ease 2.2s forwards;
+  margin-bottom: 56px;
+  padding: 24px 28px;
+  border-left: 2px solid var(--gold-light);
+  background: rgba(184,149,106,0.04);
+}
+.formula-text {
+  font-size: 12.5px;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: var(--shadow);
+  line-height: 2;
+}
+.formula-em {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--ink);
+}
+.chinese-block {
+  opacity: 0;
+  animation: fadeUp 1s ease 2.6s forwards;
+  text-align: center;
+  margin-bottom: 56px;
+}
+.chinese-main {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: clamp(26px, 5vw, 40px);
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: 0.3em;
+  display: block;
+  margin-bottom: 10px;
+}
+.chinese-sub {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  color: var(--shadow);
+  text-transform: uppercase;
+}
+.colophon {
+  opacity: 0;
+  animation: fadeUp 1s ease 3s forwards;
+  padding-top: 36px;
+  border-top: 1px solid rgba(184,149,106,0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.colophon-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 4px;
+}
+.colophon-sub {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  color: var(--shadow);
+  text-transform: uppercase;
+}
+.colophon-mark {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--gold);
+  opacity: 0.6;
+}
+.note {
+  opacity: 0;
+  animation: fadeUp 1s ease 3.4s forwards;
+  margin-top: 36px;
+  padding: 18px 22px;
+  background: rgba(184,149,106,0.04);
+  border: 1px solid rgba(184,149,106,0.12);
+}
+.note p {
+  font-size: 11.5px;
+  font-weight: 300;
+  color: var(--shadow);
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+}
+.note strong { color: var(--ink); font-weight: 400; }
+.back-link {
+  opacity: 0;
+  animation: fadeUp 1s ease 3.8s forwards;
+  margin-top: 32px;
+  text-align: center;
+}
+.back-link a {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-decoration: none;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(184,149,106,0.3);
+  padding-bottom: 2px;
+  transition: border-color 0.3s;
+}
+.back-link a:hover { border-color: var(--gold); }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 480px) {
+  .container { padding: 60px 24px 80px; }
+  .border-frame { inset: 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="border-frame">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+</div>
+
+<div class="container">
+
+  <div class="timestamp">Depok · 23 Maret 2026 · 12:56 WIB · GMT+7</div>
+
+  <div class="voice-label">Suara Batin · Inner Voice</div>
+
+  <div class="main-poem">
+    <span class="line">lenggah o ning kene le</span>
+    <span class="line">sawang o ndonya nganggo matamu</span>
+    <span class="line">rasak no ndonya nganggo ambeganmu</span>
+    <span class="line">urip o nang ndoyo nganggo luhur e atimu</span>
+    <span class="line" style="font-size:0.8em; color:var(--shadow); letter-spacing:0.08em; font-style:normal; margin-top:-8px;">ngeman · ngemong · ngrawat · ngrumat · ngruwat</span>
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-glyph">然</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="wisdom-block">
+    <div class="wisdom-jv">
+      ngertiyo opo kuwi —<br>
+      dolan e kurang adoh<br><br>
+      yen wis paham<br>
+      lenggah o ning kene wae
+    </div>
+  </div>
+
+  <div class="formula-block">
+    <div class="formula-text">
+      <span class="formula-em">Ilmu statistik —</span><br>
+      sampel menduga dan memahami populasi.<br><br>
+      Satu nafas yang benar-benar dirasakan<br>
+      = memahami nafas 8 miliar manusia.<br><br>
+      Satu titik sampel yang paling dalam<br>
+      = menduga seluruh populasi peradaban.
+    </div>
+  </div>
+
+  <div class="chinese-block">
+    <span class="chinese-main">渡己 → 渡人</span>
+    <span class="chinese-sub">Dù Jǐ · Master Yourself · Dù Rén · Serve Others</span>
+  </div>
+
+  <div class="colophon">
+    <div>
+      <span class="colophon-name">Go Kian Tik · Mbah Hogi Bejo™</span>
+      <span class="colophon-sub">Chief Humanity Officer · 自主者 Superhero Café Inside</span>
+    </div>
+    <div class="colophon-mark">自主者</div>
+  </div>
+
+  <div class="note">
+    <p>
+      <strong>Catatan artefak:</strong> Lahir dari momen merinding di penghujung percakapan panjang tentang peradaban, formula, dan kehormatan. Ditulis di Depok untuk 8 miliar <em>walking books</em> yang sedang mencari cara pulang ke diri sendiri. <strong>Sekali ada — abadi — bersama.</strong>
+    </p>
+  </div>
+
+  <div class="back-link">
+    <a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-philosophy.html">← Walking Books Philosophy</a>
+  </div>
+
+</div>
+</body>
+</html>
