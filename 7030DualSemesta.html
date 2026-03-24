@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7030DualSemesta</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0a;
+    --paper: #f5f0e8;
+    --gold: #c8922a;
+    --gold-light: #e8c06a;
+    --red: #9b2335;
+    --muted: #7a7060;
+    --line: #c8b89a;
+    --digital: #1a3a5c;
+    --material: #3a1a0a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* GRAIN TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 48px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  .masthead {
+    border-top: 3px solid var(--ink);
+    border-bottom: 1px solid var(--line);
+    padding: 20px 0 16px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .brief-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .brief-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 9vw, 88px);
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    margin: 28px 0 0;
+  }
+
+  .hero-title .ratio {
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    font-style: italic;
+    color: var(--muted);
+    margin: 14px 0 0;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--line);
+    margin: 32px 0;
+  }
+
+  .divider-bold {
+    height: 2px;
+    background: var(--ink);
+    margin: 32px 0;
+  }
+
+  /* TWO COLUMN INTRO */
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 600px) {
+    .intro-grid { grid-template-columns: 1fr; }
+  }
+
+  .intro-pull {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--digital);
+    border-left: 4px solid var(--gold);
+    padding-left: 20px;
+  }
+
+  .intro-body p {
+    margin-bottom: 12px;
+    color: #2a2520;
+  }
+
+  /* SECTION HEADERS */
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .section-title .pct {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--gold);
+    margin-right: 4px;
+  }
+
+  /* DIGITAL SECTION */
+  .section-digital {
+    background: var(--digital);
+    color: var(--paper);
+    padding: 40px 44px;
+    margin: 0 -48px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-digital::before {
+    content: '数字';
+    position: absolute;
+    right: -10px;
+    top: -20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 140px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  @media (max-width: 600px) {
+    .section-digital { margin: 0 -24px 40px; padding: 32px 24px; }
+  }
+
+  .section-digital .section-num { color: var(--gold-light); }
+  .section-digital .section-title { color: #fff; }
+
+  /* TOOLS GRID */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 24px 0;
+  }
+
+  @media (max-width: 500px) {
+    .tools-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .tool-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 14px 16px;
+    border-radius: 2px;
+  }
+
+  .tool-card .tool-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .tool-card .tool-name {
+    font-size: 15px;
+    font-weight: 400;
+    color: #fff;
+  }
+
+  /* AI ROSTER */
+  .ai-roster {
+    margin: 24px 0;
+  }
+
+  .ai-roster-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .ai-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .ai-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold-light);
+    width: 20px;
+    flex-shrink: 0;
+  }
+
+  .ai-name {
+    font-size: 15px;
+    color: #eee;
+    flex: 1;
+  }
+
+  .ai-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.08em;
+  }
+
+  .ai-tag.paid { background: var(--gold); color: var(--ink); }
+  .ai-tag.trial { background: rgba(255,255,255,0.12); color: #ccc; }
+
+  /* OUTPUT LIST */
+  .output-list {
+    margin: 20px 0 0;
+    list-style: none;
+  }
+
+  .output-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 15px;
+    color: #ddd;
+  }
+
+  .output-list li::before {
+    content: '→';
+    color: var(--gold-light);
+    font-family: 'DM Mono', monospace;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* MATERIAL SECTION */
+  .section-material {
+    margin-bottom: 40px;
+  }
+
+  .section-material .section-title { color: var(--material); }
+
+  /* 6M TABLE */
+  .m6-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 15px;
+  }
+
+  .m6-table thead tr {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .m6-table thead th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    text-align: left;
+    font-weight: 500;
+  }
+
+  .m6-table tbody tr {
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+  }
+
+  .m6-table tbody tr:hover { background: rgba(200,146,42,0.06); }
+
+  .m6-table tbody td {
+    padding: 11px 16px;
+    vertical-align: top;
+  }
+
+  .m6-table td:first-child {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    width: 32px;
+  }
+
+  .m6-table td:nth-child(2) {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--gold);
+    width: 110px;
+  }
+
+  .m6-table td:nth-child(3) {
+    color: #2a2520;
+    font-style: italic;
+    font-size: 14px;
+  }
+
+  /* LMC BADGES */
+  .lmc-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+  }
+
+  .lmc-badge {
+    background: var(--material);
+    color: var(--paper);
+    padding: 12px 24px;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+  }
+
+  .lmc-badge .lmc-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+  }
+
+  .lmc-badge .lmc-word {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #ccc;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* RATIO VISUAL */
+  .ratio-section {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 44px 44px;
+    margin: 0 -48px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  @media (max-width: 600px) {
+    .ratio-section { margin: 0 -24px 40px; padding: 32px 24px; grid-template-columns: 1fr; }
+  }
+
+  .ratio-bar-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ratio-bar {
+    height: 52px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    font-weight: 500;
+    position: relative;
+  }
+
+  .ratio-bar.digital {
+    width: 100%;
+    background: var(--gold);
+  }
+
+  .ratio-bar.material {
+    width: 43%;
+    background: #7a7060;
+    color: var(--paper);
+  }
+
+  .ratio-pct {
+    position: absolute;
+    right: 16px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .ratio-text {
+    font-size: 16px;
+    color: #ccc;
+    line-height: 1.6;
+  }
+
+  .ratio-text strong {
+    color: var(--gold-light);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+  }
+
+  /* FOOTER */
+  .footer {
+    border-top: 3px solid var(--ink);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .footer-name em {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--gold);
+    display: block;
+    font-style: normal;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.08em;
+    margin-top: 2px;
+  }
+
+  .footer-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .page > * {
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .page > *:nth-child(1) { animation-delay: 0.05s; }
+  .page > *:nth-child(2) { animation-delay: 0.1s; }
+  .page > *:nth-child(3) { animation-delay: 0.15s; }
+  .page > *:nth-child(4) { animation-delay: 0.2s; }
+  .page > *:nth-child(5) { animation-delay: 0.25s; }
+  .page > *:nth-child(6) { animation-delay: 0.3s; }
+  .page > *:nth-child(7) { animation-delay: 0.35s; }
+  .page > *:nth-child(8) { animation-delay: 0.4s; }
+  .page > *:nth-child(9) { animation-delay: 0.45s; }
+
+  blockquote {
+    border-left: 3px solid var(--gold-light);
+    padding: 4px 0 4px 20px;
+    margin: 20px 0;
+    font-style: italic;
+    font-size: 16px;
+    color: #ccc;
+    line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <span class="brief-label">7030DualSemesta · GKT Executive Brief</span>
+    <span class="brief-date">March 2026</span>
+  </div>
+
+  <!-- HERO -->
+  <h1 class="hero-title">
+    <span class="ratio">70 / 30</span>
+    Dual Semesta
+  </h1>
+  <p class="hero-sub">Semesta Digital &amp; Semesta Materialisasi — Satu Siklus Penciptaan yang Utuh</p>
+
+  <div class="divider-bold"></div>
+
+  <!-- INTRO -->
+  <div class="intro-grid">
+    <div class="intro-pull">
+      "Era digitalisasi AI telah membantu mewujudkan jati diri saya sebagai co-creator."
+    </div>
+    <div class="intro-body">
+      <p>Kerangka pikir pragmatis ini lahir dari realita keseharian seorang peneliti independen yang 70% waktunya hidup di semesta digital, dan 30% sisanya berjumpa dengan para mitra di semesta materialisasi.</p>
+      <p>Bukan sekadar teori — ini adalah <em>cara hidup yang terukur.</em></p>
+    </div>
+  </div>
+
+  <!-- DIGITAL SECTION -->
+  <div class="section-digital">
+    <div class="section-num">Bagian I</div>
+    <h2 class="section-title"><span class="pct">70%</span> Semesta Digital</h2>
+
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-label">Teks</div>
+        <div class="tool-name">Gemini AI</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-label">Grafis</div>
+        <div class="tool-name">Nano Banana</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-label">Audio</div>
+        <div class="tool-name">Lyria</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-label">Video</div>
+        <div class="tool-name">Veo</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-label">Proteksi</div>
+        <div class="tool-name">Merek · Paten · Hak Cipta</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-label">Relasi</div>
+        <div class="tool-name">Human–Machine</div>
+      </div>
+    </div>
+
+    <div class="ai-roster">
+      <div class="ai-roster-title">Pola Riset: 1 Human ∥ 5 Machines</div>
+      <div class="ai-row">
+        <span class="ai-num">01</span>
+        <span class="ai-name">Gemini AI Plus</span>
+        <span class="ai-tag paid">Berbayar</span>
+      </div>
+      <div class="ai-row">
+        <span class="ai-num">02</span>
+        <span class="ai-name">Claude</span>
+        <span class="ai-tag trial">Trial</span>
+      </div>
+      <div class="ai-row">
+        <span class="ai-num">03</span>
+        <span class="ai-name">Microsoft Copilot</span>
+        <span class="ai-tag trial">Trial</span>
+      </div>
+      <div class="ai-row">
+        <span class="ai-num">04</span>
+        <span class="ai-name">ChatGPT</span>
+        <span class="ai-tag trial">Trial</span>
+      </div>
+      <div class="ai-row">
+        <span class="ai-num">05</span>
+        <span class="ai-name">Deepseek</span>
+        <span class="ai-tag trial">Trial</span>
+      </div>
+      <div class="ai-row">
+        <span class="ai-num">06</span>
+        <span class="ai-name">Askaichat</span>
+        <span class="ai-tag paid">Berbayar</span>
+      </div>
+    </div>
+
+    <ul class="output-list">
+      <li>Publikasi akademis di Zenodo &amp; SSRN — zenodo.org/communities/superhero-cafe-inside</li>
+      <li>Bacaan populer di LinkedIn, Substack, Medium, BMAC, Trakteer</li>
+      <li>Kanal YouTube — youtu.be/U3jxUdW99fc</li>
+    </ul>
+
+    <blockquote>"AI telah memperbesar kapasitas saya untuk berkontribusi pada kemanusiaan yang lebih luas, bahkan global."</blockquote>
+  </div>
+
+  <!-- MATERIAL SECTION -->
+  <div class="section-material">
+    <div class="section-num">Bagian II</div>
+    <h2 class="section-title"><span class="pct" style="color:var(--material)">30%</span> Semesta Materialisasi</h2>
+
+    <p style="margin-bottom:20px; color:#2a2520;">Ekosistem di mana ideasi siap memasuki <em>mass-production</em> sebagai produk/jasa riil. Relasi antara <strong>human with idea</strong> dan <strong>human with power to realize.</strong></p>
+
+    <p style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:8px;">Aktor Kunci</p>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:28px;">
+      <span style="background:var(--material); color:var(--paper); padding:6px 14px; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.08em;">Self-Employed</span>
+      <span style="background:var(--material); color:var(--paper); padding:6px 14px; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.08em;">Business Owner</span>
+      <span style="background:var(--material); color:var(--paper); padding:6px 14px; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.08em;">Investor</span>
+      <span style="background:var(--material); color:var(--paper); padding:6px 14px; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.08em;">Entrepreneur</span>
+    </div>
+
+    <table class="m6-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Formula 6M</th>
+          <th>Referensi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>01</td>
+          <td>Man</td>
+          <td><em>Good to Great</em> — Jim Collins &amp; 12 Prinsip Neng — Tao Zhu Gong</td>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Material</td>
+          <td>Bahan baku &amp; sumber daya fisik</td>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Method</td>
+          <td>Proses, sistem &amp; standar operasional</td>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Machine</td>
+          <td>Teknologi &amp; infrastruktur produksi</td>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Market</td>
+          <td>Segmen, distribusi &amp; go-to-market</td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Money</td>
+          <td>Modal, arus kas &amp; return</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:16px;">Prinsip Penggerak — LMC</p>
+    <div class="lmc-row">
+      <div class="lmc-badge">
+        <span class="lmc-letter">L</span>
+        <span class="lmc-word">Leveraging</span>
+      </div>
+      <div class="lmc-badge">
+        <span class="lmc-letter">M</span>
+        <span class="lmc-word">Multiplying</span>
+      </div>
+      <div class="lmc-badge">
+        <span class="lmc-letter">C</span>
+        <span class="lmc-word">Compounding</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RATIO VISUAL -->
+  <div class="ratio-section">
+    <div class="ratio-bar-wrap">
+      <p style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:#888; margin-bottom:8px;">Alokasi Waktu Harian</p>
+      <div class="ratio-bar digital">
+        SEMESTA DIGITAL
+        <span class="ratio-pct">70%</span>
+      </div>
+      <div class="ratio-bar material">
+        MATERIALISASI
+        <span class="ratio-pct" style="color:var(--paper)">30%</span>
+      </div>
+    </div>
+    <div class="ratio-text">
+      <p>Angka ini bukan teori. Ini adalah <strong>realita pragmatis</strong> keseharian — setiap hari 70% waktu ada di semesta digital, dan melalui semua kesiapan itu bisa berjumpa dengan teman-teman di 30% semesta materialisasi.</p>
+      <p style="margin-top:14px;">Keduanya bukan saingan. Keduanya adalah <strong>satu siklus penciptaan yang utuh.</strong></p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div>
+      <div class="footer-name">
+        Go Kian Tik
+        <em>Mbah Hogi Bejo™</em>
+      </div>
+    </div>
+    <div class="footer-title">
+      Chief Humanity Officer<br>
+      自主者 Superhero Café Inside<br>
+      <span style="color:var(--gold);">Semoga Bermanfaat ✦</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
