@@ -11,7 +11,6 @@
     --paper: #f5f0e8;
     --gold: #c8922a;
     --gold-light: #e8c06a;
-    --red: #9b2335;
     --muted: #7a7060;
     --line: #c8b89a;
     --digital: #1a3a5c;
@@ -29,7 +28,6 @@
     min-height: 100vh;
   }
 
-  /* GRAIN TEXTURE */
   body::before {
     content: '';
     position: fixed;
@@ -40,15 +38,59 @@
     opacity: 0.5;
   }
 
+  /* TOGGLE */
+  .lang-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    display: flex;
+    background: var(--ink);
+    border-radius: 40px;
+    padding: 4px;
+    gap: 2px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  }
+
+  .lang-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    padding: 7px 16px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background: transparent;
+    color: #888;
+    font-weight: 500;
+  }
+
+  .lang-btn.active { background: var(--gold); color: var(--ink); }
+  .lang-btn:hover:not(.active) { color: #ccc; }
+
+  /* LANGUAGE VISIBILITY */
+  .txt[data-lang] { display: none; }
+  body.lang-id .txt[data-lang="id"] { display: block; }
+  body.lang-en .txt[data-lang="en"] { display: block; }
+
+  .ti[data-lang] { display: none; }
+  body.lang-id .ti[data-lang="id"] { display: inline; }
+  body.lang-en .ti[data-lang="en"] { display: inline; }
+
   .page {
     max-width: 860px;
     margin: 0 auto;
     padding: 60px 48px 80px;
     position: relative;
     z-index: 1;
+    transition: opacity 0.2s ease;
   }
 
-  /* HEADER */
+  .page.switching { opacity: 0; }
+
+  @media (max-width: 600px) { .page { padding: 60px 24px 80px; } }
+
   .masthead {
     border-top: 3px solid var(--ink);
     border-bottom: 1px solid var(--line);
@@ -61,456 +103,96 @@
     gap: 8px;
   }
 
-  .brief-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
+  .brief-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+  .brief-date { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
 
-  .brief-date {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-  }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(52px, 9vw, 88px); font-weight: 900; line-height: 0.92; letter-spacing: -0.02em; margin: 28px 0 0; }
+  .hero-title .ratio { color: var(--gold); display: block; }
 
-  .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(52px, 9vw, 88px);
-    font-weight: 900;
-    line-height: 0.92;
-    letter-spacing: -0.02em;
-    margin: 28px 0 0;
-  }
+  .hero-sub { font-size: 18px; font-style: italic; color: var(--muted); margin: 14px 0 0; font-weight: 300; letter-spacing: 0.01em; }
 
-  .hero-title .ratio {
-    color: var(--gold);
-    display: block;
-  }
+  .divider-bold { height: 2px; background: var(--ink); margin: 32px 0; }
 
-  .hero-sub {
-    font-size: 18px;
-    font-style: italic;
-    color: var(--muted);
-    margin: 14px 0 0;
-    font-weight: 300;
-    letter-spacing: 0.01em;
-  }
+  .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  @media (max-width: 600px) { .intro-grid { grid-template-columns: 1fr; } }
 
-  .divider {
-    height: 1px;
-    background: var(--line);
-    margin: 32px 0;
-  }
+  .intro-pull { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; line-height: 1.4; color: var(--digital); border-left: 4px solid var(--gold); padding-left: 20px; }
+  .intro-body p { margin-bottom: 12px; color: #2a2520; }
 
-  .divider-bold {
-    height: 2px;
-    background: var(--ink);
-    margin: 32px 0;
-  }
+  .section-num { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; line-height: 1.15; margin-bottom: 20px; }
+  .section-title .pct { font-size: 48px; font-weight: 900; color: var(--gold); margin-right: 4px; }
 
-  /* TWO COLUMN INTRO */
-  .intro-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 40px;
-  }
-
-  @media (max-width: 600px) {
-    .intro-grid { grid-template-columns: 1fr; }
-  }
-
-  .intro-pull {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 1.4;
-    color: var(--digital);
-    border-left: 4px solid var(--gold);
-    padding-left: 20px;
-  }
-
-  .intro-body p {
-    margin-bottom: 12px;
-    color: #2a2520;
-  }
-
-  /* SECTION HEADERS */
-  .section-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1.15;
-    margin-bottom: 20px;
-  }
-
-  .section-title .pct {
-    font-size: 48px;
-    font-weight: 900;
-    color: var(--gold);
-    margin-right: 4px;
-  }
-
-  /* DIGITAL SECTION */
-  .section-digital {
-    background: var(--digital);
-    color: var(--paper);
-    padding: 40px 44px;
-    margin: 0 -48px 40px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .section-digital::before {
-    content: '数字';
-    position: absolute;
-    right: -10px;
-    top: -20px;
-    font-family: 'Playfair Display', serif;
-    font-size: 140px;
-    font-weight: 900;
-    color: rgba(255,255,255,0.04);
-    line-height: 1;
-    pointer-events: none;
-  }
-
-  @media (max-width: 600px) {
-    .section-digital { margin: 0 -24px 40px; padding: 32px 24px; }
-  }
-
+  .section-digital { background: var(--digital); color: var(--paper); padding: 40px 44px; margin: 0 -48px 40px; position: relative; overflow: hidden; }
+  .section-digital::before { content: '数字'; position: absolute; right: -10px; top: -20px; font-family: 'Playfair Display', serif; font-size: 140px; font-weight: 900; color: rgba(255,255,255,0.04); line-height: 1; pointer-events: none; }
+  @media (max-width: 600px) { .section-digital { margin: 0 -24px 40px; padding: 32px 24px; } }
   .section-digital .section-num { color: var(--gold-light); }
   .section-digital .section-title { color: #fff; }
 
-  /* TOOLS GRID */
-  .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin: 24px 0;
-  }
+  .tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
+  @media (max-width: 500px) { .tools-grid { grid-template-columns: 1fr 1fr; } }
 
-  @media (max-width: 500px) {
-    .tools-grid { grid-template-columns: 1fr 1fr; }
-  }
+  .tool-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); padding: 14px 16px; border-radius: 2px; }
+  .tool-card .tool-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; color: var(--gold-light); text-transform: uppercase; margin-bottom: 4px; }
+  .tool-card .tool-name { font-size: 15px; color: #fff; }
 
-  .tool-card {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.15);
-    padding: 14px 16px;
-    border-radius: 2px;
-  }
-
-  .tool-card .tool-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    color: var(--gold-light);
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-
-  .tool-card .tool-name {
-    font-size: 15px;
-    font-weight: 400;
-    color: #fff;
-  }
-
-  /* AI ROSTER */
-  .ai-roster {
-    margin: 24px 0;
-  }
-
-  .ai-roster-title {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    color: var(--gold-light);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid rgba(255,255,255,0.15);
-  }
-
-  .ai-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-  }
-
-  .ai-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--gold-light);
-    width: 20px;
-    flex-shrink: 0;
-  }
-
-  .ai-name {
-    font-size: 15px;
-    color: #eee;
-    flex: 1;
-  }
-
-  .ai-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    padding: 2px 8px;
-    border-radius: 20px;
-    letter-spacing: 0.08em;
-  }
-
+  .ai-roster { margin: 24px 0; }
+  .ai-roster-title { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; color: var(--gold-light); text-transform: uppercase; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.15); }
+  .ai-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .ai-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gold-light); width: 20px; flex-shrink: 0; }
+  .ai-name { font-size: 15px; color: #eee; flex: 1; }
+  .ai-tag { font-family: 'DM Mono', monospace; font-size: 10px; padding: 2px 8px; border-radius: 20px; letter-spacing: 0.08em; }
   .ai-tag.paid { background: var(--gold); color: var(--ink); }
   .ai-tag.trial { background: rgba(255,255,255,0.12); color: #ccc; }
 
-  /* OUTPUT LIST */
-  .output-list {
-    margin: 20px 0 0;
-    list-style: none;
-  }
+  .output-list { margin: 20px 0 0; list-style: none; }
+  .output-list li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: #ddd; }
+  .output-list li::before { content: '→'; color: var(--gold-light); font-family: 'DM Mono', monospace; flex-shrink: 0; margin-top: 1px; }
 
-  .output-list li {
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    font-size: 15px;
-    color: #ddd;
-  }
+  blockquote { border-left: 3px solid var(--gold-light); padding: 4px 0 4px 20px; margin: 20px 0; font-style: italic; font-size: 16px; color: #ccc; line-height: 1.7; }
 
-  .output-list li::before {
-    content: '→';
-    color: var(--gold-light);
-    font-family: 'DM Mono', monospace;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  /* MATERIAL SECTION */
-  .section-material {
-    margin-bottom: 40px;
-  }
-
+  .section-material { margin-bottom: 40px; }
   .section-material .section-title { color: var(--material); }
 
-  /* 6M TABLE */
-  .m6-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 24px 0;
-    font-size: 15px;
-  }
+  .sub-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
 
-  .m6-table thead tr {
-    background: var(--ink);
-    color: var(--paper);
-  }
+  .actor-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+  .actor-tag { background: var(--material); color: var(--paper); padding: 6px 14px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; }
 
-  .m6-table thead th {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 10px 16px;
-    text-align: left;
-    font-weight: 500;
-  }
-
-  .m6-table tbody tr {
-    border-bottom: 1px solid var(--line);
-    transition: background 0.15s;
-  }
-
+  .m6-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 15px; }
+  .m6-table thead tr { background: var(--ink); color: var(--paper); }
+  .m6-table thead th { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; padding: 10px 16px; text-align: left; font-weight: 500; }
+  .m6-table tbody tr { border-bottom: 1px solid var(--line); }
   .m6-table tbody tr:hover { background: rgba(200,146,42,0.06); }
+  .m6-table tbody td { padding: 11px 16px; vertical-align: top; }
+  .m6-table td:first-child { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); width: 32px; }
+  .m6-table td:nth-child(2) { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--gold); width: 110px; }
+  .m6-table td.ref { color: #2a2520; font-style: italic; font-size: 14px; }
 
-  .m6-table tbody td {
-    padding: 11px 16px;
-    vertical-align: top;
-  }
+  .lmc-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 20px 0; }
+  .lmc-badge { background: var(--material); color: var(--paper); padding: 12px 24px; flex: 1; min-width: 140px; text-align: center; }
+  .lmc-badge .lmc-letter { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: var(--gold); display: block; line-height: 1; }
+  .lmc-badge .lmc-word { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #ccc; margin-top: 4px; display: block; }
 
-  .m6-table td:first-child {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    width: 32px;
-  }
+  .ratio-section { background: var(--ink); color: var(--paper); padding: 44px; margin: 0 -48px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  @media (max-width: 600px) { .ratio-section { margin: 0 -24px 40px; padding: 32px 24px; grid-template-columns: 1fr; } }
 
-  .m6-table td:nth-child(2) {
-    font-family: 'Playfair Display', serif;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--gold);
-    width: 110px;
-  }
+  .ratio-bar-wrap { display: flex; flex-direction: column; gap: 12px; }
+  .ratio-bar { height: 52px; display: flex; align-items: center; padding: 0 16px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: var(--ink); font-weight: 500; position: relative; }
+  .ratio-bar.digital { width: 100%; background: var(--gold); }
+  .ratio-bar.material { width: 43%; background: #7a7060; color: var(--paper); }
+  .ratio-pct { position: absolute; right: 16px; font-size: 16px; font-weight: 500; font-family: 'Playfair Display', serif; }
 
-  .m6-table td:nth-child(3) {
-    color: #2a2520;
-    font-style: italic;
-    font-size: 14px;
-  }
+  .ratio-text { font-size: 16px; color: #ccc; line-height: 1.6; }
+  .ratio-text strong { color: var(--gold-light); font-family: 'Playfair Display', serif; font-style: italic; }
 
-  /* LMC BADGES */
-  .lmc-row {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin: 20px 0;
-  }
+  .footer { border-top: 3px solid var(--ink); padding-top: 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  .footer-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; }
+  .footer-name em { font-size: 13px; font-weight: 400; color: var(--gold); display: block; font-style: normal; font-family: 'DM Mono', monospace; letter-spacing: 0.08em; margin-top: 2px; }
+  .footer-title { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-align: right; line-height: 1.8; }
 
-  .lmc-badge {
-    background: var(--material);
-    color: var(--paper);
-    padding: 12px 24px;
-    flex: 1;
-    min-width: 140px;
-    text-align: center;
-  }
-
-  .lmc-badge .lmc-letter {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px;
-    font-weight: 900;
-    color: var(--gold);
-    display: block;
-    line-height: 1;
-  }
-
-  .lmc-badge .lmc-word {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #ccc;
-    margin-top: 4px;
-    display: block;
-  }
-
-  /* RATIO VISUAL */
-  .ratio-section {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 44px 44px;
-    margin: 0 -48px 40px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: center;
-  }
-
-  @media (max-width: 600px) {
-    .ratio-section { margin: 0 -24px 40px; padding: 32px 24px; grid-template-columns: 1fr; }
-  }
-
-  .ratio-bar-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .ratio-bar {
-    height: 52px;
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    color: var(--ink);
-    font-weight: 500;
-    position: relative;
-  }
-
-  .ratio-bar.digital {
-    width: 100%;
-    background: var(--gold);
-  }
-
-  .ratio-bar.material {
-    width: 43%;
-    background: #7a7060;
-    color: var(--paper);
-  }
-
-  .ratio-pct {
-    position: absolute;
-    right: 16px;
-    font-size: 16px;
-    font-weight: 500;
-    font-family: 'Playfair Display', serif;
-  }
-
-  .ratio-text {
-    font-size: 16px;
-    color: #ccc;
-    line-height: 1.6;
-  }
-
-  .ratio-text strong {
-    color: var(--gold-light);
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-  }
-
-  /* FOOTER */
-  .footer {
-    border-top: 3px solid var(--ink);
-    padding-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  .footer-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 700;
-  }
-
-  .footer-name em {
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--gold);
-    display: block;
-    font-style: normal;
-    font-family: 'DM Mono', monospace;
-    letter-spacing: 0.08em;
-    margin-top: 2px;
-  }
-
-  .footer-title {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    text-align: right;
-    line-height: 1.8;
-  }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .page > * {
-    animation: fadeUp 0.5s ease both;
-  }
-
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .page > * { animation: fadeUp 0.5s ease both; }
   .page > *:nth-child(1) { animation-delay: 0.05s; }
   .page > *:nth-child(2) { animation-delay: 0.1s; }
   .page > *:nth-child(3) { animation-delay: 0.15s; }
@@ -520,20 +202,17 @@
   .page > *:nth-child(7) { animation-delay: 0.35s; }
   .page > *:nth-child(8) { animation-delay: 0.4s; }
   .page > *:nth-child(9) { animation-delay: 0.45s; }
-
-  blockquote {
-    border-left: 3px solid var(--gold-light);
-    padding: 4px 0 4px 20px;
-    margin: 20px 0;
-    font-style: italic;
-    font-size: 16px;
-    color: #ccc;
-    line-height: 1.7;
-  }
 </style>
 </head>
-<body>
-<div class="page">
+<body class="lang-id">
+
+<!-- LANGUAGE TOGGLE -->
+<div class="lang-toggle">
+  <button class="lang-btn active" onclick="setLang('id')" id="btn-id">ID</button>
+  <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+</div>
+
+<div class="page" id="main-page">
 
   <!-- MASTHEAD -->
   <div class="masthead">
@@ -546,33 +225,46 @@
     <span class="ratio">70 / 30</span>
     Dual Semesta
   </h1>
-  <p class="hero-sub">Semesta Digital &amp; Semesta Materialisasi — Satu Siklus Penciptaan yang Utuh</p>
+  <p class="hero-sub">
+    <span class="ti" data-lang="id">Semesta Digital &amp; Semesta Materialisasi — Satu Siklus Penciptaan yang Utuh</span>
+    <span class="ti" data-lang="en">Digital Universe &amp; Materialisation Universe — One Complete Creation Cycle</span>
+  </p>
 
   <div class="divider-bold"></div>
 
   <!-- INTRO -->
   <div class="intro-grid">
     <div class="intro-pull">
-      "Era digitalisasi AI telah membantu mewujudkan jati diri saya sebagai co-creator."
+      <span class="ti" data-lang="id">"Era digitalisasi AI telah membantu mewujudkan jati diri saya sebagai co-creator."</span>
+      <span class="ti" data-lang="en">"The AI digitalisation era has helped me realise my identity as a co-creator."</span>
     </div>
     <div class="intro-body">
-      <p>Kerangka pikir pragmatis ini lahir dari realita keseharian seorang peneliti independen yang 70% waktunya hidup di semesta digital, dan 30% sisanya berjumpa dengan para mitra di semesta materialisasi.</p>
-      <p>Bukan sekadar teori — ini adalah <em>cara hidup yang terukur.</em></p>
+      <p class="txt" data-lang="id">Kerangka pikir pragmatis ini lahir dari realita keseharian seorang peneliti independen yang 70% waktunya hidup di semesta digital, dan 30% sisanya berjumpa dengan para mitra di semesta materialisasi.</p>
+      <p class="txt" data-lang="en">This pragmatic framework emerges from the daily reality of an independent researcher who spends 70% of his time in the digital universe, and the remaining 30% meeting partners in the materialisation universe.</p>
+      <p class="txt" data-lang="id">Bukan sekadar teori — ini adalah <em>cara hidup yang terukur.</em></p>
+      <p class="txt" data-lang="en">Not mere theory — this is <em>a measurable way of living.</em></p>
     </div>
   </div>
 
   <!-- DIGITAL SECTION -->
   <div class="section-digital">
-    <div class="section-num">Bagian I</div>
-    <h2 class="section-title"><span class="pct">70%</span> Semesta Digital</h2>
+    <div class="section-num">
+      <span class="ti" data-lang="id">Bagian I</span>
+      <span class="ti" data-lang="en">Part I</span>
+    </div>
+    <h2 class="section-title">
+      <span class="pct">70%</span>
+      <span class="ti" data-lang="id">Semesta Digital</span>
+      <span class="ti" data-lang="en">Digital Universe</span>
+    </h2>
 
     <div class="tools-grid">
       <div class="tool-card">
-        <div class="tool-label">Teks</div>
+        <div class="tool-label"><span class="ti" data-lang="id">Teks</span><span class="ti" data-lang="en">Text</span></div>
         <div class="tool-name">Gemini AI</div>
       </div>
       <div class="tool-card">
-        <div class="tool-label">Grafis</div>
+        <div class="tool-label"><span class="ti" data-lang="id">Grafis</span><span class="ti" data-lang="en">Graphics</span></div>
         <div class="tool-name">Nano Banana</div>
       </div>
       <div class="tool-card">
@@ -584,148 +276,128 @@
         <div class="tool-name">Veo</div>
       </div>
       <div class="tool-card">
-        <div class="tool-label">Proteksi</div>
-        <div class="tool-name">Merek · Paten · Hak Cipta</div>
+        <div class="tool-label"><span class="ti" data-lang="id">Proteksi</span><span class="ti" data-lang="en">Protection</span></div>
+        <div class="tool-name"><span class="ti" data-lang="id">Merek · Paten · Hak Cipta</span><span class="ti" data-lang="en">Trademark · Patent · Copyright</span></div>
       </div>
       <div class="tool-card">
-        <div class="tool-label">Relasi</div>
+        <div class="tool-label"><span class="ti" data-lang="id">Relasi</span><span class="ti" data-lang="en">Relation</span></div>
         <div class="tool-name">Human–Machine</div>
       </div>
     </div>
 
     <div class="ai-roster">
-      <div class="ai-roster-title">Pola Riset: 1 Human ∥ 5 Machines</div>
-      <div class="ai-row">
-        <span class="ai-num">01</span>
-        <span class="ai-name">Gemini AI Plus</span>
-        <span class="ai-tag paid">Berbayar</span>
+      <div class="ai-roster-title">
+        <span class="ti" data-lang="id">Pola Riset: 1 Human ∥ 5 Machines</span>
+        <span class="ti" data-lang="en">Research Pattern: 1 Human ∥ 5 Machines</span>
       </div>
-      <div class="ai-row">
-        <span class="ai-num">02</span>
-        <span class="ai-name">Claude</span>
-        <span class="ai-tag trial">Trial</span>
-      </div>
-      <div class="ai-row">
-        <span class="ai-num">03</span>
-        <span class="ai-name">Microsoft Copilot</span>
-        <span class="ai-tag trial">Trial</span>
-      </div>
-      <div class="ai-row">
-        <span class="ai-num">04</span>
-        <span class="ai-name">ChatGPT</span>
-        <span class="ai-tag trial">Trial</span>
-      </div>
-      <div class="ai-row">
-        <span class="ai-num">05</span>
-        <span class="ai-name">Deepseek</span>
-        <span class="ai-tag trial">Trial</span>
-      </div>
-      <div class="ai-row">
-        <span class="ai-num">06</span>
-        <span class="ai-name">Askaichat</span>
-        <span class="ai-tag paid">Berbayar</span>
-      </div>
+      <div class="ai-row"><span class="ai-num">01</span><span class="ai-name">Gemini AI Plus</span><span class="ai-tag paid"><span class="ti" data-lang="id">Berbayar</span><span class="ti" data-lang="en">Paid</span></span></div>
+      <div class="ai-row"><span class="ai-num">02</span><span class="ai-name">Claude</span><span class="ai-tag trial">Trial</span></div>
+      <div class="ai-row"><span class="ai-num">03</span><span class="ai-name">Microsoft Copilot</span><span class="ai-tag trial">Trial</span></div>
+      <div class="ai-row"><span class="ai-num">04</span><span class="ai-name">ChatGPT</span><span class="ai-tag trial">Trial</span></div>
+      <div class="ai-row"><span class="ai-num">05</span><span class="ai-name">Deepseek</span><span class="ai-tag trial">Trial</span></div>
+      <div class="ai-row"><span class="ai-num">06</span><span class="ai-name">Askaichat</span><span class="ai-tag paid"><span class="ti" data-lang="id">Berbayar</span><span class="ti" data-lang="en">Paid</span></span></div>
     </div>
 
     <ul class="output-list">
-      <li>Publikasi akademis di Zenodo &amp; SSRN — zenodo.org/communities/superhero-cafe-inside</li>
-      <li>Bacaan populer di LinkedIn, Substack, Medium, BMAC, Trakteer</li>
-      <li>Kanal YouTube — youtu.be/U3jxUdW99fc</li>
+      <li><span class="ti" data-lang="id">Publikasi akademis di Zenodo &amp; SSRN — zenodo.org/communities/superhero-cafe-inside</span><span class="ti" data-lang="en">Academic publications on Zenodo &amp; SSRN — zenodo.org/communities/superhero-cafe-inside</span></li>
+      <li><span class="ti" data-lang="id">Bacaan populer di LinkedIn, Substack, Medium, BMAC, Trakteer</span><span class="ti" data-lang="en">Popular reads on LinkedIn, Substack, Medium, BMAC, Trakteer</span></li>
+      <li><span class="ti" data-lang="id">Kanal YouTube — youtu.be/U3jxUdW99fc</span><span class="ti" data-lang="en">YouTube Channel — youtu.be/U3jxUdW99fc</span></li>
     </ul>
 
-    <blockquote>"AI telah memperbesar kapasitas saya untuk berkontribusi pada kemanusiaan yang lebih luas, bahkan global."</blockquote>
+    <blockquote>
+      <span class="ti" data-lang="id">"AI telah memperbesar kapasitas saya untuk berkontribusi pada kemanusiaan yang lebih luas, bahkan global."</span>
+      <span class="ti" data-lang="en">"AI has amplified my capacity to contribute to a broader humanity — even at a global scale."</span>
+    </blockquote>
   </div>
 
   <!-- MATERIAL SECTION -->
   <div class="section-material">
-    <div class="section-num">Bagian II</div>
-    <h2 class="section-title"><span class="pct" style="color:var(--material)">30%</span> Semesta Materialisasi</h2>
+    <div class="section-num">
+      <span class="ti" data-lang="id">Bagian II</span>
+      <span class="ti" data-lang="en">Part II</span>
+    </div>
+    <h2 class="section-title">
+      <span class="pct" style="color:var(--material)">30%</span>
+      <span class="ti" data-lang="id">Semesta Materialisasi</span>
+      <span class="ti" data-lang="en">Materialisation Universe</span>
+    </h2>
 
-    <p style="margin-bottom:20px; color:#2a2520;">Ekosistem di mana ideasi siap memasuki <em>mass-production</em> sebagai produk/jasa riil. Relasi antara <strong>human with idea</strong> dan <strong>human with power to realize.</strong></p>
+    <p class="txt" data-lang="id" style="margin-bottom:20px;color:#2a2520;">Ekosistem di mana ideasi siap memasuki <em>mass-production</em> sebagai produk/jasa riil. Relasi antara <strong>human with idea</strong> dan <strong>human with power to realize.</strong></p>
+    <p class="txt" data-lang="en" style="margin-bottom:20px;color:#2a2520;">The ecosystem where ideas are ready to enter <em>mass-production</em> as real products/services. The relation between <strong>human with idea</strong> and <strong>human with power to realize.</strong></p>
 
-    <p style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:8px;">Aktor Kunci</p>
-    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:28px;">
-      <span style="background:var(--material); color:var(--paper); padding:6px 14px; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.08em;">Self-Employed</span>
-      <span style="background:var(--material); color:var(--paper); padding:6px 14px; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.08em;">Business Owner</span>
-      <span style="background:var(--material); color:var(--paper); padding:6px 14px; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.08em;">Investor</span>
-      <span style="background:var(--material); color:var(--paper); padding:6px 14px; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.08em;">Entrepreneur</span>
+    <p class="sub-label"><span class="ti" data-lang="id">Aktor Kunci</span><span class="ti" data-lang="en">Key Actors</span></p>
+    <div class="actor-tags">
+      <span class="actor-tag">Self-Employed</span>
+      <span class="actor-tag">Business Owner</span>
+      <span class="actor-tag">Investor</span>
+      <span class="actor-tag">Entrepreneur</span>
     </div>
 
     <table class="m6-table">
       <thead>
         <tr>
           <th>#</th>
-          <th>Formula 6M</th>
-          <th>Referensi</th>
+          <th><span class="ti" data-lang="id">Formula 6M</span><span class="ti" data-lang="en">6M Formula</span></th>
+          <th><span class="ti" data-lang="id">Referensi</span><span class="ti" data-lang="en">Reference</span></th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>01</td>
-          <td>Man</td>
-          <td><em>Good to Great</em> — Jim Collins &amp; 12 Prinsip Neng — Tao Zhu Gong</td>
+          <td>01</td><td>Man</td>
+          <td class="ref"><em>Good to Great</em> — Jim Collins &amp; 12 <span class="ti" data-lang="id">Prinsip Neng</span><span class="ti" data-lang="en">Principles of Neng</span> — Tao Zhu Gong</td>
         </tr>
         <tr>
-          <td>02</td>
-          <td>Material</td>
-          <td>Bahan baku &amp; sumber daya fisik</td>
+          <td>02</td><td>Material</td>
+          <td class="ref"><span class="ti" data-lang="id">Bahan baku &amp; sumber daya fisik</span><span class="ti" data-lang="en">Raw materials &amp; physical resources</span></td>
         </tr>
         <tr>
-          <td>03</td>
-          <td>Method</td>
-          <td>Proses, sistem &amp; standar operasional</td>
+          <td>03</td><td>Method</td>
+          <td class="ref"><span class="ti" data-lang="id">Proses, sistem &amp; standar operasional</span><span class="ti" data-lang="en">Process, system &amp; operational standards</span></td>
         </tr>
         <tr>
-          <td>04</td>
-          <td>Machine</td>
-          <td>Teknologi &amp; infrastruktur produksi</td>
+          <td>04</td><td>Machine</td>
+          <td class="ref"><span class="ti" data-lang="id">Teknologi &amp; infrastruktur produksi</span><span class="ti" data-lang="en">Technology &amp; production infrastructure</span></td>
         </tr>
         <tr>
-          <td>05</td>
-          <td>Market</td>
-          <td>Segmen, distribusi &amp; go-to-market</td>
+          <td>05</td><td>Market</td>
+          <td class="ref"><span class="ti" data-lang="id">Segmen, distribusi &amp; go-to-market</span><span class="ti" data-lang="en">Segment, distribution &amp; go-to-market</span></td>
         </tr>
         <tr>
-          <td>06</td>
-          <td>Money</td>
-          <td>Modal, arus kas &amp; return</td>
+          <td>06</td><td>Money</td>
+          <td class="ref"><span class="ti" data-lang="id">Modal, arus kas &amp; return</span><span class="ti" data-lang="en">Capital, cash flow &amp; return</span></td>
         </tr>
       </tbody>
     </table>
 
-    <p style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:16px;">Prinsip Penggerak — LMC</p>
+    <p class="sub-label"><span class="ti" data-lang="id">Prinsip Penggerak — LMC</span><span class="ti" data-lang="en">Driving Principles — LMC</span></p>
     <div class="lmc-row">
-      <div class="lmc-badge">
-        <span class="lmc-letter">L</span>
-        <span class="lmc-word">Leveraging</span>
-      </div>
-      <div class="lmc-badge">
-        <span class="lmc-letter">M</span>
-        <span class="lmc-word">Multiplying</span>
-      </div>
-      <div class="lmc-badge">
-        <span class="lmc-letter">C</span>
-        <span class="lmc-word">Compounding</span>
-      </div>
+      <div class="lmc-badge"><span class="lmc-letter">L</span><span class="lmc-word">Leveraging</span></div>
+      <div class="lmc-badge"><span class="lmc-letter">M</span><span class="lmc-word">Multiplying</span></div>
+      <div class="lmc-badge"><span class="lmc-letter">C</span><span class="lmc-word">Compounding</span></div>
     </div>
   </div>
 
   <!-- RATIO VISUAL -->
   <div class="ratio-section">
     <div class="ratio-bar-wrap">
-      <p style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:#888; margin-bottom:8px;">Alokasi Waktu Harian</p>
+      <p style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#888;margin-bottom:8px;">
+        <span class="ti" data-lang="id">Alokasi Waktu Harian</span>
+        <span class="ti" data-lang="en">Daily Time Allocation</span>
+      </p>
       <div class="ratio-bar digital">
-        SEMESTA DIGITAL
+        <span class="ti" data-lang="id">SEMESTA DIGITAL</span><span class="ti" data-lang="en">DIGITAL UNIVERSE</span>
         <span class="ratio-pct">70%</span>
       </div>
       <div class="ratio-bar material">
-        MATERIALISASI
+        <span class="ti" data-lang="id">MATERIALISASI</span><span class="ti" data-lang="en">MATERIALISATION</span>
         <span class="ratio-pct" style="color:var(--paper)">30%</span>
       </div>
     </div>
     <div class="ratio-text">
-      <p>Angka ini bukan teori. Ini adalah <strong>realita pragmatis</strong> keseharian — setiap hari 70% waktu ada di semesta digital, dan melalui semua kesiapan itu bisa berjumpa dengan teman-teman di 30% semesta materialisasi.</p>
-      <p style="margin-top:14px;">Keduanya bukan saingan. Keduanya adalah <strong>satu siklus penciptaan yang utuh.</strong></p>
+      <p class="txt" data-lang="id">Angka ini bukan teori. Ini adalah <strong>realita pragmatis</strong> keseharian — setiap hari 70% waktu ada di semesta digital, dan melalui semua kesiapan itu bisa berjumpa dengan teman-teman di 30% semesta materialisasi.</p>
+      <p class="txt" data-lang="en">These numbers are not theory. This is the <strong>pragmatic daily reality</strong> — every day 70% of the time is in the digital universe, and through all that readiness comes the meeting with friends in the 30% materialisation universe.</p>
+      <p class="txt" data-lang="id" style="margin-top:14px;">Keduanya bukan saingan. Keduanya adalah <strong>satu siklus penciptaan yang utuh.</strong></p>
+      <p class="txt" data-lang="en" style="margin-top:14px;">Neither is a rival to the other. Both form <strong>one complete creation cycle.</strong></p>
     </div>
   </div>
 
@@ -740,10 +412,26 @@
     <div class="footer-title">
       Chief Humanity Officer<br>
       自主者 Superhero Café Inside<br>
-      <span style="color:var(--gold);">Semoga Bermanfaat ✦</span>
+      <span style="color:var(--gold);">
+        <span class="ti" data-lang="id">Semoga Bermanfaat ✦</span>
+        <span class="ti" data-lang="en">May It Be of Benefit ✦</span>
+      </span>
     </div>
   </div>
 
 </div>
+
+<script>
+  function setLang(lang) {
+    const page = document.getElementById('main-page');
+    page.classList.add('switching');
+    setTimeout(() => {
+      document.body.className = 'lang-' + lang;
+      document.getElementById('btn-id').classList.toggle('active', lang === 'id');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      page.classList.remove('switching');
+    }, 200);
+  }
+</script>
 </body>
 </html>
