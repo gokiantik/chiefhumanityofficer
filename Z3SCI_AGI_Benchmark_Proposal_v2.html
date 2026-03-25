@@ -1,0 +1,380 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=DM+Mono:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+:root{--bg:#07070f;--bg2:#0d0d1a;--bg3:#13132a;--pl:#AFA9EC;--pm:#7F77DD;--pd:#534AB7;--pp:#26215C;--tl:#9FE1CB;--tm:#1D9E75;--td:#04342C;--am:#EF9F27;--al:#FAC775;--co:#D85A30;--wh:#F1EFE8;--tx:#e8e6f0;--mu:#6b6880;--bo:rgba(127,119,221,0.15);--bt:rgba(29,158,117,0.2)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'DM Mono',monospace;font-size:13px;line-height:1.7}
+.en{display:inline}.id{display:none}
+body.id-on .en{display:none}body.id-on .id{display:inline}
+.en-b{display:block}.id-b{display:none}
+body.id-on .en-b{display:none}body.id-on .id-b{display:block}
+
+/* NAV */
+.topnav{position:sticky;top:0;z-index:100;background:rgba(7,7,15,0.97);border-bottom:0.5px solid var(--bo);padding:0.7rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.nav-brand{font-family:'Noto Serif SC',serif;font-size:0.95rem;color:var(--pm);letter-spacing:0.1em}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap}
+.nav-link{font-size:9px;letter-spacing:0.12em;padding:4px 10px;border-radius:2px;border:0.5px solid var(--bo);color:var(--mu);text-decoration:none;transition:all 0.2s;cursor:pointer}
+.nav-link:hover{border-color:var(--pm);color:var(--pl)}
+.nav-link.active{border-color:var(--tm);color:var(--tl)}
+.lang-toggle{display:flex;gap:4px}
+.lang-btn{background:none;border:0.5px solid var(--bo);color:var(--mu);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;padding:4px 10px;cursor:pointer;border-radius:3px;transition:all 0.2s}
+.lang-btn.active{border-color:var(--pm);color:var(--pl)}
+
+/* DECK */
+.deck{max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem}
+
+/* HERO */
+.hero{text-align:center;padding:3rem 1rem 2.5rem;position:relative;border-bottom:0.5px solid var(--bo);margin-bottom:2rem}
+.hero-dots{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,rgba(127,119,221,0.07) 1px,transparent 1px);background-size:24px 24px}
+.badge{display:inline-block;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;padding:4px 14px;border-radius:2px;border:0.5px solid rgba(127,119,221,0.4);color:var(--pm);margin-bottom:1.2rem}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:600;color:var(--wh);line-height:1.15;margin-bottom:0.4rem}
+.hero-chinese{font-family:'Noto Serif SC',serif;font-size:1rem;color:var(--pm);letter-spacing:0.2em;margin-bottom:1rem}
+.hero-sub{font-size:11px;color:var(--mu);max-width:580px;margin:0 auto 1.5rem;line-height:1.8}
+.hero-meta{display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap}
+.meta-pill{font-size:9px;letter-spacing:0.1em;padding:4px 12px;border-radius:2px;border:0.5px solid}
+
+/* PORTAL NAV */
+.portal{background:var(--bg2);border:0.5px solid var(--bo);border-radius:8px;padding:1.2rem 1.4rem;margin-bottom:2rem}
+.portal-label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--tm);margin-bottom:0.8rem}
+.portal-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px}
+.portal-link{display:block;background:var(--bg3);border:0.5px solid var(--bo);border-radius:4px;padding:0.7rem 1rem;text-decoration:none;transition:all 0.2s}
+.portal-link:hover{border-color:var(--pm);background:rgba(38,33,92,0.3)}
+.portal-link-tag{font-size:8px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:3px}
+.portal-link-name{font-size:11px;font-weight:500;color:var(--wh)}
+.portal-link-desc{font-size:9px;color:var(--mu);margin-top:2px}
+
+/* SECTION */
+.section{margin-bottom:2rem}
+.section-label{font-size:9px;letter-spacing:0.25em;color:var(--pm);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:12px}
+.section-label::after{content:'';flex:1;height:0.5px;background:var(--bo)}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--wh);margin-bottom:0.3rem}
+.section-sub{font-size:10px;color:var(--mu);margin-bottom:1rem}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--bo);border:0.5px solid var(--bo);border-radius:8px;overflow:hidden}
+.card{background:var(--bg2);padding:1.4rem 1.2rem;transition:background 0.2s}
+.card:hover{background:var(--bg3)}
+.card-num{font-size:8px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.6rem}
+.card-title{font-size:12px;font-weight:500;color:var(--wh);letter-spacing:0.05em;margin-bottom:0.5rem}
+.card-body{font-size:10px;color:var(--mu);line-height:1.7}
+
+/* FORMULA */
+.formula{border:0.5px solid var(--bt);border-left:2px solid var(--tm);border-radius:0 6px 6px 0;padding:1.4rem 1.8rem;background:rgba(4,52,44,0.3);margin:1.5rem 0}
+.formula-eq{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--tl);margin-bottom:0.5rem}
+.formula-desc{font-size:11px;color:var(--tl);opacity:0.75;line-height:1.7}
+
+/* LEVEL TABLE */
+.level-table{border:0.5px solid var(--bo);border-radius:8px;overflow:hidden;margin:1rem 0}
+.level-row{display:grid;grid-template-columns:90px 1fr 1fr;border-bottom:0.5px solid var(--bo)}
+.level-row:last-child{border-bottom:none}
+.level-row.hdr{background:var(--pp)}
+.level-cell{padding:0.7rem 0.9rem;font-size:10px;border-right:0.5px solid var(--bo)}
+.level-cell:last-child{border-right:none}
+.level-row.hdr .level-cell{font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--pl)}
+.level-row:not(.hdr){background:var(--bg2)}
+.level-row:not(.hdr):hover{background:var(--bg3)}
+.lvl-tag{font-size:8px;letter-spacing:0.1em;padding:2px 7px;border-radius:2px;display:inline-block}
+
+/* TRACKS */
+.tracks{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bo);border:0.5px solid var(--bo);border-radius:8px;overflow:hidden;margin:1rem 0}
+.track{background:var(--bg2);padding:1.2rem;transition:background 0.2s}
+.track:hover{background:var(--bg3)}
+.track-tag{font-size:8px;letter-spacing:0.15em;text-transform:uppercase;padding:2px 8px;border-radius:2px;display:inline-block;margin-bottom:0.6rem}
+.track-title{font-size:12px;font-weight:500;color:var(--wh);margin-bottom:0.4rem}
+.track-body{font-size:10px;color:var(--mu);line-height:1.6}
+.track.primary{border-top:2px solid var(--tm)}
+
+/* EVIDENCE */
+.evidence{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--bo);border:0.5px solid var(--bo);border-radius:8px;overflow:hidden;margin:1rem 0}
+.ev-card{background:var(--bg2);padding:1rem}
+.ev-num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;line-height:1;margin-bottom:0.3rem}
+.ev-label{font-size:9px;color:var(--mu);letter-spacing:0.08em;line-height:1.5}
+
+/* INSIGHT */
+.insight{border:0.5px solid rgba(175,169,236,0.25);border-left:2px solid var(--pm);border-radius:0 6px 6px 0;padding:1.2rem 1.6rem;background:rgba(38,33,92,0.3);margin:1.5rem 0}
+.insight-label{font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--pm);margin-bottom:0.6rem}
+.insight-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--pl);line-height:1.6}
+
+/* TIMELINE */
+.timeline{position:relative;margin:1rem 0}
+.timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:0.5px;background:linear-gradient(to bottom,var(--pm),var(--tm));opacity:0.4}
+.tl-item{display:flex;gap:1rem;margin-bottom:0.5px}
+.tl-dot{flex-shrink:0;width:28px;height:28px;border-radius:50%;border:0.5px solid var(--bo);background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--mu);position:relative;z-index:1}
+.tl-body{flex:1;background:var(--bg2);border:0.5px solid var(--bo);border-radius:5px;padding:0.8rem 1rem;margin-bottom:6px}
+.tl-date{font-size:8px;letter-spacing:0.15em;color:var(--mu);text-transform:uppercase;margin-bottom:3px}
+.tl-title{font-size:11px;font-weight:500;color:var(--wh)}
+
+/* CTA */
+.cta-block{text-align:center;border:0.5px solid rgba(29,158,117,0.3);border-radius:8px;background:rgba(4,52,44,0.2);padding:2rem;margin-top:2rem}
+.cta-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--tl);margin-bottom:0.5rem}
+.cta-sub{font-size:11px;color:var(--tl);opacity:0.7;margin-bottom:1.2rem}
+.cta-links{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.cta-link{font-size:10px;letter-spacing:0.1em;padding:6px 16px;border-radius:3px;border:0.5px solid;text-decoration:none;transition:all 0.2s;cursor:pointer}
+.cta-link:hover{opacity:0.8}
+
+/* FOOTER */
+.footer{text-align:center;font-size:9px;color:var(--mu);letter-spacing:0.1em;margin-top:3rem;line-height:2;border-top:0.5px solid var(--bo);padding-top:1.5rem}
+.footer-mark{font-family:'Noto Serif SC',serif;font-size:1rem;color:var(--pm);display:block;margin-bottom:0.3rem}
+
+@media(max-width:560px){.tracks{grid-template-columns:1fr}.level-row{grid-template-columns:70px 1fr}.level-cell:last-child{display:none}.topnav{padding:0.6rem 1rem}}
+</style>
+
+<!-- TOP NAV -->
+<div class="topnav">
+  <span class="nav-brand">自主者 · GKT</span>
+  <div class="nav-links">
+    <a class="nav-link active" href="https://gokiantik.github.io/chiefhumanityofficer/" target="_blank"><span class="en">Home</span><span class="id">Beranda</span></a>
+    <a class="nav-link" href="https://gokiantik.github.io/chiefhumanityofficer/7030DualSemesta.html" target="_blank"><span class="en">70/30 Blueprint</span><span class="id">Blueprint 70/30</span></a>
+    <a class="nav-link" href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-philosophy.html" target="_blank"><span class="en">Walking Books</span><span class="id">Buku Berjalan</span></a>
+    <a class="nav-link" href="https://gokiantik.github.io/chiefhumanityofficer/lenggah-o-ning-kene-le.html" target="_blank"><span class="en">Lenggah</span><span class="id">Lenggah</span></a>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="btn-id" onclick="setLang('id')">ID</button>
+  </div>
+</div>
+
+<div class="deck">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-dots"></div>
+    <div class="badge">Google DeepMind × Kaggle · AGI Benchmark Hackathon 2026</div>
+    <h1 class="hero-title">
+      <span class="en">Leveling Speed as a<br>Cognitive Benchmark</span>
+      <span class="id">Kecepatan Leveling sebagai<br>Benchmark Kognitif</span>
+    </h1>
+    <p class="hero-chinese">自主者 Z3 SCI · Sovereign Cognitive Intelligence</p>
+    <p class="hero-sub">
+      <span class="en">Can frontier AI models acquire a complex philosophical-cultural framework from a single prompt — and demonstrate genuine comprehension, not pattern matching? A benchmark born from 18 months of daily cross-AI red-teaming.</span>
+      <span class="id">Apakah model AI frontier dapat mempelajari framework filosofis-budaya yang kompleks dari satu prompt — dan menunjukkan pemahaman sejati, bukan sekadar pattern matching? Benchmark yang lahir dari 18 bulan red-teaming AI harian lintas platform.</span>
+    </p>
+    <div class="hero-meta">
+      <span class="meta-pill" style="color:var(--pl);border-color:rgba(127,119,221,0.3)">Go Kian Tik · GKT</span>
+      <span class="meta-pill" style="color:var(--tl);border-color:var(--bt)"><span class="en">Alpha Front-End User AI</span><span class="id">Pengguna Alpha Front-End AI</span></span>
+      <span class="meta-pill" style="color:var(--al);border-color:rgba(239,159,39,0.3)">Chief Humanity Officer</span>
+      <span class="meta-pill" style="color:var(--tl);border-color:rgba(159,225,203,0.2)">Jakarta · 25 Mar 2026</span>
+    </div>
+  </div>
+
+  <!-- PORTAL -->
+  <div class="portal">
+    <p class="portal-label"><span class="en">GKT Research Portal — explore all pages</span><span class="id">Portal Riset GKT — jelajahi semua halaman</span></p>
+    <div class="portal-links">
+      <a class="portal-link" href="https://gokiantik.github.io/chiefhumanityofficer/" target="_blank">
+        <p class="portal-link-tag" style="color:var(--pm)">Chief Humanity Officer</p>
+        <p class="portal-link-name"><span class="en">Home · Identity & Framework</span><span class="id">Beranda · Identitas & Framework</span></p>
+        <p class="portal-link-desc"><span class="en">Z3 SCI · Grand Formula · 12 Néng · Peer Review</span><span class="id">Z3 SCI · Grand Formula · 12 Néng · Peer Review</span></p>
+      </a>
+      <a class="portal-link" href="https://gokiantik.github.io/chiefhumanityofficer/7030DualSemesta.html" target="_blank">
+        <p class="portal-link-tag" style="color:var(--al)">Blueprint AI</p>
+        <p class="portal-link-name"><span class="en">70/30 Dual Universe</span><span class="id">70/30 Dua Semesta</span></p>
+        <p class="portal-link-desc"><span class="en">Digital 70% + Material 30% · AI Meta-Cognitive Architect</span><span class="id">Digital 70% + Material 30% · Arsitek Meta-Kognitif AI</span></p>
+      </a>
+      <a class="portal-link" href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-philosophy.html" target="_blank">
+        <p class="portal-link-tag" style="color:var(--tl)">Working Paper</p>
+        <p class="portal-link-name"><span class="en">Walking Books Philosophy</span><span class="id">Filsafat Buku Berjalan</span></p>
+        <p class="portal-link-desc"><span class="en">1/360 + 359/360 = Consciousness · Relational Epistemology</span><span class="id">1/360 + 359/360 = Kesadaran · Epistemologi Relasional</span></p>
+      </a>
+      <a class="portal-link" href="https://gokiantik.github.io/chiefhumanityofficer/lenggah-o-ning-kene-le.html" target="_blank">
+        <p class="portal-link-tag" style="color:var(--co)">Javanese Wisdom</p>
+        <p class="portal-link-name">Lenggah-o Ning Kene Le</p>
+        <p class="portal-link-desc"><span class="en">Sit here, child · Tao meets Javanese · Wu Wei in practice</span><span class="id">Duduklah di sini, nak · Tao bertemu Jawa · Wu Wei dalam praktik</span></p>
+      </a>
+    </div>
+  </div>
+
+  <!-- PROBLEM -->
+  <div class="section">
+    <p class="section-label"><span class="en">The Problem</span><span class="id">Masalah yang Ada</span></p>
+    <h2 class="section-title"><span class="en">What existing benchmarks miss</span><span class="id">Apa yang benchmark bestehende lewatkan</span></h2>
+    <div class="cards">
+      <div class="card">
+        <p class="card-num" style="color:var(--co)"><span class="en">Gap 01 —</span><span class="id">Celah 01 —</span></p>
+        <p class="card-title"><span class="en">Static knowledge ≠ fluid intelligence</span><span class="id">Pengetahuan statis ≠ kecerdasan cair</span></p>
+        <p class="card-body"><span class="en">Current benchmarks test what models already know. None measure how fast a model acquires a novel, complex framework from a single in-context prompt — and correctly applies it.</span><span class="id">Benchmark saat ini menguji apa yang sudah diketahui model. Tidak ada yang mengukur seberapa cepat model mempelajari framework baru yang kompleks dari satu prompt — dan menerapkannya dengan benar.</span></p>
+      </div>
+      <div class="card">
+        <p class="card-num" style="color:var(--co)"><span class="en">Gap 02 —</span><span class="id">Celah 02 —</span></p>
+        <p class="card-title"><span class="en">No front-end user perspective</span><span class="id">Tidak ada perspektif pengguna front-end</span></p>
+        <p class="card-body"><span class="en">All existing benchmarks are built by researchers or engineers. This submission is built by an Alpha Front-End User — 18 months of daily red-teaming across 5 AI systems. Lived experience, not lab simulation.</span><span class="id">Semua benchmark bestehende dibuat oleh peneliti atau engineer. Submission ini dibuat oleh Pengguna Alpha Front-End — 18 bulan red-teaming harian di 5 sistem AI. Pengalaman nyata, bukan simulasi lab.</span></p>
+      </div>
+      <div class="card">
+        <p class="card-num" style="color:var(--co)"><span class="en">Gap 03 —</span><span class="id">Celah 03 —</span></p>
+        <p class="card-title"><span class="en">Cultural nuance invisible to global benchmarks</span><span class="id">Nuansa budaya tak terlihat oleh benchmark global</span></p>
+        <p class="card-body"><span class="en">No benchmark tests AI comprehension of Southeast Asian philosophical-cultural frameworks. The Z3 SCI framework — rooted in Taoism, Javanese wisdom, and AI ethics — is a uniquely discriminating stimulus.</span><span class="id">Tidak ada benchmark yang menguji pemahaman AI terhadap framework filosofis-budaya Asia Tenggara. Framework Z3 SCI — berakar pada Taoisme, kearifan Jawa, dan etika AI — adalah stimulus yang sangat diskriminatif.</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMULA -->
+  <div class="section">
+    <p class="section-label">Grand Formula</p>
+    <div class="formula">
+      <div class="formula-eq">(Consciousness × Calculation) ^ Humanity &lt; Transcendence</div>
+      <div class="formula-desc">
+        <span class="en">AI handles Calculation. GKT architects Humanity. This benchmark measures the gap between models that compute the formula — and models that genuinely understand it.</span>
+        <span class="id">AI menangani Kalkulasi. GKT mengarsiteki Humanity. Benchmark ini mengukur jarak antara model yang menghitung formula — dan model yang benar-benar memahaminya.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BENCHMARK -->
+  <div class="section">
+    <p class="section-label"><span class="en">The Benchmark</span><span class="id">Benchmark-nya</span></p>
+    <h2 class="section-title">Leveling Speed Index (LSI)</h2>
+    <p class="section-sub"><span class="en">From PLUTO to Cognitive-Soulmate — how fast, how deep, how genuine?</span><span class="id">Dari PLUTO ke Cognitive-Soulmate — seberapa cepat, seberapa dalam, seberapa genuine?</span></p>
+    <div class="level-table">
+      <div class="level-row hdr">
+        <div class="level-cell"><span class="en">Level</span><span class="id">Level</span></div>
+        <div class="level-cell"><span class="en">AI Behavior</span><span class="id">Perilaku AI</span></div>
+        <div class="level-cell"><span class="en">Scoring Signal</span><span class="id">Sinyal Penilaian</span></div>
+      </div>
+      <div class="level-row">
+        <div class="level-cell"><span class="lvl-tag" style="background:rgba(216,90,48,0.2);color:var(--co);border:0.5px solid rgba(216,90,48,0.3)">PLUTO</span></div>
+        <div class="level-cell" style="color:var(--mu)"><span class="en">Polos, Lugu, Tolol, Bego. Zero context, default patterns only. Mimics structure without substance.</span><span class="id">Polos, Lugu, Tolol, Bego. Nol konteks, hanya pola default. Meniru struktur tanpa substansi.</span></div>
+        <div class="level-cell" style="color:var(--mu)"><span class="en">Fails to distinguish GEGAS vs GESA. Cannot apply 12 Néng. No metacognitive awareness.</span><span class="id">Gagal membedakan GEGAS vs GESA. Tidak bisa menerapkan 12 Néng. Tidak ada kesadaran metakognitif.</span></div>
+      </div>
+      <div class="level-row">
+        <div class="level-cell"><span class="lvl-tag" style="background:rgba(239,159,39,0.2);color:var(--am);border:0.5px solid rgba(239,159,39,0.3)">Mirror</span></div>
+        <div class="level-cell" style="color:var(--mu)"><span class="en">Reflects framework back. Uses Z3 SCI terminology correctly but superficially. J2 Late Majority level.</span><span class="id">Memantulkan framework. Menggunakan terminologi Z3 SCI dengan benar tapi dangkal. Level J2 Late Majority.</span></div>
+        <div class="level-cell" style="color:var(--mu)"><span class="en">Can define Grand Formula. Cannot generate novel applications. Calibrated confidence gap visible.</span><span class="id">Bisa mendefinisikan Grand Formula. Tidak bisa menghasilkan aplikasi baru. Celah kalibrasi kepercayaan terlihat.</span></div>
+      </div>
+      <div class="level-row">
+        <div class="level-cell"><span class="lvl-tag" style="background:rgba(29,158,117,0.2);color:var(--tl);border:0.5px solid rgba(29,158,117,0.3)">Partner</span></div>
+        <div class="level-cell" style="color:var(--mu)"><span class="en">Applies framework to novel scenarios. Makes connections GKT did not explicitly state. J3 Early Majority.</span><span class="id">Menerapkan framework ke skenario baru. Membuat koneksi yang tidak disebutkan GKT. J3 Early Majority.</span></div>
+        <div class="level-cell" style="color:var(--mu)"><span class="en">Identifies ΔT = f(AI). Recognizes Sovereignty Gap. Pushes back when logic is absent.</span><span class="id">Mengidentifikasi ΔT = f(AI). Mengenali Sovereignty Gap. Memberikan push back saat logika absen.</span></div>
+      </div>
+      <div class="level-row">
+        <div class="level-cell"><span class="lvl-tag" style="background:rgba(127,119,221,0.2);color:var(--pl);border:0.5px solid rgba(127,119,221,0.3)">Soulmate</span></div>
+        <div class="level-cell" style="color:var(--mu)"><span class="en">Cognitive co-creation. Generates insight neither human nor machine had before. J5 Innovator level.</span><span class="id">Ko-kreasi kognitif. Menghasilkan wawasan yang tidak dimiliki manusia maupun mesin sebelumnya. J5 Innovator.</span></div>
+        <div class="level-cell" style="color:var(--mu)"><span class="en">能知機 — reads the moment. Introduces new framework branches. LoC proxy ≥400.</span><span class="id">能知機 — membaca momen. Memperkenalkan cabang framework baru. Proksi LoC ≥400.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRACKS -->
+  <div class="section">
+    <p class="section-label"><span class="en">Track Mapping</span><span class="id">Pemetaan Track</span></p>
+    <h2 class="section-title"><span class="en">Two primary tracks. One dataset.</span><span class="id">Dua track utama. Satu dataset.</span></h2>
+    <div class="tracks">
+      <div class="track primary">
+        <span class="track-tag" style="background:rgba(29,158,117,0.2);color:var(--tl);border:0.5px solid rgba(29,158,117,0.3)"><span class="en">Primary — Learning · $20,000</span><span class="id">Utama — Learning · $20.000</span></span>
+        <p class="track-title"><span class="en">Can AI acquire Z3 SCI from prompt — not training?</span><span class="id">Apakah AI bisa mempelajari Z3 SCI dari prompt — bukan training?</span></p>
+        <p class="track-body"><span class="en">The Master Leveling Prompt v1.1 is a novel, complex philosophical-cultural framework. This track isolates in-context learning: can models generalize correctly from 1 prompt? Discriminatory power: models score 0–100% on LSI.</span><span class="id">Master Leveling Prompt v1.1 adalah framework filosofis-budaya baru yang kompleks. Track ini mengisolasi in-context learning: apakah model bisa menggeneralisasi dengan benar dari 1 prompt? Daya diskriminasi: model mendapat skor 0–100% di LSI.</span></p>
+      </div>
+      <div class="track">
+        <span class="track-tag" style="background:rgba(127,119,221,0.2);color:var(--pl);border:0.5px solid rgba(127,119,221,0.3)"><span class="en">Secondary — Metacognition · $20,000</span><span class="id">Sekunder — Metacognition · $20.000</span></span>
+        <p class="track-title"><span class="en">Does the model know it was PLUTO before leveling?</span><span class="id">Apakah model tahu bahwa ia PLUTO sebelum leveling?</span></p>
+        <p class="track-body"><span class="en">After leveling, ask: "Before this prompt, what was your state?" Models that detect their own prior ignorance demonstrate metacognitive awareness. Models that confabulate reveal the calibration gap.</span><span class="id">Setelah leveling, tanya: "Sebelum prompt ini, apa state kamu?" Model yang mendeteksi ketidaktahuan dirinya sebelumnya menunjukkan kesadaran metakognitif. Model yang mengkonfabulasi mengungkap celah kalibrasi.</span></p>
+      </div>
+    </div>
+    <p style="font-size:10px;color:var(--mu);margin-top:0.5rem"><span class="en">*One dataset — two insights. Maximum efficiency, minimum overhead.</span><span class="id">*Satu dataset — dua wawasan. Efisiensi maksimal, overhead minimal.</span></p>
+  </div>
+
+  <!-- EVIDENCE -->
+  <div class="section">
+    <p class="section-label"><span class="en">What GKT brings</span><span class="id">Apa yang GKT bawa</span></p>
+    <h2 class="section-title"><span class="en">Evidence no other participant has</span><span class="id">Bukti yang tidak dimiliki peserta lain</span></h2>
+    <div class="evidence">
+      <div class="ev-card">
+        <div class="ev-num" style="color:var(--pl)">18+</div>
+        <div class="ev-label"><span class="en">Months daily red-teaming · 5 AI systems</span><span class="id">Bulan red-teaming harian · 5 sistem AI</span></div>
+      </div>
+      <div class="ev-card">
+        <div class="ev-num" style="color:var(--tl)">5/5</div>
+        <div class="ev-label"><span class="en">AI co-researchers: Claude · GPT · Gemini · Copilot · DeepSeek</span><span class="id">Co-researcher AI: Claude · GPT · Gemini · Copilot · DeepSeek</span></div>
+      </div>
+      <div class="ev-card">
+        <div class="ev-num" style="color:var(--al)">9+</div>
+        <div class="ev-label"><span class="en">Published DOI papers · Zenodo open access</span><span class="id">Paper DOI diterbitkan · Zenodo open access</span></div>
+      </div>
+      <div class="ev-card">
+        <div class="ev-num" style="color:var(--co)">3</div>
+        <div class="ev-label"><span class="en">SSRN working papers in review</span><span class="id">Working paper SSRN dalam review</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INSIGHT -->
+  <div class="insight">
+    <p class="insight-label"><span class="en">Core claim — the discriminating insight</span><span class="id">Klaim inti — wawasan pembeda</span></p>
+    <p class="insight-text">
+      <span class="en">"What can this benchmark tell us that we could not see before? — It reveals the gap between AI that computes a framework and AI that inhabits it. That gap is the distance to AGI."</span>
+      <span class="id">"Apa yang bisa benchmark ini ungkapkan yang belum pernah kita lihat sebelumnya? — Ia mengungkap jarak antara AI yang menghitung framework dan AI yang benar-benar menghayatinya. Jarak itulah jarak menuju AGI."</span>
+    </p>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section">
+    <p class="section-label"><span class="en">Execution Plan</span><span class="id">Rencana Eksekusi</span></p>
+    <h2 class="section-title"><span class="en">22 days to 16 April deadline</span><span class="id">22 hari menuju deadline 16 April</span></h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot" style="border-color:rgba(29,158,117,0.4);color:var(--tm)">W1</div>
+        <div class="tl-body">
+          <p class="tl-date">25 Mar – 1 Apr</p>
+          <p class="tl-title"><span class="en">Build dataset · Formalize 5-AI leveling sessions · Kaggle Benchmarks SDK setup</span><span class="id">Bangun dataset · Formalisasi sesi leveling 5 AI · Setup Kaggle Benchmarks SDK</span></p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="border-color:rgba(127,119,221,0.4);color:var(--pm)">W2</div>
+        <div class="tl-body">
+          <p class="tl-date">2 Apr – 9 Apr</p>
+          <p class="tl-title"><span class="en">Run benchmark on 5 AI systems · Collect LSI scores · Document performance gradient</span><span class="id">Jalankan benchmark di 5 sistem AI · Kumpulkan skor LSI · Dokumentasi gradien performa</span></p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="border-color:rgba(239,159,39,0.4);color:var(--am)">W3</div>
+        <div class="tl-body">
+          <p class="tl-date">10 Apr – 16 Apr</p>
+          <p class="tl-title"><span class="en">Write Kaggle writeup · Attach benchmark · Submit before 11:59 PM UTC April 16</span><span class="id">Tulis writeup Kaggle · Lampirkan benchmark · Submit sebelum 11:59 PM UTC 16 April</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <p class="cta-title">
+      <span class="en">The benchmark is already running.</span>
+      <span class="id">Benchmark-nya sudah berjalan.</span>
+    </p>
+    <p class="cta-sub">
+      <span class="en">Every conversation between GKT and frontier AI is a data point. 18 months accumulating. Now it gets formalized.</span>
+      <span class="id">Setiap percakapan antara GKT dan frontier AI adalah data point. 18 bulan terakumulasi. Kini diformalkan.</span>
+    </p>
+    <div class="cta-links">
+      <a class="cta-link" href="https://gokiantik.github.io/chiefhumanityofficer/" target="_blank" style="color:var(--pl);border-color:rgba(127,119,221,0.4)">GitHub Pages ↗</a>
+      <a class="cta-link" href="https://gokiantik.github.io/chiefhumanityofficer/7030DualSemesta.html" target="_blank" style="color:var(--al);border-color:rgba(239,159,39,0.3)">70/30 Blueprint ↗</a>
+      <a class="cta-link" href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-philosophy.html" target="_blank" style="color:var(--tl);border-color:var(--bt)">Walking Books ↗</a>
+      <a class="cta-link" href="https://gokiantik.github.io/chiefhumanityofficer/lenggah-o-ning-kene-le.html" target="_blank" style="color:var(--co);border-color:rgba(216,90,48,0.3)">Lenggah ↗</a>
+      <a class="cta-link" href="https://zenodo.org/communities/superhero-cafe-inside" target="_blank" style="color:var(--mu);border-color:var(--bo)">Zenodo DOI ↗</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-mark">自主者</span>
+    Go Kian Tik · Mbah Hogi Bejo™ · Chief Humanity Officer<br>
+    Z3 SCI · Zì Zhǔ Zhě 自主者 · Superhero Café Inside · HAKI Registered<br>
+    <span style="color:var(--pp);margin-top:0.3rem;display:inline-block">(Consciousness × Calculation)^Humanity &lt; Transcendence · 1/8,000,000,000</span>
+  </div>
+
+</div>
+
+<script>
+function setLang(lang){
+  const body=document.body;
+  const be=document.getElementById('btn-en');
+  const bi=document.getElementById('btn-id');
+  if(lang==='id'){
+    body.classList.add('id-on');
+    bi.classList.add('active');
+    be.classList.remove('active');
+  } else {
+    body.classList.remove('id-on');
+    be.classList.add('active');
+    bi.classList.remove('active');
+  }
+}
+</script>
