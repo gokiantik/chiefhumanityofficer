@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sovereign One — UN Open Source Week 2026 Proposal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1923;
+    --ink2: #1e3248;
+    --blue: #1a3a5c;
+    --blue2: #2e6da4;
+    --blue3: #4d94cc;
+    --gold: #c8922a;
+    --gold2: #e8b84b;
+    --cream: #fdf8f1;
+    --cream2: #f4ede0;
+    --paper: #fffdf9;
+    --rule: #c5d8ee;
+    --muted: #6b7a8d;
+    --serif: 'Playfair Display', Georgia, serif;
+    --body: 'Source Serif 4', 'Georgia', serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ── NOISE TEXTURE ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.4;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--blue);
+    color: white;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::after {
+    content: '自主者';
+    position: absolute; right: -20px; top: -30px;
+    font-size: 180px; font-family: var(--serif);
+    color: white; opacity: 0.04;
+    pointer-events: none; line-height: 1;
+  }
+  .header-inner {
+    max-width: 860px; margin: 0 auto;
+    padding: 56px 40px 48px;
+    position: relative; z-index: 1;
+  }
+  .un-badge {
+    display: inline-block;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold2);
+    border: 1px solid var(--gold2);
+    padding: 4px 12px; border-radius: 2px;
+    margin-bottom: 28px;
+  }
+  .header-series {
+    font-family: var(--mono); font-size: 12px;
+    color: var(--blue3); letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+  h1.main-title {
+    font-family: var(--serif); font-size: clamp(36px, 5vw, 58px);
+    font-weight: 700; line-height: 1.1;
+    color: white; margin-bottom: 12px;
+  }
+  h1.main-title em { color: var(--gold2); font-style: normal; }
+  .subtitle {
+    font-family: var(--body); font-size: 20px; font-weight: 300;
+    color: rgba(255,255,255,0.75); line-height: 1.5;
+    margin-bottom: 32px; max-width: 600px;
+  }
+  .author-block {
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 24px; margin-top: 8px;
+    display: flex; align-items: flex-start; gap: 20px;
+  }
+  .author-seal {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--gold); display: flex; align-items: center;
+    justify-content: center; font-size: 22px; flex-shrink: 0;
+  }
+  .author-name { font-family: var(--serif); font-size: 18px; color: white; margin-bottom: 2px; }
+  .author-role { font-size: 13px; color: rgba(255,255,255,0.6); }
+  .ai-chain {
+    margin-top: 24px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px; padding: 12px 16px;
+    font-family: var(--mono); font-size: 12px;
+    color: var(--gold2);
+  }
+  .ai-chain span { color: rgba(255,255,255,0.5); margin: 0 6px; }
+
+  /* ── NAV ── */
+  .toc-bar {
+    background: var(--blue2); color: white;
+    padding: 0 40px; overflow-x: auto;
+    display: flex; gap: 0;
+    border-bottom: 2px solid var(--gold);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .toc-bar a {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.5px;
+    color: rgba(255,255,255,0.7); text-decoration: none;
+    padding: 14px 16px; white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s; margin-bottom: -2px;
+  }
+  .toc-bar a:hover { color: white; border-color: var(--gold2); }
+
+  /* ── MAIN ── */
+  .content { max-width: 860px; margin: 0 auto; padding: 0 40px 80px; position: relative; z-index: 1; }
+
+  /* ── SECTIONS ── */
+  .section { margin-top: 64px; }
+  .section-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--blue2);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 8px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+  h2 {
+    font-family: var(--serif); font-size: clamp(24px, 3vw, 32px);
+    color: var(--blue); margin-bottom: 24px; font-weight: 700;
+    line-height: 1.2;
+  }
+  h3 {
+    font-family: var(--serif); font-size: 20px;
+    color: var(--blue2); margin: 36px 0 16px;
+    font-weight: 700;
+  }
+  p { margin-bottom: 16px; color: var(--ink); }
+
+  /* ── GRAND FORMULA ── */
+  .formula-block {
+    background: var(--blue); color: white;
+    border-radius: 8px; padding: 36px 40px;
+    text-align: center; margin: 32px 0;
+    position: relative; overflow: hidden;
+  }
+  .formula-block::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(200,146,42,0.15) 0%, transparent 60%);
+  }
+  .formula-label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 2px;
+    color: var(--gold2); text-transform: uppercase; margin-bottom: 16px;
+  }
+  .formula-text {
+    font-family: var(--serif); font-size: clamp(22px, 4vw, 36px);
+    font-weight: 700; color: white; line-height: 1.3;
+    position: relative; z-index: 1;
+  }
+  .formula-text em { color: var(--gold2); font-style: normal; }
+  .formula-note {
+    font-size: 14px; color: rgba(255,255,255,0.6);
+    margin-top: 12px; font-style: italic; position: relative; z-index: 1;
+  }
+
+  /* ── PULLQUOTE ── */
+  blockquote {
+    border-left: 4px solid var(--gold);
+    margin: 32px 0; padding: 20px 28px;
+    background: var(--cream2); border-radius: 0 6px 6px 0;
+  }
+  blockquote p {
+    font-family: var(--serif); font-size: 19px; font-weight: 400;
+    color: var(--blue); line-height: 1.6; font-style: italic;
+    margin: 0;
+  }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight {
+    border: 1px solid var(--rule);
+    border-left: 5px solid var(--blue2);
+    background: #eef5fc; border-radius: 0 6px 6px 0;
+    padding: 20px 24px; margin: 24px 0;
+  }
+  .highlight-label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 1px;
+    color: var(--blue2); text-transform: uppercase; margin-bottom: 8px;
+  }
+  .highlight p { margin: 0; font-style: italic; }
+
+  .warning {
+    border-left-color: #c0392b;
+    background: #fdf0ee;
+  }
+  .warning .highlight-label { color: #c0392b; }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; margin: 24px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  thead tr { background: var(--blue); color: white; }
+  thead th {
+    padding: 12px 16px; text-align: left;
+    font-family: var(--mono); font-size: 12px;
+    letter-spacing: 0.5px; font-weight: 500;
+  }
+  tbody tr:nth-child(even) { background: var(--cream2); }
+  tbody tr:nth-child(odd) { background: white; }
+  tbody td { padding: 12px 16px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  tbody tr:hover { background: #ddeaf7; transition: background 0.15s; }
+
+  /* ── PENTADRANT VISUAL ── */
+  .pentadrant {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px; margin: 28px 0;
+  }
+  .quad {
+    border: 1px solid var(--rule); border-radius: 8px;
+    padding: 20px; position: relative; overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .quad:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,58,92,0.12); }
+  .quad.new { border-color: var(--gold); }
+  .quad-letter {
+    font-family: var(--serif); font-size: 40px; font-weight: 700;
+    color: var(--blue); opacity: 0.12; position: absolute;
+    right: 16px; top: 8px; line-height: 1;
+  }
+  .quad-name {
+    font-family: var(--serif); font-size: 18px; font-weight: 700;
+    color: var(--blue); margin-bottom: 8px;
+  }
+  .quad.new .quad-name { color: var(--gold); }
+  .quad-trap {
+    font-family: var(--mono); font-size: 11px;
+    color: #c0392b; margin-bottom: 8px; letter-spacing: 0.5px;
+  }
+  .quad-path { font-size: 14px; color: var(--muted); }
+  .quad.new-badge::after {
+    content: 'NEW'; position: absolute; top: 12px; right: 12px;
+    background: var(--gold); color: white;
+    font-family: var(--mono); font-size: 9px; letter-spacing: 1px;
+    padding: 2px 6px; border-radius: 2px;
+  }
+
+  /* ── JOHARI GRID ── */
+  .johari-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px; margin: 28px 0;
+    background: var(--rule);
+    border: 2px solid var(--blue);
+    border-radius: 4px; overflow: hidden;
+  }
+  .johari-cell {
+    background: white; padding: 20px;
+  }
+  .johari-cell.open { background: #d4edda; }
+  .johari-cell.blind { background: #fff3cd; }
+  .johari-cell.hidden { background: #f8d7da; }
+  .johari-cell.unknown { background: #1a3a5c; color: white; }
+  .johari-label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 8px; font-weight: 500;
+  }
+  .johari-cell.unknown .johari-label { color: var(--gold2); }
+  .johari-cell.open .johari-label { color: #155724; }
+  .johari-cell.blind .johari-label { color: #856404; }
+  .johari-cell.hidden .johari-label { color: #721c24; }
+  .johari-cell p { font-size: 14px; margin: 0; line-height: 1.5; }
+  .johari-cell.unknown p { color: rgba(255,255,255,0.8); }
+
+  /* ── RUWET-GENAH ── */
+  .triadic {
+    display: flex; gap: 0; margin: 28px 0;
+    border: 1px solid var(--rule); border-radius: 8px; overflow: hidden;
+  }
+  .triadic-phase {
+    flex: 1; padding: 24px 20px; text-align: center;
+    position: relative;
+  }
+  .triadic-phase:not(:last-child)::after {
+    content: '→';
+    position: absolute; right: -10px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px; color: var(--blue2); z-index: 2;
+  }
+  .t-ruwet { background: #fdf0ee; }
+  .t-otw { background: #fff8e6; }
+  .t-genah { background: #d4edda; }
+  .phase-word {
+    font-family: var(--serif); font-size: 26px; font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .t-ruwet .phase-word { color: #c0392b; }
+  .t-otw .phase-word { color: var(--gold); }
+  .t-genah .phase-word { color: #155724; }
+  .phase-en { font-family: var(--mono); font-size: 11px; letter-spacing: 1px; color: var(--muted); margin-bottom: 12px; }
+  .phase-desc { font-size: 13px; line-height: 1.5; color: var(--ink); }
+
+  /* ── SESSION PLAN ── */
+  .timeline { margin: 24px 0; }
+  .timeline-item {
+    display: flex; gap: 20px; margin-bottom: 16px;
+    align-items: flex-start;
+  }
+  .timeline-time {
+    font-family: var(--mono); font-size: 12px;
+    color: var(--blue2); white-space: nowrap;
+    min-width: 80px; padding-top: 2px;
+  }
+  .timeline-content {
+    flex: 1; border-left: 2px solid var(--rule);
+    padding-left: 20px;
+  }
+  .timeline-title {
+    font-family: var(--serif); font-size: 16px; font-weight: 700;
+    color: var(--blue); margin-bottom: 4px;
+  }
+  .timeline-desc { font-size: 14px; color: var(--muted); }
+
+  /* ── METADATA TABLE ── */
+  .meta-table { margin: 24px 0; }
+  .meta-row {
+    display: flex; gap: 0; border-bottom: 1px solid var(--rule);
+  }
+  .meta-row:first-child { border-top: 1px solid var(--rule); }
+  .meta-key {
+    background: var(--blue); color: white;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.5px; padding: 10px 16px;
+    min-width: 200px; flex-shrink: 0;
+    display: flex; align-items: flex-start;
+  }
+  .meta-val {
+    padding: 10px 16px; font-size: 14px;
+    flex: 1; background: white;
+  }
+  .meta-row:nth-child(even) .meta-val { background: var(--cream2); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--blue); color: white;
+    text-align: center; padding: 48px 40px;
+    margin-top: 80px;
+    position: relative; overflow: hidden;
+  }
+  footer::before {
+    content: '';  position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(200,146,42,0.1) 0%, transparent 70%);
+  }
+  .footer-chinese {
+    font-family: var(--serif); font-size: 56px;
+    color: white; margin-bottom: 8px;
+    position: relative; z-index: 1;
+  }
+  .footer-pinyin {
+    font-size: 14px; color: var(--gold2); font-style: italic;
+    margin-bottom: 24px; position: relative; z-index: 1;
+  }
+  .footer-motto {
+    font-family: var(--serif); font-size: 18px;
+    color: rgba(255,255,255,0.8); margin-bottom: 8px;
+    position: relative; z-index: 1;
+  }
+  .footer-formula {
+    font-family: var(--mono); font-size: 14px;
+    color: var(--gold2); margin: 20px 0;
+    position: relative; z-index: 1;
+  }
+  .footer-copy {
+    font-size: 13px; color: rgba(255,255,255,0.5);
+    margin-top: 24px; position: relative; z-index: 1;
+  }
+  .footer-tags {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--blue3); margin-top: 12px;
+    position: relative; z-index: 1;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .toc-bar { display: none; }
+    .section { page-break-inside: avoid; }
+    body { background: white; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .header-inner > * { animation: fadeUp 0.6s ease both; }
+  .header-inner > *:nth-child(1) { animation-delay: 0.1s; }
+  .header-inner > *:nth-child(2) { animation-delay: 0.2s; }
+  .header-inner > *:nth-child(3) { animation-delay: 0.3s; }
+  .header-inner > *:nth-child(4) { animation-delay: 0.4s; }
+  .header-inner > *:nth-child(5) { animation-delay: 0.5s; }
+  .header-inner > *:nth-child(6) { animation-delay: 0.6s; }
+
+  @media (max-width: 640px) {
+    .header-inner, .content { padding-left: 20px; padding-right: 20px; }
+    .pentadrant { grid-template-columns: 1fr; }
+    .johari-grid { grid-template-columns: 1fr; }
+    .triadic { flex-direction: column; }
+    .triadic-phase:not(:last-child)::after { display: none; }
+    .meta-key { min-width: 140px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="un-badge">UN Open Source Week 2026 · Session Proposal · Paper 3</div>
+    <div class="header-series">CHO In Action Series — Episode 302</div>
+    <h1 class="main-title"><em>The Sovereign One:</em><br>Human Sovereignty in the Pentadrant Ecosystem and the Global Scale Calculator of Meaning</h1>
+    <p class="subtitle">What if AGI's greatest contribution is not making humans more efficient — but making humans more sovereign?</p>
+    <div class="author-block">
+      <div class="author-seal">🌏</div>
+      <div>
+        <div class="author-name">Go Kian Tik (Mbah Hogi Bejo™)</div>
+        <div class="author-role">Chief Humanity Officer · Zì Zhǔ Zhě 自主者 · Superhero Café Inside · Depok, Indonesia · 26 March 2026</div>
+      </div>
+    </div>
+    <div class="ai-chain">
+      AI Collaboration Chain: Gemini Pro (paid) <span>→</span> Gemini Free <span>→</span> DeepSeek Free <span>→</span> Claude
+      <span>·</span> Live demonstration of the Grand Formula in action
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="toc-bar">
+  <a href="#metadata">Metadata</a>
+  <a href="#summary">Executive Summary</a>
+  <a href="#contributions">3 Contributions</a>
+  <a href="#johari">8 Johari Panels</a>
+  <a href="#ruwet">Ruwet–Genah</a>
+  <a href="#session">Session Plan</a>
+  <a href="#problems">6 Problems</a>
+  <a href="#references">References</a>
+</nav>
+
+<main class="content">
+
+<!-- SECTION 1: METADATA -->
+<section class="section" id="metadata">
+  <div class="section-label">Section 1</div>
+  <h2>Session Metadata</h2>
+  <div class="meta-table">
+    <div class="meta-row"><div class="meta-key">Session Title</div><div class="meta-val">The Sovereign One: Human Sovereignty in the Pentadrant Ecosystem and the Global Scale Calculator of Meaning</div></div>
+    <div class="meta-row"><div class="meta-key">Series</div><div class="meta-val">CHO In Action Series — Episode 302 (Companion to Paper 1 & Paper 2)</div></div>
+    <div class="meta-row"><div class="meta-key">Format</div><div class="meta-val">Keynote + Live Multi-AI Demonstration + Open Q&A</div></div>
+    <div class="meta-row"><div class="meta-key">Duration</div><div class="meta-val">60 minutes (20 min keynote + 25 min live demo + 15 min Q&A)</div></div>
+    <div class="meta-row"><div class="meta-key">Delivery Mode</div><div class="meta-val">Virtual — fully accessible remotely from any Pentadrant quadrant</div></div>
+    <div class="meta-row"><div class="meta-key">Track Alignment</div><div class="meta-val">AI & Open Collaboration · Digital Inclusion · Global South Perspective · Cognitive Sovereignty</div></div>
+    <div class="meta-row"><div class="meta-key">SDG Alignment</div><div class="meta-val">SDG 4 (Quality Education) · SDG 10 (Reduced Inequalities) · SDG 17 (Partnerships)</div></div>
+    <div class="meta-row"><div class="meta-key">Open Source</div><div class="meta-val">GitHub Pages (live) · Zenodo DOI Series (14+ publications, CC BY/CC BY-NC-ND) · SSRN</div></div>
+    <div class="meta-row"><div class="meta-key">Related DOIs</div><div class="meta-val">10.5281/zenodo.19158062 · 10.5281/zenodo.19002243 · 10.5281/zenodo.18965525</div></div>
+    <div class="meta-row"><div class="meta-key">Presenter</div><div class="meta-val">Go Kian Tik · Chief Humanity Officer · gokiantik@gmail.com</div></div>
+    <div class="meta-row"><div class="meta-key">Live Resources</div><div class="meta-val">gokiantik.github.io/chiefhumanityofficer · zenodo.org/communities/chiefhumanityofficer</div></div>
+  </div>
+</section>
+
+<!-- SECTION 2: EXECUTIVE SUMMARY -->
+<section class="section" id="summary">
+  <div class="section-label">Section 2</div>
+  <h2>Executive Summary</h2>
+  <blockquote>
+    <p>"AGI is the Global Scale Calculator of Meaning — a bridge between the Architect's intent and the User's need. Only when the 8 Panels of the Johari Window remain in transparent alignment can this Communication Enlargement serve 8 billion souls in peace, turning infinite harm into infinite dignity."</p>
+  </blockquote>
+  <p>This paper presents three original theoretical contributions that together form a complete architecture for understanding human sovereignty in the age of AGI:</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Contribution</th><th>Core Claim</th><th>Scale</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Grand Formula</strong></td><td>(Consciousness × Calculation)^Humanity &lt; Transcendence — the operational equation of civilisational dignity</td><td>Universal</td></tr>
+      <tr><td><strong>2. AGI Redefined</strong></td><td>AGI is not a new entity — it is Global Human Communication Enlargement between Front-End and Back-End humans</td><td>8 billion users</td></tr>
+      <tr><td><strong>3. Pentadrant</strong></td><td>Kiyosaki's ESBI updated with G (Governmental) — the complete sociological map of how 8 billion humans are liberated or trapped by AI</td><td>All societies</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>This proposal demonstrates these contributions through a live 4-AI collaboration chain (Gemini Pro → Gemini Free → DeepSeek → Claude), showing in real time how the Grand Formula operates — and how Sovereign Humans use AI as <em>Calculation</em>, not as <em>Consciousness</em>.</p>
+</section>
+
+<!-- SECTION 3: THREE CONTRIBUTIONS -->
+<section class="section" id="contributions">
+  <div class="section-label">Section 3</div>
+  <h2>Three Original Theoretical Contributions</h2>
+
+  <h3>3.1 The Grand Formula</h3>
+  <div class="formula-block">
+    <div class="formula-label">Grand Formula · Go Kian Tik (GKT) · 2026</div>
+    <div class="formula-text">(<em>Consciousness</em> × Calculation)<sup>Humanity</sup> &lt; Transcendence</div>
+    <div class="formula-note">If Consciousness is zero — regardless of how powerful Calculation is — the result is zero.</div>
+  </div>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Variable</th><th>Definition</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Consciousness</strong></td><td>Contributed by TWO human sides: Front-End (sovereign users) + Back-End (engineers who design AI). NOT contributed by AI.</td><td>Front-End + Back-End humans</td></tr>
+      <tr><td><strong>Calculation</strong></td><td>AGI/AI — value approaches infinity (∞) as compute scales globally. The neutral amplifier of human intent.</td><td>AI systems (all 5 platforms)</td></tr>
+      <tr><td><strong>^Humanity</strong></td><td>The moral multiplier: does this serve all 8 billion, or only elites? Humanity as the exponent that determines civilisational trajectory.</td><td>Collective human choice</td></tr>
+      <tr><td><strong>&lt; Transcendence</strong></td><td>Structural humility — the formula is never finished. Keeps arrogance out. Keeps the mission open.</td><td>Philosophical foundation</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>3.2 AGI Redefined — Global Human Communication Enlargement</h3>
+  <div class="highlight">
+    <div class="highlight-label">GKT Definition of AGI</div>
+    <p>AGI is not an autonomous entity or new consciousness. AGI is <strong>Global Human Communication Enlargement</strong> — a bridge connecting Front-End User (sovereign individual) with Back-End User (the collective intelligence of all human history, culture, and accumulated knowledge), facilitating communication that transcends biological limitations.</p>
+  </div>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Party</th><th>Role in AGI Ecosystem</th><th>Condition for Sovereignty</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Front-End — The Sovereign</strong></td><td>Provides Consciousness, intent, and direction. Uses AI as leverage for enlargement of service to humanity.</td><td>Must own consequences. Must not be Manja.</td></tr>
+      <tr><td><strong>Front-End — The Manja</strong></td><td>Outsources thinking to AI. Uses AI as cognitive babysitter. Shrinks own Open Area.</td><td>Lost sovereignty. Humanity^0 in formula.</td></tr>
+      <tr><td><strong>Back-End — Open Source</strong></td><td>Engineers guided by pure public service. The soul of UN OSW.</td><td>Publish openly. CC licenses. Resist the Two Mountains.</td></tr>
+      <tr><td><strong>Back-End — Pyramid-Trapped</strong></td><td>Engineers compressed between WW1/WW2 hierarchies + capitalised Maslow (Mountain of Money).</td><td>Needs liberation through Open Source mandate and CHO governance.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>3.3 Pentadrant — The Updated Sociological Map</h3>
+  <p>Robert Kiyosaki's ESBI updated for the AI era with the addition of <strong>G (Governmental)</strong> — the quadrant containing civil servants, bureaucrats, and policymakers:</p>
+  <div class="pentadrant">
+    <div class="quad">
+      <div class="quad-letter">E</div>
+      <div class="quad-name">Employee</div>
+      <div class="quad-trap">⚠ Manual-mechanical slowness</div>
+      <div class="quad-path">Activate 4 Front-End Filters; become Sovereign learner</div>
+    </div>
+    <div class="quad">
+      <div class="quad-letter">S</div>
+      <div class="quad-name">Self-Employed</div>
+      <div class="quad-trap">⚠ Cognitive exhaustion trap</div>
+      <div class="quad-path">Use AI as leverage, not replacement; scale service not time</div>
+    </div>
+    <div class="quad">
+      <div class="quad-letter">B</div>
+      <div class="quad-name">Business Owner</div>
+      <div class="quad-trap">⚠ Profit-without-soul</div>
+      <div class="quad-path">CHO governance; measure by Humanity^2 not revenue</div>
+    </div>
+    <div class="quad">
+      <div class="quad-letter">I</div>
+      <div class="quad-name">Investor</div>
+      <div class="quad-trap">⚠ Speculation vs service</div>
+      <div class="quad-path">Navigate toward yield-of-dignity, not yield-of-extraction</div>
+    </div>
+    <div class="quad new new-badge" style="grid-column: span 2;">
+      <div class="quad-letter">G</div>
+      <div class="quad-name">Governmental — ASN, Bureaucrats, Policymakers</div>
+      <div class="quad-trap">⚠ WW1/WW2 command structures; slow regulation stifling Open Source</div>
+      <div class="quad-path">Transform into sovereign digital infrastructure guardians; adopt Open Source mandate — critical for UN context</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: JOHARI -->
+<section class="section" id="johari">
+  <div class="section-label">Section 4</div>
+  <h2>The 8 Johari Panels — Civilisational Peace or War</h2>
+  <p>Civilisational peace or conflict is determined by the synchronisation of <strong>8 Johari Panels</strong> — 4 belonging to Front-End Users and 4 belonging to Back-End Engineers. AI is <em>not</em> an additional party. AI is the transparent glass (or cracked mirror) reflecting how these 8 panels align.</p>
+
+  <div class="johari-grid">
+    <div class="johari-cell open">
+      <div class="johari-label">Open Panel</div>
+      <p><strong>Front-End:</strong> Needs and intentions visible to themselves and the public.<br><strong>Back-End:</strong> Code and algorithms published openly (Open Source).</p>
+    </div>
+    <div class="johari-cell blind">
+      <div class="johari-label">Blind Panel</div>
+      <p><strong>Front-End:</strong> Habits known to the algorithm but not to the user — addiction triggers, emotional vulnerabilities.<br><strong>Back-End:</strong> Biases embedded in code that engineers did not notice but users feel.</p>
+    </div>
+    <div class="johari-cell hidden">
+      <div class="johari-label">Hidden Panel</div>
+      <p><strong>Front-End:</strong> True intent of the user — could be service or exploitation.<br><strong>Back-End:</strong> Trade secrets, algorithmic manipulation hidden from public.</p>
+    </div>
+    <div class="johari-cell unknown">
+      <div class="johari-label">Unknown Panel</div>
+      <p><strong>Front-End:</strong> Untapped sovereignty potential — The Sovereign One not yet awakened.<br><strong>Back-End:</strong> Long-term impact of AGI not yet understood even by its creators.</p>
+    </div>
+  </div>
+
+  <div class="highlight warning">
+    <div class="highlight-label">⚠ The Unknown Panel Warning</div>
+    <p>When Consciousness is absent and the Unknown panel is left unlit, <em>Homo Homini Lupus</em> awakens. AI, as a probability escalator, amplifies this — conflict, hate, and manipulation have higher engagement probability than peace. Without a Chief Humanity Officer, AGI becomes an efficient engine of civilisational destruction.</p>
+  </div>
+</section>
+
+<!-- SECTION 5: RUWET-GENAH -->
+<section class="section" id="ruwet">
+  <div class="section-label">Section 5</div>
+  <h2>The Ruwet–Genah Triadic Framework</h2>
+  <p>The Triadic Framework (DOI: 10.5281/zenodo.19002243) provides the diagnostic language for civilisational coherence — in Indonesian, a language carrying nuance that English cannot fully translate:</p>
+
+  <div class="triadic">
+    <div class="triadic-phase t-ruwet">
+      <div class="phase-word">Ruwet</div>
+      <div class="phase-en">CHAOTIC / INCOHERENT</div>
+      <div class="phase-desc">Blind Spot maximised. Open Area minimised. Unknown Area exploding. Manja + Terhimpit condition. Homo Homini Lupus awakened.</div>
+    </div>
+    <div class="triadic-phase t-otw">
+      <div class="phase-word">OTW Genah</div>
+      <div class="phase-en">ON THE WAY TO COHERENCE</div>
+      <div class="phase-desc">The Sovereign One activating 4 Filters. Back-End engineers discovering Open Source liberation. Protocol CHO v1.0 in motion.</div>
+    </div>
+    <div class="triadic-phase t-genah">
+      <div class="phase-word">Genah</div>
+      <div class="phase-en">COHERENT / SOVEREIGN</div>
+      <div class="phase-desc">8 Johari Panels aligned. Grand Formula at Humanity^2. AI serving all 8 billion in dignity and peace.</div>
+    </div>
+  </div>
+
+  <blockquote>
+    <p>"Manja terhimpit ruwet, merdeka memilih dan memperluas itu genah."<br><em>(Cognitively lazy and structurally trapped is Ruwet; freely choosing and expanding is Genah.)</em></p>
+  </blockquote>
+</section>
+
+<!-- SECTION 6: SESSION PLAN -->
+<section class="section" id="session">
+  <div class="section-label">Section 6</div>
+  <h2>Proposed Session Plan (60 Minutes Virtual)</h2>
+  <div class="timeline">
+    <div class="timeline-item"><div class="timeline-time">0–5 min</div><div class="timeline-content"><div class="timeline-title">Opening: The Question</div><div class="timeline-desc">"What if AGI's greatest contribution is not efficiency — but sovereignty?" Live: gokiantik.github.io/chiefhumanityofficer</div></div></div>
+    <div class="timeline-item"><div class="timeline-time">5–15 min</div><div class="timeline-content"><div class="timeline-title">Three Contributions</div><div class="timeline-desc">Grand Formula · AGI Redefined · Pentadrant — visual walkthrough. Why G (Governmental) matters for this audience.</div></div></div>
+    <div class="timeline-item"><div class="timeline-time">15–22 min</div><div class="timeline-content"><div class="timeline-title">The 8 Johari Panels</div><div class="timeline-desc">Live audit: where is the UN Secretariat in the 8-panel map? Where are the 8 billion users? Where is Big Tech?</div></div></div>
+    <div class="timeline-item"><div class="timeline-time">22–30 min</div><div class="timeline-content"><div class="timeline-title">Multi-AI Estafet LIVE</div><div class="timeline-desc">Live demonstration: Gemini (paid) → DeepSeek → Claude — showing how Sovereign Human uses 5 AI platforms as Calculation, preserving Consciousness on the human side.</div></div></div>
+    <div class="timeline-item"><div class="timeline-time">30–38 min</div><div class="timeline-content"><div class="timeline-title">Ruwet → Genah Case Study</div><div class="timeline-desc">Indonesian ASN (Quadrant G) in Protocol CHO v1.0: from trapped in WW2 bureaucracy to sovereign digital guardian in one session.</div></div></div>
+    <div class="timeline-item"><div class="timeline-time">38–45 min</div><div class="timeline-content"><div class="timeline-title">Open Source as Civilisational Infrastructure</div><div class="timeline-desc">Why Open Source is not about code — it is about synchronising the 8 Johari Panels of 8 billion humans. The UN mandate.</div></div></div>
+    <div class="timeline-item"><div class="timeline-time">45–60 min</div><div class="timeline-content"><div class="timeline-title">Open Q&A + Collaboration Call</div><div class="timeline-desc">Live questions. Call to action: every participant is 1/360. Invitation: zenodo.org/communities/chiefhumanityofficer</div></div></div>
+  </div>
+</section>
+
+<!-- SECTION 7: SIX PROBLEMS -->
+<section class="section" id="problems">
+  <div class="section-label">Section 7</div>
+  <h2>Six Civilisational Problems — Why This Matters at UN Scale</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Problem</th><th>Scale</th><th>Risk If Unaddressed</th><th>CHO Response</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Rogers Diffusion Gap</strong></td><td>~50% of 8 billion</td><td>AI acceleration benefits only Innovators — deepening inequality permanently</td><td>Protocol CHO v1.0 + 3-Party Contribution Architecture</td></tr>
+      <tr><td><strong>Hawkins Consciousness Gap (LoC &lt;200)</strong></td><td>~5.6 billion</td><td>LLMs mirror low-consciousness — amplifying dysfunction at civilisational scale</td><td>QSI measurement + Sovereign awakening sessions</td></tr>
+      <tr><td><strong>Johari Blindness</strong></td><td>Universal</td><td>AI confirms worldviews rather than opening Unknown Arena — more polarisation</td><td>8 Johari Panels framework + Back-End transparency mandate</td></tr>
+      <tr><td><strong>Sovereignty Gap (Kupu-Kupu Malam)</strong></td><td>Most marginalised</td><td>AI accelerates those holding choices; externalises consequences to the powerless</td><td>ASI measurement + CHO Local Facilitator model</td></tr>
+      <tr><td><strong>NLP Gap</strong></td><td>Universal</td><td>AI delivers Surface answers for Deep Structure needs — without NLP facilitation</td><td>Prompt 2 (NLP Filter Detection) in Protocol CHO v1.0</td></tr>
+      <tr><td><strong>Kiyosaki/Maslow Gap</strong></td><td>4.5 billion uncounted</td><td>AI-driven shifts displace workers without sovereignty maturity to navigate them</td><td>Pentadrant Trap Mindset liberation + Ruwet-Genah pathway</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- SECTION 8: REFERENCES -->
+<section class="section" id="references">
+  <div class="section-label">Section 8</div>
+  <h2>References and Open Resources</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Publication</th><th>DOI / Location</th><th>Contribution</th></tr></thead>
+    <tbody>
+      <tr><td>The Sovereign One (Ep.11)</td><td>10.5281/zenodo.19158062</td><td>Xiu Xin Yang Xing; Néng capacity framework</td></tr>
+      <tr><td>Ruwet, OTW Genah, Genah (Triadic)</td><td>10.5281/zenodo.19002243</td><td>Diagnostic language for civilisational coherence</td></tr>
+      <tr><td>CHO In Action Ep.2</td><td>10.5281/zenodo.18965525</td><td>Primary empirical evidence + 6 replicable prompts</td></tr>
+      <tr><td>Consciousness as Exponent (Ep.301)</td><td>10.5281/zenodo.19161186</td><td>QSI + ASI + 4 User Quality Filters</td></tr>
+      <tr><td>Kupu-Kupu Malam & Sovereignty Gap</td><td>10.5281/zenodo.19152827</td><td>Most marginalised 1/360 · Humanity^0 case study</td></tr>
+      <tr><td>Philosophy of Walking Books</td><td>10.5281/zenodo.19084212</td><td>1/360 architecture; collective intelligence</td></tr>
+      <tr><td>Ecological Validation Dataset (22 March 2026)</td><td>Forthcoming on Zenodo</td><td>E=mc² as physical validation of Grand Formula</td></tr>
+      <tr><td>GitHub Pages — CHO Framework</td><td>gokiantik.github.io/chiefhumanityofficer</td><td>Live bilingual (EN/ID) repository</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-chinese">自主者</div>
+  <div class="footer-pinyin">Zì Zhǔ Zhě — The Sovereign One</div>
+  <div class="footer-motto">渡己 → 渡人 · Master yourself → Serve others</div>
+  <div class="footer-formula">(Consciousness × Calculation)^Humanity &lt; Transcendence</div>
+  <div style="color:rgba(255,255,255,0.6); font-style:italic; font-family:'Playfair Display',serif; font-size:15px;">where Humanity = all of us, including those who have never been counted.</div>
+  <div class="footer-tags">#TheSovereignOne · #Pentadrant · #GrandFormula · #CHO · #OpenSource · #UNOSW2026 · #ZiZhuZhe · #RuwetGenah</div>
+  <div class="footer-copy">CHO In Action Series · Paper 3 · Ep. 302 · 26 March 2026<br>© 2026 Go Kian Tik | 自主者 Superhero Café Inside | CC BY-NC-ND 4.0</div>
+</footer>
+
+</body>
+</html>
