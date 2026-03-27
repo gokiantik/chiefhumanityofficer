@@ -191,6 +191,350 @@
   .footer-name em { font-size: 13px; font-weight: 400; color: var(--gold); display: block; font-style: normal; font-family: 'DM Mono', monospace; letter-spacing: 0.08em; margin-top: 2px; }
   .footer-title { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-align: right; line-height: 1.8; }
 
+  /* LIVING PROOF SECTION */
+  .proof-section {
+    background: linear-gradient(135deg, #0a1628 0%, #1a2a1a 100%);
+    color: var(--paper);
+    padding: 44px;
+    margin: 0 -48px 40px;
+    border-top: 3px solid var(--gold);
+    border-bottom: 3px solid var(--gold);
+  }
+
+  @media (max-width: 600px) {
+    .proof-section { margin: 0 -24px 40px; padding: 32px 24px; }
+  }
+
+  .proof-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+    padding: 6px 14px;
+    border: 1px solid rgba(200,146,42,0.3);
+    display: inline-block;
+    border-radius: 2px;
+  }
+
+  .proof-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 36px;
+    align-items: start;
+  }
+
+  @media (max-width: 700px) {
+    .proof-grid { grid-template-columns: 1fr; }
+  }
+
+  .proof-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(232,192,106,0.6);
+    margin-bottom: 8px;
+  }
+
+  .proof-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  /* CHAT BUBBLES */
+  .chat-bubble {
+    border-radius: 4px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .chat-bubble.gkt {
+    background: rgba(26,58,92,0.7);
+    border-left: 3px solid var(--gold);
+  }
+
+  .chat-bubble.rhiana {
+    background: rgba(20,60,20,0.7);
+    border-left: 3px solid #5aaa5a;
+  }
+
+  .chat-who {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+
+  .chat-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+
+  .chat-bubble.rhiana .chat-role { color: #8dda8d; }
+
+  .chat-text {
+    font-size: 14px;
+    color: #ddd;
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  /* SOPHIA STATS */
+  .proof-sophia {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 16px 18px;
+    margin-top: 16px;
+  }
+
+  .sophia-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .sophia-stat {
+    font-size: 15px;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .sophia-desc {
+    font-size: 13px;
+    color: #aaa;
+    line-height: 1.6;
+  }
+
+  /* SCALE CARD */
+  .scale-card {
+    background: rgba(200,146,42,0.08);
+    border: 1px solid rgba(200,146,42,0.25);
+    border-radius: 4px;
+    padding: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .scale-icon { font-size: 32px; margin-bottom: 8px; }
+
+  .scale-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .scale-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 16px;
+  }
+
+  .scale-divider { height: 1px; background: rgba(200,146,42,0.2); margin-bottom: 16px; }
+
+  .scale-desc {
+    font-size: 13px;
+    color: #bbb;
+    line-height: 1.7;
+    text-align: left;
+    margin-bottom: 16px;
+  }
+
+  .scale-desc em { color: var(--gold-light); font-style: italic; }
+
+  .scale-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+
+  .scale-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #bbb;
+    border-radius: 2px;
+  }
+
+  .scale-tag.sovereign {
+    border-color: var(--gold);
+    color: var(--gold-light);
+    background: rgba(200,146,42,0.1);
+  }
+
+  /* FLOW DIAGRAM */
+  .dual-flow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .flow-node {
+    flex: 1;
+    padding: 12px;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .flow-node.flow-gkt { background: rgba(26,58,92,0.6); border: 1px solid rgba(200,146,42,0.3); }
+  .flow-node.flow-rhiana { background: rgba(20,60,20,0.6); border: 1px solid rgba(90,170,90,0.3); }
+
+  .flow-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .flow-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: #999;
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    text-align: center;
+    color: var(--gold-light);
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    flex-shrink: 0;
+  }
+
+  .flow-result {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--gold-light);
+    text-align: center;
+    padding: 10px;
+    border: 1px dashed rgba(200,146,42,0.3);
+    border-radius: 2px;
+  }
+  .pillars-wrap {
+    margin-top: 36px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 28px;
+  }
+
+  .pillars-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .pillars-quote {
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(232,192,106,0.85);
+    margin-bottom: 24px;
+  }
+
+  .pentagon-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: center;
+  }
+
+  @media (max-width: 600px) {
+    .pentagon-container { grid-template-columns: 1fr; }
+  }
+
+  #pentagon-svg { width: 100%; height: auto; }
+
+  .pillar-node .node-circle {
+    transition: fill 0.25s, r 0.25s;
+  }
+
+  .pillar-node:hover .node-circle,
+  .pillar-node.active .node-circle {
+    fill: #c8922a;
+  }
+
+  .pillar-panel {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(200,146,42,0.3);
+    border-radius: 4px;
+    padding: 24px;
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+  }
+
+  .pillar-panel-inner { width: 100%; }
+
+  .pillar-hint {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    text-align: center;
+    letter-spacing: 0.05em;
+  }
+
+  .pillar-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .pillar-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .pillar-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    opacity: 0.8;
+  }
+
+  .pillar-desc {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.7;
+  }
+
+  .pillar-desc em { color: var(--gold-light); font-style: italic; }
+
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   .page > * { animation: fadeUp 0.5s ease both; }
   .page > *:nth-child(1) { animation-delay: 0.05s; }
@@ -308,6 +652,210 @@
       <span class="ti" data-lang="id">"AI telah memperbesar kapasitas saya untuk berkontribusi pada kemanusiaan yang lebih luas, bahkan global."</span>
       <span class="ti" data-lang="en">"AI has amplified my capacity to contribute to a broader humanity — even at a global scale."</span>
     </blockquote>
+
+    <!-- FIVE PILLARS -->
+    <div class="pillars-wrap">
+      <div class="pillars-header">
+        <div class="section-num" style="color:var(--gold-light);">The Sovereign Artifact</div>
+        <h3 class="pillars-title">
+          <span class="ti" data-lang="id">Lima Pilar AI yang Berpusat pada Kemanusiaan</span>
+          <span class="ti" data-lang="en">The Five Pillars of Human-Centric AI</span>
+        </h3>
+        <p class="pillars-quote">"AI should protect people. I'm making sure it does." — <em>Rhiana Spring</em></p>
+      </div>
+
+      <div class="pentagon-container">
+        <svg id="pentagon-svg" viewBox="0 0 420 400" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer glow ring -->
+          <circle cx="210" cy="195" r="155" fill="none" stroke="rgba(200,146,42,0.08)" stroke-width="1"/>
+          <circle cx="210" cy="195" r="130" fill="none" stroke="rgba(200,146,42,0.12)" stroke-width="1" stroke-dasharray="4,6"/>
+
+          <!-- Pentagon lines -->
+          <polygon id="penta-bg" points="210,50 380,168 318,355 102,355 40,168"
+            fill="rgba(255,255,255,0.03)" stroke="rgba(200,146,42,0.3)" stroke-width="1.5"/>
+
+          <!-- Inner pentagon -->
+          <polygon points="210,100 330,185 288,310 132,310 90,185"
+            fill="rgba(200,146,42,0.05)" stroke="rgba(200,146,42,0.15)" stroke-width="1"/>
+
+          <!-- Connector lines from center -->
+          <line x1="210" y1="195" x2="210" y2="50" stroke="rgba(200,146,42,0.2)" stroke-width="1" stroke-dasharray="3,4"/>
+          <line x1="210" y1="195" x2="380" y2="168" stroke="rgba(200,146,42,0.2)" stroke-width="1" stroke-dasharray="3,4"/>
+          <line x1="210" y1="195" x2="318" y2="355" stroke="rgba(200,146,42,0.2)" stroke-width="1" stroke-dasharray="3,4"/>
+          <line x1="210" y1="195" x2="102" y2="355" stroke="rgba(200,146,42,0.2)" stroke-width="1" stroke-dasharray="3,4"/>
+          <line x1="210" y1="195" x2="40" y2="168" stroke="rgba(200,146,42,0.2)" stroke-width="1" stroke-dasharray="3,4"/>
+
+          <!-- Center circle -->
+          <circle cx="210" cy="195" r="32" fill="rgba(200,146,42,0.15)" stroke="rgba(200,146,42,0.5)" stroke-width="1.5"/>
+          <text x="210" y="190" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" fill="#e8c06a" font-weight="700">70%</text>
+          <text x="210" y="204" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7.5" fill="#e8c06a" letter-spacing="1">DIGITAL</text>
+
+          <!-- NODE 1: Humanity (top) -->
+          <g class="pillar-node" data-pillar="0" style="cursor:pointer">
+            <circle cx="210" cy="50" r="28" fill="#1a3a5c" stroke="#c8922a" stroke-width="2" class="node-circle"/>
+            <text x="210" y="46" text-anchor="middle" font-family="'Playfair Display',serif" font-size="11" fill="#e8c06a" font-weight="700">❤</text>
+            <text x="210" y="59" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#fff" letter-spacing="0.5">HUM</text>
+            <text x="210" y="20" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" fill="#e8c06a" font-weight="700">Humanity</text>
+          </g>
+
+          <!-- NODE 2: Sovereignty (top-right) -->
+          <g class="pillar-node" data-pillar="1" style="cursor:pointer">
+            <circle cx="380" cy="168" r="28" fill="#1a3a5c" stroke="#c8922a" stroke-width="2" class="node-circle"/>
+            <text x="380" y="164" text-anchor="middle" font-family="'Playfair Display',serif" font-size="11" fill="#e8c06a" font-weight="700">⚡</text>
+            <text x="380" y="177" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#fff" letter-spacing="0.5">SOV</text>
+            <text x="408" y="148" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" fill="#e8c06a" font-weight="700">Sovereignty</text>
+          </g>
+
+          <!-- NODE 3: Dignity (bottom-right) -->
+          <g class="pillar-node" data-pillar="2" style="cursor:pointer">
+            <circle cx="318" cy="355" r="28" fill="#1a3a5c" stroke="#c8922a" stroke-width="2" class="node-circle"/>
+            <text x="318" y="351" text-anchor="middle" font-family="'Playfair Display',serif" font-size="11" fill="#e8c06a" font-weight="700">✦</text>
+            <text x="318" y="364" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#fff" letter-spacing="0.5">DIG</text>
+            <text x="318" y="392" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" fill="#e8c06a" font-weight="700">Dignity</text>
+          </g>
+
+          <!-- NODE 4: Family (bottom-left) -->
+          <g class="pillar-node" data-pillar="3" style="cursor:pointer">
+            <circle cx="102" cy="355" r="28" fill="#1a3a5c" stroke="#c8922a" stroke-width="2" class="node-circle"/>
+            <text x="102" y="351" text-anchor="middle" font-family="'Playfair Display',serif" font-size="11" fill="#e8c06a" font-weight="700">🌱</text>
+            <text x="102" y="364" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#fff" letter-spacing="0.5">FAM</text>
+            <text x="102" y="392" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" fill="#e8c06a" font-weight="700">Family</text>
+          </g>
+
+          <!-- NODE 5: Ubuntu (top-left) -->
+          <g class="pillar-node" data-pillar="4" style="cursor:pointer">
+            <circle cx="40" cy="168" r="28" fill="#1a3a5c" stroke="#c8922a" stroke-width="2" class="node-circle"/>
+            <text x="40" y="164" text-anchor="middle" font-family="'Playfair Display',serif" font-size="11" fill="#e8c06a" font-weight="700">🤝</text>
+            <text x="40" y="177" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#fff" letter-spacing="0.5">UBU</text>
+            <text x="14" y="148" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" fill="#e8c06a" font-weight="700">Ubuntu</text>
+          </g>
+        </svg>
+
+        <!-- Info Panel -->
+        <div class="pillar-panel" id="pillar-panel">
+          <div class="pillar-panel-inner" id="pillar-content">
+            <p class="pillar-hint">
+              <span class="ti" data-lang="id">↑ Klik tiap simpul untuk melihat penjelasannya</span>
+              <span class="ti" data-lang="en">↑ Click each node to explore the pillar</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RHIANA SPRING LIVING PROOF -->
+  <div class="proof-section">
+    <div class="proof-tag">
+      <span class="ti" data-lang="id">⚡ Bukti Nyata · Dual Semesta Sedang Berjalan</span>
+      <span class="ti" data-lang="en">⚡ Living Proof · Dual Semesta In Action</span>
+    </div>
+
+    <div class="proof-grid">
+      <div class="proof-left">
+        <div class="proof-label">
+          <span class="ti" data-lang="id">Koneksi Sovereign — Di Kolom Komentar LinkedIn</span>
+          <span class="ti" data-lang="en">Sovereign Connection — In the LinkedIn Comments</span>
+        </div>
+        <h3 class="proof-title">
+          <span class="ti" data-lang="id">Dua Pencipta Bertemu di Semesta Digital</span>
+          <span class="ti" data-lang="en">Two Creators Meet in the Digital Universe</span>
+        </h3>
+
+        <!-- GKT -->
+        <div class="chat-bubble gkt">
+          <div class="chat-who">Go Kian Tik · Mbah Hogi Bejo™</div>
+          <div class="chat-role">
+            <span class="ti" data-lang="id">Chief Humanity Officer · 自主者</span>
+            <span class="ti" data-lang="en">Chief Humanity Officer · 自主者</span>
+          </div>
+          <p class="chat-text">
+            <span class="ti" data-lang="id">"Rhiana, karya Sophia Chat adalah contoh paling nyata dari Five Pillars yang saya yakini — AI yang melindungi, bukan mengeksploitasi. Saya ingin menjadi bagian dari gerakan ini. Semesta Digital kita sudah bertemu, kini saatnya Semesta Materialisasi ikut bergerak."</span>
+            <span class="ti" data-lang="en">"Rhiana, Sophia Chat is the most concrete proof of the Five Pillars I believe in — AI that protects, not exploits. I want to be part of this movement. Our Digital Universe has already connected; now it is time for the Materialisation Universe to move."</span>
+          </p>
+        </div>
+
+        <!-- RHIANA -->
+        <div class="chat-bubble rhiana">
+          <div class="chat-who">Rhiana Spring</div>
+          <div class="chat-role">
+            <span class="ti" data-lang="id">Pendiri Spring ACT · Pengacara HAM Internasional · Swiss</span>
+            <span class="ti" data-lang="en">Founder Spring ACT · International Human Rights Lawyer · Switzerland</span>
+          </div>
+          <p class="chat-text">
+            <span class="ti" data-lang="id">"AI should protect people. I'm making sure it does."</span>
+            <span class="ti" data-lang="en">"AI should protect people. I'm making sure it does."</span>
+          </p>
+        </div>
+
+        <div class="proof-sophia">
+          <div class="sophia-logo">🤖 Sophia Chat</div>
+          <p class="sophia-stat">
+            <span class="ti" data-lang="id"><strong>41.000+</strong> percakapan rahasia · <strong>172</strong> negara · <strong>85+</strong> bahasa</span>
+            <span class="ti" data-lang="en"><strong>41,000+</strong> confidential conversations · <strong>172</strong> countries · <strong>85+</strong> languages</span>
+          </p>
+          <p class="sophia-desc">
+            <span class="ti" data-lang="id">Chatbot pertama di dunia yang melindungi korban kekerasan rumah tangga — mengumpulkan bukti, memberi arah, menjaga martabat.</span>
+            <span class="ti" data-lang="en">The world's first chatbot protecting domestic violence survivors — collecting evidence, giving direction, preserving dignity.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="proof-right">
+        <div class="scale-card">
+          <div class="scale-icon">🌍</div>
+          <div class="scale-num">8 <span style="font-size:28px;">Miliar</span></div>
+          <div class="scale-label">
+            <span class="ti" data-lang="id">Target Kemanusiaan</span>
+            <span class="ti" data-lang="en">Humanity Target</span>
+          </div>
+          <div class="scale-divider"></div>
+          <p class="scale-desc">
+            <span class="ti" data-lang="id">Ini bukan sekadar kolaborasi dua orang. Ini adalah <em>proof of concept</em> bahwa Semesta Digital mampu melahirkan gerakan yang menjangkau setiap perempuan — yang tertindas, terlindas, maupun yang sudah sovereign.</span>
+            <span class="ti" data-lang="en">This is not merely a collaboration between two people. This is a <em>proof of concept</em> that the Digital Universe can birth a movement reaching every woman — the oppressed, the protected, and the already sovereign.</span>
+          </p>
+          <div class="scale-tags">
+            <span class="scale-tag">
+              <span class="ti" data-lang="id">Perempuan Tertindas</span>
+              <span class="ti" data-lang="en">Oppressed Women</span>
+            </span>
+            <span class="scale-tag">
+              <span class="ti" data-lang="id">Perempuan Terlindas</span>
+              <span class="ti" data-lang="en">Protected Women</span>
+            </span>
+            <span class="scale-tag sovereign">
+              <span class="ti" data-lang="id">Perempuan Sovereign</span>
+              <span class="ti" data-lang="en">Sovereign Women</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="dual-flow">
+          <div class="flow-node flow-gkt">
+            <div class="flow-name">GKT</div>
+            <div class="flow-sub">
+              <span class="ti" data-lang="id">Peneliti · Co-Creator · Indonesia</span>
+              <span class="ti" data-lang="en">Researcher · Co-Creator · Indonesia</span>
+            </div>
+          </div>
+          <div class="flow-arrow">
+            <span class="ti" data-lang="id">Semesta Digital<br>bertemu</span>
+            <span class="ti" data-lang="en">Digital Universe<br>converges</span>
+          </div>
+          <div class="flow-node flow-rhiana">
+            <div class="flow-name">Rhiana</div>
+            <div class="flow-sub">
+              <span class="ti" data-lang="id">Lawyer · Inovator · Swiss</span>
+              <span class="ti" data-lang="en">Lawyer · Innovator · Switzerland</span>
+            </div>
+          </div>
+        </div>
+        <div class="flow-result">
+          <span class="ti" data-lang="id">→ Semesta Materialisasi siap bergerak bersama</span>
+          <span class="ti" data-lang="en">→ Materialisation Universe ready to move together</span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- MATERIAL SECTION -->
@@ -432,6 +980,76 @@
       page.classList.remove('switching');
     }, 200);
   }
+
+  const pillars = [
+    {
+      num: '01',
+      name: 'Humanity',
+      sub_id: 'The Heart of the Narrative',
+      sub_en: 'The Heart of the Narrative',
+      desc_id: 'Dalam filosofi <em>Walking Books</em>, setiap manusia adalah narasi yang hidup. AI dalam ekosistem 70/30 tidak boleh hanya mengolah data, tetapi harus mampu menghormati kebenaran emosional dan perjalanan unik setiap individu.',
+      desc_en: 'In the <em>Walking Books</em> philosophy, every human being is a living narrative. AI in the 70/30 ecosystem must not merely process data — it must honour the emotional truth and unique journey of each individual.'
+    },
+    {
+      num: '02',
+      name: 'Sovereignty',
+      sub_id: 'The Spine of Empowerment',
+      sub_en: 'The Spine of Empowerment',
+      desc_id: 'Menjadi <em>The Sovereign One (自主者)</em> berarti memiliki kendali penuh. Kami membangun sistem agar individu mampu bangkit dari situasi tidak kondusif dan merebut kembali hak untuk menentukan masa depan mereka sendiri.',
+      desc_en: 'To be <em>The Sovereign One (自主者)</em> means having full control. We build systems so individuals can rise from unfavourable situations and reclaim their right to determine their own future.'
+    },
+    {
+      num: '03',
+      name: 'Dignity',
+      sub_id: 'The Sacred Subject',
+      sub_en: 'The Sacred Subject',
+      desc_id: 'Teknologi harus memperlakukan setiap orang sebagai subjek yang sakral, bukan sekadar komoditas atau <em>data point</em>. Martabat adalah garis merah yang tidak boleh dilanggar oleh algoritma mana pun.',
+      desc_en: 'Technology must treat every person as a sacred subject — not a commodity or a <em>data point</em>. Dignity is the red line that no algorithm may cross.'
+    },
+    {
+      num: '04',
+      name: 'Family',
+      sub_id: 'The Root of Legacy',
+      sub_en: 'The Root of Legacy',
+      desc_id: 'Kedaulatan dimulai dari akar. Melindungi koneksi manusiawi yang paling murni dan membangun warisan digital yang aman bagi generasi mendatang adalah tujuan akhir dari setiap inovasi yang kami kembangkan.',
+      desc_en: 'Sovereignty begins at the root. Protecting the purest human connections and building a safe digital legacy for future generations is the ultimate purpose of every innovation we develop.'
+    },
+    {
+      num: '05',
+      name: 'Ubuntu',
+      sub_id: 'The Bridge of Collective Rise',
+      sub_en: 'The Bridge of Collective Rise',
+      desc_id: '<em>"I am because we are."</em> Kebangkitan yang paling jitu terjadi ketika kita bergerak dalam kebersamaan. Pilar Ubuntu memastikan kemajuan teknologi memberikan dampak luas bagi harmoni kolektif.',
+      desc_en: '<em>"I am because we are."</em> The most powerful rise happens when we move together. The Ubuntu pillar ensures that technological progress delivers broad impact for collective harmony.'
+    }
+  ];
+
+  let activePillar = null;
+
+  document.querySelectorAll('.pillar-node').forEach((node) => {
+    node.addEventListener('click', () => {
+      const idx = parseInt(node.getAttribute('data-pillar'));
+      const p = pillars[idx];
+      const lang = document.body.classList.contains('lang-en') ? 'en' : 'id';
+
+      document.querySelectorAll('.pillar-node').forEach(n => n.classList.remove('active'));
+      node.classList.add('active');
+      activePillar = idx;
+
+      const panel = document.getElementById('pillar-content');
+      panel.style.opacity = '0';
+      setTimeout(() => {
+        panel.innerHTML = `
+          <div class="pillar-num">${p.num} / 05</div>
+          <div class="pillar-name">${p.name}</div>
+          <div class="pillar-sub">${lang === 'id' ? p.sub_id : p.sub_en}</div>
+          <p class="pillar-desc">${lang === 'id' ? p.desc_id : p.desc_en}</p>
+        `;
+        panel.style.opacity = '1';
+        panel.style.transition = 'opacity 0.3s ease';
+      }, 150);
+    });
+  });
 </script>
 </body>
 </html>
