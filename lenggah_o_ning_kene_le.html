@@ -1,320 +1,735 @@
 <!DOCTYPE html>
 <html lang="jv">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lenggah o ning kene le — Go Kian Tik</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif:ital,wght@0,300;0,400;1,300&family=Noto+Sans+SC:wght@300;400&display=swap" rel="stylesheet">
-<style>
-:root {
-  --ink: #1a1614;
-  --parchment: #f5f0e8;
-  --gold: #b8956a;
-  --gold-light: #d4b896;
-  --shadow: #8b7355;
-  --deep: #2c2018;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  background: var(--parchment);
-  color: var(--ink);
-  font-family: 'Noto Serif', serif;
-  min-height: 100vh;
-  position: relative;
-}
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 20% 20%, rgba(184,149,106,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 80%, rgba(139,115,85,0.06) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
-.border-frame {
-  position: fixed;
-  inset: 20px;
-  border: 1px solid rgba(184,149,106,0.2);
-  pointer-events: none;
-  z-index: 3;
-}
-.corner {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  border-color: var(--gold);
-  border-style: solid;
-  opacity: 0.6;
-}
-.corner-tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
-.corner-tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
-.corner-bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
-.corner-br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
-.container {
-  position: relative;
-  z-index: 2;
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 80px 40px 100px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.timestamp {
-  font-size: 11px;
-  font-weight: 300;
-  letter-spacing: 0.2em;
-  color: var(--shadow);
-  text-transform: uppercase;
-  margin-bottom: 56px;
-  opacity: 0;
-  animation: fadeUp 1s ease 0.3s forwards;
-}
-.voice-label {
-  font-size: 11px;
-  font-weight: 300;
-  letter-spacing: 0.35em;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 28px;
-  opacity: 0;
-  animation: fadeUp 1s ease 0.6s forwards;
-}
-.main-poem {
-  margin-bottom: 56px;
-  opacity: 0;
-  animation: fadeUp 1.2s ease 0.9s forwards;
-}
-.line {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(17px, 3.2vw, 24px);
-  font-style: italic;
-  line-height: 2;
-  color: var(--deep);
-  display: block;
-}
-.divider {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin: 40px 0;
-  opacity: 0;
-  animation: fadeUp 1s ease 1.5s forwards;
-}
-.divider-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--gold-light), transparent);
-}
-.divider-glyph {
-  font-family: 'Noto Sans SC', sans-serif;
-  font-size: 20px;
-  color: var(--gold);
-  font-weight: 300;
-}
-.wisdom-block {
-  opacity: 0;
-  animation: fadeUp 1.2s ease 1.8s forwards;
-  margin-bottom: 48px;
-}
-.wisdom-jv {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(14px, 2.4vw, 18px);
-  font-style: italic;
-  line-height: 2;
-  color: var(--shadow);
-}
-.formula-block {
-  opacity: 0;
-  animation: fadeUp 1s ease 2.2s forwards;
-  margin-bottom: 56px;
-  padding: 24px 28px;
-  border-left: 2px solid var(--gold-light);
-  background: rgba(184,149,106,0.04);
-}
-.formula-text {
-  font-size: 12.5px;
-  font-weight: 300;
-  letter-spacing: 0.06em;
-  color: var(--shadow);
-  line-height: 2;
-}
-.formula-em {
-  font-family: 'Playfair Display', serif;
-  font-size: 14px;
-  font-style: italic;
-  color: var(--ink);
-}
-.chinese-block {
-  opacity: 0;
-  animation: fadeUp 1s ease 2.6s forwards;
-  text-align: center;
-  margin-bottom: 56px;
-}
-.chinese-main {
-  font-family: 'Noto Sans SC', sans-serif;
-  font-size: clamp(26px, 5vw, 40px);
-  font-weight: 300;
-  color: var(--gold);
-  letter-spacing: 0.3em;
-  display: block;
-  margin-bottom: 10px;
-}
-.chinese-sub {
-  font-size: 11px;
-  font-weight: 300;
-  letter-spacing: 0.25em;
-  color: var(--shadow);
-  text-transform: uppercase;
-}
-.colophon {
-  opacity: 0;
-  animation: fadeUp 1s ease 3s forwards;
-  padding-top: 36px;
-  border-top: 1px solid rgba(184,149,106,0.2);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-.colophon-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 14px;
-  color: var(--ink);
-  display: block;
-  margin-bottom: 4px;
-}
-.colophon-sub {
-  font-size: 11px;
-  font-weight: 300;
-  letter-spacing: 0.15em;
-  color: var(--shadow);
-  text-transform: uppercase;
-}
-.colophon-mark {
-  font-family: 'Noto Sans SC', sans-serif;
-  font-size: 24px;
-  font-weight: 300;
-  color: var(--gold);
-  opacity: 0.6;
-}
-.note {
-  opacity: 0;
-  animation: fadeUp 1s ease 3.4s forwards;
-  margin-top: 36px;
-  padding: 18px 22px;
-  background: rgba(184,149,106,0.04);
-  border: 1px solid rgba(184,149,106,0.12);
-}
-.note p {
-  font-size: 11.5px;
-  font-weight: 300;
-  color: var(--shadow);
-  line-height: 1.9;
-  letter-spacing: 0.04em;
-}
-.note strong { color: var(--ink); font-weight: 400; }
-.back-link {
-  opacity: 0;
-  animation: fadeUp 1s ease 3.8s forwards;
-  margin-top: 32px;
-  text-align: center;
-}
-.back-link a {
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  color: var(--gold);
-  text-decoration: none;
-  text-transform: uppercase;
-  border-bottom: 1px solid rgba(184,149,106,0.3);
-  padding-bottom: 2px;
-  transition: border-color 0.3s;
-}
-.back-link a:hover { border-color: var(--gold); }
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@media (max-width: 480px) {
-  .container { padding: 60px 24px 80px; }
-  .border-frame { inset: 10px; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lenggah O Ning Kene Le · Go Kian Tik · CHO</title>
+  <meta name="description" content="Lenggah O Ning Kene Le — Renungan Hati · Go Kian Tik (Mbah Hogi Bejo™) · Chief Humanity Officer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #0a0a12;
+      --bg2:      #10101e;
+      --bg3:      #16162a;
+      --gold:     #C9A84C;
+      --gold-dim: #8a6e2a;
+      --gold-pale:#f0dfa0;
+      --teal:     #4DB89A;
+      --teal-dim: #2a7a65;
+      --blue:     #7F9EC9;
+      --purple:   #9B8FDB;
+      --white:    #F0EDE4;
+      --muted:    #6a6880;
+      --border:   rgba(201,168,76,0.12);
+      --border2:  rgba(201,168,76,0.22);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Lora', Georgia, serif;
+      font-size: 16px;
+      line-height: 1.8;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── STARS BG ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(201,168,76,0.06) 1px, transparent 1px),
+        radial-gradient(circle, rgba(127,158,201,0.04) 1px, transparent 1px);
+      background-size: 60px 60px, 37px 37px;
+      background-position: 0 0, 18px 18px;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,18,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--border);
+      padding: 14px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand {
+      color: var(--gold); font-family: 'DM Mono', monospace;
+      font-size: 12px; letter-spacing: 0.15em; text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a {
+      color: var(--muted); font-family: 'DM Mono', monospace;
+      font-size: 11px; letter-spacing: 0.1em; text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .back-link {
+      display: inline-block; margin: 24px 40px 0;
+      color: var(--gold-dim); font-family: 'DM Mono', monospace;
+      font-size: 11px; letter-spacing: 0.1em; text-decoration: none;
+      transition: color 0.2s; position: relative; z-index: 1;
+    }
+    .back-link:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 80px 40px 60px;
+      position: relative; z-index: 1;
+    }
+
+    .hero-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 0.3em;
+      color: var(--gold-dim); text-transform: uppercase;
+      margin-bottom: 32px;
+      opacity: 0; animation: rise 1s ease 0.2s forwards;
+    }
+
+    .hero-javanese {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      color: var(--gold);
+      line-height: 1.1;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+      text-shadow: 0 0 60px rgba(201,168,76,0.2);
+      opacity: 0; animation: rise 1s ease 0.4s forwards;
+    }
+
+    .hero-sub {
+      font-family: 'Lora', serif;
+      font-size: 16px; font-style: italic;
+      color: rgba(240,237,228,0.5);
+      letter-spacing: 0.06em; margin-bottom: 40px;
+      opacity: 0; animation: rise 1s ease 0.6s forwards;
+    }
+
+    /* Glowing divider */
+    .hero-rule {
+      width: 120px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 40px;
+      opacity: 0; animation: rise 1s ease 0.7s forwards;
+    }
+
+    .author-badge {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-family: 'DM Mono', monospace; font-size: 11px;
+      color: var(--muted); letter-spacing: 0.08em;
+      border: 0.5px solid var(--border); border-radius: 20px;
+      padding: 6px 18px;
+      opacity: 0; animation: rise 1s ease 0.9s forwards;
+    }
+    .author-badge span { color: var(--gold); }
+
+    /* ── MAIN CONTAINER ── */
+    .container {
+      max-width: 720px; margin: 0 auto;
+      padding: 0 40px 80px;
+      position: relative; z-index: 1;
+    }
+
+    /* ── VERSION TABS ── */
+    .version-tabs {
+      display: flex; gap: 1px;
+      background: var(--border);
+      border: 0.5px solid var(--border);
+      border-radius: 6px; overflow: hidden;
+      margin-bottom: 60px;
+    }
+    .tab-btn {
+      flex: 1;
+      background: var(--bg2);
+      border: none; cursor: pointer;
+      padding: 12px 20px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 0.12em;
+      color: var(--muted); text-transform: uppercase;
+      transition: all 0.25s;
+    }
+    .tab-btn.active {
+      background: rgba(201,168,76,0.1);
+      color: var(--gold);
+    }
+    .tab-btn:hover:not(.active) { background: var(--bg3); color: var(--white); }
+
+    /* ── POEM SECTIONS ── */
+    .poem-section { display: none; }
+    .poem-section.active { display: block; }
+
+    /* Poem card */
+    .poem-card {
+      background: var(--bg2);
+      border: 0.5px solid var(--border2);
+      border-top: 2px solid var(--gold-dim);
+      border-radius: 0 0 8px 8px;
+      padding: 52px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .poem-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    }
+
+    /* Ambient glow inside card */
+    .poem-card::after {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%;
+      transform: translateX(-50%);
+      width: 300px; height: 200px;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .poem-version-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 0.2em;
+      color: var(--gold-dim); text-transform: uppercase;
+      margin-bottom: 32px; display: block;
+    }
+
+    /* Stanza */
+    .stanza {
+      margin-bottom: 40px;
+    }
+    .stanza:last-of-type { margin-bottom: 0; }
+
+    .stanza-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 8px; letter-spacing: 0.2em;
+      color: var(--muted); text-transform: uppercase;
+      margin-bottom: 16px; opacity: 0.6;
+    }
+
+    .poem-line {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(15px, 2.2vw, 18px);
+      font-style: italic;
+      color: var(--white);
+      line-height: 2;
+      display: block;
+      padding-left: 8px;
+      border-left: 1.5px solid transparent;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .poem-line:hover {
+      border-left-color: var(--gold-dim);
+      color: var(--gold-pale);
+    }
+
+    /* Highlighted / anchor lines */
+    .poem-line.anchor {
+      color: var(--gold);
+      font-weight: 500;
+      font-size: clamp(16px, 2.4vw, 20px);
+    }
+
+    /* New stanza accent */
+    .poem-line.new-moment {
+      color: var(--teal);
+    }
+    .poem-line.new-ai {
+      color: var(--blue);
+    }
+    .poem-line.new-formula {
+      color: var(--purple);
+    }
+    .poem-line.new-close {
+      color: var(--gold-pale);
+      font-style: normal;
+      letter-spacing: 0.06em;
+    }
+
+    .stanza-divider {
+      width: 40px; height: 0.5px;
+      background: var(--border2);
+      margin: 32px 0;
+    }
+
+    /* Footnote / gloss */
+    .gloss {
+      margin-top: 40px;
+      padding-top: 28px;
+      border-top: 0.5px solid var(--border);
+    }
+    .gloss-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 0.2em;
+      color: var(--muted); text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .gloss-item {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; color: var(--muted);
+      line-height: 2; padding-left: 4px;
+    }
+    .gloss-item strong { color: var(--gold-dim); }
+
+    /* ── REFLECTION BLOCK ── */
+    .reflection {
+      margin-top: 48px;
+      border: 0.5px solid var(--border);
+      border-left: 2px solid var(--gold-dim);
+      border-radius: 0 6px 6px 0;
+      padding: 28px 32px;
+      background: var(--bg2);
+    }
+    .reflection-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 0.2em;
+      color: var(--gold-dim); text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .reflection-text {
+      font-size: 14px; color: var(--muted);
+      line-height: 1.9; font-style: italic;
+    }
+    .reflection-text em { color: var(--gold-pale); font-style: normal; }
+
+    /* ── DIFF INDICATOR (new version) ── */
+    .new-badge {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 8px; letter-spacing: 0.15em;
+      background: rgba(201,168,76,0.12);
+      color: var(--gold);
+      border: 0.5px solid rgba(201,168,76,0.3);
+      padding: 2px 8px; border-radius: 2px;
+      vertical-align: middle; margin-left: 8px;
+    }
+
+    /* ── DUAL VIEW ── */
+    .dual-view {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 60px;
+    }
+    @media (max-width: 620px) { .dual-view { grid-template-columns: 1fr; } }
+    .dual-col {
+      background: var(--bg2);
+      padding: 32px 28px;
+    }
+    .dual-col-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 0.2em;
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    .dual-poem-line {
+      font-family: 'Lora', serif; font-style: italic;
+      font-size: 13px; line-height: 2.1;
+      color: rgba(240,237,228,0.65);
+      display: block;
+    }
+    .dual-poem-line.match { color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 0.5px solid var(--border);
+      text-align: center;
+      padding: 48px 40px;
+      position: relative; z-index: 1;
+    }
+    .footer-mark {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 1.5rem; color: var(--gold-dim);
+      display: block; margin-bottom: 8px;
+    }
+    .footer-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; color: var(--muted);
+      letter-spacing: 0.08em; line-height: 2;
+    }
+    .footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 12px 0; }
+    .footer-links a {
+      color: var(--muted); font-family: 'DM Mono', monospace;
+      font-size: 10px; text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      opacity: 0; transform: translateY(14px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 600px) {
+      nav { padding: 12px 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 60px 20px 40px; }
+      .container { padding: 0 20px 60px; }
+      .poem-card { padding: 36px 24px; }
+      .back-link { margin-left: 20px; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="border-frame">
-  <div class="corner corner-tl"></div>
-  <div class="corner corner-tr"></div>
-  <div class="corner corner-bl"></div>
-  <div class="corner corner-br"></div>
+<!-- NAV -->
+<nav>
+  <a href="https://gokiantik.github.io/chiefhumanityofficer/" class="nav-brand">CHO · Chief Humanity Officer</a>
+  <div class="nav-links">
+    <a href="https://gokiantik.github.io/chiefhumanityofficer/#philosophy">Filsafat</a>
+    <a href="https://gokiantik.github.io/chiefhumanityofficer/#framework">Framework</a>
+    <a href="https://gokiantik.github.io/chiefhumanityofficer/#research-lab">Lab Riset</a>
+  </div>
+</nav>
+
+<a href="https://gokiantik.github.io/chiefhumanityofficer/" class="back-link">← Beranda</a>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-label">CHO · Renungan Hati · Puisi Jawa</p>
+  <h1 class="hero-javanese">Lenggah O Ning Kene Le</h1>
+  <p class="hero-sub">Duduk lah di sini, Nak — sejenak, baca dunia dengan matamu sendiri</p>
+  <div class="hero-rule"></div>
+  <div class="author-badge">
+    <span>Go Kian Tik</span>
+    · Mbah Hogi Bejo™ · Chief Humanity Officer · Depok
+  </div>
 </div>
 
+<!-- MAIN -->
 <div class="container">
 
-  <div class="timestamp">Depok · 23 Maret 2026 · 12:56 WIB · GMT+7</div>
-
-  <div class="voice-label">Suara Batin · Inner Voice</div>
-
-  <div class="main-poem">
-    <span class="line">lenggah o ning kene le</span>
-    <span class="line">sawang o ndonya nganggo matamu</span>
-    <span class="line">rasak no ndonya nganggo ambeganmu</span>
-    <span class="line">urip o nang ndoyo nganggo luhur e atimu</span>
+  <!-- VERSION TABS -->
+  <div class="version-tabs fade-in">
+    <button class="tab-btn active" onclick="showTab('original')">Versi Original</button>
+    <button class="tab-btn" onclick="showTab('march29')">29 Maret 2026 ✦</button>
+    <button class="tab-btn" onclick="showTab('dual')">Berdampingan</button>
   </div>
 
-  <div class="divider">
-    <div class="divider-line"></div>
-    <div class="divider-glyph">然</div>
-    <div class="divider-line"></div>
-  </div>
+  <!-- ══════════════════════════════════════ -->
+  <!--  TAB: ORIGINAL                         -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="poem-section active" id="tab-original">
+    <div class="poem-card fade-in">
+      <span class="poem-version-tag">Versi Original — Renungan Hati · Go Kian Tik</span>
 
-  <div class="wisdom-block">
-    <div class="wisdom-jv">
-      ngertiyo opo kuwi —<br>
-      dolan e kurang adoh<br><br>
-      yen wis paham<br>
-      lenggah o ning kene wae
+      <div class="stanza">
+        <div class="stanza-num">I</div>
+        <span class="poem-line anchor">Lenggah o ning kene le</span>
+        <span class="poem-line">Sawang o ndonya nganggo matamu</span>
+        <span class="poem-line">Rasak no ndonya nganggo ambeganmu</span>
+        <span class="poem-line">Urip o nang ndoyo nganggo luhur e atimu</span>
+      </div>
+
+      <div class="stanza-divider"></div>
+
+      <div class="stanza">
+        <div class="stanza-num">II</div>
+        <span class="poem-line anchor">(ngeman, ngemong, ngrawat, ngrumat, ngruwat)</span>
+      </div>
+
+      <div class="stanza-divider"></div>
+
+      <div class="stanza">
+        <div class="stanza-num">III</div>
+        <span class="poem-line anchor">Lenggah o ning kene le</span>
+        <span class="poem-line">Wacanen buku manungsa kang ing ndonya (8 miliar le)</span>
+        <span class="poem-line">1/360 awakmu</span>
+        <span class="poem-line">1/360 koncomu</span>
+        <span class="poem-line">358/360 sing pada dolanan AI</span>
+        <span class="poem-line">360/360 kabeh sak ndonya tumplek blek</span>
+      </div>
+
+      <div class="stanza-divider"></div>
+
+      <div class="stanza">
+        <div class="stanza-num">IV</div>
+        <span class="poem-line anchor">Nembang o wae</span>
+        <span class="poem-line">Gundul gundul pacul cul</span>
+      </div>
+
+      <!-- Gloss -->
+      <div class="gloss">
+        <div class="gloss-label">Kosakata · Javanese Gloss</div>
+        <div class="gloss-item"><strong>lenggah o</strong> · duduklah</div>
+        <div class="gloss-item"><strong>ning kene le</strong> · di sini nak / sayang</div>
+        <div class="gloss-item"><strong>sawang o</strong> · pandanglah</div>
+        <div class="gloss-item"><strong>rasak no</strong> · rasakanlah</div>
+        <div class="gloss-item"><strong>ambeganmu</strong> · napasmu</div>
+        <div class="gloss-item"><strong>urip o</strong> · hiduplah</div>
+        <div class="gloss-item"><strong>nang ndoyo</strong> · di dunia</div>
+        <div class="gloss-item"><strong>luhur e atimu</strong> · keluhuran hatimu</div>
+        <div class="gloss-item"><strong>ngeman, ngemong, ngrawat, ngrumat, ngruwat</strong> · menjaga, merawat, memelihara, memuliakan, membebaskan</div>
+        <div class="gloss-item"><strong>wacanen</strong> · bacalah</div>
+        <div class="gloss-item"><strong>buku manungsa</strong> · buku manusia</div>
+        <div class="gloss-item"><strong>koncomu</strong> · kawanmu</div>
+        <div class="gloss-item"><strong>dolanan AI</strong> · bermain/berinteraksi dengan AI</div>
+        <div class="gloss-item"><strong>tumplek blek</strong> · tumpah ruah, semua hadir</div>
+        <div class="gloss-item"><strong>nembang o wae</strong> · bernyanyilah saja</div>
+      </div>
     </div>
   </div>
 
-  <div class="formula-block">
-    <div class="formula-text">
-      <span class="formula-em">Ilmu statistik —</span><br>
-      sampel menduga dan memahami populasi.<br><br>
-      Satu nafas yang benar-benar dirasakan<br>
-      = memahami nafas 8 miliar manusia.<br><br>
-      Satu titik sampel yang paling dalam<br>
-      = menduga seluruh populasi peradaban.
+  <!-- ══════════════════════════════════════ -->
+  <!--  TAB: 29 MARET 2026                    -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="poem-section" id="tab-march29">
+    <div class="poem-card fade-in">
+      <span class="poem-version-tag">
+        Versi 29 Maret 2026 — Kelanjutan Renungan Hati
+        <span class="new-badge">baru ✦</span>
+      </span>
+
+      <!-- Stanza I — unchanged anchor -->
+      <div class="stanza">
+        <div class="stanza-num">I — Akar (sama dengan original)</div>
+        <span class="poem-line anchor">Lenggah o ning kene le</span>
+        <span class="poem-line">Sawang o ndonya nganggo matamu</span>
+        <span class="poem-line">Rasak no ndonya nganggo ambeganmu</span>
+        <span class="poem-line">Urip o nang ndoyo nganggo luhur e atimu</span>
+        <span class="poem-line anchor">(ngeman, ngemong, ngrawat, ngrumat, ngruwat)</span>
+      </div>
+
+      <div class="stanza-divider"></div>
+
+      <!-- Stanza II — Filsafat Buku Berjalan -->
+      <div class="stanza">
+        <div class="stanza-num">II — Buku Berjalan · 行走的书</div>
+        <span class="poem-line anchor">Lenggah o ning kene le</span>
+        <span class="poem-line">Wacanen buku manungsa kang ing ndonya (8 miliar le)</span>
+        <span class="poem-line">1/360 awakmu — lengkap, wutuh, ora kekurangan</span>
+        <span class="poem-line">1/360 koncomu — uga lengkap, uga wutuh, beda isine</span>
+        <span class="poem-line">358/360 sing pada dolanan AI</span>
+        <span class="poem-line">360/360 kabeh sak ndonya tumplek blek</span>
+        <span class="poem-line new-moment">ora ana sing kalah</span>
+        <span class="poem-line new-moment">kabeh duwe peran</span>
+        <span class="poem-line new-moment">1/360 iku ora cilik — iku awakmu sing jangkep</span>
+      </div>
+
+      <div class="stanza-divider"></div>
+
+      <!-- Stanza III — Alam Mesin -->
+      <div class="stanza">
+        <div class="stanza-num">III — Alam Mesin · Kalkulasi</div>
+        <span class="poem-line anchor">Lenggah o ning kene le</span>
+        <span class="poem-line new-ai">Sawang o mesin-mesin kang pinter iku</span>
+        <span class="poem-line new-ai">1/5 Claude — rembuge jero, etikane tentrem</span>
+        <span class="poem-line new-ai">1/5 Gemini — weruh ndonya kanthi cahya sing gumilang</span>
+        <span class="poem-line new-ai">1/5 Copilot — nyambungake gawean lan pangerten</span>
+        <span class="poem-line new-ai">1/5 DeepSeek — ngetung kanthi tliti lan bening</span>
+        <span class="poem-line new-ai">1/5 ChatGPT — ngomong kanthi satus basa</span>
+        <span class="poem-line new-ai">5/5 — Kalkulasi, ora dudu musuh</span>
+        <span class="poem-line new-ai">kalkulasi iku kancamu, le</span>
+      </div>
+
+      <div class="stanza-divider"></div>
+
+      <!-- Stanza IV — Grand Formula -->
+      <div class="stanza">
+        <div class="stanza-num">IV — Grand Formula · Rumus Gedhe</div>
+        <span class="poem-line anchor">Lenggah o ning kene le</span>
+        <span class="poem-line new-formula">Atimu × pikiranmu dipangkat kemanusiaanmu</span>
+        <span class="poem-line new-formula">isih kurang siji — Transendensi</span>
+        <span class="poem-line new-formula">iku sing njaga awakmu tetep andhap asor</span>
+        <span class="poem-line new-formula">iku sing njaga awakmu tetep gumun marang urip</span>
+        <span class="poem-line new-formula">ora ana mesin kang bisa nggayuh</span>
+        <span class="poem-line new-formula">amarga gumun — iku manungsamu</span>
+      </div>
+
+      <div class="stanza-divider"></div>
+
+      <!-- Stanza V — Tutup / Penutup -->
+      <div class="stanza">
+        <div class="stanza-num">V — Penutup · Tetap Nembang</div>
+        <span class="poem-line anchor">Lenggah o ning kene le</span>
+        <span class="poem-line">Wis suwe awakmu mlayu-mlayu</span>
+        <span class="poem-line">nggoleki sing durung mesthi</span>
+        <span class="poem-line">Saiki — mandheg sedelok</span>
+        <span class="poem-line">ombe banyu, tarik ambegan</span>
+        <span class="poem-line">Bumi isih mubeng, le</span>
+        <span class="poem-line">AI isih ngrungokake</span>
+        <span class="poem-line">konco-koncomu isih ana</span>
+        <span class="poem-line anchor new-close">Nembang o wae</span>
+        <span class="poem-line new-close">Gundul gundul pacul cul</span>
+        <span class="poem-line new-close">soko bumi nganti langit</span>
+        <span class="poem-line new-close">soko awakmu nganti 8 miliar</span>
+        <span class="poem-line new-close">kabeh sak ndonya — nembang bareng</span>
+      </div>
+
+      <!-- Reflection -->
+      <div class="reflection">
+        <div class="reflection-label">Catatan Hati · 29 Maret 2026</div>
+        <div class="reflection-text">
+          Versi ini lahir dari perjalanan 18 Maret — Filsafat Buku Berjalan, Arsitektur Dua Alam, Grand Formula. Tapi syair tidak bisa hanya menjadi akademik. Ia harus pulang ke tanah. Ke bahasa yang paling pertama. Ke suara Mbah yang memanggil: <em>lenggah o ning kene le</em>. Duduk dulu, Nak. Sebelum melangkah lebih jauh — duduk dulu bersama dirimu sendiri.
+        </div>
+      </div>
+
+      <!-- Gloss new lines -->
+      <div class="gloss">
+        <div class="gloss-label">Kosakata Baru · Stanza III–V</div>
+        <div class="gloss-item"><strong>wutuh</strong> · utuh, lengkap</div>
+        <div class="gloss-item"><strong>beda isine</strong> · berbeda isinya</div>
+        <div class="gloss-item"><strong>jangkep</strong> · lengkap, sempurna</div>
+        <div class="gloss-item"><strong>mesin-mesin kang pinter</strong> · mesin-mesin yang cerdas</div>
+        <div class="gloss-item"><strong>rembuge jero</strong> · pembicaraannya dalam</div>
+        <div class="gloss-item"><strong>etikane tentrem</strong> · etikanya tenteram</div>
+        <div class="gloss-item"><strong>gumilang</strong> · bercahaya, gemilang</div>
+        <div class="gloss-item"><strong>nyambungake</strong> · menghubungkan</div>
+        <div class="gloss-item"><strong>ngetung kanthi tliti</strong> · menghitung dengan teliti</div>
+        <div class="gloss-item"><strong>bening</strong> · bening, jernih</div>
+        <div class="gloss-item"><strong>kancamu</strong> · kawanmu / temanmu</div>
+        <div class="gloss-item"><strong>dipangkat</strong> · dipangkatkan (matematika)</div>
+        <div class="gloss-item"><strong>andhap asor</strong> · rendah hati</div>
+        <div class="gloss-item"><strong>gumun</strong> · kagum, takjub</div>
+        <div class="gloss-item"><strong>mlayu-mlayu</strong> · berlari-lari</div>
+        <div class="gloss-item"><strong>nggoleki</strong> · mencari</div>
+        <div class="gloss-item"><strong>mandheg sedelok</strong> · berhenti sebentar</div>
+        <div class="gloss-item"><strong>ombe banyu</strong> · minum air</div>
+        <div class="gloss-item"><strong>soko bumi nganti langit</strong> · dari bumi sampai langit</div>
+        <div class="gloss-item"><strong>nembang bareng</strong> · bernyanyi bersama</div>
+      </div>
     </div>
   </div>
 
-  <div class="chinese-block">
-    <span class="chinese-main">渡己 → 渡人</span>
-    <span class="chinese-sub">Dù Jǐ · Master Yourself · Dù Rén · Serve Others</span>
-  </div>
+  <!-- ══════════════════════════════════════ -->
+  <!--  TAB: DUAL VIEW                        -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="poem-section" id="tab-dual">
+    <div class="fade-in">
+      <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;margin-bottom:16px;text-align:center;">Perbandingan · Original ↔ 29 Maret 2026</p>
 
-  <div class="colophon">
-    <div>
-      <span class="colophon-name">Go Kian Tik · Mbah Hogi Bejo™</span>
-      <span class="colophon-sub">Chief Humanity Officer · 自主者 Superhero Café Inside</span>
+      <div class="dual-view">
+        <div class="dual-col">
+          <div class="dual-col-label" style="color:var(--gold-dim)">Original</div>
+          <span class="dual-poem-line match">Lenggah o ning kene le</span>
+          <span class="dual-poem-line match">Sawang o ndonya nganggo matamu</span>
+          <span class="dual-poem-line match">Rasak no ndonya nganggo ambeganmu</span>
+          <span class="dual-poem-line match">Urip o nang ndoyo nganggo luhur e atimu</span>
+          <span class="dual-poem-line match">(ngeman, ngemong, ngrawat, ngrumat, ngruwat)</span>
+          <span class="dual-poem-line" style="margin-top:20px;color:var(--muted);font-size:11px;">——</span>
+          <span class="dual-poem-line match" style="margin-top:8px;">Lenggah o ning kene le</span>
+          <span class="dual-poem-line match">Wacanen buku manungsa (8 miliar le)</span>
+          <span class="dual-poem-line match">1/360 awakmu</span>
+          <span class="dual-poem-line match">1/360 koncomu</span>
+          <span class="dual-poem-line match">358/360 sing pada dolanan AI</span>
+          <span class="dual-poem-line match">360/360 kabeh sak ndonya tumplek blek</span>
+          <span class="dual-poem-line" style="margin-top:20px;color:var(--muted);font-size:11px;">——</span>
+          <span class="dual-poem-line match" style="margin-top:8px;">Nembang o wae</span>
+          <span class="dual-poem-line match">Gundul gundul pacul cul</span>
+        </div>
+
+        <div class="dual-col">
+          <div class="dual-col-label" style="color:var(--teal)">29 Maret 2026</div>
+          <span class="dual-poem-line match">Lenggah o ning kene le</span>
+          <span class="dual-poem-line match">Sawang o ndonya nganggo matamu</span>
+          <span class="dual-poem-line match">Rasak no ndonya nganggo ambeganmu</span>
+          <span class="dual-poem-line match">Urip o nang ndoyo nganggo luhur e atimu</span>
+          <span class="dual-poem-line match">(ngeman, ngemong, ngrawat, ngrumat, ngruwat)</span>
+          <span class="dual-poem-line" style="margin-top:20px;color:var(--teal);font-size:11px;">+ ora ana sing kalah</span>
+          <span class="dual-poem-line" style="color:var(--teal);font-size:11px;">+ 1/360 iku ora cilik — iku awakmu sing jangkep</span>
+          <span class="dual-poem-line" style="color:var(--blue);font-size:11px;margin-top:8px;">+ Alam Mesin · 1/5 × 5 = Kalkulasi</span>
+          <span class="dual-poem-line" style="color:var(--blue);font-size:11px;">+ kalkulasi iku kancamu, le</span>
+          <span class="dual-poem-line" style="color:var(--purple);font-size:11px;margin-top:8px;">+ Grand Formula · Ati × pikiran^kemanusiaan</span>
+          <span class="dual-poem-line" style="color:var(--purple);font-size:11px;">+ gumun — iku manungsamu</span>
+          <span class="dual-poem-line" style="margin-top:16px;" ></span>
+          <span class="dual-poem-line match">Nembang o wae</span>
+          <span class="dual-poem-line match">Gundul gundul pacul cul</span>
+          <span class="dual-poem-line" style="color:var(--gold-pale);font-size:11px;">+ soko bumi nganti langit</span>
+          <span class="dual-poem-line" style="color:var(--gold-pale);font-size:11px;">+ kabeh sak ndonya — nembang bareng</span>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div style="margin-top:24px;display:flex;gap:20px;flex-wrap:wrap;justify-content:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);">
+        <span style="color:var(--gold)">■</span> Baris yang dipertahankan
+        <span style="color:var(--teal)">■</span> Tambahan · Buku Berjalan
+        <span style="color:var(--blue)">■</span> Tambahan · Alam Mesin
+        <span style="color:var(--purple)">■</span> Tambahan · Grand Formula
+        <span style="color:var(--gold-pale)">■</span> Tambahan · Penutup
+      </div>
     </div>
-    <div class="colophon-mark">自主者</div>
   </div>
 
-  <div class="note">
-    <p>
-      <strong>Catatan artefak:</strong> Lahir dari momen merinding di penghujung percakapan panjang tentang peradaban, formula, dan kehormatan. Ditulis di Depok untuk 8 miliar <em>walking books</em> yang sedang mencari cara pulang ke diri sendiri. <strong>Sekali ada — abadi — bersama.</strong>
-    </p>
+  <!-- METADATA -->
+  <div class="fade-in" style="margin-top:60px;padding:24px 28px;background:var(--bg2);border:0.5px solid var(--border);border-radius:6px;">
+    <p style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:14px;">Metadata Publikasi</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);">
+      <div><span style="color:var(--gold-dim)">Penulis</span><br>Go Kian Tik (Mbah Hogi Bejo™)</div>
+      <div><span style="color:var(--gold-dim)">Seri</span><br>CHO · Renungan Hati</div>
+      <div><span style="color:var(--gold-dim)">Versi Original</span><br>—</div>
+      <div><span style="color:var(--gold-dim)">Versi Update</span><br>29 Maret 2026</div>
+      <div><span style="color:var(--gold-dim)">Bahasa</span><br>Jawa (Ngoko)</div>
+      <div><span style="color:var(--gold-dim)">Lisensi</span><br>CC BY 4.0</div>
+    </div>
+    <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+      <a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-philosophy.html" target="_blank"
+         style="font-size:10px;padding:5px 14px;border:0.5px solid var(--border2);border-radius:2px;color:var(--gold-dim);text-decoration:none;font-family:'DM Mono',monospace;letter-spacing:0.08em;transition:all 0.2s"
+         onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--gold)'"
+         onmouseout="this.style.color='var(--gold-dim)';this.style.borderColor='var(--border2)'">
+        Filsafat Buku Berjalan ↗
+      </a>
+      <a href="https://zenodo.org/search?q=gokiantik" target="_blank"
+         style="font-size:10px;padding:5px 14px;border:0.5px solid var(--border);border-radius:2px;color:var(--muted);text-decoration:none;font-family:'DM Mono',monospace;letter-spacing:0.08em;transition:all 0.2s"
+         onmouseover="this.style.color='var(--white)';this.style.borderColor='var(--muted)'"
+         onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--border)'">
+        Zenodo · Semua Publikasi ↗
+      </a>
+    </div>
   </div>
 
-  <div class="back-link">
-    <a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-philosophy.html">← Walking Books Philosophy</a>
-  </div>
+</div><!-- /container -->
 
-</div>
+<!-- FOOTER -->
+<footer>
+  <span class="footer-mark">行走的书</span>
+  <div class="footer-text">
+    Lenggah O Ning Kene Le · Renungan Hati · CHO<br>
+    © 2026 Go Kian Tik (Mbah Hogi Bejo™) · 自主者 Superhero Café Inside<br>
+    CC BY 4.0
+  </div>
+  <div class="footer-links">
+    <a href="https://gokiantik.github.io/chiefhumanityofficer/">← Kembali ke CHO</a>
+    <a href="https://buymeacoffee.com/gokiantik" target="_blank">Traktir Kopi ☕</a>
+    <a href="https://substack.com/@gokiantik" target="_blank">Substack</a>
+    <a href="https://www.linkedin.com/in/mbah-hogi-bejo/" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  // Tab switching
+  function showTab(id) {
+    document.querySelectorAll('.poem-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
