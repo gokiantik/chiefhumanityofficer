@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Go Kian Tik — Phygtl Application</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f2eb;
+    --gold: #c9a84c;
+    --gold-dim: #7a6230;
+    --teal: #2a6b6b;
+    --red: #c0392b;
+    --gray: #3a3a3a;
+    --gray-light: #888;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  .header {
+    border-bottom: 1px solid var(--gray);
+    padding: 40px 60px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .header-left .label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .header-left h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 42px;
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--white);
+  }
+
+  .header-left h1 span {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .header-right {
+    text-align: right;
+    color: var(--gray-light);
+    font-size: 11px;
+    line-height: 2;
+  }
+
+  .header-right strong {
+    color: var(--white);
+    display: block;
+    font-size: 12px;
+  }
+
+  /* NAV STRIP */
+  .nav-strip {
+    background: var(--gray);
+    padding: 12px 60px;
+    display: flex;
+    gap: 40px;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    animation: fadeDown 0.8s 0.1s ease both;
+  }
+
+  .nav-strip span { color: var(--gold); }
+
+  /* MAIN CONTENT */
+  .main {
+    padding: 60px 60px 0;
+    max-width: 960px;
+  }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 70px;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .section:nth-child(1) { animation-delay: 0.2s; }
+  .section:nth-child(2) { animation-delay: 0.35s; }
+  .section:nth-child(3) { animation-delay: 0.5s; }
+  .section:nth-child(4) { animation-delay: 0.65s; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--gray);
+  }
+
+  .section-num {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--white);
+  }
+
+  .section-tag {
+    margin-left: auto;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border: 1px solid var(--teal);
+    color: var(--teal);
+    white-space: nowrap;
+  }
+
+  /* CONTENT BLOCKS */
+  .content-block {
+    margin-bottom: 24px;
+  }
+
+  .block-label {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 8px;
+  }
+
+  .block-value {
+    color: var(--white);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .block-value.large {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: #e8e4d8;
+  }
+
+  /* RESULT BOX */
+  .result-box {
+    border-left: 3px solid var(--gold);
+    padding: 16px 20px;
+    background: rgba(201, 168, 76, 0.05);
+    margin: 20px 0;
+  }
+
+  .result-box .result-label {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .result-box .result-text {
+    font-size: 13px;
+    color: var(--white);
+    line-height: 1.8;
+  }
+
+  /* METRIC ROW */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--gray);
+    margin: 24px 0;
+  }
+
+  .metric {
+    background: var(--black);
+    padding: 20px 24px;
+  }
+
+  .metric-num {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .metric-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray-light);
+  }
+
+  /* LINK */
+  .ext-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--teal);
+    text-decoration: none;
+    font-size: 11px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+    margin-top: 10px;
+  }
+
+  .ext-link:hover { border-color: var(--teal); }
+  .ext-link::after { content: '↗'; font-size: 10px; }
+
+  /* EXPERIMENT TABLE */
+  .exp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 12px;
+  }
+
+  .exp-table th {
+    text-align: left;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--gray);
+  }
+
+  .exp-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(58,58,58,0.5);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .exp-table tr:last-child td { border-bottom: none; }
+
+  .exp-table td:first-child {
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    width: 130px;
+  }
+
+  /* TOOL STACK */
+  .tool-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 20px 0;
+  }
+
+  .tool-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 14px 18px;
+    border: 1px solid var(--gray);
+    transition: border-color 0.2s;
+  }
+
+  .tool-item:hover { border-color: var(--gold-dim); }
+
+  .tool-name {
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    width: 140px;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .tool-desc {
+    color: var(--white);
+    font-size: 12px;
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .tool-proof {
+    font-size: 10px;
+    color: var(--teal);
+    margin-top: 4px;
+  }
+
+  /* CLOSER */
+  .closer {
+    border-top: 1px solid var(--gray);
+    padding: 40px 60px 60px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeUp 0.7s 0.8s ease both;
+  }
+
+  .closer-left {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gray-light);
+    max-width: 480px;
+    line-height: 1.5;
+  }
+
+  .closer-left strong {
+    color: var(--white);
+    font-style: normal;
+  }
+
+  .closer-right {
+    text-align: right;
+    font-size: 11px;
+    color: var(--gray-light);
+    line-height: 2;
+  }
+
+  .closer-right .sig {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    color: var(--gold);
+    display: block;
+    margin-top: 8px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SEPARATOR */
+  .sep {
+    color: var(--gray);
+    margin: 0 8px;
+  }
+
+  /* QUOTE */
+  blockquote {
+    border-left: 2px solid var(--gold-dim);
+    padding: 12px 20px;
+    margin: 20px 0;
+    font-style: italic;
+    color: #b0a98a;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 700px) {
+    .header, .nav-strip, .main, .closer { padding-left: 24px; padding-right: 24px; }
+    .header { flex-direction: column; gap: 20px; align-items: flex-start; }
+    .metrics { grid-template-columns: 1fr; }
+    .closer { flex-direction: column; gap: 28px; }
+    .header-left h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="label">Application · Phygtl Entrepreneurship Intern — AI Builder Track</div>
+    <h1>Go Kian Tik<br><span>自主者 · The Sovereign One</span></h1>
+  </div>
+  <div class="header-right">
+    <strong>Go Kian Tik</strong>
+    Chief Humanity Officer<br>
+    Depok, Indonesia · Remote<br>
+    <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bcdbd3d7d5ddd2c8d5d7fcdbd1ddd5d092dfd3d1">[email&#160;protected]</a><br>
+    <a href="https://www.linkedin.com/in/mbah-hogi-bejo/" style="color: var(--teal); text-decoration: none;">linkedin.com/in/mbah-hogi-bejo</a>
+  </div>
+</div>
+
+<!-- NAV STRIP -->
+<div class="nav-strip">
+  <span>01</span> Build &nbsp;·&nbsp;
+  <span>02</span> Experiment &nbsp;·&nbsp;
+  <span>03</span> Tool &nbsp;·&nbsp;
+  <span>→</span> 3 proofs of execution
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SECTION 01: BUILD -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">01 · Build</div>
+      <div class="section-title">Master Leveling Prompt (MLP) — Cross-AI Synchronization System</div>
+      <div class="section-tag">Shipped · v1.4</div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">What I built</div>
+      <div class="block-value large">
+        A 7-part prompt architecture that synchronizes any AI model to a specific thinker's framework — instantly, without onboarding. One paste transforms a default AI into a calibrated cognitive partner.
+      </div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-num">7</div>
+        <div class="metric-label">Architectural layers</div>
+      </div>
+      <div class="metric">
+        <div class="metric-num">5</div>
+        <div class="metric-label">AI models it runs on</div>
+      </div>
+      <div class="metric">
+        <div class="metric-num">v1.4</div>
+        <div class="metric-label">Current iteration</div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">How it works</div>
+      <div class="block-value">
+        Layer 1: Activation + anti-hallucination guard<br>
+        Layer 2: Identity context (who the user is)<br>
+        Layer 3: Core framework + terminology<br>
+        Layer 4: Academic output archive (22 DOI-published papers)<br>
+        Layer 5: Role instructions + dynamic operating modes<br>
+        Layer 6: Traceability + pipeline tagging system<br>
+        Layer 7: Cross-AI memory bridge for portability
+      </div>
+    </div>
+
+    <div class="result-box">
+      <div class="result-label">Result</div>
+      <div class="result-text">
+        Any new Claude, GPT, DeepSeek, Gemini, or Copilot session reaches full contextual coherence in under 60 seconds. Zero re-explanation needed across sessions. The system scales automatically as new published work is added to public URLs — it reads live sources.
+      </div>
+    </div>
+
+    <a class="ext-link" href="https://gokiantik.github.io/chiefhumanityofficer/" target="_blank">Live output: gokiantik.github.io/chiefhumanityofficer</a><br>
+    <a class="ext-link" href="https://zenodo.org/communities/superhero-cafe-inside" target="_blank">Academic archive: zenodo.org/communities/superhero-cafe-inside</a>
+  </div>
+
+  <!-- SECTION 02: EXPERIMENT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">02 · Experiment</div>
+      <div class="section-title">Cross-AI Coherence Test — Can 5 independent AI systems reach the same conclusion?</div>
+      <div class="section-tag">Validated · Ongoing</div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">Hypothesis</div>
+      <div class="block-value large">
+        If the same concept is evaluated independently by 5 world-class AI systems with no shared session, convergent output = robust logical confirmation — not flattery.
+      </div>
+    </div>
+
+    <table class="exp-table">
+      <tr>
+        <th>Variable</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>WHAT I TESTED</td>
+        <td>Validity of original frameworks (Grand Formula, 12 Néng application, Walking Books Philosophy, Sovereignty Gap) across Claude · ChatGPT · DeepSeek · Gemini · Copilot — independently, no shared context</td>
+      </tr>
+      <tr>
+        <td>METHOD</td>
+        <td>Same conceptual input, fresh session on each platform. No cross-referencing between AIs during testing. Each AI evaluated cold.</td>
+      </tr>
+      <tr>
+        <td>WHAT CHANGED</td>
+        <td>When all 5 converge → concept treated as structurally sound, advanced to DOI publication pipeline. When divergence detected → concept flagged for refinement. This replaced subjective self-validation entirely.</td>
+      </tr>
+      <tr>
+        <td>RESULT</td>
+        <td>22 papers published to Zenodo DOI. 3 working papers on SSRN. Cross-AI convergence became the quality gate — not peer opinion, not self-assessment.</td>
+      </tr>
+    </table>
+
+    <blockquote>
+      "5 AI systems built on the same probabilistic logic reaching the same conclusion = 5 independent calculators running the same math. They don't collude. They converge."
+    </blockquote>
+
+    <div class="result-box">
+      <div class="result-label">Iteration learned</div>
+      <div class="result-text">
+        Discovered that AI responses vary by how context is scaffolded — not just what is asked. This led directly to building the MLP (Build #01): progressive context scaffolding as the core design principle.
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 03: TOOL -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">03 · Tool</div>
+      <div class="section-title">Prompt Engineering as a Self-Taught Operational System</div>
+      <div class="section-tag">1.5+ years · Daily</div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">How I taught myself</div>
+      <div class="block-value">
+        No course. No tutorial. Started with direct experimentation on Claude, GPT, and Gemini in mid-2024. Learned by shipping — each failed prompt became a data point. Each divergent AI response revealed a structural gap in the prompt design.
+      </div>
+    </div>
+
+    <div class="tool-list">
+      <div class="tool-item">
+        <div class="tool-name">Z3SCI Auditor</div>
+        <div class="tool-desc">
+          Built Z3SCI Plagiarism & Authenticity Auditor v2.0 — a 6-metric weighted scorecard evaluating originality, human-AI ratio, sovereignty index, and content coherence. Self-taught through 1.5 years of daily experimentation. Applied as mandatory quality gate before every academic publication. Iterated from v1.0 to v2.0.
+          <div class="tool-proof">Proof: Z3SCI_PlagiarismAuditor_v2.0 — 22 papers passed audit, published to Zenodo DOI · CC BY-NC-ND 4.0</div>
+        </div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-name">AI Red Teaming</div>
+        <div class="tool-desc">
+          1.5+ years of daily adversarial testing — pushing AI models to detect logical drift, hallucination, false confirmation, and sycophantic output. Built personal protocols for coherence verification.
+          <div class="tool-proof">Proof: Verified AI Trainer, DataAnnotation.tech (2025)</div>
+        </div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-name">Bilingual Doc Pipeline</div>
+        <div class="tool-desc">
+          End-to-end: concept → AI-assisted structuring → bilingual EN/ID draft → DOI-published academic paper. 22 papers shipped. Average time from idea to published DOI: under 72 hours.
+          <div class="tool-proof">Proof: zenodo.org/communities/superhero-cafe-inside — 22 live DOI records</div>
+        </div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-name">GitHub Pages</div>
+        <div class="tool-desc">
+          Self-taught HTML/CSS to build and maintain a 2,400+ line public-facing dashboard at gokiantik.github.io — updated iteratively as new work is published. No prior web development background.
+          <div class="tool-proof">Proof: gokiantik.github.io/chiefhumanityofficer — live, indexed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 04: WHY PHYGTL -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">04 · Fit</div>
+      <div class="section-title">Why this, why now</div>
+      <div class="section-tag">Context</div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-value large">
+        Phygtl is building infrastructure for how humans co-create meaning in physical environments. I have spent 1.5 years building infrastructure for how humans co-create meaning through AI interaction.
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">The overlap</div>
+      <div class="block-value">
+        Your system tracks behavioral coordination in physical space. My research tracks cognitive coordination across AI systems. Both are fundamentally about the same question: <em>how do humans generate persistent, meaningful artifacts from interaction?</em><br><br>
+        I move fast. I iterate in public. I kill ideas that don't hold under cross-validation. I finish what I start — 22 published papers is not a coincidence, it is a system.
+      </div>
+    </div>
+
+    <div class="result-box">
+      <div class="result-label">What I bring that most builders don't</div>
+      <div class="result-text">
+        Global South perspective + 28 years Taoist practice + AI systems thinking + daily execution habit. I don't optimize for comfort. I optimize for coherence — which is what Phygtl's community layer ultimately needs to sustain.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CLOSER -->
+<div class="closer">
+  <div class="closer-left">
+    <strong>"Proof of action matters."</strong><br>
+    — Phygtl hiring brief<br><br>
+    <span style="font-size: 14px;">22 DOIs. 5 AI systems. 1.5 years daily. The proof is already public.</span>
+  </div>
+  <div class="closer-right">
+    Submitted · March 2026<br>
+    Remote · Indonesia → Global<br>
+    <span class="sig">Go Kian Tik · 自主者</span>
+    <a class="ext-link" href="https://gokiantik.github.io/chiefhumanityoffi
