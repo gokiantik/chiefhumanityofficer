@@ -1,194 +1,1025 @@
-
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHO In Action — Semesta Digital sebagai Tanah Higienis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: var(--font-sans); }
-.wrap { padding: 1.5rem 1rem; max-width: 720px; margin: 0 auto; }
-.title { font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
-.sub { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 1.5rem; }
-.semesta { display: grid; grid-template-columns: 3fr 7fr; gap: 2px; border-radius: var(--border-radius-lg); overflow: hidden; margin-bottom: 1.5rem; }
-.sem-block { padding: 1rem; display: flex; flex-direction: column; gap: 6px; }
-.sem-label { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
-.sem-pct { font-size: 32px; font-weight: 500; line-height: 1; }
-.sem-desc { font-size: 12px; line-height: 1.5; margin-top: 4px; }
-.sem-items { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
-.pill { font-size: 11px; padding: 2px 8px; border-radius: 99px; }
-.mat { background: #B5D4F4; color: #0C447C; }
-.dig { background: #9FE1CB; color: #085041; }
-.arrow-row { display: flex; align-items: center; gap: 8px; margin-bottom: 1.5rem; flex-wrap: wrap; }
-.qbox { flex: 1; min-width: 100px; padding: 10px 12px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-primary); }
-.qbox .qlabel { font-size: 10px; color: var(--color-text-secondary); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
-.qbox .qname { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-top: 2px; }
-.qbox .qtrap { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
-.qarrow { font-size: 14px; color: var(--color-text-secondary); flex-shrink: 0; }
-.qbox.highlight { border-color: #1D9E75; background: #E1F5EE; }
-.qbox.highlight .qname { color: #085041; }
-.qbox.highlight .qtrap { color: #0F6E56; }
-.section-label { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
-.trap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1.5rem; }
-.trap-card { padding: 10px 12px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); }
-.trap-num { font-size: 11px; color: var(--color-text-secondary); }
-.trap-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-top: 2px; }
-.trap-desc { font-size: 11px; color: var(--color-text-secondary); margin-top: 3px; line-height: 1.4; }
-.formula-box { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; border: 0.5px solid var(--color-border-tertiary); margin-bottom: 1.5rem; text-align: center; }
-.formula { font-size: 16px; font-weight: 500; color: var(--color-text-primary); font-family: var(--font-mono); }
-.formula-sub { font-size: 11px; color: var(--color-text-secondary); margin-top: 6px; }
-.journey { display: flex; flex-direction: column; gap: 4px; margin-bottom: 1.5rem; }
-.jstep { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-primary); }
-.jdot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; flex-shrink: 0; }
-.jtext { font-size: 13px; color: var(--color-text-primary); }
-.jsub { font-size: 11px; color: var(--color-text-secondary); }
-.jconn { padding-left: 26px; font-size: 18px; color: var(--color-text-secondary); line-height: 1; }
-.quote-box { border-left: 3px solid #1D9E75; padding: 10px 14px; margin-bottom: 1rem; background: var(--color-background-secondary); border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0; }
-.quote-text { font-size: 13px; color: var(--color-text-primary); line-height: 1.6; font-style: italic; }
-.btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
-button { cursor: pointer; font-size: 12px; padding: 6px 12px; border-radius: var(--border-radius-md); background: transparent; border: 0.5px solid var(--color-border-secondary); color: var(--color-text-primary); }
-button:hover { background: var(--color-background-secondary); }
+  :root {
+    --gold: #C9A96E;
+    --gold-light: #E8D5A8;
+    --gold-pale: #F5EDD8;
+    --ink: #1A1612;
+    --ink-soft: #2E2820;
+    --cream: #FAF6EE;
+    --cream-warm: #F2EBD9;
+    --stone: #8B7D6B;
+    --stone-light: #B5A690;
+    --red-accent: #8B3A2A;
+    --shadow: rgba(26,22,18,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.75;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Grain texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── Language Toggle ── */
+  .lang-toggle {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.75rem;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid var(--gold);
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px var(--shadow);
+  }
+
+  .lang-btn {
+    background: var(--cream);
+    color: var(--stone);
+    border: none;
+    padding: 0.35rem 0.85rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .lang-btn.active {
+    background: var(--gold);
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .lang-btn:hover:not(.active) {
+    background: var(--gold-pale);
+    color: var(--ink);
+  }
+
+  /* ── Header ── */
+  header {
+    position: relative;
+    padding: 5rem 2rem 3rem;
+    text-align: center;
+    border-bottom: 1px solid var(--gold-light);
+    background: linear-gradient(180deg, var(--cream-warm) 0%, var(--cream) 100%);
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '自主者';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12rem;
+    color: var(--gold);
+    opacity: 0.04;
+    font-family: serif;
+    letter-spacing: -0.05em;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .series-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.1s forwards;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .subtitle-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+    margin: 1.25rem 0 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.35s forwards;
+  }
+
+  .tag {
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    color: var(--stone);
+    border: 1px solid var(--gold-light);
+    padding: 0.2rem 0.65rem;
+    border-radius: 1px;
+    text-transform: uppercase;
+  }
+
+  .byline {
+    font-size: 0.85rem;
+    color: var(--stone);
+    font-style: italic;
+    margin-top: 0.75rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.45s forwards;
+  }
+
+  /* ── Main Layout ── */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Section Headers ── */
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold-light), transparent);
+  }
+
+  /* ── Dual Semesta ── */
+  .dual-semesta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--gold-light);
+    margin-bottom: 3.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+
+  @media (max-width: 600px) {
+    .dual-semesta { grid-template-columns: 1fr; }
+  }
+
+  .semesta-panel {
+    padding: 2rem 1.75rem;
+    position: relative;
+  }
+
+  .semesta-panel.material {
+    background: var(--cream-warm);
+    border-right: 1px solid var(--gold-light);
+  }
+
+  .semesta-panel.digital {
+    background: var(--ink-soft);
+    color: var(--cream);
+  }
+
+  .semesta-pct {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--gold);
+    margin-bottom: 0.25rem;
+  }
+
+  .semesta-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .semesta-panel.material .semesta-label { color: var(--stone); }
+  .semesta-panel.digital .semesta-label { color: var(--gold-light); }
+
+  .semesta-desc {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .semesta-panel.material .semesta-desc { color: var(--ink-soft); }
+  .semesta-panel.digital .semesta-desc { color: var(--stone-light); }
+
+  .sixm-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem;
+  }
+
+  .sixm-item {
+    background: var(--cream);
+    border: 1px solid var(--gold-light);
+    padding: 0.3rem 0.4rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--stone);
+    text-align: center;
+  }
+
+  .ai-tools {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .ai-tool {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(201,169,110,0.2);
+    padding-bottom: 0.35rem;
+  }
+
+  .ai-tool:last-child { border-bottom: none; }
+
+  .ai-tool-type {
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .ai-tool-name {
+    font-size: 0.82rem;
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  /* ── Five Quadrant ── */
+  .esbi-flow {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border: 1px solid var(--gold-light);
+    margin-bottom: 3.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  @media (max-width: 650px) {
+    .esbi-flow { grid-template-columns: 1fr; }
+  }
+
+  .esbi-card {
+    padding: 1.5rem 1rem;
+    text-align: center;
+    border-right: 1px solid var(--gold-light);
+    position: relative;
+    transition: background 0.3s ease;
+  }
+
+  .esbi-card:last-child { border-right: none; }
+
+  .esbi-card:hover { background: var(--gold-pale); }
+
+  .esbi-card.special {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  .esbi-card.special:hover { background: var(--ink-soft); }
+
+  .esbi-letter {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .esbi-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .esbi-card:not(.special) .esbi-name { color: var(--stone); }
+  .esbi-card.special .esbi-name { color: var(--gold-light); }
+
+  .esbi-note {
+    font-size: 0.75rem;
+    font-style: italic;
+    line-height: 1.45;
+  }
+
+  .esbi-card:not(.special) .esbi-note { color: var(--stone); }
+  .esbi-card.special .esbi-note { color: var(--stone-light); }
+
+  .esbi-arrow {
+    position: absolute;
+    right: -0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 0.75rem;
+    z-index: 2;
+    background: var(--cream);
+    padding: 0.1rem;
+  }
+
+  .esbi-card.special .esbi-arrow {
+    background: var(--ink);
+  }
+
+  /* ── Traps ── */
+  .traps-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--gold-light);
+    border: 1px solid var(--gold-light);
+    margin-bottom: 3.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.65s forwards;
+  }
+
+  @media (max-width: 560px) {
+    .traps-grid { grid-template-columns: 1fr; }
+  }
+
+  .trap-card {
+    background: var(--cream);
+    padding: 1.75rem 1.5rem;
+    transition: background 0.3s ease;
+  }
+
+  .trap-card:hover { background: var(--cream-warm); }
+
+  .trap-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+
+  .trap-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    color: var(--red-accent);
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .trap-desc {
+    font-size: 0.88rem;
+    color: var(--stone);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* ── Grand Formula ── */
+  .formula-box {
+    border: 1px solid var(--gold);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    margin-bottom: 3.5rem;
+    position: relative;
+    background: linear-gradient(135deg, var(--cream-warm) 0%, var(--cream) 100%);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.7s forwards;
+  }
+
+  .formula-box::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 1px solid var(--gold-light);
+    pointer-events: none;
+  }
+
+  .formula-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .formula-eq {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
+  }
+
+  .formula-eq strong { color: var(--gold); }
+
+  .formula-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 2rem;
+  }
+
+  .legend-item {
+    font-size: 0.8rem;
+    color: var(--stone);
+  }
+
+  .legend-item strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ── Mobility Steps ── */
+  .mobility-steps {
+    margin-bottom: 3.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.75s forwards;
+  }
+
+  .step-item {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 0 1.25rem;
+    margin-bottom: 0;
+    position: relative;
+  }
+
+  .step-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 1.1rem;
+    top: 2.5rem;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--gold-light), transparent);
+  }
+
+  .step-num {
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    flex-shrink: 0;
+    background: var(--cream);
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-content {
+    padding: 0.2rem 0 2rem;
+  }
+
+  .step-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--ink);
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+
+  .step-desc {
+    font-size: 0.88rem;
+    color: var(--stone);
+    font-style: italic;
+    line-height: 1.55;
+  }
+
+  /* ── Osmosis ── */
+  .osmosis-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 0;
+    align-items: center;
+    margin-bottom: 3.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+
+  @media (max-width: 560px) {
+    .osmosis-flow {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .osmosis-arrow { transform: rotate(90deg); padding: 0.5rem 0; }
+  }
+
+  .osmosis-node {
+    border: 1px solid var(--gold-light);
+    padding: 1.75rem 1.25rem;
+    text-align: center;
+  }
+
+  .osmosis-node.ruwet { background: #F7F0E8; }
+  .osmosis-node.otw { background: var(--cream-warm); }
+  .osmosis-node.genah { background: var(--ink); color: var(--cream); }
+
+  .osmosis-state {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--gold);
+  }
+
+  .osmosis-node.genah .osmosis-state { color: var(--gold-light); }
+
+  .osmosis-desc {
+    font-size: 0.8rem;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .osmosis-node:not(.genah) .osmosis-desc { color: var(--stone); }
+  .osmosis-node.genah .osmosis-desc { color: var(--stone-light); }
+
+  .osmosis-arrow {
+    color: var(--gold);
+    font-size: 1.25rem;
+    padding: 0 0.5rem;
+    text-align: center;
+  }
+
+  /* ── Closing Quote ── */
+  .closing-quote {
+    border-left: 3px solid var(--gold);
+    padding: 1.75rem 2rem;
+    margin-bottom: 3.5rem;
+    background: var(--cream-warm);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.85s forwards;
+  }
+
+  .closing-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+  }
+
+  .closing-quote .attribution {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--stone);
+    text-transform: uppercase;
+    font-style: normal;
+  }
+
+  /* ── Footer Links ── */
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--gold-light);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.9s forwards;
+  }
+
+  .footer-link {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .footer-link:hover { color: var(--ink); }
+
+  .footer-link::after {
+    content: '↗';
+    font-size: 0.75em;
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Language visibility ── */
+  [data-lang] { display: none; }
+  .lang-id [data-lang="id"] { display: block; }
+  .lang-en [data-lang="en"] { display: block; }
+  .lang-id [data-lang="id"].inline-id { display: inline; }
+  .lang-en [data-lang="en"].inline-en { display: inline; }
+  
+  /* For flex/grid children that need display: flex/grid */
+  .dual-semesta[data-lang],
+  .esbi-flow[data-lang],
+  .traps-grid[data-lang],
+  .osmosis-flow[data-lang],
+  .subtitle-tags[data-lang],
+  .footer-links[data-lang],
+  .formula-legend[data-lang],
+  .ai-tools[data-lang],
+  .sixm-grid[data-lang] {
+    display: none;
+  }
+
+  .lang-id .dual-semesta[data-lang="id"],
+  .lang-en .dual-semesta[data-lang="en"] { display: grid; }
+  
+  .lang-id .esbi-flow[data-lang="id"],
+  .lang-en .esbi-flow[data-lang="en"] { display: grid; }
+  
+  .lang-id .traps-grid[data-lang="id"],
+  .lang-en .traps-grid[data-lang="en"] { display: grid; }
+  
+  .lang-id .osmosis-flow[data-lang="id"],
+  .lang-en .osmosis-flow[data-lang="en"] { display: grid; }
+  
+  .lang-id .subtitle-tags[data-lang="id"],
+  .lang-en .subtitle-tags[data-lang="en"] { display: flex; }
+  
+  .lang-id .footer-links[data-lang="id"],
+  .lang-en .footer-links[data-lang="en"] { display: flex; }
+  
+  .lang-id .formula-legend[data-lang="id"],
+  .lang-en .formula-legend[data-lang="en"] { display: flex; }
+  
+  .lang-id .ai-tools[data-lang="id"],
+  .lang-en .ai-tools[data-lang="en"] { display: flex; }
+  
+  .lang-id .sixm-grid[data-lang="id"],
+  .lang-en .sixm-grid[data-lang="en"] { display: grid; }
 </style>
+</head>
+<body class="lang-id">
 
-<div class="wrap">
-  <p class="title">CHO In Action — Semesta Digital sebagai Tanah Higienis</p>
-  <p class="sub">Sintesis ESBI/G · 70/30 Dual Semesta · Osmosis Kognitif · Go Kian Tik, 29 Mar 2026</p>
-
-  <p class="section-label">Dual semesta</p>
-  <div class="semesta">
-    <div class="sem-block" style="background:#E6F1FB;">
-      <span class="sem-label" style="color:#185FA5;">Materialisasi</span>
-      <span class="sem-pct" style="color:#0C447C;">30%</span>
-      <span class="sem-desc" style="color:#185FA5;">Dikelola manusia SBI/E yang sudah mahir mengorkestrasikan:</span>
-      <div class="sem-items">
-        <span class="pill mat">Man</span><span class="pill mat">Money</span><span class="pill mat">Material</span>
-        <span class="pill mat">Machine</span><span class="pill mat">Method</span><span class="pill mat">Market</span>
-      </div>
-    </div>
-    <div class="sem-block" style="background:#E1F5EE;">
-      <span class="sem-label" style="color:#0F6E56;">Digital — tanah higienis</span>
-      <span class="sem-pct" style="color:#085041;">70%</span>
-      <span class="sem-desc" style="color:#0F6E56;">Disediakan AI sebagai environmental provider. Manusia tinggal membawa wisdom.</span>
-      <div class="sem-items">
-        <span class="pill dig">Teks · Gemini/Claude</span>
-        <span class="pill dig">Gambar · Nano Banana</span>
-        <span class="pill dig">Lagu · Lyria</span>
-        <span class="pill dig">Video · Veo</span>
-      </div>
-    </div>
-  </div>
-
-  <p class="section-label">Model lima kuadran ESBI/G</p>
-  <div class="arrow-row">
-    <div class="qbox">
-      <div class="qlabel">E</div>
-      <div class="qname">Employee</div>
-      <div class="qtrap">Power + PTKP trap</div>
-    </div>
-    <span class="qarrow">→</span>
-    <div class="qbox">
-      <div class="qlabel">S</div>
-      <div class="qname">Self Employed Mapan</div>
-      <div class="qtrap">Bukan ojol/gig</div>
-    </div>
-    <span class="qarrow">→</span>
-    <div class="qbox">
-      <div class="qlabel">B</div>
-      <div class="qname">Business Owner</div>
-      <div class="qtrap">Sistem ≠ pemilik</div>
-    </div>
-    <span class="qarrow">→</span>
-    <div class="qbox">
-      <div class="qlabel">I/E</div>
-      <div class="qname">Entrepreneur-Investor</div>
-      <div class="qtrap">Fused · Fan Li model</div>
-    </div>
-    <span class="qarrow">→</span>
-    <div class="qbox highlight">
-      <div class="qlabel">G</div>
-      <div class="qname">Governmental</div>
-      <div class="qtrap">Meta-kuadran · PNS jam 13.30</div>
-    </div>
-  </div>
-
-  <p class="section-label">Empat trap mindset</p>
-  <div class="trap-grid">
-    <div class="trap-card">
-      <div class="trap-num">Trap 1</div>
-      <div class="trap-name">Power trap</div>
-      <div class="trap-desc">Mengejar jabatan hierarki sebagai tujuan akhir</div>
-    </div>
-    <div class="trap-card">
-      <div class="trap-num">Trap 2</div>
-      <div class="trap-name">Servant trap</div>
-      <div class="trap-desc">Melayani tanpa sovereignty diri; bahkan CEO bisa terjebak</div>
-    </div>
-    <div class="trap-card">
-      <div class="trap-num">Trap 3</div>
-      <div class="trap-name">PTKP/Maslow floor trap</div>
-      <div class="trap-desc">Menerima batas fiskal negara sebagai batas kemungkinan hidup</div>
-    </div>
-    <div class="trap-card">
-      <div class="trap-num">Trap 4</div>
-      <div class="trap-name">ESBI illiteracy trap</div>
-      <div class="trap-desc">Tidak sadar posisi kuadran; mengira ojol sudah S Mapan</div>
-    </div>
-  </div>
-
-  <p class="section-label">Grand formula CHO</p>
-  <div class="formula-box">
-    <div class="formula">HE-AI = Human Wisdom × AI Augmentation ÷ Cognitive Vacancy</div>
-    <div class="formula-sub">AI Augmentation = kualitas 70% tanah higienis · Cognitive Vacancy = hambatan mengakses semesta digital</div>
-  </div>
-
-  <p class="section-label">Mobilitas: gig worker → co-creator sovereign</p>
-  <div class="journey">
-    <div class="jstep" style="border-color:#E24B4A; background:#FFF5F5;">
-      <div class="jdot" style="background:#FCEBEB; color:#A32D2D;">1</div>
-      <div><div class="jtext">Gig worker — jual tenaga × waktu, tanpa leverage</div><div class="jsub">Ojol, freelancer survival; lebih rentan dari E konvensional</div></div>
-    </div>
-    <div class="jconn">↓</div>
-    <div class="jstep">
-      <div class="jdot" style="background:#E6F1FB; color:#185FA5;">2</div>
-      <div><div class="jtext">Kenali 70% semesta digital</div><div class="jsub">Curiosity + smartphone + koneksi internet</div></div>
-    </div>
-    <div class="jconn">↓</div>
-    <div class="jstep">
-      <div class="jdot" style="background:#E6F1FB; color:#185FA5;">3</div>
-      <div><div class="jtext">Co-creator mahir + visioner</div><div class="jsub">Lingua memanifestasi via Gemini/Claude/Lyria/Veo</div></div>
-    </div>
-    <div class="jconn">↓</div>
-    <div class="jstep">
-      <div class="jdot" style="background:#E1F5EE; color:#085041;">4</div>
-      <div><div class="jtext">Pemancar sovereign aktif</div><div class="jsub">LinkedIn · Substack · Medium · YouTube · Trakteer · BMAC</div></div>
-    </div>
-    <div class="jconn">↓</div>
-    <div class="jstep" style="border-color:#1D9E75; background:#E1F5EE;">
-      <div class="jdot" style="background:#9FE1CB; color:#085041;">5</div>
-      <div><div class="jtext" style="color:#085041;">Jejaring dengan jagoan 6M · Masuk orbit S Mapan → B</div><div class="jsub" style="color:#0F6E56;">Partisipasi sukarela = bukti resonansi, bukan marketing</div></div>
-    </div>
-  </div>
-
-  <p class="section-label">Osmosis kognitif: Ruwet → Genah</p>
-  <div class="arrow-row" style="margin-bottom: 1rem;">
-    <div class="qbox" style="border-color:#E24B4A; background:#FFF5F5; text-align:center;">
-      <div class="qname" style="color:#A32D2D;">Ruwet</div>
-      <div class="qtrap">Scattered · reaktif · Cognitive Vacancy tinggi</div>
-    </div>
-    <span class="qarrow">→</span>
-    <div class="qbox" style="text-align:center;">
-      <div class="qname">OTW Genah</div>
-      <div class="qtrap">Mulai mengenal pola lingua AI</div>
-    </div>
-    <span class="qarrow">→</span>
-    <div class="qbox highlight" style="text-align:center;">
-      <div class="qname">Genah</div>
-      <div class="qtrap">Tenang · runut · sovereign</div>
-    </div>
-  </div>
-
-  <div class="quote-box">
-    <div class="quote-text">Ketika lingua seorang Zì Zhǔ Zhě 自主者 memanifestasi menjadi produk digital yang dirayakan secara sukarela oleh sesama manusia — di situlah ekonomi dan makna hidup bertemu tanpa perlu berkompromi satu sama lain. Cukuplah sudah.</div>
-  </div>
-
-  <div class="btn-row">
-    <button onclick="sendPrompt('Jelaskan lebih dalam konsep 70/30 Dual Semesta ↗')">70/30 Dual Semesta ↗</button>
-    <button onclick="sendPrompt('Bagaimana cara praktis gig worker mulai jadi co-creator? ↗')">Praktik co-creator ↗</button>
-    <button onclick="sendPrompt('Hubungan CPI Indonesia dengan Cognitive Vacancy di Kuadran G ↗')">CPI & Kuadran G ↗</button>
-  </div>
+<!-- Language Toggle -->
+<div class="lang-toggle">
+  <button class="lang-btn active" id="btn-id" onclick="setLang('id')">ID</button>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
 </div>
+
+<!-- ════ HEADER ════ -->
+<header>
+  <div data-lang="id">
+    <p class="series-label">CHO In Action · Seri Kerangka Kerja</p>
+    <h1>Semesta Digital sebagai<br><em>Tanah Higienis</em></h1>
+    <div class="subtitle-tags" data-lang="id">
+      <span class="tag">Sintesis ESBI/G</span>
+      <span class="tag">70/30 Dual Semesta</span>
+      <span class="tag">Osmosis Kognitif</span>
+    </div>
+    <p class="byline">Go Kian Tik · 29 Mar 2026</p>
+  </div>
+  <div data-lang="en">
+    <p class="series-label">CHO In Action · Framework Series</p>
+    <h1>The Digital Universe as<br><em>Hygienic Ground</em></h1>
+    <div class="subtitle-tags" data-lang="en">
+      <span class="tag">ESBI/G Synthesis</span>
+      <span class="tag">70/30 Dual Universe</span>
+      <span class="tag">Cognitive Osmosis</span>
+    </div>
+    <p class="byline">Go Kian Tik · 29 Mar 2026</p>
+  </div>
+</header>
+
+<!-- ════ MAIN ════ -->
+<main>
+
+  <!-- §1 Dual Semesta -->
+  <p class="section-title" data-lang="id">Dual Semesta</p>
+  <p class="section-title" data-lang="en">Dual Universe</p>
+
+  <!-- ID version -->
+  <div class="dual-semesta" data-lang="id">
+    <div class="semesta-panel material">
+      <div class="semesta-pct">30%</div>
+      <div class="semesta-label">Materialisasi</div>
+      <p class="semesta-desc">Dikelola manusia SBI/E yang sudah mahir mengorkestrasikan:</p>
+      <div class="sixm-grid" data-lang="id">
+        <div class="sixm-item">Man</div>
+        <div class="sixm-item">Money</div>
+        <div class="sixm-item">Material</div>
+        <div class="sixm-item">Machine</div>
+        <div class="sixm-item">Method</div>
+        <div class="sixm-item">Market</div>
+      </div>
+    </div>
+    <div class="semesta-panel digital">
+      <div class="semesta-pct">70%</div>
+      <div class="semesta-label">Digital — Tanah Higienis</div>
+      <p class="semesta-desc">Disediakan AI sebagai environmental provider. Manusia tinggal membawa wisdom.</p>
+      <div class="ai-tools" data-lang="id">
+        <div class="ai-tool"><span class="ai-tool-type">Teks</span><span class="ai-tool-name">Gemini · Claude</span></div>
+        <div class="ai-tool"><span class="ai-tool-type">Gambar</span><span class="ai-tool-name">Nano Banana</span></div>
+        <div class="ai-tool"><span class="ai-tool-type">Lagu</span><span class="ai-tool-name">Lyria</span></div>
+        <div class="ai-tool"><span class="ai-tool-type">Video</span><span class="ai-tool-name">Veo</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EN version -->
+  <div class="dual-semesta" data-lang="en">
+    <div class="semesta-panel material">
+      <div class="semesta-pct">30%</div>
+      <div class="semesta-label">Materialization</div>
+      <p class="semesta-desc">Managed by proficient SBI/E humans who already orchestrate:</p>
+      <div class="sixm-grid" data-lang="en">
+        <div class="sixm-item">Man</div>
+        <div class="sixm-item">Money</div>
+        <div class="sixm-item">Material</div>
+        <div class="sixm-item">Machine</div>
+        <div class="sixm-item">Method</div>
+        <div class="sixm-item">Market</div>
+      </div>
+    </div>
+    <div class="semesta-panel digital">
+      <div class="semesta-pct">70%</div>
+      <div class="semesta-label">Digital — Hygienic Ground</div>
+      <p class="semesta-desc">Provided by AI as environmental provider. Humans only need to bring wisdom.</p>
+      <div class="ai-tools" data-lang="en">
+        <div class="ai-tool"><span class="ai-tool-type">Text</span><span class="ai-tool-name">Gemini · Claude</span></div>
+        <div class="ai-tool"><span class="ai-tool-type">Image</span><span class="ai-tool-name">Nano Banana</span></div>
+        <div class="ai-tool"><span class="ai-tool-type">Song</span><span class="ai-tool-name">Lyria</span></div>
+        <div class="ai-tool"><span class="ai-tool-type">Video</span><span class="ai-tool-name">Veo</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- §2 Five Quadrant ESBI/G -->
+  <p class="section-title" data-lang="id">Model Lima Kuadran ESBI/G</p>
+  <p class="section-title" data-lang="en">Five Quadrant ESBI/G Model</p>
+
+  <!-- ID -->
+  <div class="esbi-flow" data-lang="id">
+    <div class="esbi-card"><div class="esbi-letter">E</div><div class="esbi-name">Employee</div><div class="esbi-note">Power + PTKP trap</div><span class="esbi-arrow">→</span></div>
+    <div class="esbi-card"><div class="esbi-letter">S</div><div class="esbi-name">Self Employed Mapan</div><div class="esbi-note">Bukan ojol/gig</div><span class="esbi-arrow">→</span></div>
+    <div class="esbi-card"><div class="esbi-letter">B</div><div class="esbi-name">Business Owner</div><div class="esbi-note">Sistem ≠ pemilik</div><span class="esbi-arrow">→</span></div>
+    <div class="esbi-card"><div class="esbi-letter">I/E</div><div class="esbi-name">Entrepreneur-Investor</div><div class="esbi-note">Fused · Fan Li model</div><span class="esbi-arrow">→</span></div>
+    <div class="esbi-card special"><div class="esbi-letter">G</div><div class="esbi-name">Governmental</div><div class="esbi-note">Meta-kuadran · PNS jam 13.30</div></div>
+  </div>
+
+  <!-- EN -->
+  <div class="esbi-flow" data-lang="en">
+    <div class="esbi-card"><div class="esbi-letter">E</div><div class="esbi-name">Employee</div><div class="esbi-note">Power + tax-floor trap</div><span class="esbi-arrow">→</span></div>
+    <div class="esbi-card"><div class="esbi-letter">S</div><div class="esbi-name">Established Self-Employed</div><div class="esbi-note">Not gig/ojol</div><span class="esbi-arrow">→</span></div>
+    <div class="esbi-card"><div class="esbi-letter">B</div><div class="esbi-name">Business Owner</div><div class="esbi-note">System ≠ owner</div><span class="esbi-arrow">→</span></div>
+    <div class="esbi-card"><div class="esbi-letter">I/E</div><div class="esbi-name">Entrepreneur-Investor</div><div class="esbi-note">Fused · Fan Li model</div><span class="esbi-arrow">→</span></div>
+    <div class="esbi-card special"><div class="esbi-letter">G</div><div class="esbi-name">Governmental</div><div class="esbi-note">Meta-quadrant · civil servant at 1:30PM</div></div>
+  </div>
+
+  <!-- §3 Four Traps -->
+  <p class="section-title" data-lang="id">Empat Trap Mindset</p>
+  <p class="section-title" data-lang="en">Four Mindset Traps</p>
+
+  <!-- ID -->
+  <div class="traps-grid" data-lang="id">
+    <div class="trap-card"><div class="trap-num">01</div><div class="trap-name">Power Trap</div><p class="trap-desc">Mengejar jabatan hierarki sebagai tujuan akhir</p></div>
+    <div class="trap-card"><div class="trap-num">02</div><div class="trap-name">Servant Trap</div><p class="trap-desc">Melayani tanpa sovereignty diri; bahkan CEO bisa terjebak</p></div>
+    <div class="trap-card"><div class="trap-num">03</div><div class="trap-name">PTKP / Maslow Floor Trap</div><p class="trap-desc">Menerima batas fiskal negara sebagai batas kemungkinan hidup</p></div>
+    <div class="trap-card"><div class="trap-num">04</div><div class="trap-name">ESBI Illiteracy Trap</div><p class="trap-desc">Tidak sadar posisi kuadran; mengira ojol sudah S Mapan</p></div>
+  </div>
+
+  <!-- EN -->
+  <div class="traps-grid" data-lang="en">
+    <div class="trap-card"><div class="trap-num">01</div><div class="trap-name">Power Trap</div><p class="trap-desc">Chasing hierarchical rank as the ultimate end goal</p></div>
+    <div class="trap-card"><div class="trap-num">02</div><div class="trap-name">Servant Trap</div><p class="trap-desc">Serving without self-sovereignty; even CEOs can be trapped here</p></div>
+    <div class="trap-card"><div class="trap-num">03</div><div class="trap-name">Tax-Floor / Maslow Floor Trap</div><p class="trap-desc">Accepting the state's fiscal ceiling as the ceiling of life's possibilities</p></div>
+    <div class="trap-card"><div class="trap-num">04</div><div class="trap-name">ESBI Illiteracy Trap</div><p class="trap-desc">Unaware of one's quadrant position; mistaking gig work for Established S</p></div>
+  </div>
+
+  <!-- §4 Grand Formula -->
+  <p class="section-title" data-lang="id">Grand Formula CHO</p>
+  <p class="section-title" data-lang="en">CHO Grand Formula</p>
+
+  <div class="formula-box">
+    <div class="formula-label" data-lang="id">Human–Enhanced AI</div>
+    <div class="formula-label" data-lang="en">Human–Enhanced AI</div>
+
+    <div class="formula-eq">
+      <strong>HE-AI</strong> = Human Wisdom × AI Augmentation ÷ Cognitive Vacancy
+    </div>
+
+    <div class="formula-legend" data-lang="id">
+      <span class="legend-item"><strong>AI Augmentation</strong> — kualitas 70% tanah higienis</span>
+      <span class="legend-item"><strong>Cognitive Vacancy</strong> — hambatan mengakses semesta digital</span>
+    </div>
+    <div class="formula-legend" data-lang="en">
+      <span class="legend-item"><strong>AI Augmentation</strong> — quality of the 70% hygienic ground</span>
+      <span class="legend-item"><strong>Cognitive Vacancy</strong> — barriers to accessing the digital universe</span>
+    </div>
+  </div>
+
+  <!-- §5 Mobility -->
+  <p class="section-title" data-lang="id">Mobilitas: Gig Worker → Co-Creator Sovereign</p>
+  <p class="section-title" data-lang="en">Mobility: Gig Worker → Sovereign Co-Creator</p>
+
+  <div class="mobility-steps">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title" data-lang="id">Gig Worker</div>
+        <div class="step-title" data-lang="en">Gig Worker</div>
+        <div class="step-desc" data-lang="id">Jual tenaga × waktu, tanpa leverage — ojol, freelancer survival; lebih rentan dari E konvensional</div>
+        <div class="step-desc" data-lang="en">Selling labor × time, with no leverage — ojol, survival freelancer; more vulnerable than conventional E</div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title" data-lang="id">Kenali 70% Semesta Digital</div>
+        <div class="step-title" data-lang="en">Recognize the 70% Digital Universe</div>
+        <div class="step-desc" data-lang="id">Curiosity + smartphone + koneksi internet</div>
+        <div class="step-desc" data-lang="en">Curiosity + smartphone + internet connection</div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title" data-lang="id">Co-Creator Mahir + Visioner</div>
+        <div class="step-title" data-lang="en">Skilled Co-Creator + Visionary</div>
+        <div class="step-desc" data-lang="id">Lingua memanifestasi via Gemini / Claude / Lyria / Veo</div>
+        <div class="step-desc" data-lang="en">Lingua manifests through Gemini / Claude / Lyria / Veo</div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title" data-lang="id">Pemancar Sovereign Aktif</div>
+        <div class="step-title" data-lang="en">Active Sovereign Broadcaster</div>
+        <div class="step-desc" data-lang="id">LinkedIn · Substack · Medium · YouTube · Trakteer · BMAC</div>
+        <div class="step-desc" data-lang="en">LinkedIn · Substack · Medium · YouTube · Trakteer · BMAC</div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <div class="step-title" data-lang="id">Jejaring dengan Jagoan 6M · Masuk Orbit S Mapan → B</div>
+        <div class="step-title" data-lang="en">Network with the 6M Masters · Enter S Mapan → B Orbit</div>
+        <div class="step-desc" data-lang="id">Partisipasi sukarela = bukti resonansi, bukan marketing</div>
+        <div class="step-desc" data-lang="en">Voluntary participation = proof of resonance, not marketing</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- §6 Osmosis -->
+  <p class="section-title" data-lang="id">Osmosis Kognitif: Ruwet → Genah</p>
+  <p class="section-title" data-lang="en">Cognitive Osmosis: Ruwet → Genah</p>
+
+  <!-- ID -->
+  <div class="osmosis-flow" data-lang="id">
+    <div class="osmosis-node ruwet">
+      <div class="osmosis-state">Ruwet</div>
+      <div class="osmosis-desc">Scattered · reaktif · Cognitive Vacancy tinggi</div>
+    </div>
+    <div class="osmosis-arrow">→</div>
+    <div class="osmosis-node otw">
+      <div class="osmosis-state">OTW Genah</div>
+      <div class="osmosis-desc">Mulai mengenal pola lingua AI</div>
+    </div>
+    <div class="osmosis-arrow">→</div>
+    <div class="osmosis-node genah">
+      <div class="osmosis-state">Genah</div>
+      <div class="osmosis-desc">Tenang · runut · sovereign</div>
+    </div>
+  </div>
+
+  <!-- EN -->
+  <div class="osmosis-flow" data-lang="en">
+    <div class="osmosis-node ruwet">
+      <div class="osmosis-state">Ruwet</div>
+      <div class="osmosis-desc">Scattered · reactive · high Cognitive Vacancy</div>
+    </div>
+    <div class="osmosis-arrow">→</div>
+    <div class="osmosis-node otw">
+      <div class="osmosis-state">OTW Genah</div>
+      <div class="osmosis-desc">Beginning to recognize AI lingua patterns</div>
+    </div>
+    <div class="osmosis-arrow">→</div>
+    <div class="osmosis-node genah">
+      <div class="osmosis-state">Genah</div>
+      <div class="osmosis-desc">Calm · coherent · sovereign</div>
+    </div>
+  </div>
+
+  <!-- §7 Closing Quote -->
+  <div class="closing-quote">
+    <p data-lang="id">
+      Ketika lingua seorang Zì Zhǔ Zhě 自主者 memanifestasi menjadi produk digital yang dirayakan secara sukarela oleh sesama manusia — di situlah ekonomi dan makna hidup bertemu tanpa perlu berkompromi satu sama lain. Cukuplah sudah.
+    </p>
+    <p data-lang="en">
+      When the lingua of a Zì Zhǔ Zhě 自主者 manifests into digital products voluntarily celebrated by fellow humans — that is where economy and the meaning of life meet without compromise. That is already enough.
+    </p>
+    <div class="attribution">Go Kian Tik · CHO In Action Series · 2026</div>
+  </div>
+
+  <!-- §8 Footer Links -->
+  <div class="footer-links" data-lang="id">
+    <a class="footer-link" href="/chiefhumanityofficer/dual_semesta">70/30 Dual Semesta</a>
+    <a class="footer-link" href="/chiefhumanityofficer/praktik_cocreator">Praktik Co-Creator</a>
+    <a class="footer-link" href="/chiefhumanityofficer/cpi_kuadran_g">CPI & Kuadran G</a>
+  </div>
+  <div class="footer-links" data-lang="en">
+    <a class="footer-link" href="/chiefhumanityofficer/dual_semesta">70/30 Dual Universe</a>
+    <a class="footer-link" href="/chiefhumanityofficer/praktik_cocreator">Co-Creator Practice</a>
+    <a class="footer-link" href="/chiefhumanityofficer/cpi_kuadran_g">CPI & Quadrant G</a>
+  </div>
+
+</main>
+
+<script>
+  function setLang(lang) {
+    document.body.classList.remove('lang-id', 'lang-en');
+    document.body.classList.add('lang-' + lang);
+    document.getElementById('btn-id').classList.toggle('active', lang === 'id');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('cho-lang', lang);
+  }
+
+  // Restore saved preference
+  const saved = localStorage.getItem('cho-lang');
+  if (saved) setLang(saved);
+
+  // Scroll-reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.dual-semesta, .esbi-flow, .traps-grid, .formula-box, .mobility-steps, .osmosis-flow, .closing-quote, .footer-links').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
