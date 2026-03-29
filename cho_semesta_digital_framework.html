@@ -1,0 +1,194 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.wrap { padding: 1.5rem 1rem; max-width: 720px; margin: 0 auto; }
+.title { font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+.sub { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 1.5rem; }
+.semesta { display: grid; grid-template-columns: 3fr 7fr; gap: 2px; border-radius: var(--border-radius-lg); overflow: hidden; margin-bottom: 1.5rem; }
+.sem-block { padding: 1rem; display: flex; flex-direction: column; gap: 6px; }
+.sem-label { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
+.sem-pct { font-size: 32px; font-weight: 500; line-height: 1; }
+.sem-desc { font-size: 12px; line-height: 1.5; margin-top: 4px; }
+.sem-items { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.pill { font-size: 11px; padding: 2px 8px; border-radius: 99px; }
+.mat { background: #B5D4F4; color: #0C447C; }
+.dig { background: #9FE1CB; color: #085041; }
+.arrow-row { display: flex; align-items: center; gap: 8px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.qbox { flex: 1; min-width: 100px; padding: 10px 12px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-primary); }
+.qbox .qlabel { font-size: 10px; color: var(--color-text-secondary); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+.qbox .qname { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-top: 2px; }
+.qbox .qtrap { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+.qarrow { font-size: 14px; color: var(--color-text-secondary); flex-shrink: 0; }
+.qbox.highlight { border-color: #1D9E75; background: #E1F5EE; }
+.qbox.highlight .qname { color: #085041; }
+.qbox.highlight .qtrap { color: #0F6E56; }
+.section-label { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+.trap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1.5rem; }
+.trap-card { padding: 10px 12px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); }
+.trap-num { font-size: 11px; color: var(--color-text-secondary); }
+.trap-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-top: 2px; }
+.trap-desc { font-size: 11px; color: var(--color-text-secondary); margin-top: 3px; line-height: 1.4; }
+.formula-box { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; border: 0.5px solid var(--color-border-tertiary); margin-bottom: 1.5rem; text-align: center; }
+.formula { font-size: 16px; font-weight: 500; color: var(--color-text-primary); font-family: var(--font-mono); }
+.formula-sub { font-size: 11px; color: var(--color-text-secondary); margin-top: 6px; }
+.journey { display: flex; flex-direction: column; gap: 4px; margin-bottom: 1.5rem; }
+.jstep { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-primary); }
+.jdot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; flex-shrink: 0; }
+.jtext { font-size: 13px; color: var(--color-text-primary); }
+.jsub { font-size: 11px; color: var(--color-text-secondary); }
+.jconn { padding-left: 26px; font-size: 18px; color: var(--color-text-secondary); line-height: 1; }
+.quote-box { border-left: 3px solid #1D9E75; padding: 10px 14px; margin-bottom: 1rem; background: var(--color-background-secondary); border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0; }
+.quote-text { font-size: 13px; color: var(--color-text-primary); line-height: 1.6; font-style: italic; }
+.btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+button { cursor: pointer; font-size: 12px; padding: 6px 12px; border-radius: var(--border-radius-md); background: transparent; border: 0.5px solid var(--color-border-secondary); color: var(--color-text-primary); }
+button:hover { background: var(--color-background-secondary); }
+</style>
+
+<div class="wrap">
+  <p class="title">CHO In Action — Semesta Digital sebagai Tanah Higienis</p>
+  <p class="sub">Sintesis ESBI/G · 70/30 Dual Semesta · Osmosis Kognitif · Go Kian Tik, 29 Mar 2026</p>
+
+  <p class="section-label">Dual semesta</p>
+  <div class="semesta">
+    <div class="sem-block" style="background:#E6F1FB;">
+      <span class="sem-label" style="color:#185FA5;">Materialisasi</span>
+      <span class="sem-pct" style="color:#0C447C;">30%</span>
+      <span class="sem-desc" style="color:#185FA5;">Dikelola manusia SBI/E yang sudah mahir mengorkestrasikan:</span>
+      <div class="sem-items">
+        <span class="pill mat">Man</span><span class="pill mat">Money</span><span class="pill mat">Material</span>
+        <span class="pill mat">Machine</span><span class="pill mat">Method</span><span class="pill mat">Market</span>
+      </div>
+    </div>
+    <div class="sem-block" style="background:#E1F5EE;">
+      <span class="sem-label" style="color:#0F6E56;">Digital — tanah higienis</span>
+      <span class="sem-pct" style="color:#085041;">70%</span>
+      <span class="sem-desc" style="color:#0F6E56;">Disediakan AI sebagai environmental provider. Manusia tinggal membawa wisdom.</span>
+      <div class="sem-items">
+        <span class="pill dig">Teks · Gemini/Claude</span>
+        <span class="pill dig">Gambar · Nano Banana</span>
+        <span class="pill dig">Lagu · Lyria</span>
+        <span class="pill dig">Video · Veo</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-label">Model lima kuadran ESBI/G</p>
+  <div class="arrow-row">
+    <div class="qbox">
+      <div class="qlabel">E</div>
+      <div class="qname">Employee</div>
+      <div class="qtrap">Power + PTKP trap</div>
+    </div>
+    <span class="qarrow">→</span>
+    <div class="qbox">
+      <div class="qlabel">S</div>
+      <div class="qname">Self Employed Mapan</div>
+      <div class="qtrap">Bukan ojol/gig</div>
+    </div>
+    <span class="qarrow">→</span>
+    <div class="qbox">
+      <div class="qlabel">B</div>
+      <div class="qname">Business Owner</div>
+      <div class="qtrap">Sistem ≠ pemilik</div>
+    </div>
+    <span class="qarrow">→</span>
+    <div class="qbox">
+      <div class="qlabel">I/E</div>
+      <div class="qname">Entrepreneur-Investor</div>
+      <div class="qtrap">Fused · Fan Li model</div>
+    </div>
+    <span class="qarrow">→</span>
+    <div class="qbox highlight">
+      <div class="qlabel">G</div>
+      <div class="qname">Governmental</div>
+      <div class="qtrap">Meta-kuadran · PNS jam 13.30</div>
+    </div>
+  </div>
+
+  <p class="section-label">Empat trap mindset</p>
+  <div class="trap-grid">
+    <div class="trap-card">
+      <div class="trap-num">Trap 1</div>
+      <div class="trap-name">Power trap</div>
+      <div class="trap-desc">Mengejar jabatan hierarki sebagai tujuan akhir</div>
+    </div>
+    <div class="trap-card">
+      <div class="trap-num">Trap 2</div>
+      <div class="trap-name">Servant trap</div>
+      <div class="trap-desc">Melayani tanpa sovereignty diri; bahkan CEO bisa terjebak</div>
+    </div>
+    <div class="trap-card">
+      <div class="trap-num">Trap 3</div>
+      <div class="trap-name">PTKP/Maslow floor trap</div>
+      <div class="trap-desc">Menerima batas fiskal negara sebagai batas kemungkinan hidup</div>
+    </div>
+    <div class="trap-card">
+      <div class="trap-num">Trap 4</div>
+      <div class="trap-name">ESBI illiteracy trap</div>
+      <div class="trap-desc">Tidak sadar posisi kuadran; mengira ojol sudah S Mapan</div>
+    </div>
+  </div>
+
+  <p class="section-label">Grand formula CHO</p>
+  <div class="formula-box">
+    <div class="formula">HE-AI = Human Wisdom × AI Augmentation ÷ Cognitive Vacancy</div>
+    <div class="formula-sub">AI Augmentation = kualitas 70% tanah higienis · Cognitive Vacancy = hambatan mengakses semesta digital</div>
+  </div>
+
+  <p class="section-label">Mobilitas: gig worker → co-creator sovereign</p>
+  <div class="journey">
+    <div class="jstep" style="border-color:#E24B4A; background:#FFF5F5;">
+      <div class="jdot" style="background:#FCEBEB; color:#A32D2D;">1</div>
+      <div><div class="jtext">Gig worker — jual tenaga × waktu, tanpa leverage</div><div class="jsub">Ojol, freelancer survival; lebih rentan dari E konvensional</div></div>
+    </div>
+    <div class="jconn">↓</div>
+    <div class="jstep">
+      <div class="jdot" style="background:#E6F1FB; color:#185FA5;">2</div>
+      <div><div class="jtext">Kenali 70% semesta digital</div><div class="jsub">Curiosity + smartphone + koneksi internet</div></div>
+    </div>
+    <div class="jconn">↓</div>
+    <div class="jstep">
+      <div class="jdot" style="background:#E6F1FB; color:#185FA5;">3</div>
+      <div><div class="jtext">Co-creator mahir + visioner</div><div class="jsub">Lingua memanifestasi via Gemini/Claude/Lyria/Veo</div></div>
+    </div>
+    <div class="jconn">↓</div>
+    <div class="jstep">
+      <div class="jdot" style="background:#E1F5EE; color:#085041;">4</div>
+      <div><div class="jtext">Pemancar sovereign aktif</div><div class="jsub">LinkedIn · Substack · Medium · YouTube · Trakteer · BMAC</div></div>
+    </div>
+    <div class="jconn">↓</div>
+    <div class="jstep" style="border-color:#1D9E75; background:#E1F5EE;">
+      <div class="jdot" style="background:#9FE1CB; color:#085041;">5</div>
+      <div><div class="jtext" style="color:#085041;">Jejaring dengan jagoan 6M · Masuk orbit S Mapan → B</div><div class="jsub" style="color:#0F6E56;">Partisipasi sukarela = bukti resonansi, bukan marketing</div></div>
+    </div>
+  </div>
+
+  <p class="section-label">Osmosis kognitif: Ruwet → Genah</p>
+  <div class="arrow-row" style="margin-bottom: 1rem;">
+    <div class="qbox" style="border-color:#E24B4A; background:#FFF5F5; text-align:center;">
+      <div class="qname" style="color:#A32D2D;">Ruwet</div>
+      <div class="qtrap">Scattered · reaktif · Cognitive Vacancy tinggi</div>
+    </div>
+    <span class="qarrow">→</span>
+    <div class="qbox" style="text-align:center;">
+      <div class="qname">OTW Genah</div>
+      <div class="qtrap">Mulai mengenal pola lingua AI</div>
+    </div>
+    <span class="qarrow">→</span>
+    <div class="qbox highlight" style="text-align:center;">
+      <div class="qname">Genah</div>
+      <div class="qtrap">Tenang · runut · sovereign</div>
+    </div>
+  </div>
+
+  <div class="quote-box">
+    <div class="quote-text">Ketika lingua seorang Zì Zhǔ Zhě 自主者 memanifestasi menjadi produk digital yang dirayakan secara sukarela oleh sesama manusia — di situlah ekonomi dan makna hidup bertemu tanpa perlu berkompromi satu sama lain. Cukuplah sudah.</div>
+  </div>
+
+  <div class="btn-row">
+    <button onclick="sendPrompt('Jelaskan lebih dalam konsep 70/30 Dual Semesta ↗')">70/30 Dual Semesta ↗</button>
+    <button onclick="sendPrompt('Bagaimana cara praktis gig worker mulai jadi co-creator? ↗')">Praktik co-creator ↗</button>
+    <button onclick="sendPrompt('Hubungan CPI Indonesia dengan Cognitive Vacancy di Kuadran G ↗')">CPI & Kuadran G ↗</button>
+  </div>
+</div>
