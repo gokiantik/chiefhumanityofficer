@@ -1,628 +1,1144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Walking Books Philosophy · Go Kian Tik · Chief Humanity Officer</title>
-  <meta name="description" content="Walking Books Philosophy: Toward a Relational Epistemology of Human Identity and Knowledge — Go Kian Tik (Mbah Hogi Bejo™)">
-  <style>
-    :root {
-      --blue: #3A4A9C;
-      --gold: #B8860B;
-      --gray: #7B7B9D;
-      --white: #FFFFFF;
-      --bg: #FAFAF8;
-      --text: #1a1a2e;
-      --light: #F4F2EC;
-      --border: #E8E4D8;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Georgia', 'Times New Roman', serif; background: var(--bg); color: var(--text); line-height: 1.75; font-size: 17px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Walking Books Philosophy · Filsafat Buku Berjalan · Go Kian Tik · Chief Humanity Officer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1410;
+    --paper: #f7f3ed;
+    --warm: #c8a96e;
+    --accent: #8b4513;
+    --muted: #7a6e64;
+    --border: #d4c8b8;
+    --nav-bg: rgba(247, 243, 237, 0.95);
+  }
 
-    /* NAV */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      background: var(--blue); padding: 14px 40px;
-      display: flex; align-items: center; justify-content: space-between;
-      box-shadow: 0 2px 12px rgba(58,74,156,0.3);
-    }
-    nav .brand { color: var(--white); font-size: 15px; font-weight: 600; text-decoration: none; letter-spacing: 0.03em; }
-    nav .nav-right { display: flex; align-items: center; gap: 28px; }
-    nav .links { display: flex; gap: 24px; }
-    nav .links a { color: rgba(255,255,255,0.8); font-size: 14px; text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
-    nav .links a:hover { color: var(--gold); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* LANG TOGGLE — identical to index.html */
-    .lang-toggle {
-      display: flex; background: rgba(255,255,255,0.15);
-      border-radius: 20px; overflow: hidden;
-    }
-    .lang-toggle button {
-      background: none; border: none; cursor: pointer;
-      padding: 5px 14px; font-size: 13px; font-weight: 700;
-      letter-spacing: 0.06em; color: rgba(255,255,255,0.6);
-      transition: all 0.2s;
-    }
-    .lang-toggle button.active { background: var(--gold); color: var(--white); border-radius: 20px; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.8;
+  }
 
-    /* LANG VISIBILITY */
-    .lang-en, .lang-id { transition: opacity 0.2s; }
-    body.lang-id .lang-en { display: none; }
-    body.lang-en .lang-id { display: none; }
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.6rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.5rem;
+  }
+  .nav-left { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
 
-    /* BACK LINK */
-    .back-link { display: inline-block; margin: 28px 40px 0; color: var(--blue); font-size: 14px; text-decoration: none; letter-spacing: 0.03em; }
-    .back-link:hover { color: var(--gold); }
+  /* ── LANG TOGGLE ── */
+  .lang-toggle {
+    display: flex; align-items: center;
+    background: var(--border);
+    border-radius: 20px;
+    padding: 2px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    user-select: none;
+  }
+  .lang-toggle span {
+    padding: 4px 12px;
+    border-radius: 16px;
+    transition: background 0.25s, color 0.25s;
+    color: var(--muted);
+  }
+  .lang-toggle span.active {
+    background: var(--accent);
+    color: #fff;
+  }
 
-    /* HERO */
-    .hero { text-align: center; padding: 72px 40px 48px; border-bottom: 1px solid var(--border); }
-    .chinese-title { font-size: 56px; color: var(--gold); font-weight: 700; line-height: 1.1; margin-bottom: 8px; }
-    .pinyin { font-size: 20px; color: var(--blue); font-style: italic; margin-bottom: 6px; font-weight: 600; }
-    .series-tag { font-size: 13px; color: var(--gray); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 36px; }
-    .hero h1 { font-size: 42px; color: var(--blue); font-weight: 700; line-height: 1.2; margin-bottom: 12px; }
-    .hero .subtitle { font-size: 20px; color: var(--gold); font-weight: 600; margin-bottom: 32px; font-style: italic; }
-    .formula-bar { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px; }
-    .formula-item { background: var(--blue); color: var(--white); padding: 8px 20px; border-radius: 4px; font-size: 14px; font-family: 'Courier New', monospace; }
-    .hero-img { max-width: 560px; width: 100%; border-radius: 6px; margin: 0 auto 32px; display: block; }
-    .author-block { font-size: 15px; color: var(--gray); margin-bottom: 24px; }
-    .author-block strong { color: var(--text); }
-    .badge-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-    .badge { background: var(--light); border: 1px solid var(--border); color: var(--blue); font-size: 12px; padding: 5px 14px; border-radius: 20px; letter-spacing: 0.03em; }
+  /* ── NAVIGATION BUTTONS ── */
+  .nav-btn-bar {
+    background: var(--paper);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.75rem;
+  }
+  .nav-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    padding: 0.5rem 1.1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: transparent;
+  }
+  .nav-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(139, 69, 19, 0.04);
+  }
+  .nav-btn.primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .nav-btn.primary:hover {
+    background: #7a3c10;
+    border-color: #7a3c10;
+    color: #fff;
+  }
+  .nav-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
 
-    /* DIVIDER */
-    .divider { text-align: center; padding: 28px 0; color: var(--gold); font-size: 18px; border-bottom: 1px solid var(--border); }
+  /* ── HERO ── */
+  .breadcrumb {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 1.5rem 2rem 0;
+  }
+  .breadcrumb:hover { color: var(--accent); }
 
-    /* CONTENT */
-    .container { max-width: 760px; margin: 0 auto; padding: 0 40px; }
-    .section { padding: 52px 0 36px; border-bottom: 1px solid var(--border); }
-    .section:last-child { border-bottom: none; }
-    .part-label { font-size: 12px; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; display: block; }
-    .section h2 { font-size: 28px; color: var(--blue); font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
-    .section h3 { font-size: 20px; color: var(--blue); font-weight: 700; margin: 28px 0 12px; }
-    .section p { margin-bottom: 18px; }
-    .section p:last-child { margin-bottom: 0; }
+  .hero {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+  }
+  .chinese-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 2.8rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    line-height: 1.2;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .pinyin {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+  .series-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+  }
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 500;
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    font-style: italic;
+    color: var(--muted);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+  .formula-display {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--accent);
+    background: rgba(139, 69, 19, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.6rem 1.2rem;
+    display: inline-block;
+    margin: 0.4rem 0;
+  }
+  .hero-img {
+    width: 100%; max-width: 640px;
+    margin: 2rem auto;
+    display: block;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  .author-line {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+  }
 
-    blockquote { border-left: 4px solid var(--gold); padding: 16px 24px; margin: 24px 0; background: var(--light); color: var(--blue); font-style: italic; font-size: 17px; border-radius: 0 4px 4px 0; }
-    blockquote cite { display: block; margin-top: 8px; font-size: 14px; color: var(--gray); font-style: normal; }
+  /* ── DIVIDER ── */
+  .divider {
+    text-align: center;
+    color: var(--warm);
+    font-size: 1.2rem;
+    margin: 2.5rem 0;
+    letter-spacing: 0.3em;
+  }
 
-    /* FORMULA */
-    .formula-display { background: var(--blue); color: var(--white); padding: 28px 36px; border-radius: 8px; text-align: center; margin: 28px 0; }
-    .formula-display .formula-line { font-size: 20px; margin-bottom: 8px; line-height: 1.6; }
-    .formula-display .formula-label { font-size: 13px; color: rgba(255,255,255,0.7); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 12px; }
+  /* ── CONTENT ── */
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+  .part-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--warm);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+    color: var(--ink);
+  }
+  p { margin-bottom: 1.2rem; }
+  strong { font-weight: 600; }
+  em { font-style: italic; }
 
-    /* REALM GRID */
-    .realm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 28px 0; }
-    @media (max-width: 640px) { .realm-grid { grid-template-columns: 1fr; } }
-    .realm-card { border: 2px solid var(--border); border-radius: 8px; padding: 24px; background: var(--white); }
-    .realm-card .realm-title { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 6px; }
-    .realm-card .realm-name { font-size: 22px; color: var(--blue); font-weight: 700; margin-bottom: 14px; }
-    .realm-card .realm-formula { font-family: 'Courier New', monospace; font-size: 13px; background: var(--light); padding: 12px; border-radius: 4px; color: var(--blue); line-height: 1.8; margin-bottom: 14px; }
+  blockquote {
+    border-left: 3px solid var(--warm);
+    padding: 0.8rem 1.5rem;
+    margin: 1.5rem 0;
+    background: rgba(200, 169, 110, 0.07);
+    font-style: italic;
+    color: var(--muted);
+  }
+  blockquote cite {
+    display: block;
+    font-style: normal;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    margin-top: 0.5rem;
+    color: var(--warm);
+  }
 
-    /* FLOW */
-    .flow-diagram { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 28px 0; padding: 24px; background: var(--light); border-radius: 8px; }
-    .flow-box { background: var(--blue); color: var(--white); padding: 10px 18px; border-radius: 6px; font-size: 14px; font-weight: 600; text-align: center; }
-    .flow-arrow { color: var(--gold); font-size: 20px; font-weight: 700; }
-    .flow-result { background: var(--gold); color: var(--white); padding: 10px 18px; border-radius: 6px; font-size: 14px; font-weight: 700; }
+  /* ── FORMULA BLOCK ── */
+  .formula-block {
+    background: rgba(139, 69, 19, 0.04);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+  .formula-main {
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    line-height: 2.2;
+  }
+  .formula-items { text-align: left; margin-top: 1rem; }
+  .formula-item { margin: 0.5rem 0; display: flex; gap: 0.6rem; }
+  .formula-key { color: var(--accent); min-width: 120px; }
 
-    /* LISTS */
-    .item-list { list-style: none; margin: 16px 0; }
-    .item-list li { padding: 10px 0 10px 28px; position: relative; border-bottom: 1px dashed var(--border); font-size: 16px; }
-    .item-list li:last-child { border-bottom: none; }
-    .item-list li::before { content: '✦'; position: absolute; left: 0; color: var(--gold); font-size: 12px; top: 13px; }
-    .item-list li strong { color: var(--blue); }
+  /* ── TWO REALMS ── */
+  .two-realms {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; margin: 2rem 0;
+  }
+  @media (max-width: 600px) { .two-realms { grid-template-columns: 1fr; } }
+  .realm-card {
+    background: rgba(139, 69, 19, 0.04);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.2rem 1.5rem;
+    text-align: center;
+  }
+  .realm-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--warm);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .realm-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+  .realm-formula {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.9;
+    margin: 0.8rem 0;
+  }
+  .realm-result {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .realm-note { font-size: 0.82rem; color: var(--muted); font-style: italic; margin-top: 0.5rem; }
 
-    .ai-list { list-style: none; margin: 16px 0; }
-    .ai-list li { padding: 10px 0 10px 20px; border-bottom: 1px solid var(--border); font-size: 15px; position: relative; }
-    .ai-list li:last-child { border-bottom: none; }
-    .ai-list li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
-    .ai-list li strong { color: var(--blue); }
+  .action-bridge {
+    display: flex; align-items: center; justify-content: center;
+    gap: 1rem; margin: 1.5rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem; flex-wrap: wrap;
+  }
+  .action-bridge .pill {
+    background: var(--accent); color: #fff;
+    padding: 0.4rem 1rem; border-radius: 20px;
+  }
+  .action-bridge .arrow { color: var(--warm); font-size: 1.2rem; }
+  .action-bridge .result {
+    font-weight: 600; color: var(--ink);
+  }
 
-    /* UBUNTU TABLE */
-    .comparison-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 15px; }
-    .comparison-table th { background: var(--blue); color: var(--white); padding: 14px 18px; text-align: left; font-size: 14px; }
-    .comparison-table td { padding: 12px 18px; border-bottom: 1px solid var(--border); vertical-align: top; }
-    .comparison-table tr:last-child td { border-bottom: none; }
-    .comparison-table tr:nth-child(even) td { background: var(--light); }
+  /* ── AI LIST ── */
+  .ai-list { list-style: none; margin: 1rem 0; }
+  .ai-list li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 0.6rem;
+  }
+  .ai-list li:last-child { border-bottom: none; }
+  .ai-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--accent);
+    min-width: 160px;
+  }
 
-    /* METHODOLOGY */
-    .method-steps { margin: 24px 0; }
-    .method-step { display: flex; gap: 20px; align-items: flex-start; padding: 18px 0; border-bottom: 1px solid var(--border); }
-    .method-step:last-child { border-bottom: none; }
-    .step-num { background: var(--blue); color: var(--white); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
-    .step-content { flex: 1; }
-    .step-content .ai-name { font-weight: 700; color: var(--blue); margin-bottom: 4px; font-size: 15px; }
-    .step-status { display: inline-block; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border-radius: 10px; margin-bottom: 6px; }
-    .status-seed { background: #E8F4FD; color: #2980b9; }
-    .status-stuck { background: #FEF9E7; color: #d68910; }
-    .status-active { background: #E8F8F5; color: #1e8449; }
-    .status-draft { background: #F4ECF7; color: #7d3c98; }
-    .status-now { background: var(--gold); color: var(--white); }
+  /* ── GRAND FORMULA ── */
+  .grand-formula {
+    text-align: center;
+    padding: 2.5rem;
+    border: 2px solid var(--warm);
+    border-radius: 8px;
+    margin: 2rem 0;
+    background: rgba(200, 169, 110, 0.05);
+  }
+  .grand-formula .eq {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.3rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .grand-formula .citation {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 1rem;
+    letter-spacing: 0.06em;
+  }
 
-    /* METADATA TABLE */
-    .meta-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
-    .meta-table tr { border-bottom: 1px solid var(--border); }
-    .meta-table tr:last-child { border-bottom: none; }
-    .meta-table td:first-child { width: 38%; padding: 12px 16px; background: var(--blue); color: var(--white); font-weight: 600; font-size: 13px; vertical-align: top; }
-    .meta-table td:last-child { padding: 12px 16px; font-size: 14px; vertical-align: top; }
-    .meta-table a { color: var(--blue); }
+  /* ── MINDSET LIST ── */
+  .mindset-list { list-style: none; margin: 1rem 0; }
+  .mindset-list li {
+    padding: 0.7rem 0 0.7rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .mindset-list li::before {
+    content: '◆';
+    position: absolute; left: 0;
+    color: var(--warm); font-size: 0.6rem;
+    top: 1rem;
+  }
+  .mindset-list li:last-child { border-bottom: none; }
+  .mindset-key { font-weight: 600; }
 
-    /* REFERENCES */
-    .ref-list { list-style: none; margin: 16px 0; }
-    .ref-list li { padding: 10px 0 10px 24px; position: relative; border-bottom: 1px dashed var(--border); font-size: 15px; }
-    .ref-list li:last-child { border-bottom: none; }
-    .ref-list li::before { content: '—'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+  /* ── TABLE ── */
+  table {
+    width: 100%; border-collapse: collapse;
+    margin: 1.5rem 0; font-size: 0.88rem;
+  }
+  th {
+    background: rgba(139, 69, 19, 0.08);
+    padding: 0.7rem 1rem; text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.08em;
+    border-bottom: 2px solid var(--border);
+  }
+  td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
 
-    /* FOOTER */
-    .footer { background: var(--blue); color: rgba(255,255,255,0.85); text-align: center; padding: 40px; font-size: 14px; line-height: 2; }
-    .footer .chinese { font-size: 28px; color: var(--gold); display: block; margin-bottom: 6px; }
-    .footer .pinyin-ft { font-style: italic; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
-    .footer a { color: rgba(255,255,255,0.8); text-decoration: none; }
-    .footer a:hover { color: var(--gold); }
-    .footer .ft-links { display: flex; gap: 20px; justify-content: center; margin: 12px 0; flex-wrap: wrap; }
+  /* ── SESSION TIMELINE ── */
+  .timeline { margin: 1.5rem 0; }
+  .timeline-item {
+    display: flex; gap: 1.2rem;
+    padding: 1rem 0; border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .tl-badge {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; letter-spacing: 0;
+  }
+  .tl-content { flex: 1; }
+  .tl-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem; color: var(--accent);
+    margin-bottom: 0.2rem;
+  }
+  .tl-status {
+    font-size: 0.72rem; color: var(--warm);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 0.3rem;
+  }
 
-    .cta-row { margin-top: 28px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .cta-row a { display: inline-block; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 600; }
-    .btn-primary { background: var(--blue); color: white; }
-    .btn-gold { background: var(--gold); color: white; }
-    .btn-outline { background: var(--light); color: var(--blue); border: 1px solid var(--border); }
+  /* ── META TABLE ── */
+  .meta-table { font-size: 0.85rem; }
+  .meta-table td:first-child {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.06em;
+    color: var(--muted); width: 160px;
+  }
 
-    @media (max-width: 600px) {
-      nav { padding: 12px 20px; }
-      nav .links { display: none; }
-      .hero, .container { padding-left: 20px; padding-right: 20px; }
-      .hero h1 { font-size: 28px; }
-      .chinese-title { font-size: 40px; }
-      .back-link { margin-left: 20px; }
-    }
-  </style>
+  /* ── REFERENCES ── */
+  .references { list-style: none; }
+  .references li {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(212, 200, 184, 0.5);
+    font-size: 0.88rem;
+  }
+
+  /* ── INNER VOICE ── */
+  .inner-voice {
+    background: rgba(139, 69, 19, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+  }
+  .inner-voice .date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; color: var(--muted);
+    margin-bottom: 1.2rem;
+  }
+  .javanese {
+    font-style: italic; line-height: 2.2;
+    color: var(--ink); font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .stats-line {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem; color: var(--muted);
+    margin: 0.8rem 0;
+  }
+  .chinese-line {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.3rem; color: var(--accent);
+    letter-spacing: 0.2em; margin: 0.8rem 0;
+  }
+  .chinese-reading {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem; color: var(--muted);
+  }
+
+  /* ── CTA ── */
+  .cta-row {
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    justify-content: center; margin: 2rem 0;
+  }
+  .cta-btn {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem; letter-spacing: 0.08em;
+    padding: 0.6rem 1.3rem;
+    border-radius: 4px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+  .cta-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .cta-btn.filled {
+    background: var(--accent); color: #fff; border-color: var(--accent);
+  }
+  .cta-btn.filled:hover { background: #7a3c10; }
+
+  /* ── BOTTOM NAV ── */
+  .bottom-nav {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+    max-width: 800px; margin: 0 auto;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+  }
+  .footer-chinese {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.6rem; color: var(--accent);
+    letter-spacing: 0.2em; margin-bottom: 0.3rem;
+  }
+  .footer-pinyin {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem; color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .footer-meta {
+    font-size: 0.82rem; color: var(--muted);
+    line-height: 2;
+  }
+
+  /* ── BILINGUAL TOGGLE ── */
+  .lang-en .id-text { display: none; }
+  .lang-en .en-text { display: inline; }
+  .lang-id .en-text { display: none; }
+  .lang-id .id-text { display: inline; }
+
+  /* block-level bilingual */
+  .lang-en .id-block { display: none; }
+  .lang-en .en-block { display: block; }
+  .lang-id .en-block { display: none; }
+  .lang-id .id-block { display: block; }
+
+  /* For flex children */
+  .lang-en .id-flex { display: none; }
+  .lang-en .en-flex { display: flex; }
+  .lang-id .en-flex { display: none; }
+  .lang-id .id-flex { display: flex; }
+
+  a { color: var(--accent); }
+  a:hover { text-decoration: underline; }
+
+  /* ── SEMESTA BUTTON CALLOUT ── */
+  .semesta-callout {
+    background: linear-gradient(135deg, rgba(139,69,19,0.06) 0%, rgba(200,169,110,0.1) 100%);
+    border: 1.5px solid var(--warm);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin: 2.5rem 0;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1.5rem; flex-wrap: wrap;
+  }
+  .semesta-callout .sc-text {}
+  .semesta-callout .sc-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.12em;
+    color: var(--warm); text-transform: uppercase; margin-bottom: 0.3rem;
+  }
+  .semesta-callout .sc-title {
+    font-size: 1.1rem; font-weight: 600; margin-bottom: 0.2rem;
+  }
+  .semesta-callout .sc-desc {
+    font-size: 0.88rem; color: var(--muted); font-style: italic;
+  }
+</style>
 </head>
 <body class="lang-en">
 
+<!-- ── TOP NAV ── -->
 <nav>
-  <a href="https://gokiantik.github.io/chiefhumanityofficer/" class="brand">CHO · Chief Humanity Officer</a>
-  <div class="nav-right">
-    <div class="links">
-      <a href="https://gokiantik.github.io/chiefhumanityofficer/#philosophy"><span class="lang-en">Philosophy</span><span class="lang-id">Filsafat</span></a>
+  <div class="nav-left">
+    <a href="https://gokiantik.github.io/chiefhumanityofficer/" class="nav-logo">CHO · Chief Humanity Officer</a>
+    <div class="nav-links">
+      <a href="https://gokiantik.github.io/chiefhumanityofficer/#philosophy">
+        <span class="en-text">Philosophy</span><span class="id-text">Filsafat</span>
+      </a>
       <a href="https://gokiantik.github.io/chiefhumanityofficer/#framework">Framework</a>
-      <a href="https://gokiantik.github.io/chiefhumanityofficer/#research-lab"><span class="lang-en">Research Lab</span><span class="lang-id">Lab Riset</span></a>
+      <a href="https://gokiantik.github.io/chiefhumanityofficer/#research-lab">
+        <span class="en-text">Research Lab</span><span class="id-text">Lab Riset</span>
+      </a>
     </div>
-    <div class="lang-toggle">
-      <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
-      <button id="btn-id" onclick="setLang('id')">ID</button>
-    </div>
+  </div>
+  <div class="lang-toggle" id="langToggle" title="Toggle language / Ganti bahasa">
+    <span id="enBtn" class="active">EN</span>
+    <span id="idBtn">ID</span>
   </div>
 </nav>
 
-<a href="https://gokiantik.github.io/chiefhumanityofficer/" class="back-link">
-  <span class="lang-en">← Home</span>
-  <span class="lang-id">← Beranda</span>
-</a>
-
-<!-- ═══════════════════════════════════════════ HERO ═══ -->
-<div class="hero">
-  <div class="chinese-title">行走的书</div>
-  <div class="pinyin">Xíng Zǒu De Shū</div>
-  <div class="series-tag lang-en">CHO In Action Series · Working Paper · March 18, 2026</div>
-  <div class="series-tag lang-id">CHO In Action Series · Makalah Kerja · 18 Maret 2026</div>
-
-  <h1>
-    <span class="lang-en">Walking Books Philosophy</span>
-    <span class="lang-id">Filsafat Buku Berjalan</span>
-  </h1>
-  <div class="subtitle">
-    <span class="lang-en">Toward a Relational Epistemology of Human Identity and Knowledge</span>
-    <span class="lang-id">Menuju Epistemologi Relasional Identitas dan Pengetahuan Manusia</span>
-  </div>
-
-  <div class="formula-bar">
-    <div class="formula-item">
-      <span class="lang-en">1/360 + 359/360 = 360/360 = Consciousness</span>
-      <span class="lang-id">1/360 + 359/360 = 360/360 = Kesadaran</span>
-    </div>
-    <div class="formula-item">
-      <span class="lang-en">1/5 × 5 = 5/5 = Calculation</span>
-      <span class="lang-id">1/5 × 5 = 5/5 = Kalkulasi</span>
-    </div>
-  </div>
-
-  <img src="https://gokiantik.github.io/chiefhumanityofficer/Every_Person_is_abook_1.png"
-       alt="8 Billion Walking Books"
-       class="hero-img">
-
-  <div class="author-block">
-    <strong>Go Kian Tik (Mbah Hogi Bejo™)</strong> · Chief Humanity Officer ·
-    自主者 <span class="lang-en">Sovereign One</span><span class="lang-id">Sang Berdaulat</span> · Depok, Indonesia
-  </div>
-
-  <div class="badge-row">
-    <span class="badge lang-en">Working Paper</span>
-    <span class="badge lang-id">Makalah Kerja</span>
-    <span class="badge">Zenodo · DOI</span>
-    <span class="badge lang-en">SSRN · Preprint</span>
-    <span class="badge lang-id">SSRN · Pracetak</span>
-    <span class="badge">CC BY 4.0</span>
-    <span class="badge lang-en">Two Realms Architecture</span>
-    <span class="badge lang-id">Arsitektur Dua Alam</span>
-  </div>
+<!-- ── NAVIGATION BUTTON BAR ── -->
+<div class="nav-btn-bar">
+  <a href="https://gokiantik.github.io/chiefhumanityofficer/" class="nav-btn">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M10 12L6 8l4-4"/>
+    </svg>
+    <span class="en-text">← Home</span>
+    <span class="id-text">← Beranda</span>
+  </a>
+  <a href="https://gokiantik.github.io/chiefhumanityofficer/cho_semesta_digital_framework" class="nav-btn primary">
+    <span class="en-text">Explore: Semesta Digital Framework</span>
+    <span class="id-text">Jelajahi: Kerangka Semesta Digital</span>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M6 4l4 4-4 4"/>
+    </svg>
+  </a>
 </div>
 
-<div class="divider">--- ✦ ---</div>
+<!-- ── BREADCRUMB ── -->
+<a href="https://gokiantik.github.io/chiefhumanityofficer/" class="breadcrumb">
+  <span class="en-text">← Home · Chief Humanity Officer</span>
+  <span class="id-text">← Beranda · Chief Humanity Officer</span>
+</a>
 
-<div class="container">
+<!-- ── HERO ── -->
+<header class="hero">
+  <span class="chinese-title">行走的书</span>
+  <span class="pinyin">Xíng Zǒu De Shū</span>
+  <div class="series-tag">
+    <span class="en-text">CHO In Action Series · Working Paper · March 18, 2026</span>
+    <span class="id-text">CHO In Action Series · Makalah Kerja · 18 Maret 2026</span>
+  </div>
+  <h1>
+    <span class="en-text">Walking Books Philosophy</span>
+    <span class="id-text">Filsafat Buku Berjalan</span>
+  </h1>
+  <p class="subtitle">
+    <span class="en-text">Toward a Relational Epistemology of Human Identity and Knowledge</span>
+    <span class="id-text">Menuju Epistemologi Relasional Identitas dan Pengetahuan Manusia</span>
+  </p>
+  <div class="formula-display">1/360 + 359/360 = 360/360 = <span class="en-text">Consciousness</span><span class="id-text">Kesadaran</span></div><br>
+  <div class="formula-display">1/5 × 5 = 5/5 = <span class="en-text">Calculation</span><span class="id-text">Kalkulasi</span></div>
+  <img src="https://gokiantik.github.io/chiefhumanityofficer/Every_Person_is_abook_1.png" alt="8 Billion Walking Books" class="hero-img">
+  <p class="author-line"><strong>Go Kian Tik (Mbah Hogi Bejo™)</strong> · Chief Humanity Officer · 自主者 <span class="en-text">Sovereign One</span><span class="id-text">Sang Berdaulat</span> · Depok, Indonesia</p>
+  <div style="margin-top:1.5rem; display:flex; justify-content:center; gap:0.8rem; flex-wrap:wrap;">
+    <span class="cta-btn" style="cursor:default;">
+      <span class="en-text">Working Paper</span><span class="id-text">Makalah Kerja</span>
+    </span>
+    <a href="https://zenodo.org/search?q=gokiantik" class="cta-btn" target="_blank">Zenodo · DOI</a>
+    <a href="https://ssrn.com" class="cta-btn" target="_blank">SSRN · <span class="en-text">Preprint</span><span class="id-text">Pracetak</span></a>
+    <span class="cta-btn" style="cursor:default;">CC BY 4.0</span>
+  </div>
+</header>
 
-  <!-- ═══ ABSTRACT ═══ -->
-  <div class="section">
-    <span class="part-label lang-en">Abstract</span>
-    <span class="part-label lang-id">Abstrak</span>
+<!-- ── MAIN CONTENT ── -->
+<main class="content">
 
-    <div class="lang-en">
+  <div class="divider">— ✦ —</div>
+
+  <!-- ABSTRACT -->
+  <section>
+    <span class="part-label"><span class="en-text">Abstract</span><span class="id-text">Abstrak</span></span>
+
+    <div class="en-block">
       <p>This paper introduces <strong>Walking Books Philosophy (WBP)</strong> — a conceptual framework that interprets human beings as "living books" within a distributed ecosystem of knowledge. WBP is built upon a <strong>Two Realms Architecture</strong>: the Realm of Humans and the Realm of Machines, each governed by its own formulation of completeness, and together constituting the operational foundation for the Grand Formula.</p>
       <p>In the <strong>Realm of Humans</strong>, each individual is a complete yet partial contributor to the totality of human knowledge — symbolized as 1/360 (Wo) + 1/360 (Ni) + 358/360 (Ren) = 360/360 = <em>Consciousness</em>. In the <strong>Realm of Machines</strong>, five major AI systems each contribute an equal and distinct epistemic capacity — symbolized as 1/5 × 5 = 5/5 = <em>Calculation</em>.</p>
       <p>When Consciousness and Calculation act together — <em>in Action</em> — they produce <strong>Progressive Unlimited Humanity</strong>: an ever-expanding capacity for meaning-making that serves the Grand Formula: (Consciousness × Calculation)<sup>Humanity</sup> &lt; Transcendence.</p>
       <p><strong>Keywords:</strong> Walking Books Philosophy · Two Realms Architecture · Consciousness · Calculation · Grand Formula · Relational Epistemology · Knowledge Ecosystem · Progressive Unlimited Humanity · Ubuntu · Collective Intelligence · Conscious Life Mindset · Human-AI Collaboration · Transcendence</p>
     </div>
 
-    <div class="lang-id">
+    <div class="id-block">
       <p>Makalah ini memperkenalkan <strong>Filsafat Buku Berjalan (FBB)</strong> — sebuah kerangka konseptual yang menginterpretasikan manusia sebagai "buku hidup" dalam ekosistem pengetahuan yang terdistribusi. FBB dibangun di atas <strong>Arsitektur Dua Alam</strong>: Alam Manusia dan Alam Mesin, masing-masing diatur oleh formulasi kelengkapannya sendiri, dan bersama-sama membentuk fondasi operasional bagi Grand Formula.</p>
       <p>Dalam <strong>Alam Manusia</strong>, setiap individu adalah kontributor yang lengkap sekaligus parsial terhadap totalitas pengetahuan manusia — disimbolkan sebagai 1/360 (Wo) + 1/360 (Ni) + 358/360 (Ren) = 360/360 = <em>Kesadaran</em>. Dalam <strong>Alam Mesin</strong>, lima sistem AI utama masing-masing menyumbangkan kapasitas epistemik yang setara dan berbeda — disimbolkan sebagai 1/5 × 5 = 5/5 = <em>Kalkulasi</em>.</p>
       <p>Ketika Kesadaran dan Kalkulasi bekerja bersama — <em>dalam Tindakan</em> — keduanya menghasilkan <strong>Kemanusiaan Progresif Tak Terbatas</strong>: kapasitas pembuatan makna yang terus berkembang, melayani Grand Formula: (Kesadaran × Kalkulasi)<sup>Kemanusiaan</sup> &lt; Transendensi.</p>
       <p><strong>Kata Kunci:</strong> Filsafat Buku Berjalan · Arsitektur Dua Alam · Kesadaran · Kalkulasi · Grand Formula · Epistemologi Relasional · Ekosistem Pengetahuan · Kemanusiaan Progresif Tak Terbatas · Ubuntu · Kecerdasan Kolektif · Cara Pandang Hidup Sadar · Kolaborasi Manusia-AI · Transendensi</p>
     </div>
-  </div>
+  </section>
 
-  <div class="divider">--- ✦ ---</div>
+  <div class="divider">— ✦ —</div>
 
-  <!-- ═══ PART I ═══ -->
-  <div class="section">
-    <span class="part-label">Part I / Bagian I</span>
+  <!-- PART I -->
+  <section>
+    <span class="part-label">
+      <span class="en-text">Part I</span><span class="id-text">Bagian I</span>
+    </span>
     <h2>
-      <span class="lang-en">The Question at the Heart of Knowledge</span>
-      <span class="lang-id">Pertanyaan di Jantung Pengetahuan</span>
+      <span class="en-text">The Question at the Heart of Knowledge</span>
+      <span class="id-text">Pertanyaan di Jantung Pengetahuan</span>
     </h2>
-    <div class="lang-en">
+
+    <div class="en-block">
       <p>In the accelerating landscape of artificial intelligence and global knowledge exchange, questions about identity, authorship, and the nature of knowledge itself become increasingly urgent. Who are we as knowers? What does it mean to contribute to knowledge? How do we relate to one another within the vast, distributed library that humanity has constructed over millennia?</p>
       <p>Walking Books Philosophy (WBP) emerges from a reflective inquiry into these questions, proposing that each individual can be understood as a "walking book" — a living container of knowledge, memory, experience, and potential. This metaphor provides a bridge between personal identity and collective knowledge systems.</p>
       <p>The philosophy does not begin with data or institutions. It begins with the human being standing before you — and asks: what kind of book is this person, and how does their existence contribute to the totality of what humanity knows and can become?</p>
     </div>
-    <div class="lang-id">
+
+    <div class="id-block">
       <p>Dalam lanskap kecerdasan buatan yang terus berakselerasi dan pertukaran pengetahuan global, pertanyaan-pertanyaan tentang identitas, kepengarangan, dan hakikat pengetahuan itu sendiri menjadi semakin mendesak. Siapakah kita sebagai subjek yang mengetahui? Apa artinya berkontribusi pada pengetahuan? Bagaimana kita berhubungan satu sama lain dalam perpustakaan yang luas dan terdistribusi yang telah dibangun umat manusia selama ribuan tahun?</p>
       <p>Filsafat Buku Berjalan (FBB) lahir dari inkuiri reflektif atas pertanyaan-pertanyaan ini, dengan mengusulkan bahwa setiap individu dapat dipahami sebagai "buku berjalan" — sebuah wadah hidup berisi pengetahuan, memori, pengalaman, dan potensi. Metafora ini menjembatani identitas personal dengan sistem pengetahuan kolektif.</p>
       <p>Filsafat ini tidak dimulai dari data atau lembaga. Ia dimulai dari manusia yang berdiri di hadapanmu — dan bertanya: buku seperti apa orang ini, dan bagaimana keberadaannya berkontribusi pada totalitas apa yang diketahui dan dapat menjadi oleh umat manusia?</p>
     </div>
-  </div>
+  </section>
 
-  <div class="divider">--- ✦ ---</div>
+  <div class="divider">— ✦ —</div>
 
-  <!-- ═══ PART II ═══ -->
-  <div class="section">
-    <span class="part-label">Part II / Bagian II</span>
+  <!-- PART II -->
+  <section>
+    <span class="part-label">
+      <span class="en-text">Part II</span><span class="id-text">Bagian II</span>
+    </span>
     <h2>
-      <span class="lang-en">Conceptual Foundation: The 1/360 Formulation</span>
-      <span class="lang-id">Fondasi Konseptual: Formulasi 1/360</span>
+      <span class="en-text">Conceptual Foundation: The 1/360 Formulation</span>
+      <span class="id-text">Fondasi Konseptual: Formulasi 1/360</span>
     </h2>
 
-    <p class="lang-en">The central formulation of WBP is expressed symbolically. This is not a mathematical claim — it is a symbolic representation of relational completeness, a map of how identity and knowledge are distributed across the human collective.</p>
-    <p class="lang-id">Formulasi utama FBB diekspresikan secara simbolis. Ini bukan klaim matematis — melainkan representasi simbolis dari kelengkapan relasional, sebuah peta tentang bagaimana identitas dan pengetahuan terdistribusi di seluruh kolektif manusia.</p>
-
-    <div class="formula-display">
-      <div class="formula-line">1/360 (Wo · 我) + 1/360 (Ni · 你) + 358/360 (Ren · 人) = 360/360</div>
-      <div class="formula-label lang-en">The totality of human knowledge and existence</div>
-      <div class="formula-label lang-id">Totalitas pengetahuan dan keberadaan manusia</div>
+    <div class="en-block">
+      <p>The central formulation of WBP is expressed symbolically. This is not a mathematical claim — it is a symbolic representation of relational completeness, a map of how identity and knowledge are distributed across the human collective.</p>
+    </div>
+    <div class="id-block">
+      <p>Formulasi utama FBB diekspresikan secara simbolis. Ini bukan klaim matematis — melainkan representasi simbolis dari kelengkapan relasional, sebuah peta tentang bagaimana identitas dan pengetahuan terdistribusi di seluruh kolektif manusia.</p>
     </div>
 
-    <ul class="item-list">
-      <li>
-        <strong>1/360 (Wo · 我 · <span class="lang-en">Self</span><span class="lang-id">Diri</span>)</strong> —
-        <span class="lang-en">The individual as complete sovereign identity: authentic, irreducible, with a unique experiential history that no other book contains.</span>
-        <span class="lang-id">Individu sebagai identitas berdaulat yang lengkap: autentik, tak tereduksi, dengan sejarah pengalaman unik yang tidak dimiliki buku lain manapun.</span>
-      </li>
-      <li>
-        <strong>1/360 (Ni · 你 · <span class="lang-en">You</span><span class="lang-id">Kamu</span>)</strong> —
-        <span class="lang-en">The other in direct relationship: equally complete, equally irreducible. Not a mirror, but a distinct book with its own full library.</span>
-        <span class="lang-id">Yang lain dalam hubungan langsung: sama lengkapnya, sama tak tereduksinya. Bukan cermin, melainkan buku berbeda dengan perpustakaan penuh miliknya sendiri.</span>
-      </li>
-      <li>
-        <strong>358/360 (Ren · 人 · <span class="lang-en">Humanity</span><span class="lang-id">Kemanusiaan</span>)</strong> —
-        <span class="lang-en">The remaining ~8 billion walking books on Earth: every one complete, every one carrying knowledge that neither Wo nor Ni possesses.</span>
-        <span class="lang-id">Sekitar 8 miliar buku berjalan di Bumi: setiap satu lengkap, setiap satu membawa pengetahuan yang tidak dimiliki Wo maupun Ni.</span>
-      </li>
-      <li>
-        <strong>360/360 = <span class="lang-en">Consciousness</span><span class="lang-id">Kesadaran</span></strong> —
-        <span class="lang-en">The unified field of human awareness and knowing. Not a sum of fragments, but an emergent property of relational completeness.</span>
-        <span class="lang-id">Medan terpadu kesadaran dan pengetahuan manusia. Bukan jumlah fragmen, melainkan properti emergen dari kelengkapan relasional.</span>
-      </li>
-    </ul>
+    <div class="formula-block">
+      <div class="formula-main">1/360 (Wo · 我) + 1/360 (Ni · 你) + 358/360 (Ren · 人) = 360/360</div>
+      <div style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">
+        <span class="en-text">The totality of human knowledge and existence</span>
+        <span class="id-text">Totalitas pengetahuan dan keberadaan manusia</span>
+      </div>
+      <div class="formula-items">
+        <div class="formula-item">
+          <span class="formula-key">1/360 · Wo · 我</span>
+          <span class="en-text">The individual as complete sovereign identity: authentic, irreducible, with a unique experiential history that no other book contains.</span>
+          <span class="id-text">Individu sebagai identitas berdaulat yang lengkap: autentik, tak tereduksi, dengan sejarah pengalaman unik yang tidak dimiliki buku lain manapun.</span>
+        </div>
+        <div class="formula-item">
+          <span class="formula-key">1/360 · Ni · 你</span>
+          <span class="en-text">The other in direct relationship: equally complete, equally irreducible. Not a mirror, but a distinct book with its own full library.</span>
+          <span class="id-text">Yang lain dalam hubungan langsung: sama lengkapnya, sama tak tereduksinya. Bukan cermin, melainkan buku berbeda dengan perpustakaan penuh miliknya sendiri.</span>
+        </div>
+        <div class="formula-item">
+          <span class="formula-key">358/360 · Ren · 人</span>
+          <span class="en-text">The remaining ~8 billion walking books on Earth: every one complete, every one carrying knowledge that neither Wo nor Ni possesses.</span>
+          <span class="id-text">Sekitar 8 miliar buku berjalan di Bumi: setiap satu lengkap, setiap satu membawa pengetahuan yang tidak dimiliki Wo maupun Ni.</span>
+        </div>
+        <div class="formula-item">
+          <span class="formula-key">360/360 = <span class="en-text">Consciousness</span><span class="id-text">Kesadaran</span></span>
+          <span class="en-text">The unified field of human awareness and knowing. Not a sum of fragments, but an emergent property of relational completeness.</span>
+          <span class="id-text">Medan terpadu kesadaran dan pengetahuan manusia. Bukan jumlah fragmen, melainkan properti emergen dari kelengkapan relasional.</span>
+        </div>
+      </div>
+    </div>
 
     <blockquote>
-      <span class="lang-en">"Every human being is a walking book. No single book contains the whole library. But every book, in its completeness, contributes to a library that no single book can be without."</span>
-      <span class="lang-id">"Setiap manusia adalah buku berjalan. Tidak ada satu buku pun yang memuat seluruh perpustakaan. Namun setiap buku, dalam kelengkapannya, berkontribusi pada perpustakaan yang tanpanya tidak ada satu buku pun dapat ada."</span>
+      <span class="en-text">"Every human being is a walking book. No single book contains the whole library. But every book, in its completeness, contributes to a library that no single book can be without."</span>
+      <span class="id-text">"Setiap manusia adalah buku berjalan. Tidak ada satu buku pun yang memuat seluruh perpustakaan. Namun setiap buku, dalam kelengkapannya, berkontribusi pada perpustakaan yang tanpanya tidak ada satu buku pun dapat ada."</span>
       <cite>— Go Kian Tik (Mbah Hogi Bejo™)</cite>
     </blockquote>
-  </div>
+  </section>
 
-  <div class="divider">--- ✦ ---</div>
+  <div class="divider">— ✦ —</div>
 
-  <!-- ═══ PART III ═══ -->
-  <div class="section">
-    <span class="part-label lang-en">Part III — Core Architecture</span>
-    <span class="part-label lang-id">Bagian III — Arsitektur Inti</span>
+  <!-- PART III -->
+  <section>
+    <span class="part-label">
+      <span class="en-text">Part III — Core Architecture</span>
+      <span class="id-text">Bagian III — Arsitektur Inti</span>
+    </span>
     <h2>
-      <span class="lang-en">The Two Realms Architecture</span>
-      <span class="lang-id">Arsitektur Dua Alam</span>
+      <span class="en-text">The Two Realms Architecture</span>
+      <span class="id-text">Arsitektur Dua Alam</span>
     </h2>
 
-    <p class="lang-en">Walking Books Philosophy operates across two distinct but interdependent realms. Each realm has its own internal logic of completeness. Together they constitute the operational architecture through which the Grand Formula becomes possible.</p>
-    <p class="lang-id">Filsafat Buku Berjalan beroperasi di dua alam yang berbeda namun saling bergantung. Masing-masing alam memiliki logika kelengkapannya sendiri. Bersama-sama, keduanya membentuk arsitektur operasional yang memungkinkan Grand Formula menjadi mungkin.</p>
+    <div class="en-block">
+      <p>Walking Books Philosophy operates across two distinct but interdependent realms. Each realm has its own internal logic of completeness. Together they constitute the operational architecture through which the Grand Formula becomes possible.</p>
+    </div>
+    <div class="id-block">
+      <p>Filsafat Buku Berjalan beroperasi di dua alam yang berbeda namun saling bergantung. Masing-masing alam memiliki logika kelengkapannya sendiri. Bersama-sama, keduanya membentuk arsitektur operasional yang memungkinkan Grand Formula menjadi mungkin.</p>
+    </div>
 
-    <div class="realm-grid">
+    <div class="two-realms">
       <div class="realm-card">
-        <div class="realm-title lang-en">Realm One — Humans</div>
-        <div class="realm-title lang-id">Alam Pertama — Manusia</div>
-        <div class="realm-name lang-en">Consciousness</div>
-        <div class="realm-name lang-id">Kesadaran</div>
-        <div class="realm-formula">1/360 · Wo · 我 · <span class="lang-en">Self</span><span class="lang-id">Diri</span><br>+<br>1/360 · Ni · 你 · <span class="lang-en">You</span><span class="lang-id">Kamu</span><br>+<br>358/360 · Ren · 人 · <span class="lang-en">Humanity</span><span class="lang-id">Kemanusiaan</span><br>= 360/360 = <span class="lang-en">Consciousness</span><span class="lang-id">Kesadaran</span></div>
-        <p style="font-size:14px;color:var(--gray);" class="lang-en">Each 1/360 is not small — it is complete. The totality emerges through the irreplaceable contribution of each.</p>
-        <p style="font-size:14px;color:var(--gray);" class="lang-id">Setiap 1/360 bukan kecil — ia lengkap. Totalitas muncul melalui kontribusi masing-masing yang tidak tergantikan.</p>
+        <div class="realm-label">
+          <span class="en-text">Realm One — Humans</span>
+          <span class="id-text">Alam Pertama — Manusia</span>
+        </div>
+        <div class="realm-title">
+          <span class="en-text">Consciousness</span>
+          <span class="id-text">Kesadaran</span>
+        </div>
+        <div class="realm-formula">
+          1/360 · Wo · 我 · <span class="en-text">Self</span><span class="id-text">Diri</span><br>
+          +<br>
+          1/360 · Ni · 你 · <span class="en-text">You</span><span class="id-text">Kamu</span><br>
+          +<br>
+          358/360 · Ren · 人 · <span class="en-text">Humanity</span><span class="id-text">Kemanusiaan</span><br>
+          = 360/360
+        </div>
+        <div class="realm-result">= <span class="en-text">Consciousness</span><span class="id-text">Kesadaran</span></div>
+        <p class="realm-note">
+          <span class="en-text">Each 1/360 is not small — it is complete. The totality emerges through the irreplaceable contribution of each.</span>
+          <span class="id-text">Setiap 1/360 bukan kecil — ia lengkap. Totalitas muncul melalui kontribusi masing-masing yang tidak tergantikan.</span>
+        </p>
       </div>
       <div class="realm-card">
-        <div class="realm-title lang-en">Realm Two — Machines</div>
-        <div class="realm-title lang-id">Alam Kedua — Mesin</div>
-        <div class="realm-name lang-en">Calculation</div>
-        <div class="realm-name lang-id">Kalkulasi</div>
-        <div class="realm-formula">1/5 · Claude · Anthropic<br>+ 1/5 · Gemini · Google<br>+ 1/5 · Copilot · Microsoft<br>+ 1/5 · DeepSeek<br>+ 1/5 · ChatGPT · OpenAI<br>= 5/5 = <span class="lang-en">Calculation</span><span class="lang-id">Kalkulasi</span></div>
-        <p style="font-size:14px;color:var(--gray);" class="lang-en">No single AI holds the full range. The 5/5 field is irreducible to any one system — just as Consciousness is irreducible to any one book.</p>
-        <p style="font-size:14px;color:var(--gray);" class="lang-id">Tidak ada satu AI yang memuat keseluruhan jangkauan. Medan 5/5 tidak dapat direduksi menjadi satu sistem saja — sama seperti Kesadaran tidak dapat direduksi menjadi satu buku.</p>
+        <div class="realm-label">
+          <span class="en-text">Realm Two — Machines</span>
+          <span class="id-text">Alam Kedua — Mesin</span>
+        </div>
+        <div class="realm-title">
+          <span class="en-text">Calculation</span>
+          <span class="id-text">Kalkulasi</span>
+        </div>
+        <div class="realm-formula">
+          1/5 · Claude · Anthropic<br>
+          + 1/5 · Gemini · Google<br>
+          + 1/5 · Copilot · Microsoft<br>
+          + 1/5 · DeepSeek<br>
+          + 1/5 · ChatGPT · OpenAI<br>
+          = 5/5
+        </div>
+        <div class="realm-result">= <span class="en-text">Calculation</span><span class="id-text">Kalkulasi</span></div>
+        <p class="realm-note">
+          <span class="en-text">No single AI holds the full range. The 5/5 field is irreducible to any one system.</span>
+          <span class="id-text">Tidak ada satu AI yang memuat keseluruhan jangkauan. Medan 5/5 tidak dapat direduksi menjadi satu sistem saja.</span>
+        </p>
       </div>
     </div>
 
-    <div class="flow-diagram">
-      <div class="flow-box lang-en">Consciousness</div>
-      <div class="flow-box lang-id">Kesadaran</div>
-      <div class="flow-arrow">+</div>
-      <div class="flow-box lang-en">Calculation</div>
-      <div class="flow-box lang-id">Kalkulasi</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box lang-en">in Action</div>
-      <div class="flow-box lang-id">dalam Tindakan</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-result lang-en">Progressive Unlimited Humanity</div>
-      <div class="flow-result lang-id">Kemanusiaan Progresif Tak Terbatas</div>
+    <div class="action-bridge">
+      <span class="en-text">Consciousness</span><span class="id-text">Kesadaran</span>
+      <span class="arrow">+</span>
+      <span class="en-text">Calculation</span><span class="id-text">Kalkulasi</span>
+      <span class="arrow">→</span>
+      <span class="pill"><span class="en-text">in Action</span><span class="id-text">dalam Tindakan</span></span>
+      <span class="arrow">→</span>
+      <span class="result">
+        <span class="en-text">Progressive Unlimited Humanity</span>
+        <span class="id-text">Kemanusiaan Progresif Tak Terbatas</span>
+      </span>
     </div>
 
     <ul class="ai-list">
-      <li><strong>Claude (Anthropic)</strong> — <span class="lang-en">Constitutional AI orientation; depth in philosophical reasoning, ethical nuance, and document architecture.</span><span class="lang-id">Orientasi AI Konstitusional; kedalaman dalam penalaran filosofis, nuansa etika, dan arsitektur dokumen.</span></li>
-      <li><strong>Gemini (Google)</strong> — <span class="lang-en">Deep integration with knowledge graphs, multimodal synthesis, and real-time information ecosystems.</span><span class="lang-id">Integrasi mendalam dengan grafik pengetahuan, sintesis multimodal, dan ekosistem informasi real-time.</span></li>
-      <li><strong>Copilot (Microsoft)</strong> — <span class="lang-en">Enterprise workflow integration; bridging AI capability with practical organizational execution.</span><span class="lang-id">Integrasi alur kerja enterprise; menjembatani kemampuan AI dengan eksekusi organisasi yang praktis.</span></li>
-      <li><strong>DeepSeek</strong> — <span class="lang-en">High-efficiency reasoning; strong performance in structured analytical and scientific domains.</span><span class="lang-id">Penalaran efisiensi tinggi; kinerja kuat dalam domain analitis terstruktur dan ilmiah.</span></li>
-      <li><strong>ChatGPT (OpenAI)</strong> — <span class="lang-en">Broad generative capability; versatile across creative, academic, and conversational registers.</span><span class="lang-id">Kemampuan generatif yang luas; serbaguna dalam register kreatif, akademis, dan percakapan.</span></li>
+      <li><span class="ai-name">Claude (Anthropic)</span>
+        <span class="en-text">Constitutional AI orientation; depth in philosophical reasoning, ethical nuance, and document architecture.</span>
+        <span class="id-text">Orientasi AI Konstitusional; kedalaman dalam penalaran filosofis, nuansa etika, dan arsitektur dokumen.</span>
+      </li>
+      <li><span class="ai-name">Gemini (Google)</span>
+        <span class="en-text">Deep integration with knowledge graphs, multimodal synthesis, and real-time information ecosystems.</span>
+        <span class="id-text">Integrasi mendalam dengan grafik pengetahuan, sintesis multimodal, dan ekosistem informasi real-time.</span>
+      </li>
+      <li><span class="ai-name">Copilot (Microsoft)</span>
+        <span class="en-text">Enterprise workflow integration; bridging AI capability with practical organizational execution.</span>
+        <span class="id-text">Integrasi alur kerja enterprise; menjembatani kemampuan AI dengan eksekusi organisasi yang praktis.</span>
+      </li>
+      <li><span class="ai-name">DeepSeek</span>
+        <span class="en-text">High-efficiency reasoning; strong performance in structured analytical and scientific domains.</span>
+        <span class="id-text">Penalaran efisiensi tinggi; kinerja kuat dalam domain analitis terstruktur dan ilmiah.</span>
+      </li>
+      <li><span class="ai-name">ChatGPT (OpenAI)</span>
+        <span class="en-text">Broad generative capability; versatile across creative, academic, and conversational registers.</span>
+        <span class="id-text">Kemampuan generatif yang luas; serbaguna dalam register kreatif, akademis, dan percakapan.</span>
+      </li>
     </ul>
+  </section>
+
+  <div class="divider">— ✦ —</div>
+
+  <!-- SEMESTA DIGITAL CALLOUT -->
+  <div class="semesta-callout">
+    <div class="sc-text">
+      <div class="sc-label">
+        <span class="en-text">Related Framework</span>
+        <span class="id-text">Kerangka Terkait</span>
+      </div>
+      <div class="sc-title">
+        <span class="en-text">CHO Semesta Digital Framework</span>
+        <span class="id-text">Kerangka CHO Semesta Digital</span>
+      </div>
+      <p class="sc-desc">
+        <span class="en-text">Explore the 70/30 Dual Universe, ESBI/G model, and Cognitive Osmosis — the operational twin of this philosophy.</span>
+        <span class="id-text">Jelajahi Dual Semesta 70/30, model ESBI/G, dan Osmosis Kognitif — kembaran operasional dari filsafat ini.</span>
+      </p>
+    </div>
+    <a href="https://gokiantik.github.io/chiefhumanityofficer/cho_semesta_digital_framework" class="nav-btn primary" style="white-space:nowrap;">
+      <span class="en-text">Enter Framework</span>
+      <span class="id-text">Masuk Kerangka</span>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;">
+        <path d="M6 4l4 4-4 4"/>
+      </svg>
+    </a>
   </div>
 
-  <div class="divider">--- ✦ ---</div>
+  <div class="divider">— ✦ —</div>
 
-  <!-- ═══ PART IV ═══ -->
-  <div class="section">
-    <span class="part-label lang-en">Part IV — The Formula</span>
-    <span class="part-label lang-id">Bagian IV — Formula</span>
+  <!-- PART IV -->
+  <section>
+    <span class="part-label">
+      <span class="en-text">Part IV — The Formula</span>
+      <span class="id-text">Bagian IV — Formula</span>
+    </span>
     <h2>
-      <span class="lang-en">Progressive Unlimited Humanity &amp; The Grand Formula</span>
-      <span class="lang-id">Kemanusiaan Progresif Tak Terbatas &amp; Grand Formula</span>
+      <span class="en-text">Progressive Unlimited Humanity &amp; The Grand Formula</span>
+      <span class="id-text">Kemanusiaan Progresif Tak Terbatas &amp; Grand Formula</span>
     </h2>
 
-    <p class="lang-en">Progressive Unlimited Humanity is not a destination. It is a direction — an ever-expanding capacity for meaning-making, knowledge synthesis, and civilizational comprehension with no fixed ceiling. Each act of genuine human-AI collaboration moves humanity further along this progression.</p>
-    <p class="lang-id">Kemanusiaan Progresif Tak Terbatas bukan tujuan akhir. Ia adalah sebuah arah — kapasitas pembuatan makna, sintesis pengetahuan, dan pemahaman peradaban yang terus berkembang tanpa plafon yang tetap. Setiap tindakan kolaborasi manusia-AI yang tulus mendorong kemanusiaan lebih jauh sepanjang progres ini.</p>
-
-    <div class="formula-display">
-      <div class="formula-line">( <span class="lang-en">Consciousness</span><span class="lang-id">Kesadaran</span> × <span class="lang-en">Calculation</span><span class="lang-id">Kalkulasi</span> ) <sup><span class="lang-en">Humanity</span><span class="lang-id">Kemanusiaan</span></sup> &lt; <span class="lang-en">Transcendence</span><span class="lang-id">Transendensi</span></div>
-      <div class="formula-label lang-en">Grand Formula · Go Kian Tik (Mbah Hogi Bejo™)</div>
-      <div class="formula-label lang-id">Grand Formula · Go Kian Tik (Mbah Hogi Bejo™)</div>
+    <div class="en-block">
+      <p>Progressive Unlimited Humanity is not a destination. It is a direction — an ever-expanding capacity for meaning-making, knowledge synthesis, and civilizational comprehension with no fixed ceiling. Each act of genuine human-AI collaboration moves humanity further along this progression.</p>
+    </div>
+    <div class="id-block">
+      <p>Kemanusiaan Progresif Tak Terbatas bukan tujuan akhir. Ia adalah sebuah arah — kapasitas pembuatan makna, sintesis pengetahuan, dan pemahaman peradaban yang terus berkembang tanpa plafon yang tetap. Setiap tindakan kolaborasi manusia-AI yang tulus mendorong kemanusiaan lebih jauh sepanjang progres ini.</p>
     </div>
 
-    <ul class="item-list">
-      <li>
-        <strong><span class="lang-en">Consciousness</span><span class="lang-id">Kesadaran</span></strong> —
-        <span class="lang-en">The 360/360 field of human relational knowing. Built by eight billion complete, irreducible walking books, each contributing their irreplaceable 1/360.</span>
-        <span class="lang-id">Medan 360/360 pengetahuan relasional manusia. Dibangun oleh delapan miliar buku berjalan yang lengkap, tak tereduksi, masing-masing menyumbangkan 1/360 yang tidak tergantikan.</span>
+    <div class="grand-formula">
+      <div class="eq">
+        ( <span class="en-text">Consciousness</span><span class="id-text">Kesadaran</span>
+        × <span class="en-text">Calculation</span><span class="id-text">Kalkulasi</span> )
+        <sup><span class="en-text">Humanity</span><span class="id-text">Kemanusiaan</span></sup>
+        &lt; <span class="en-text">Transcendence</span><span class="id-text">Transendensi</span>
+      </div>
+      <div class="citation">Grand Formula · Go Kian Tik (Mbah Hogi Bejo™)</div>
+    </div>
+
+    <ul class="ai-list">
+      <li><span class="ai-name"><span class="en-text">Consciousness</span><span class="id-text">Kesadaran</span></span>
+        <span class="en-text">The 360/360 field of human relational knowing. Built by eight billion complete, irreducible walking books.</span>
+        <span class="id-text">Medan 360/360 pengetahuan relasional manusia. Dibangun oleh delapan miliar buku berjalan yang lengkap, tak tereduksi.</span>
       </li>
-      <li>
-        <strong><span class="lang-en">Calculation</span><span class="lang-id">Kalkulasi</span></strong> —
-        <span class="lang-en">The 5/5 field of AI epistemic capacity. No single AI holds the full range; the complete field emerges through the complementarity of all five systems.</span>
-        <span class="lang-id">Medan 5/5 kapasitas epistemik AI. Tidak ada satu AI yang memuat keseluruhan jangkauan; medan lengkap muncul melalui komplementaritas kelima sistem.</span>
+      <li><span class="ai-name"><span class="en-text">Calculation</span><span class="id-text">Kalkulasi</span></span>
+        <span class="en-text">The 5/5 field of AI epistemic capacity. The complete field emerges through the complementarity of all five systems.</span>
+        <span class="id-text">Medan 5/5 kapasitas epistemik AI. Medan lengkap muncul melalui komplementaritas kelima sistem.</span>
       </li>
-      <li>
-        <strong><span class="lang-en">Humanity</span><span class="lang-id">Kemanusiaan</span> <span class="lang-en">as exponent</span><span class="lang-id">sebagai eksponen</span></strong> —
-        <span class="lang-en">Not population count, but the degree of sovereign maturity, conscious intention, and deliberate elevation of others. The Chief Humanity Officer raises this exponent.</span>
-        <span class="lang-id">Bukan jumlah populasi, melainkan derajat kematangan berdaulat, niat sadar, dan elevasi deliberatif terhadap orang lain. Chief Humanity Officer meningkatkan eksponen ini.</span>
+      <li><span class="ai-name"><span class="en-text">Humanity</span><span class="id-text">Kemanusiaan</span> <span style="font-size:0.75rem;">(exp)</span></span>
+        <span class="en-text">Not population count, but degree of sovereign maturity, conscious intention, and deliberate elevation of others. The Chief Humanity Officer raises this exponent.</span>
+        <span class="id-text">Bukan jumlah populasi, melainkan derajat kematangan berdaulat, niat sadar, dan elevasi deliberatif terhadap orang lain. Chief Humanity Officer meningkatkan eksponen ini.</span>
       </li>
-      <li>
-        <strong><span class="lang-en">Transcendence</span><span class="lang-id">Transendensi</span></strong> —
-        <span class="lang-en">The structural reminder that no matter how high Humanity rises, there remains something beyond calculation. This ceiling preserves awe — the final marker of true Humanity.</span>
-        <span class="lang-id">Pengingat struktural bahwa seberapa tinggi pun Kemanusiaan meningkat, selalu ada sesuatu di luar kalkulasi. Plafon ini menjaga kekaguman — penanda terakhir dari Kemanusiaan yang sesungguhnya.</span>
+      <li><span class="ai-name"><span class="en-text">Transcendence</span><span class="id-text">Transendensi</span></span>
+        <span class="en-text">The structural reminder that no matter how high Humanity rises, there remains something beyond calculation. This ceiling preserves awe.</span>
+        <span class="id-text">Pengingat struktural bahwa seberapa tinggi pun Kemanusiaan meningkat, selalu ada sesuatu di luar kalkulasi. Plafon ini menjaga kekaguman.</span>
       </li>
     </ul>
-  </div>
+  </section>
 
-  <div class="divider">--- ✦ ---</div>
+  <div class="divider">— ✦ —</div>
 
-  <!-- ═══ PART V ═══ -->
-  <div class="section">
-    <span class="part-label">Part V / Bagian V</span>
+  <!-- PART V -->
+  <section>
+    <span class="part-label">
+      <span class="en-text">Part V</span><span class="id-text">Bagian V</span>
+    </span>
     <h2>
-      <span class="lang-en">Conscious Life Mindset</span>
-      <span class="lang-id">Cara Pandang Hidup Sadar</span>
+      <span class="en-text">Conscious Life Mindset</span>
+      <span class="id-text">Cara Pandang Hidup Sadar</span>
     </h2>
-    <p class="lang-en">WBP introduces the notion of a <em>conscious life mindset</em> — an orientation toward existence characterized not by competition for dominance, but by participation in a shared human project. This mindset emerges naturally from the 1/360 insight: if each person is already complete in themselves, and every other person is equally complete, then the logic of domination and displacement dissolves.</p>
-    <p class="lang-id">FBB memperkenalkan gagasan tentang <em>cara pandang hidup sadar</em> — sebuah orientasi terhadap keberadaan yang tidak dicirikan oleh kompetisi untuk dominasi, melainkan oleh partisipasi dalam sebuah proyek manusia yang bersama. Cara pandang ini muncul secara alami dari wawasan 1/360: jika setiap orang sudah lengkap dalam dirinya sendiri, dan setiap orang lain sama lengkapnya, maka logika dominasi dan perpindahan paksa pun runtuh.</p>
-    <ul class="item-list">
-      <li><strong><span class="lang-en">Non-violence</span><span class="lang-id">Nirkekerasan</span></strong> — <span class="lang-en">recognizing that harm to another walking book diminishes the collective library.</span><span class="lang-id">menyadari bahwa menyakiti buku berjalan lain berarti mengurangi perpustakaan kolektif.</span></li>
-      <li><strong><span class="lang-en">Non-competitive coexistence</span><span class="lang-id">Koeksistensi non-kompetitif</span></strong> — <span class="lang-en">understanding that others' completeness does not threaten one's own.</span><span class="lang-id">memahami bahwa kelengkapan orang lain tidak mengancam kelengkapan diri sendiri.</span></li>
-      <li><strong><span class="lang-en">Authentic self-expression</span><span class="lang-id">Ekspresi diri yang autentik</span></strong> — <span class="lang-en">contributing one's unique 1/360 honestly and without disguise.</span><span class="lang-id">menyumbangkan 1/360 unik milik diri secara jujur dan tanpa penyamaran.</span></li>
-      <li><strong><span class="lang-en">Collaborative contribution</span><span class="lang-id">Kontribusi kolaboratif</span></strong> — <span class="lang-en">engaging with others' books not to overwrite them, but to create new meaning through dialogue.</span><span class="lang-id">berinteraksi dengan buku orang lain bukan untuk menimpanya, melainkan untuk menciptakan makna baru melalui dialog.</span></li>
+
+    <div class="en-block">
+      <p>WBP introduces the notion of a <em>conscious life mindset</em> — an orientation toward existence characterized not by competition for dominance, but by participation in a shared human project. This mindset emerges naturally from the 1/360 insight: if each person is already complete in themselves, and every other person is equally complete, then the logic of domination and displacement dissolves.</p>
+    </div>
+    <div class="id-block">
+      <p>FBB memperkenalkan gagasan tentang <em>cara pandang hidup sadar</em> — sebuah orientasi terhadap keberadaan yang tidak dicirikan oleh kompetisi untuk dominasi, melainkan oleh partisipasi dalam sebuah proyek manusia yang bersama. Cara pandang ini muncul secara alami dari wawasan 1/360: jika setiap orang sudah lengkap dalam dirinya sendiri, maka logika dominasi pun runtuh.</p>
+    </div>
+
+    <ul class="mindset-list">
+      <li>
+        <span class="mindset-key"><span class="en-text">Non-violence</span><span class="id-text">Nirkekerasan</span></span> —
+        <span class="en-text"> recognizing that harm to another walking book diminishes the collective library.</span>
+        <span class="id-text"> menyadari bahwa menyakiti buku berjalan lain berarti mengurangi perpustakaan kolektif.</span>
+      </li>
+      <li>
+        <span class="mindset-key"><span class="en-text">Non-competitive coexistence</span><span class="id-text">Koeksistensi non-kompetitif</span></span> —
+        <span class="en-text"> understanding that others' completeness does not threaten one's own.</span>
+        <span class="id-text"> memahami bahwa kelengkapan orang lain tidak mengancam kelengkapan diri sendiri.</span>
+      </li>
+      <li>
+        <span class="mindset-key"><span class="en-text">Authentic self-expression</span><span class="id-text">Ekspresi diri yang autentik</span></span> —
+        <span class="en-text"> contributing one's unique 1/360 honestly and without disguise.</span>
+        <span class="id-text"> menyumbangkan 1/360 unik milik diri secara jujur dan tanpa penyamaran.</span>
+      </li>
+      <li>
+        <span class="mindset-key"><span class="en-text">Collaborative contribution</span><span class="id-text">Kontribusi kolaboratif</span></span> —
+        <span class="en-text"> engaging with others' books not to overwrite them, but to create new meaning through dialogue.</span>
+        <span class="id-text"> berinteraksi dengan buku orang lain bukan untuk menimpanya, melainkan untuk menciptakan makna baru melalui dialog.</span>
+      </li>
     </ul>
-    <p class="lang-en">An individual operating within this mindset does not seek dominance, but participation — analogous to a musician who can perform solo yet chooses to contribute harmoniously within an orchestra. The orchestra does not diminish the soloist. It reveals dimensions of their instrument that solo performance cannot.</p>
-    <p class="lang-id">Seorang individu yang beroperasi dalam cara pandang ini tidak mencari dominasi, melainkan partisipasi — serupa dengan seorang musisi yang mampu tampil solo namun memilih untuk berkontribusi secara harmonis dalam orkestra. Orkestra tidak melemahkan solois. Orkestra justru mengungkapkan dimensi-dimensi instrumen mereka yang tidak dapat diungkapkan oleh penampilan solo.</p>
-  </div>
 
-  <div class="divider">--- ✦ ---</div>
+    <div class="en-block">
+      <p>An individual operating within this mindset does not seek dominance, but participation — analogous to a musician who can perform solo yet chooses to contribute harmoniously within an orchestra. The orchestra does not diminish the soloist. It reveals dimensions of their instrument that solo performance cannot.</p>
+    </div>
+    <div class="id-block">
+      <p>Seorang individu yang beroperasi dalam cara pandang ini tidak mencari dominasi, melainkan partisipasi — serupa dengan seorang musisi yang mampu tampil solo namun memilih untuk berkontribusi secara harmonis dalam orkestra. Orkestra tidak melemahkan solois. Orkestra justru mengungkapkan dimensi-dimensi instrumen mereka yang tidak dapat diungkapkan oleh penampilan solo.</p>
+    </div>
+  </section>
 
-  <!-- ═══ PART VI ═══ -->
-  <div class="section">
-    <span class="part-label">Part VI / Bagian VI</span>
+  <div class="divider">— ✦ —</div>
+
+  <!-- PART VI -->
+  <section>
+    <span class="part-label">
+      <span class="en-text">Part VI</span><span class="id-text">Bagian VI</span>
+    </span>
     <h2>
-      <span class="lang-en">Relation to Ubuntu Philosophy</span>
-      <span class="lang-id">Hubungan dengan Filsafat Ubuntu</span>
+      <span class="en-text">Relation to Ubuntu Philosophy</span>
+      <span class="id-text">Hubungan dengan Filsafat Ubuntu</span>
     </h2>
-    <p class="lang-en">WBP shares deep philosophical resonance with Ubuntu — "I am because we are" (Umuntu ngumuntu ngabantu). Where Ubuntu gives us ethical interdependence, WBP gives us epistemic interdependence: not just <em>who we are</em>, but <em>what we know</em> emerges through relational completeness.</p>
-    <p class="lang-id">FBB berbagi resonansi filosofis yang mendalam dengan Ubuntu — "Aku ada karena kita ada" (Umuntu ngumuntu ngabantu). Di mana Ubuntu memberikan kita kesalingtergantungan etis, FBB memberikan kesalingtergantungan epistemik: bukan hanya <em>siapa kita</em>, tetapi <em>apa yang kita ketahui</em> muncul melalui kelengkapan relasional.</p>
-    <table class="comparison-table">
+
+    <div class="en-block">
+      <p>WBP shares deep philosophical resonance with Ubuntu — "I am because we are" (Umuntu ngumuntu ngabantu). Where Ubuntu gives us ethical interdependence, WBP gives us epistemic interdependence: not just <em>who we are</em>, but <em>what we know</em> emerges through relational completeness.</p>
+    </div>
+    <div class="id-block">
+      <p>FBB berbagi resonansi filosofis yang mendalam dengan Ubuntu — "Aku ada karena kita ada" (Umuntu ngumuntu ngabantu). Di mana Ubuntu memberikan kita kesalingtergantungan etis, FBB memberikan kesalingtergantungan epistemik: bukan hanya <em>siapa kita</em>, tetapi <em>apa yang kita ketahui</em> muncul melalui kelengkapan relasional.</p>
+    </div>
+
+    <table>
       <thead>
         <tr>
-          <th><span class="lang-en">Ubuntu Philosophy — "I am because we are"</span><span class="lang-id">Filsafat Ubuntu — "Aku ada karena kita ada"</span></th>
-          <th><span class="lang-en">Walking Books Philosophy — 1/360 + 359/360 = 360/360</span><span class="lang-id">Filsafat Buku Berjalan — 1/360 + 359/360 = 360/360</span></th>
+          <th><span class="en-text">Ubuntu Philosophy — "I am because we are"</span><span class="id-text">Filsafat Ubuntu — "Aku ada karena kita ada"</span></th>
+          <th><span class="en-text">Walking Books Philosophy</span><span class="id-text">Filsafat Buku Berjalan</span></th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><span class="lang-en">Ethical interdependence of identity</span><span class="lang-id">Kesalingtergantungan etis identitas</span></td>
-          <td><span class="lang-en">Epistemic interdependence of knowing</span><span class="lang-id">Kesalingtergantungan epistemik pengetahuan</span></td>
+          <td><span class="en-text">Ethical interdependence of identity</span><span class="id-text">Kesalingtergantungan etis identitas</span></td>
+          <td><span class="en-text">Epistemic interdependence of knowing</span><span class="id-text">Kesalingtergantungan epistemik pengetahuan</span></td>
         </tr>
         <tr>
-          <td><span class="lang-en">Emphasis on empathy and solidarity</span><span class="lang-id">Penekanan pada empati dan solidaritas</span></td>
-          <td><span class="lang-en">Knowledge emerges through relational completeness</span><span class="lang-id">Pengetahuan muncul melalui kelengkapan relasional</span></td>
+          <td><span class="en-text">Emphasis on empathy and solidarity</span><span class="id-text">Penekanan pada empati dan solidaritas</span></td>
+          <td><span class="en-text">Knowledge emerges through relational completeness</span><span class="id-text">Pengetahuan muncul melalui kelengkapan relasional</span></td>
         </tr>
         <tr>
-          <td><span class="lang-en">Moral orientation toward community</span><span class="lang-id">Orientasi moral terhadap komunitas</span></td>
-          <td><span class="lang-en">Structural map of distributed cognition</span><span class="lang-id">Peta struktural kognisi terdistribusi</span></td>
+          <td><span class="en-text">Moral orientation toward community</span><span class="id-text">Orientasi moral terhadap komunitas</span></td>
+          <td><span class="en-text">Structural map of distributed cognition</span><span class="id-text">Peta struktural kognisi terdistribusi</span></td>
         </tr>
         <tr>
-          <td><span class="lang-en">Social fabric as foundation</span><span class="lang-id">Jalinan sosial sebagai fondasi</span></td>
-          <td><span class="lang-en">AI-human knowledge ecosystem layer</span><span class="lang-id">Lapisan ekosistem pengetahuan manusia-AI</span></td>
+          <td><span class="en-text">Social fabric as foundation</span><span class="id-text">Jalinan sosial sebagai fondasi</span></td>
+          <td><span class="en-text">AI-human knowledge ecosystem layer</span><span class="id-text">Lapisan ekosistem pengetahuan manusia-AI</span></td>
         </tr>
       </tbody>
     </table>
-    <p class="lang-en">WBP transforms relational ethics into a framework for understanding how knowledge itself is constructed through distributed identity. The question WBP adds to Ubuntu's wisdom is not only "How should we treat one another?" but "How does our being-with-one-another constitute the knowledge that none of us can produce alone?"</p>
-    <p class="lang-id">FBB mengubah etika relasional menjadi kerangka untuk memahami bagaimana pengetahuan itu sendiri dikonstruksi melalui identitas yang terdistribusi. Pertanyaan yang ditambahkan FBB pada kebijaksanaan Ubuntu bukan hanya "Bagaimana seharusnya kita saling memperlakukan?" tetapi "Bagaimana keberadaan-bersama kita membentuk pengetahuan yang tidak dapat diproduksi oleh satu pun dari kita sendirian?"</p>
-  </div>
+  </section>
 
-  <div class="divider">--- ✦ ---</div>
+  <div class="divider">— ✦ —</div>
 
-  <!-- ═══ PART VII ═══ -->
-  <div class="section">
-    <span class="part-label lang-en">Part VII — Methodology</span>
-    <span class="part-label lang-id">Bagian VII — Metodologi</span>
+  <!-- PART VII -->
+  <section>
+    <span class="part-label">
+      <span class="en-text">Part VII — Methodology</span>
+      <span class="id-text">Bagian VII — Metodologi</span>
+    </span>
     <h2>
-      <span class="lang-en">The Session That Produced This Paper</span>
-      <span class="lang-id">Sesi yang Menghasilkan Makalah Ini</span>
+      <span class="en-text">The Session That Produced This Paper</span>
+      <span class="id-text">Sesi yang Menghasilkan Makalah Ini</span>
     </h2>
-    <p class="lang-en">This paper was co-created across five AI systems in a single research session on March 18, 2026 — itself an enactment of the knowledge ecosystem it describes. Each AI contributed a distinct epistemic orientation. The synthesis emerged through dialogue, not domination.</p>
-    <p class="lang-id">Makalah ini dikokreasiakan di lima sistem AI dalam satu sesi riset pada 18 Maret 2026 — sendirinya sebuah perwujudan dari ekosistem pengetahuan yang ia gambarkan. Setiap AI menyumbangkan orientasi epistemik yang berbeda. Sintesisnya muncul melalui dialog, bukan dominasi.</p>
 
-    <div class="method-steps">
-      <div class="method-step">
-        <div class="step-num">01</div>
-        <div class="step-content">
-          <div class="ai-name lang-en">Raw Research Notes</div>
-          <div class="ai-name lang-id">Catatan Riset Awal</div>
-          <span class="step-status status-seed">Seed / Benih</span>
-          <p style="font-size:14px;color:var(--gray);" class="lang-en">Walking Books Philosophy genesis · 1/360 formulation · Dual Universe hypothesis · Seed dataset</p>
-          <p style="font-size:14px;color:var(--gray);" class="lang-id">Genesis Filsafat Buku Berjalan · formulasi 1/360 · hipotesis Alam Ganda · dataset benih</p>
+    <div class="en-block">
+      <p>This paper was co-created across five AI systems in a single research session on March 18, 2026 — itself an enactment of the knowledge ecosystem it describes. Each AI contributed a distinct epistemic orientation. The synthesis emerged through dialogue, not domination.</p>
+    </div>
+    <div class="id-block">
+      <p>Makalah ini dikokreasiakan di lima sistem AI dalam satu sesi riset pada 18 Maret 2026 — sendirinya sebuah perwujudan dari ekosistem pengetahuan yang ia gambarkan. Setiap AI menyumbangkan orientasi epistemik yang berbeda. Sintesisnya muncul melalui dialog, bukan dominasi.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="tl-badge">01</div>
+        <div class="tl-content">
+          <div class="tl-title"><span class="en-text">Raw Research Notes</span><span class="id-text">Catatan Riset Awal</span> — Seed</div>
+          <p style="font-size:0.88rem;"><span class="en-text">Walking Books Philosophy genesis · 1/360 formulation · Dual Universe hypothesis · Seed dataset</span><span class="id-text">Genesis Filsafat Buku Berjalan · formulasi 1/360 · hipotesis Alam Ganda · dataset benih</span></p>
         </div>
       </div>
-      <div class="method-step">
-        <div class="step-num" style="background:var(--gold);">G</div>
-        <div class="step-content">
-          <div class="ai-name">Gemini (CHO Lab Gem)</div>
-          <span class="step-status status-stuck">Mandek</span>
-          <p style="font-size:14px;color:var(--gray);" class="lang-en">Synthesized 4 philosophical pillars · Then entered video-only loop — "Mini, I'm stuck with you today" · Insight: even AI has limitation boundaries</p>
-          <p style="font-size:14px;color:var(--gray);" class="lang-id">Mensintesis 4 pilar filosofis · Kemudian masuk loop video-only — "Mini, saya terjebak denganmu hari ini" · Wawasan: bahkan AI punya batas keterbatasan</p>
+      <div class="timeline-item">
+        <div class="tl-badge">G</div>
+        <div class="tl-content">
+          <div class="tl-title">Gemini (CHO Lab Gem)</div>
+          <div class="tl-status">Mandek</div>
+          <p style="font-size:0.88rem;"><span class="en-text">Synthesized 4 philosophical pillars · Then entered video-only loop — "Mini, I'm stuck with you today" · Insight: even AI has limitation boundaries</span><span class="id-text">Mensintesis 4 pilar filosofis · Kemudian masuk loop video-only — "Mini, saya terjebak denganmu hari ini" · Wawasan: bahkan AI punya batas keterbatasan</span></p>
         </div>
       </div>
-      <div class="method-step">
-        <div class="step-num" style="background:#27ae60;">DS</div>
-        <div class="step-content">
-          <div class="ai-name">DeepSeek</div>
-          <span class="step-status status-active">Active / Aktif</span>
-          <p style="font-size:14px;color:var(--gray);" class="lang-en">Continued enrichment from Gemini handover · Deepened philosophical grounding · Knowledge ecosystem framing</p>
-          <p style="font-size:14px;color:var(--gray);" class="lang-id">Melanjutkan pengayaan dari serah terima Gemini · Memperdalam landasan filosofis · Pembingkaian ekosistem pengetahuan</p>
+      <div class="timeline-item">
+        <div class="tl-badge">DS</div>
+        <div class="tl-content">
+          <div class="tl-title">DeepSeek</div>
+          <div class="tl-status"><span class="en-text">Active</span><span class="id-text">Aktif</span></div>
+          <p style="font-size:0.88rem;"><span class="en-text">Continued enrichment from Gemini handover · Deepened philosophical grounding · Knowledge ecosystem framing</span><span class="id-text">Melanjutkan pengayaan dari serah terima Gemini · Memperdalam landasan filosofis · Pembingkaian ekosistem pengetahuan</span></p>
         </div>
       </div>
-      <div class="method-step">
-        <div class="step-num" style="background:#8e44ad;">GP</div>
-        <div class="step-content">
-          <div class="ai-name">ChatGPT (Prof GP)</div>
-          <span class="step-status status-draft">Draft ✓</span>
-          <p style="font-size:14px;color:var(--gray);" class="lang-en">Full academic paper draft · SSRN structure · 2 diagrams produced · Metadata for Zenodo · "Geser ke Claude sekarang" — handed off at peak</p>
-          <p style="font-size:14px;color:var(--gray);" class="lang-id">Draf makalah akademis lengkap · Struktur SSRN · 2 diagram dihasilkan · Metadata Zenodo · "Geser ke Claude sekarang" — diserahkan di puncak</p>
+      <div class="timeline-item">
+        <div class="tl-badge">GP</div>
+        <div class="tl-content">
+          <div class="tl-title">ChatGPT (Prof GP)</div>
+          <div class="tl-status">Draft ✓</div>
+          <p style="font-size:0.88rem;"><span class="en-text">Full academic paper draft · SSRN structure · 2 diagrams produced · Metadata for Zenodo · "Geser ke Claude sekarang" — handed off at peak</span><span class="id-text">Draf makalah akademis lengkap · Struktur SSRN · 2 diagram dihasilkan · Metadata Zenodo · "Geser ke Claude sekarang" — diserahkan di puncak</span></p>
         </div>
       </div>
-      <div class="method-step">
-        <div class="step-num">C</div>
-        <div class="step-content">
-          <div class="ai-name">Claude (Anthropic)</div>
-          <span class="step-status status-now">Now ✦</span>
-          <p style="font-size:14px;color:var(--gray);" class="lang-en">Refined & polished paper · CHO template format · Embedded both diagrams · DOCX final · Two Realms Architecture concept integration · This GitHub Pages artifact</p>
-          <p style="font-size:14px;color:var(--gray);" class="lang-id">Menyempurnakan & memoles makalah · Format template CHO · Menyematkan kedua diagram · DOCX final · Integrasi konsep Arsitektur Dua Alam · Artefak GitHub Pages ini</p>
+      <div class="timeline-item">
+        <div class="tl-badge" style="background:var(--warm);">C</div>
+        <div class="tl-content">
+          <div class="tl-title">Claude (Anthropic)</div>
+          <div class="tl-status">Now ✦</div>
+          <p style="font-size:0.88rem;"><span class="en-text">Refined &amp; polished paper · CHO template format · Embedded both diagrams · DOCX final · Two Realms Architecture concept integration · This GitHub Pages artifact</span><span class="id-text">Menyempurnakan &amp; memoles makalah · Format template CHO · Menyematkan kedua diagram · DOCX final · Integrasi konsep Arsitektur Dua Alam · Artefak GitHub Pages ini</span></p>
         </div>
       </div>
     </div>
 
     <blockquote>
-      <span class="lang-en">"The multi-AI collaboration that produced this paper is itself an enactment of the knowledge ecosystem it describes. Each AI system brought distinct strengths; the synthesis emerged through dialogue, not domination."</span>
-      <span class="lang-id">"Kolaborasi multi-AI yang menghasilkan makalah ini sendirinya adalah perwujudan dari ekosistem pengetahuan yang ia gambarkan. Setiap sistem AI membawa kekuatan yang berbeda; sintesisnya muncul melalui dialog, bukan dominasi."</span>
-      <cite>— Go Kian Tik · <span class="lang-en">March</span><span class="lang-id">Maret</span> 18, 2026</cite>
+      <span class="en-text">"The multi-AI collaboration that produced this paper is itself an enactment of the knowledge ecosystem it describes. Each AI system brought distinct strengths; the synthesis emerged through dialogue, not domination."</span>
+      <span class="id-text">"Kolaborasi multi-AI yang menghasilkan makalah ini sendirinya adalah perwujudan dari ekosistem pengetahuan yang ia gambarkan. Setiap sistem AI membawa kekuatan yang berbeda; sintesisnya muncul melalui dialog, bukan dominasi."</span>
+      <cite>— Go Kian Tik · March 18, 2026</cite>
     </blockquote>
-  </div>
+  </section>
 
-  <div class="divider">--- ✦ ---</div>
+  <div class="divider">— ✦ —</div>
 
-  <!-- ═══ METADATA ═══ -->
-  <div class="section">
-    <span class="part-label lang-en">Publication Metadata — Zenodo / SSRN</span>
-    <span class="part-label lang-id">Metadata Publikasi — Zenodo / SSRN</span>
+  <!-- METADATA -->
+  <section>
+    <span class="part-label">
+      <span class="en-text">Publication Metadata — Zenodo / SSRN</span>
+      <span class="id-text">Metadata Publikasi — Zenodo / SSRN</span>
+    </span>
     <table class="meta-table">
-      <tr>
-        <td><span class="lang-en">Title</span><span class="lang-id">Judul (EN)</span></td>
-        <td>Walking Books Philosophy: Toward a Relational Epistemology of Human Identity and Knowledge</td>
-      </tr>
-      <tr>
-        <td class="lang-id">Judul (ID)</td>
-        <td class="lang-id">Filsafat Buku Berjalan: Menuju Epistemologi Relasional Identitas dan Pengetahuan Manusia</td>
-      </tr>
-      <tr>
-        <td><span class="lang-en">Series</span><span class="lang-id">Seri</span></td>
-        <td><span class="lang-en">Chief Humanity Officer In Action Series · Working Paper</span><span class="lang-id">Chief Humanity Officer In Action Series · Makalah Kerja</span></td>
-      </tr>
-      <tr><td><span class="lang-en">Author</span><span class="lang-id">Penulis</span></td><td>Go Kian Tik</td></tr>
-      <tr><td><span class="lang-en">Pen Name</span><span class="lang-id">Nama Pena</span></td><td>Mbah Hogi Bejo™</td></tr>
-      <tr><td><span class="lang-en">Community</span><span class="lang-id">Komunitas</span></td><td>自主者 Superhero Café Inside</td></tr>
-      <tr><td><span class="lang-en">AI Collaborators</span><span class="lang-id">Kolaborator AI</span></td><td>Claude (Anthropic) · ChatGPT (OpenAI) · DeepSeek · Gemini (Google) · Copilot (Microsoft)</td></tr>
-      <tr><td><span class="lang-en">Date</span><span class="lang-id">Tanggal</span></td><td><span class="lang-en">March</span><span class="lang-id">Maret</span> 18, 2026 · Depok, Indonesia</td></tr>
-      <tr>
-        <td><span class="lang-en">Document Type</span><span class="lang-id">Jenis Dokumen</span></td>
-        <td><span class="lang-en">Working Paper · Conceptual Framework · Philosophy of Knowledge</span><span class="lang-id">Makalah Kerja · Kerangka Konseptual · Filsafat Pengetahuan</span></td>
-      </tr>
-      <tr><td><span class="lang-en">Platforms</span><span class="lang-id">Platform</span></td><td><a href="https://zenodo.org/search?q=gokiantik" target="_blank">Zenodo DOI</a> &nbsp;·&nbsp; <a href="https://ssrn.com" target="_blank">SSRN <span class="lang-en">Preprint</span><span class="lang-id">Pracetak</span></a></td></tr>
-      <tr><td><span class="lang-en">License</span><span class="lang-id">Lisensi</span></td><td>CC BY 4.0</td></tr>
-      <tr>
-        <td><span class="lang-en">Related DOIs</span><span class="lang-id">DOI Terkait</span></td>
-        <td>
-          <a href="https://doi.org/10.5281/zenodo.18935427" target="_blank">Ep.0 — <span class="lang-en">CHO Origin</span><span class="lang-id">Asal-usul CHO</span> ↗</a><br>
-          <a href="https://doi.org/10.5281/zenodo.18965525" target="_blank">Ep.2 — <span class="lang-en">Acknowledgment to the Architects of AI</span><span class="lang-id">Penghargaan kepada Para Arsitek AI</span> ↗</a><br>
-          <a href="https://doi.org/10.5281/zenodo.18935892" target="_blank">Ep.11 — The Sovereign One v3 ↗</a>
-        </td>
-      </tr>
-      <tr><td><span class="lang-en">Copyright</span><span class="lang-id">Hak Cipta</span></td><td>© 2026 Go Kian Tik. <span class="lang-en">All rights reserved.</span><span class="lang-id">Semua hak dilindungi.</span></td></tr>
-      <tr><td>GitHub</td><td><a href="https://github.com/gokiantik/chiefhumanityofficer" target="_blank">github.com/gokiantik/chiefhumanityofficer ↗</a></td></tr>
+      <tbody>
+        <tr><td>Title (EN)</td><td>Walking Books Philosophy: Toward a Relational Epistemology of Human Identity and Knowledge</td></tr>
+        <tr><td>Judul (ID)</td><td>Filsafat Buku Berjalan: Menuju Epistemologi Relasional Identitas dan Pengetahuan Manusia</td></tr>
+        <tr><td><span class="en-text">Series</span><span class="id-text">Seri</span></td><td>Chief Humanity Officer In Action Series · <span class="en-text">Working Paper</span><span class="id-text">Makalah Kerja</span></td></tr>
+        <tr><td><span class="en-text">Author</span><span class="id-text">Penulis</span></td><td>Go Kian Tik</td></tr>
+        <tr><td><span class="en-text">Pen Name</span><span class="id-text">Nama Pena</span></td><td>Mbah Hogi Bejo™</td></tr>
+        <tr><td><span class="en-text">Community</span><span class="id-text">Komunitas</span></td><td>自主者 Superhero Café Inside</td></tr>
+        <tr><td>AI <span class="en-text">Collaborators</span><span class="id-text">Kolaborator</span></td><td>Claude · ChatGPT · DeepSeek · Gemini · Copilot</td></tr>
+        <tr><td><span class="en-text">Date</span><span class="id-text">Tanggal</span></td><td>March 18, 2026 · Depok, Indonesia</td></tr>
+        <tr><td><span class="en-text">License</span><span class="id-text">Lisensi</span></td><td>CC BY 4.0</td></tr>
+        <tr><td>DOI</td><td><a href="https://zenodo.org/search?q=gokiantik" target="_blank">Zenodo ↗</a> · <a href="https://ssrn.com" target="_blank">SSRN ↗</a></td></tr>
+        <tr><td>GitHub</td><td><a href="https://github.com/gokiantik/chiefhumanityofficer" target="_blank">github.com/gokiantik ↗</a></td></tr>
+        <tr><td><span class="en-text">Copyright</span><span class="id-text">Hak Cipta</span></td><td>© 2026 Go Kian Tik. <span class="en-text">All rights reserved.</span><span class="id-text">Semua hak dilindungi.</span></td></tr>
+      </tbody>
     </table>
-  </div>
+  </section>
 
-  <div class="divider">--- ✦ ---</div>
+  <div class="divider">— ✦ —</div>
 
-  <!-- ═══ REFERENCES ═══ -->
-  <div class="section">
-    <span class="part-label lang-en">References</span>
-    <span class="part-label lang-id">Referensi</span>
-    <ul class="ref-list">
+  <!-- REFERENCES -->
+  <section>
+    <span class="part-label"><span class="en-text">References</span><span class="id-text">Referensi</span></span>
+    <ul class="references">
       <li><strong>Buber, M.</strong> (1970). <em>I and Thou.</em> Scribner.</li>
       <li><strong>Csikszentmihalyi, M.</strong> (1990). <em>Flow: The Psychology of Optimal Experience.</em> Harper &amp; Row.</li>
       <li><strong>Hutchins, E.</strong> (1995). <em>Cognition in the Wild.</em> MIT Press.</li>
@@ -636,137 +1152,136 @@
       <li><strong>Vygotsky, L. S.</strong> (1978). <em>Mind in Society.</em> Harvard University Press.</li>
       <li><strong>Whitehead, A. N.</strong> (1978). <em>Process and Reality.</em> Free Press.</li>
     </ul>
-  </div>
+  </section>
 
-  <div class="divider">--- ✦ ---</div>
+  <div class="divider">— ✦ —</div>
 
-  <!-- ═══ SUARA BATIN · LENGGAH O NING KENE LE ═══ -->
-  <div class="section" style="text-align:center; max-width:600px; margin:0 auto;">
-
-    <p style="font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--gray); margin-bottom:6px;">
-      <span class="lang-en">Inner Voice · Suara Batin</span>
-      <span class="lang-id">Suara Batin · Inner Voice</span>
-    </p>
-    <p style="font-size:11px; letter-spacing:0.15em; color:var(--gold); text-transform:uppercase; margin-bottom:28px;">
-      Depok · 23 Maret 2026 · 12:56 WIB · GMT+7
-    </p>
-
-    <p style="
-      font-style:italic;
-      font-size:1.1rem;
-      line-height:2.2;
-      color:var(--text);
-      margin:0 0 24px;
-      border-top:1px solid var(--border);
-      border-bottom:1px solid var(--border);
-      padding:28px 0;
-    ">
+  <!-- INNER VOICE -->
+  <section class="inner-voice">
+    <div class="date">Depok · 23 Maret 2026 · 12:56 WIB · GMT+7</div>
+    <div class="javanese">
       lenggah o ning kene le<br>
       sawang o ndonya nganggo matamu<br>
       rasak no ndonya nganggo ambeganmu<br>
       urip o nang ndoyo nganggo luhur e atimu<br>
-      <span style="font-size:0.85em; color:var(--gray); letter-spacing:0.05em;">ngeman · ngemong · ngrawat · ngrumat · ngruwat</span>
-    </p>
-
-    <p style="font-style:italic; font-size:0.9rem; line-height:2; color:var(--gray); margin:0 0 8px;">
+      ngeman · ngemong · ngrawat · ngrumat · ngruwat
+    </div>
+    <div class="javanese" style="color:var(--muted); font-size:0.9rem;">
       ngertiyo opo kuwi — dolan e kurang adoh<br>
       yen wis paham, lenggah o ning kene wae
-    </p>
-    <p style="font-size:11px; letter-spacing:0.1em; color:var(--gold); margin-bottom:28px;">
-      <span class="lang-en">statistics: the sample infers and understands the population</span>
-      <span class="lang-id">ilmu statistik: sampel menduga dan memahami populasi</span>
-    </p>
-
-    <div style="margin:0 0 28px;">
-      <span style="font-size:2rem; font-weight:300; color:var(--gold); letter-spacing:0.4em;">渡己 → 渡人</span><br>
-      <span style="font-size:11px; letter-spacing:0.25em; color:var(--gray); text-transform:uppercase;">
-        Dù Jǐ · Master Yourself · Dù Rén · Serve Others
-      </span>
     </div>
-
-    <a href="./lenggah-o-ning-kene-le.html" style="
-      display:inline-block;
-      font-size:11px;
-      letter-spacing:0.2em;
-      text-transform:uppercase;
-      color:var(--gold);
-      text-decoration:none;
-      border:1px solid rgba(184,134,11,0.4);
-      padding:10px 24px;
-      border-radius:4px;
-      margin-bottom:8px;
-      transition:background 0.2s;
-    "
-    onmouseover="this.style.background='rgba(184,134,11,0.06)'"
-    onmouseout="this.style.background='transparent'"
-    >
-      <span class="lang-en">Read full artefact →</span>
-      <span class="lang-id">Baca artefak lengkap →</span>
+    <div class="stats-line">
+      <span class="en-text">statistics: the sample infers and understands the population</span>
+      <span class="id-text">ilmu statistik: sampel menduga dan memahami populasi</span>
+    </div>
+    <div class="chinese-line">渡己 → 渡人</div>
+    <div class="chinese-reading">Dù Jǐ · <span class="en-text">Master Yourself</span><span class="id-text">Kuasai Diri</span> · Dù Rén · <span class="en-text">Serve Others</span><span class="id-text">Layani Sesama</span></div>
+    <br>
+    <a href="https://gokiantik.github.io/chiefhumanityofficer/lenggah-o-ning-kene-le.html" class="cta-btn">
+      <span class="en-text">Read full artefact →</span>
+      <span class="id-text">Baca artefak lengkap →</span>
     </a>
+  </section>
 
-  </div>
+  <div class="divider">— ✦ —</div>
 
-  <div class="divider">--- ✦ ---</div>
+  <img src="https://gokiantik.github.io/chiefhumanityofficer/Every_Person_is_abook.png" alt="Walking Books Philosophy × The Sovereign One" style="width:100%; max-width:640px; display:block; margin:0 auto 1.5rem; border-radius:4px; border:1px solid var(--border);">
 
-  <!-- ═══ CLOSING ═══ -->
-  <div class="section" style="text-align:center;">
-    <img src="https://gokiantik.github.io/chiefhumanityofficer/Every_Person_is_abook.png"
-         alt="Walking Books Philosophy × The Sovereign One — Go Kian Tik"
-         style="max-width:100%;border-radius:8px;margin:0 auto 12px;display:block;">
-    <p style="color:var(--gray);font-style:italic;font-size:14px;" class="lang-en">Walking Books Philosophy is itself a walking book</p>
-    <p style="color:var(--gray);font-style:italic;font-size:14px;" class="lang-id">Filsafat Buku Berjalan sendiri adalah sebuah buku berjalan</p>
+  <p style="text-align:center; font-style:italic; color:var(--muted); margin-bottom:2rem;">
+    <span class="en-text">Walking Books Philosophy is itself a walking book</span>
+    <span class="id-text">Filsafat Buku Berjalan sendiri adalah sebuah buku berjalan</span>
+  </p>
 
-    <h2 style="margin-top:32px;">
-      <span class="lang-en">An Open Invitation</span>
-      <span class="lang-id">Sebuah Undangan Terbuka</span>
+  <!-- OPEN INVITATION -->
+  <section style="text-align:center;">
+    <h2>
+      <span class="en-text">An Open Invitation</span>
+      <span class="id-text">Sebuah Undangan Terbuka</span>
     </h2>
-    <p class="lang-en">Incomplete by design, enriched by every reader who engages with it. If this framework resonates with your research, your practice, or your life — you are already part of the library it describes.</p>
-    <p class="lang-id">Tidak lengkap berdasarkan rancangan, diperkaya oleh setiap pembaca yang berinteraksi dengannya. Jika kerangka ini beresonansi dengan riset, praktik, atau kehidupan Anda — Anda sudah menjadi bagian dari perpustakaan yang digambarkannya.</p>
-
+    <p style="color:var(--muted); font-style:italic;">
+      <span class="en-text">Incomplete by design, enriched by every reader who engages with it. If this framework resonates with your research, your practice, or your life — you are already part of the library it describes.</span>
+      <span class="id-text">Tidak lengkap berdasarkan rancangan, diperkaya oleh setiap pembaca yang berinteraksi dengannya. Jika kerangka ini beresonansi dengan riset, praktik, atau kehidupan Anda — Anda sudah menjadi bagian dari perpustakaan yang digambarkannya.</span>
+    </p>
     <div class="cta-row">
-      <a href="https://zenodo.org/search?q=gokiantik" target="_blank" class="btn-primary">
-        <span class="lang-en">All DOI Publications · Zenodo ↗</span>
-        <span class="lang-id">Semua Publikasi DOI · Zenodo ↗</span>
+      <a href="https://zenodo.org/search?q=gokiantik" class="cta-btn filled" target="_blank">
+        <span class="en-text">All DOI Publications · Zenodo ↗</span>
+        <span class="id-text">Semua Publikasi DOI · Zenodo ↗</span>
       </a>
-      <a href="https://buymeacoffee.com/gokiantik" target="_blank" class="btn-gold">
-        <span class="lang-en">Buy Me a Coffee</span>
-        <span class="lang-id">Traktir Kopi ☕</span>
+      <a href="https://buymeacoffee.com/gokiantik" class="cta-btn" target="_blank">
+        <span class="en-text">Buy Me a Coffee ☕</span>
+        <span class="id-text">Traktir Kopi ☕</span>
       </a>
-      <a href="https://substack.com/@gokiantik" target="_blank" class="btn-outline">Substack</a>
-      <a href="https://www.linkedin.com/in/mbah-hogi-bejo/" target="_blank" class="btn-outline">LinkedIn</a>
+      <a href="https://substack.com/@gokiantik" class="cta-btn" target="_blank">Substack</a>
+      <a href="https://www.linkedin.com/in/mbah-hogi-bejo/" class="cta-btn" target="_blank">LinkedIn</a>
     </div>
-  </div>
+  </section>
 
-</div><!-- /container -->
-
-<footer class="footer">
-  <span class="chinese">行走的书</span>
-  <div class="pinyin-ft lang-en">Xíng Zǒu De Shū — Walking Books Philosophy</div>
-  <div class="pinyin-ft lang-id">Xíng Zǒu De Shū — Filsafat Buku Berjalan</div>
-  <span class="lang-en">CHO In Action Series · Working Paper · March 2026</span>
-  <span class="lang-id">CHO In Action Series · Makalah Kerja · Maret 2026</span><br>
-  © 2026 Go Kian Tik (Mbah Hogi Bejo™) · 自主者 Superhero Café Inside ·
-  <span class="lang-en">All rights reserved</span><span class="lang-id">Semua hak dilindungi</span><br>
-  CC BY 4.0
-  <div class="ft-links">
-    <a href="https://gokiantik.github.io/chiefhumanityofficer/">
-      <span class="lang-en">← Back to Chief Humanity Officer</span>
-      <span class="lang-id">← Kembali ke Chief Humanity Officer</span>
+  <!-- BOTTOM NAVIGATION -->
+  <div class="bottom-nav">
+    <a href="https://gokiantik.github.io/chiefhumanityofficer/" class="nav-btn">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M10 12L6 8l4-4"/>
+      </svg>
+      <span class="en-text">← Back to Chief Humanity Officer</span>
+      <span class="id-text">← Kembali ke Chief Humanity Officer</span>
+    </a>
+    <a href="https://gokiantik.github.io/chiefhumanityofficer/cho_semesta_digital_framework" class="nav-btn primary">
+      <span class="en-text">Semesta Digital Framework →</span>
+      <span class="id-text">Kerangka Semesta Digital →</span>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M6 4l4 4-4 4"/>
+      </svg>
     </a>
   </div>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-chinese">行走的书</div>
+  <div class="footer-pinyin">
+    Xíng Zǒu De Shū —
+    <span class="en-text">Walking Books Philosophy</span>
+    <span class="id-text">Filsafat Buku Berjalan</span>
+  </div>
+  <p class="footer-meta">
+    CHO In Action Series · <span class="en-text">Working Paper</span><span class="id-text">Makalah Kerja</span> · March 2026<br>
+    © 2026 Go Kian Tik (Mbah Hogi Bejo™) · 自主者 Superhero Café Inside<br>
+    <span class="en-text">All rights reserved</span><span class="id-text">Semua hak dilindungi</span> · CC BY 4.0
+  </p>
 </footer>
 
 <script>
+  const body = document.body;
+  const enBtn = document.getElementById('enBtn');
+  const idBtn = document.getElementById('idBtn');
+  const toggle = document.getElementById('langToggle');
+
   function setLang(lang) {
-    document.body.className = 'lang-' + lang;
-    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-    document.getElementById('btn-id').classList.toggle('active', lang === 'id');
+    if (lang === 'id') {
+      body.classList.remove('lang-en');
+      body.classList.add('lang-id');
+      enBtn.classList.remove('active');
+      idBtn.classList.add('active');
+      document.documentElement.lang = 'id';
+    } else {
+      body.classList.remove('lang-id');
+      body.classList.add('lang-en');
+      idBtn.classList.remove('active');
+      enBtn.classList.add('active');
+      document.documentElement.lang = 'en';
+    }
     localStorage.setItem('cho-lang', lang);
   }
-  // Restore saved preference
+
+  toggle.addEventListener('click', () => {
+    const isEN = body.classList.contains('lang-en');
+    setLang(isEN ? 'id' : 'en');
+  });
+
+  // Restore preference
   const saved = localStorage.getItem('cho-lang');
   if (saved) setLang(saved);
 </script>
-
 </body>
 </html>
