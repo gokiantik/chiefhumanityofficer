@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Formula to the Field — CHO Framework · UN Open Source Week 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0D1117;
+    --paper: #F5F0E8;
+    --gold: #C9A84C;
+    --gold-light: #E8D5A3;
+    --teal: #1B5E6E;
+    --teal-light: #2E8B9A;
+    --red: #8B2500;
+    --muted: #6B6355;
+    --rule: #C9A84C;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Grain texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  .masthead {
+    border-bottom: 3px double var(--rule);
+    padding: 20px 60px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .masthead-left {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    line-height: 1.8;
+  }
+
+  .masthead-center {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--teal);
+    text-align: center;
+  }
+
+  .masthead-right {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 60px 60px 40px;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 60px;
+    border-bottom: 1px solid var(--rule);
+    animation: fadeUp 1s ease 0.2s both;
+  }
+
+  .hero-main {}
+
+  .overline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .subtitle {
+    font-family: 'Source Serif 4', serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-style: italic;
+    line-height: 1.5;
+    max-width: 520px;
+  }
+
+  .hero-lead {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--ink);
+    max-width: 560px;
+  }
+
+  .hero-lead strong {
+    color: var(--teal);
+    font-weight: 600;
+  }
+
+  .hero-sidebar {
+    border-left: 3px solid var(--gold);
+    padding-left: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .meta-block {
+    border-bottom: 1px solid var(--gold-light);
+    padding-bottom: 16px;
+  }
+
+  .meta-block:last-child { border-bottom: none; }
+
+  .meta-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .meta-value {
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .meta-value a {
+    color: var(--teal);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--teal);
+  }
+
+  .doi-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    background: var(--ink);
+    color: var(--gold);
+    padding: 6px 12px;
+    display: inline-block;
+    margin-top: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  /* MAIN GRID */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-top: none;
+  }
+
+  .col {
+    padding: 40px 40px;
+    border-right: 1px solid var(--gold-light);
+    animation: fadeUp 1s ease both;
+  }
+
+  .col:last-child { border-right: none; }
+  .col:nth-child(1) { animation-delay: 0.3s; }
+  .col:nth-child(2) { animation-delay: 0.45s; }
+  .col:nth-child(3) { animation-delay: 0.6s; }
+
+  .col-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--teal);
+    margin: 18px 0 8px;
+  }
+
+  p { margin-bottom: 12px; font-size: 14.5px; line-height: 1.7; }
+
+  /* PROTOCOL PHASES */
+  .phase {
+    background: white;
+    border: 1px solid var(--gold-light);
+    border-left: 4px solid var(--teal);
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .phase:hover {
+    transform: translateX(4px);
+    box-shadow: -4px 0 0 var(--gold);
+  }
+
+  .phase-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .phase-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .phase-prompts {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* FORMULA */
+  .formula-block {
+    background: var(--ink);
+    color: var(--gold);
+    padding: 20px 20px;
+    margin: 16px 0;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-style: italic;
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+  }
+
+  .formula-block span {
+    display: block;
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--gold-light);
+    margin-top: 6px;
+    letter-spacing: 0.1em;
+    font-style: normal;
+    opacity: 0.7;
+  }
+
+  /* METRICS */
+  .metric-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px dotted var(--gold-light);
+  }
+
+  .metric-row:last-child { border-bottom: none; }
+
+  .metric-abbr {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--teal);
+    min-width: 44px;
+    line-height: 1;
+    padding-top: 2px;
+  }
+
+  .metric-body {}
+  .metric-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+
+  .metric-desc { font-size: 13px; line-height: 1.5; }
+
+  /* CASE STUDIES */
+  .case {
+    border: 1px solid var(--gold-light);
+    padding: 16px;
+    margin-bottom: 10px;
+    background: white;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .case:hover { border-color: var(--teal); }
+
+  .case::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+  }
+
+  .case-loc {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 4px;
+  }
+
+  .case-profile {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .case-metrics {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border: 1px solid;
+    letter-spacing: 0.05em;
+  }
+
+  .badge-teal { border-color: var(--teal); color: var(--teal); }
+  .badge-gold { border-color: var(--gold); color: #8B6914; }
+  .badge-red { border-color: var(--red); color: var(--red); }
+
+  /* PARTIES */
+  .party {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--gold-light);
+  }
+
+  .party:last-child { border-bottom: none; }
+
+  .party-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--gold-light);
+    line-height: 1;
+    float: left;
+    margin-right: 10px;
+    margin-top: -4px;
+  }
+
+  .party-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 4px;
+  }
+
+  .party-desc { font-size: 13px; line-height: 1.6; }
+
+  /* FULL-WIDTH SECTIONS */
+  .full-section {
+    border-top: 3px double var(--rule);
+    padding: 40px 60px;
+    animation: fadeUp 1s ease 0.7s both;
+  }
+
+  .full-section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+
+  .full-section-header h2 {
+    font-size: 24px;
+    margin-bottom: 0;
+  }
+
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--gold-light);
+  }
+
+  /* IMPACT TARGETS */
+  .targets-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .target-card {
+    background: white;
+    border: 1px solid var(--gold-light);
+    border-top: 4px solid var(--teal);
+    padding: 20px;
+    transition: transform 0.2s;
+  }
+
+  .target-card:hover { transform: translateY(-3px); }
+
+  .target-gap {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+
+  .target-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .target-label {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* RUBRIC */
+  .rubric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--gold-light);
+    border: 1px solid var(--gold-light);
+    margin: 16px 0;
+  }
+
+  .rubric-cell {
+    background: var(--paper);
+    padding: 16px;
+    text-align: center;
+    transition: background 0.2s;
+  }
+
+  .rubric-cell:hover { background: white; }
+
+  .rubric-icon {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+
+  .rubric-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--teal);
+    margin-bottom: 4px;
+  }
+
+  .rubric-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* PULLQUOTE */
+  .pullquote {
+    border-left: 6px solid var(--gold);
+    padding: 20px 28px;
+    margin: 20px 0;
+    background: white;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .pullquote cite {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-top: 10px;
+    text-transform: uppercase;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 3px double var(--rule);
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeUp 1s ease 0.9s both;
+  }
+
+  .footer-formula {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink);
+  }
+
+  .footer-formula strong {
+    color: var(--teal);
+  }
+
+  .footer-right {
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    line-height: 2;
+  }
+
+  .footer-right a {
+    color: var(--teal);
+    text-decoration: none;
+  }
+
+  /* CHINESE */
+  .chinese {
+    font-size: 28px;
+    color: var(--gold);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; gap: 30px; padding: 40px 30px; }
+    .main-grid { grid-template-columns: 1fr; }
+    .col { border-right: none; border-bottom: 1px solid var(--gold-light); padding: 30px; }
+    .masthead { padding: 16px 24px; }
+    .full-section { padding: 30px 24px; }
+    .targets-grid { grid-template-columns: 1fr; }
+    .rubric-grid { grid-template-columns: 1fr 1fr; }
+    footer { flex-direction: column; gap: 20px; padding: 24px 30px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-left">
+    CHO IN ACTION SERIES<br>
+    PAPER 2 · MARCH 2026
+  </div>
+  <div class="masthead-center">UN Open Source Week 2026<br>Community-Led Side Events · 26 June</div>
+  <div class="masthead-right">
+    Virtual · 60 Minutes<br>
+    Deadline: 31 March 2026
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-main">
+    <div class="overline">Session Proposal · Second Paper of the CHO Series</div>
+    <h1>From <em>Formula</em><br>to the Field</h1>
+    <p class="subtitle">Implementation Protocol of the Open Source CHO Framework — Structured Methodology, Impact Measurement, and Community Architecture to Close the Humanity Gap at a Scale of 8 Billion</p>
+    <p class="hero-lead">Paper 1 built the civilisational case. Paper 2 answers four questions it left open: <strong>How exactly does this work? How is progress measured? How can anyone replicate it? How does the community sustain it?</strong></p>
+    <p class="hero-lead" style="margin-top:12px;">Not theory. Not later. Not with perfect infrastructure. <strong>Now. Wherever you are. With whatever you have.</strong></p>
+  </div>
+  <div class="hero-sidebar">
+    <div class="meta-block">
+      <div class="meta-label">Presenter</div>
+      <div class="meta-value">Go Kian Tik (Mbah Hogi Bejo™)<br>Chief Humanity Officer · Zi Zhu Zhe 自主者<br>Depok, Indonesia · Global South</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Format</div>
+      <div class="meta-value">Interactive Workshop + Live Protocol Demo<br>20 min presentation · 25 min workshop · 15 min Q&A</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">SDG Alignment</div>
+      <div class="meta-value">SDG 4 · SDG 10 · SDG 17</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">DOI</div>
+      <div class="doi-badge">10.5281/zenodo.19322063</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Live Repository</div>
+      <div class="meta-value"><a href="https://gokiantik.github.io/chiefhumanityofficer" target="_blank">gokiantik.github.io/chiefhumanityofficer</a><br>14 publications · CC BY/CC BY-NC-ND</div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE COLUMNS -->
+<section class="main-grid">
+
+  <!-- COL 1: PROTOCOL -->
+  <div class="col">
+    <div class="col-header">Protocol CHO v1.0</div>
+    <h2>The Replicable Methodology</h2>
+    <p style="font-size:13px; color:var(--muted);">3 phases · 6 prompts · Anyone with AI access · 60 minutes · One genuine question</p>
+
+    <div class="phase">
+      <div class="phase-num">Phase 1 · 15 min</div>
+      <div class="phase-title">Opening the Unknown Arena</div>
+      <div class="phase-prompts">Prompt 1: Problem Mapping<br>Prompt 2: NLP Filter Detection</div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num">Phase 2 · 20 min</div>
+      <div class="phase-title">Multi-Perspective Exploration</div>
+      <div class="phase-prompts">Prompt 3: Counter-Position<br>Prompt 4: Systemic Context</div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num">Phase 3 · 15 min</div>
+      <div class="phase-title">Synthesis &amp; Sovereign Action</div>
+      <div class="phase-prompts">Prompt 5: New Synthesis<br>Prompt 6: First Sovereign Step</div>
+    </div>
+
+    <h3>4-Dimension Validation Rubric</h3>
+    <div class="rubric-grid">
+      <div class="rubric-cell">
+        <div class="rubric-icon">◈</div>
+        <div class="rubric-name">Novelty</div>
+        <div class="rubric-desc">New insight emerged</div>
+      </div>
+      <div class="rubric-cell">
+        <div class="rubric-icon">◎</div>
+        <div class="rubric-name">Reflectivity</div>
+        <div class="rubric-desc">Assumption questioned</div>
+      </div>
+      <div class="rubric-cell">
+        <div class="rubric-icon">◉</div>
+        <div class="rubric-name">Sovereignty</div>
+        <div class="rubric-desc">Human leads next step</div>
+      </div>
+      <div class="rubric-cell">
+        <div class="rubric-icon">◐</div>
+        <div class="rubric-name">Ecological</div>
+        <div class="rubric-desc">Works in real life</div>
+      </div>
+    </div>
+    <p style="font-size:12px; color:var(--muted); font-family:'IBM Plex Mono',monospace;">Minimum valid session: 5/8 · Ep.2 score: 8/8 · 22 March dataset: 7/8</p>
+  </div>
+
+  <!-- COL 2: FORMULA + METRICS -->
+  <div class="col">
+    <div class="col-header">Operationalising the Grand Formula</div>
+    <h2>From Concept to Measurement</h2>
+
+    <div class="formula-block">
+      ( Consciousness × Calculation ) <sup>Humanity</sup> &lt; Transcendence
+      <span>NOW MEASURED — NOT MERELY STATED</span>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric-abbr">QSI</div>
+      <div class="metric-body">
+        <div class="metric-name">Question Shift Index → Consciousness</div>
+        <div class="metric-desc">Tracks shift in question type pre/post session, aligned with Hawkins LoC. QSI 1 ("What is the right answer?") → QSI 5 ("How does this change how I serve others?")</div>
+      </div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric-abbr">AEM</div>
+      <div class="metric-body">
+        <div class="metric-name">AI Epistemic Capacity Matrix → Calculation</div>
+        <div class="metric-desc">Right AI for right phase — Claude (Phase 1), Gemini (Phase 2), Copilot (Phase 3) — or one AI as Cognitive-Soulmate via Master Leveling Prompt</div>
+      </div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric-abbr">ASI</div>
+      <div class="metric-body">
+        <div class="metric-name">Active Sovereignty Index → Humanity Exponent</div>
+        <div class="metric-desc">(Human-only actions ÷ Total outputs) × Consequence weight<br>
+        ASI &gt;0.8 = Humanity² · ASI &lt;0.3 = Humanity⁰</div>
+      </div>
+    </div>
+
+    <h3>3 Field Case Studies</h3>
+
+    <div class="case">
+      <div class="case-loc">Semarang · Rogers Laggard</div>
+      <div class="case-profile">Batik vendor, 45 — "that's for educated people"</div>
+      <div class="case-metrics">
+        <span class="badge badge-teal">QSI 1→3</span>
+        <span class="badge badge-gold">ASI 0.82</span>
+        <span class="badge badge-teal">Humanity²</span>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-loc">Jakarta · Hawkins LoC &lt;200</div>
+      <div class="case-profile">Post-layoff factory supervisor, apathy state</div>
+      <div class="case-metrics">
+        <span class="badge badge-teal">7 skills identified</span>
+        <span class="badge badge-gold">ASI 0.71</span>
+        <span class="badge badge-teal">Humanity¹→²</span>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-loc">NTT · Sovereignty Gap · Offline</div>
+      <div class="case-profile">30 families · 2hr internet/day · physical cards</div>
+      <div class="case-metrics">
+        <span class="badge badge-red">Human facilitator</span>
+        <span class="badge badge-gold">ASI 0.65</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- COL 3: COMMUNITY ARCHITECTURE -->
+  <div class="col">
+    <div class="col-header">Open Source Architecture</div>
+    <h2>Three Parties, One Ecosystem</h2>
+    <p style="font-size:13px; color:var(--muted);">Open source is not just open publication — it is contribution architecture.</p>
+
+    <div class="party">
+      <div class="party-num">①</div>
+      <div class="party-title">Front-End User — Consumer → Contributor</div>
+      <div class="party-desc" style="clear:both;">Run Protocol CHO v1.0 → document session → upload to Zenodo → teach one other person. L1–L5 contribution pathway. Free AI tiers sufficient.</div>
+    </div>
+
+    <div class="party">
+      <div class="party-num">②</div>
+      <div class="party-title">Sovereign Master — Amplifier</div>
+      <div class="party-desc" style="clear:both;">Publish in open channels (LinkedIn, Zenodo, SSRN) → amplify via Master Leveling Prompt → raise the baseline for all. Progressive Human Smart → Progressive AI Smart.</div>
+    </div>
+
+    <div class="party">
+      <div class="party-num">③</div>
+      <div class="party-title">Enabling Environment — Infrastructure</div>
+      <div class="party-desc" style="clear:both;">Devices · connectivity · open knowledge. A civilisational choice: whether knowledge remains a privilege or becomes a commons.</div>
+    </div>
+
+    <div class="pullquote">
+      "An ecosystem where Front-End Users gain access to enlarged knowledge through AI, Sovereign Masters amplify their progressive thinking through open publication, and the Enabling Environment is continuously expanded so that no one is excluded."
+      <cite>— Open Source as Civilisational Infrastructure</cite>
+    </div>
+
+    <h3>Open Research Agenda</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--muted);">
+      7 open questions for global collaboration:<br>
+      Cross-cultural effectiveness · Null results · Minimum sessions for sustained ASI shift · Adaptations for children &amp; elderly · New AI platforms · Master Leveling Prompt cross-platform · L1–L5 pathway variation across contexts
+    </p>
+  </div>
+
+</section>
+
+<!-- IMPACT TARGETS -->
+<section class="full-section">
+  <div class="full-section-header">
+    <h2>Impact Measurement — 12-Month Targets</h2>
+    <div class="section-rule"></div>
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;">CHO Impact Measurement Framework</span>
+  </div>
+
+  <div class="targets-grid">
+    <div class="target-card">
+      <div class="target-gap">Rogers Diffusion Gap</div>
+      <div class="target-num">1,000</div>
+      <div class="target-label">documented CHO sessions · ≥40% of participants shift one Rogers adopter category · replication ratio ≥1.5×</div>
+    </div>
+    <div class="target-card">
+      <div class="target-gap">Hawkins Consciousness Gap</div>
+      <div class="target-num">≥1</div>
+      <div class="target-label">QSI level shift per session average · ≥30% reduction in fear-based responses (LoC &lt;200) across community datasets</div>
+    </div>
+    <div class="target-card">
+      <div class="target-gap">Sovereignty Gap</div>
+      <div class="target-num">0.6</div>
+      <div class="target-label">Community ASI target · ≥80% of sessions produce a concrete sovereign step (Prompt 6) not delegated to AI</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <span class="chinese">自主者</span>
+    <div class="footer-formula">
+      ( Consciousness × Calculation ) <strong>^Humanity</strong> &lt; Transcendence<br>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.1em;">where Humanity = all of us, including those who have never been counted</span>
+    </div>
+  </div>
+  <div class="footer-right">
+    <a href="https://doi.org/10.5281/zenodo.19322063">DOI: 10.5281/zenodo.19322063</a><br>
+    <a href="https://gokiantik.github.io/chiefhumanityofficer">gokiantik.github.io/chiefhumanityofficer</a><br>
+    Go Kian Tik · Superhero Café Inside · CC BY-NC-ND 4.0<br>
+    Global South · Independent Researcher · March 2026
+  </div>
+</footer>
+
+</body>
+</html>
