@@ -1010,25 +1010,56 @@ function markStepDone(n) {
 }
 
 // ════ COPY UTILS ════
+function copyToClipboard(text) {
+  // Try modern clipboard API first
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    return navigator.clipboard.writeText(text).then(() => true).catch(() => fallbackCopy(text));
+  }
+  return Promise.resolve(fallbackCopy(text));
+}
+
+function fallbackCopy(text) {
+  // Fallback: create hidden textarea, select, execCommand
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try {
+    const ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    return ok;
+  } catch(e) {
+    document.body.removeChild(ta);
+    return false;
+  }
+}
+
 function copyMLP(btn) {
   const text = document.getElementById('mlp-text').textContent;
-  navigator.clipboard.writeText(text).then(() => {
-    btn.textContent = 'Copied ✓'; btn.classList.add('copied');
+  const orig = btn.textContent;
+  copyToClipboard(text).then(ok => {
+    btn.textContent = ok ? 'Copied ✓' : 'Select & Copy';
+    btn.classList.add('copied');
     setTimeout(() => { btn.textContent = 'Copy MLP'; btn.classList.remove('copied'); }, 2000);
   });
 }
 
 function copyPrompt(btn) {
-  navigator.clipboard.writeText(generatedPromptText).then(() => {
-    btn.textContent = 'Copied ✓'; btn.classList.add('copied');
+  const orig = btn.textContent;
+  copyToClipboard(generatedPromptText).then(ok => {
+    btn.textContent = ok ? 'Copied ✓' : 'Select & Copy';
+    btn.classList.add('copied');
     setTimeout(() => { btn.textContent = 'Copy Prompt'; btn.classList.remove('copied'); }, 2000);
   });
 }
 
 function copyExport() {
   const text = document.getElementById('export-content').textContent;
-  navigator.clipboard.writeText(text);
-  alert('Report copied to clipboard.');
+  copyToClipboard(text).then(ok => {
+    alert(ok ? 'Report copied to clipboard.' : 'Could not auto-copy. Please select the text above manually (Ctrl+A / Cmd+A then Ctrl+C / Cmd+C).');
+  });
 }
 
 function resetAll() {
