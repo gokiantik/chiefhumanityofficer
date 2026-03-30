@@ -727,7 +727,7 @@ function selectScenario(i) {
   selectedScenario = i;
   document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('selected'));
   document.getElementById('sc-' + i).classList.add('selected');
-  document.getElementById('btn-to-pressure').disabled = false;
+  document.getElementById('btn-to-pressure').removeAttribute('disabled');
   markStepDone(1);
 }
 
@@ -759,7 +759,11 @@ function togglePressure(i, div) {
     div.classList.add('selected');
     document.getElementById('pcb-' + i).innerHTML = '✓';
   }
-  document.getElementById('btn-to-prompt').disabled = selectedPressures.size === 0;
+  if (selectedPressures.size === 0) {
+    document.getElementById('btn-to-prompt').setAttribute('disabled', '');
+  } else {
+    document.getElementById('btn-to-prompt').removeAttribute('disabled');
+  }
 }
 
 // ════ BUILD PROMPT ════
@@ -1079,8 +1083,10 @@ function resetAll() {
 }
 
 // ════ INIT ════
-renderScenarios();
-renderPressures();
+document.addEventListener('DOMContentLoaded', function() {
+  renderScenarios();
+  renderPressures();
+});
 </script>
 </body>
 </html>
