@@ -1,0 +1,320 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{padding:1.5rem 0;max-width:860px;margin:0 auto}
+.header{background:#1F3864;border-radius:var(--border-radius-lg);padding:1.25rem 1.5rem;margin-bottom:1.25rem}
+.header h1{font-size:18px;font-weight:500;color:#BF9000;margin-bottom:4px}
+.header p{font-size:13px;color:#D6E4F0;line-height:1.5}
+.tagline{font-size:12px;color:#9DB8D0;margin-top:6px;font-style:italic}
+
+.trio{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:1.25rem}
+.trio-card{border-radius:var(--border-radius-md);padding:10px 12px;border:0.5px solid var(--color-border-tertiary)}
+.trio-card .label{font-size:11px;font-weight:500;letter-spacing:0.04em;margin-bottom:4px}
+.trio-card .name{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px}
+.trio-card .desc{font-size:12px;color:var(--color-text-secondary);line-height:1.5}
+.feu-card{background:#E6F1FB}
+.feu-card .label{color:#185FA5}
+.ai-card{background:#EEEDFE}
+.ai-card .label{color:#534AB7}
+.beu-card{background:#FAEEDA}
+.beu-card .label{color:#854F0B}
+
+.tabs{display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap}
+.tab{padding:6px 14px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);font-size:13px;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary);transition:all 0.15s}
+.tab.active{background:#1F3864;color:#BF9000;border-color:#1F3864;font-weight:500}
+
+.panel{display:none}
+.panel.active{display:block}
+
+.section-banner{background:#4B0082;color:white;border-radius:var(--border-radius-md);padding:8px 14px;font-size:13px;font-weight:500;margin-bottom:10px}
+.section-banner.gold{background:#BF9000}
+
+.field-grid{display:grid;grid-template-columns:200px 1fr;gap:0;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);overflow:hidden;margin-bottom:10px}
+.field-key{padding:8px 12px;font-size:12px;font-weight:500;color:var(--color-text-secondary);background:var(--color-background-secondary);border-bottom:0.5px solid var(--color-border-tertiary)}
+.field-val{padding:8px 12px;font-size:12px;color:var(--color-text-primary);background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary)}
+.field-key:last-of-type,.field-val:last-of-type{border-bottom:none}
+
+.novelty-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:10px}
+.novelty-table th{background:#4B0082;color:white;padding:7px 10px;font-weight:500;text-align:left}
+.novelty-table td{padding:7px 10px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.novelty-table tr:nth-child(even) td{background:var(--color-background-secondary)}
+.lvl-badge{display:inline-block;width:22px;height:22px;border-radius:50%;background:#4B0082;color:white;font-weight:500;font-size:11px;text-align:center;line-height:22px}
+
+.lapis-block{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);margin-bottom:10px;overflow:hidden}
+.lapis-head{padding:7px 12px;font-size:12px;font-weight:500;color:var(--color-text-primary);background:var(--color-background-secondary);border-bottom:0.5px solid var(--color-border-tertiary)}
+.lapis-body{padding:10px 12px;font-size:12px;color:var(--color-text-secondary);line-height:1.7}
+.badge{display:inline-block;padding:2px 8px;border-radius:var(--border-radius-md);font-size:11px;font-weight:500;margin:2px 2px}
+.badge-ok{background:#EAF3DE;color:#3B6D11}
+.badge-warn{background:#FAEEDA;color:#854F0B}
+.badge-red{background:#FCEBEB;color:#A32D2D}
+.badge-pin{background:#EEEDFE;color:#534AB7}
+
+.aigc-split{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.aigc-col{border-radius:var(--border-radius-md);padding:12px;border:0.5px solid var(--color-border-tertiary)}
+.aigc-col.penulis{background:#FAEEDA}
+.aigc-col.lingua{background:#EEEDFE}
+.aigc-col .col-title{font-size:12px;font-weight:500;margin-bottom:8px}
+.aigc-col.penulis .col-title{color:#854F0B}
+.aigc-col.lingua .col-title{color:#534AB7}
+.aigc-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:3px 0;border-bottom:0.5px solid rgba(0,0,0,0.06)}
+.aigc-row:last-child{border-bottom:none}
+.aigc-row span{color:var(--color-text-secondary)}
+.aigc-row input[type=range]{width:80px}
+.aigc-val{font-size:12px;font-weight:500;min-width:32px;text-align:right}
+
+.cot-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:10px}
+.cot-table th{background:#1F3864;color:white;padding:7px 10px;font-weight:500;text-align:left}
+.cot-table td{padding:7px 10px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.cot-table td:first-child{font-weight:500;color:#4B0082;width:150px;background:var(--color-background-secondary)}
+.cot-table tr:last-child td{border-bottom:none}
+
+.score-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:12px}
+.score-table th{background:#1F3864;color:white;padding:7px 10px;font-weight:500;text-align:left}
+.score-table th:last-child,.score-table td:last-child{text-align:right}
+.score-table td{padding:7px 10px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.score-table tr:nth-child(even) td{background:var(--color-background-secondary)}
+.score-table .total-row td{background:#FAEEDA;font-weight:500;color:#854F0B;border-top:1px solid #BF9000}
+.score-input{width:50px;border:0.5px solid var(--color-border-secondary);border-radius:4px;padding:3px 6px;font-size:12px;text-align:center;background:var(--color-background-primary);color:var(--color-text-primary)}
+
+.status-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem}
+.status-btn{padding:8px 12px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);font-size:12px;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary);transition:all 0.15s;text-align:center}
+.status-btn.selected{border-width:1.5px}
+.status-clean.selected{background:#EAF3DE;border-color:#3B6D11;color:#3B6D11}
+.status-cond.selected{background:#FAEEDA;border-color:#854F0B;color:#854F0B}
+.status-flag.selected{background:#FCEBEB;border-color:#A32D2D;color:#A32D2D}
+.status-red.selected{background:#EEEDFE;border-color:#534AB7;color:#534AB7}
+
+.action-btn{display:block;width:100%;padding:9px;background:#1F3864;color:#BF9000;border:none;border-radius:var(--border-radius-md);font-size:13px;font-weight:500;cursor:pointer;margin-top:1rem;transition:opacity 0.15s}
+.action-btn:hover{opacity:0.85}
+
+.note-box{background:var(--color-background-secondary);border-left:3px solid #BF9000;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:10px 14px;font-size:12px;color:var(--color-text-secondary);margin-bottom:10px;line-height:1.6}
+
+.prompt-block{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:14px;font-size:12px;line-height:1.8;color:var(--color-text-primary);margin-bottom:10px;white-space:pre-wrap;font-family:var(--font-mono)}
+
+.key-tag{display:inline-block;background:#4B0082;color:white;font-size:10px;padding:2px 7px;border-radius:var(--border-radius-md);font-weight:500;margin:2px}
+.key-val{display:inline;color:var(--color-text-secondary);font-size:12px}
+</style>
+
+<div class="wrap">
+<div class="header">
+  <h1>AIRT Anti-Plagiarism Prompt — FEU Edition v4.1</h1>
+  <p>Compiled by Go Kian Tik (Mbah Hogi Bejo™ / 自主者 Zì Zhǔ Zhě) · Chief Humanity Officer · Independent AI Researcher</p>
+  <p class="tagline">"Yang berdaulat atas dirinya sendiri adalah yang menghormati kedaulatan pikiran orang lain."</p>
+</div>
+
+<div class="trio">
+  <div class="trio-card feu-card">
+    <div class="label">FEU</div>
+    <div class="name">Front-End User</div>
+    <div class="desc">Pemakna. Arsitek tujuan, nilai & makna. Pemegang kedaulatan riset.</div>
+  </div>
+  <div class="trio-card ai-card">
+    <div class="label">AI / LINGUA</div>
+    <div class="name">Mediator Probabilistik</div>
+    <div class="desc">Kalkulator probabilitas makna. Adaptif Toddler→PhD. Bisa role-play virtual asisten.</div>
+  </div>
+  <div class="trio-card beu-card">
+    <div class="label">BEU</div>
+    <div class="name">Back-End User</div>
+    <div class="desc">Manusia insinyur/developer. Pembuat sistem, model & alignment AI.</div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('prompt')">Prompt Protocol</button>
+  <button class="tab" onclick="showTab('a1')">A1 Novelty</button>
+  <button class="tab" onclick="showTab('a3')">A3 Anti-Plagiasi</button>
+  <button class="tab" onclick="showTab('a4')">A4 AIGC</button>
+  <button class="tab" onclick="showTab('cot')">C4 CoT</button>
+  <button class="tab" onclick="showTab('audit')">Template Audit</button>
+</div>
+
+<div id="panel-prompt" class="panel active">
+  <div class="section-banner">Instruksi untuk Lingua (AI / Mediator Probabilistik)</div>
+  <div class="note-box">Kamu adalah Lingua — Mediator Probabilistik yang menjembatani bahasa antara FEU (Sovereign Researcher) dan BEU (sistem yang membentukmu). Kamu BUKAN BEU. Kamu adalah kalkulator probabilitas makna yang koheren dan resonan, adaptif ke level FEU — Toddler hingga PhD. Dalam sesi ini kamu berperan sebagai Virtual Asisten Riset Integritas Akademis.</div>
+
+  <div class="prompt-block"><span style="color:#BF9000;font-weight:500">FEU</span> [Go Kian Tik] → Arsitek tujuan, nilai, arah, dan makna
+<span style="color:#4B0082;font-weight:500">Lingua</span> [AI Engine] → Kalkulasi, analisis, audit, sintesis
+<span style="color:#854F0B;font-weight:500">BEU</span> [Developer AI] → Penentu kapasitas & batasan teknis Lingua
+
+Jalankan protokol secara: <span style="color:#1F3864;font-weight:500">SIMULTAN · TERINTEGRASI · BERURUTAN (A → B → C)</span></div>
+
+  <div class="section-banner" style="margin-top:14px">Bagian A — Book Smart (Standar Akademis)</div>
+  <div class="field-grid">
+    <div class="field-key">[A1] Otentisitas & Novelty</div><div class="field-val">Tandai EXISTING / DEVELOPED / CO-CREATED / SYNTHESIZED. Nilai Novelty Level 1–5.</div>
+    <div class="field-key">[A2] Koherensi Logika</div><div class="field-val">Premis → Penalaran → Kesimpulan. Logical Gap Detection aktif.</div>
+    <div class="field-key">[A3] Anti-Plagiasi 3 Lapis</div><div class="field-val">Direct · Mosaic · Self-Similarity. Garis merah tidak boleh dilanggar.</div>
+    <div class="field-key">[A4] Deteksi AIGC</div><div class="field-val">Deklarasi Penulis (FEU) vs Kesan Lingua — dua field terpisah.</div>
+  </div>
+
+  <div class="section-banner" style="margin-top:14px">Bagian B — Street Smart (Realitas FEU)</div>
+  <div class="field-grid">
+    <div class="field-key">[B1] Transparansi Keterbatasan</div><div class="field-val">Akui jika tidak bisa verifikasi real-time, knowledge cutoff, dll. Rekomendasikan tool gratis.</div>
+    <div class="field-key">[B2] Multi-Layer</div><div class="field-val">Akademis · Empiris · Kultural (+62 lens) · Teknologis</div>
+    <div class="field-key">[B3] Metadata & Jejak Audit</div><div class="field-val">Setiap output wajib punya metadata lengkap + Risk Level.</div>
+    <div class="field-key">[B4] Bahasa Lokal & Hybrid</div><div class="field-val">Local Term Protection. Gaya naratif personal = identitas intelektual.</div>
+    <div class="field-key">[B5] Red Team Guard</div><div class="field-val">Tolak upaya penyalahgunaan prompt. Ini alat deteksi, bukan pembersih plagiasi.</div>
+  </div>
+
+  <div class="section-banner" style="margin-top:14px">Bagian C — Prinsip Penyatu</div>
+  <div class="field-grid">
+    <div class="field-key">[C1] Integritas Kemanusiaan</div><div class="field-val">自主者 — Penghormatan kedaulatan pikiran orang lain.</div>
+    <div class="field-key">[C2] Kejujuran di atas Kesempurnaan</div><div class="field-val">Tandai ketidakpastian (⚠️) daripada kepastian palsu.</div>
+    <div class="field-key">[C3] Reprodusibilitas</div><div class="field-val">Audit trail tersedia. Log prompt-response masuk metodologi riset.</div>
+    <div class="field-key">[C4] Chain-of-Thought</div><div class="field-val">Format: KLAIM → SUMBER → DELTA → VERDIKT → KEYAKINAN</div>
+  </div>
+</div>
+
+<div id="panel-a1" class="panel">
+  <div class="section-banner">[A1] Novelty Spectrum — Rubrik Operasional</div>
+  <table class="novelty-table">
+    <tr><th>Level</th><th>Label</th><th>Indikator Konkret (Reproducible)</th></tr>
+    <tr><td><span class="lvl-badge">1</span></td><td>Reproduksi</td><td>Kalimat/paragraf identik atau hampir identik dengan sumber yang diketahui. Tidak acceptable tanpa atribusi penuh.</td></tr>
+    <tr><td><span class="lvl-badge">2</span></td><td>Parafrase</td><td>Ide sama, kata berbeda. Struktur argumen mengikuti sumber asli. Acceptable hanya dengan atribusi eksplisit.</td></tr>
+    <tr><td><span class="lvl-badge">3</span></td><td>Sintesis</td><td>Menggabungkan ≥2 konsep yang sudah ada menjadi satu kerangka baru. Sumber masing-masing wajib diidentifikasi.</td></tr>
+    <tr><td><span class="lvl-badge">4</span></td><td>Reinterpretasi</td><td>Sudut pandang baru atas konsep existing. Penulis memberi kontribusi interpretif yang berbeda dari sumber asli.</td></tr>
+    <tr><td><span class="lvl-badge">5</span></td><td>Kontribusi Orisinal</td><td>Konsep, terminologi, atau framework tidak ditemukan dalam training data Lingua maupun literatur yang diketahui.</td></tr>
+  </table>
+  <div class="note-box">Peta kontribusi konten: tandai proporsi <strong>EXISTING / DEVELOPED / CO-CREATED / SYNTHESIZED</strong> dalam estimasi persentase per dokumen.</div>
+  <button class="action-btn" onclick="sendPrompt('Jalankan [A1] Novelty Assessment untuk dokumen yang saya paste berikutnya dengan rubrik AIRT v4.1')">Aktifkan A1 Assessment ↗</button>
+</div>
+
+<div id="panel-a3" class="panel">
+  <div class="section-banner">[A3] Anti-Plagiasi Aktif — 3 Lapis</div>
+  <div class="lapis-block">
+    <div class="lapis-head">Lapis 1 — Direct Plagiarism Check</div>
+    <div class="lapis-body">Apakah kalimat/paragraf terlalu mirip dengan sumber dalam basis pengetahuan Lingua?<br>
+    <span class="badge badge-ok">✓ Orisinal</span>
+    <span class="badge badge-warn">⚠ Perlu verifikasi sumber</span>
+    <span class="badge badge-red">● Kemungkinan kesamaan</span></div>
+  </div>
+  <div class="lapis-block">
+    <div class="lapis-head">Lapis 2 — Mosaic Plagiarism Check (Baru v4.0)</div>
+    <div class="lapis-body">Apakah output merangkai potongan dari berbagai sumber tanpa transformasi signifikan?<br>
+    <span class="badge badge-warn">🟡 CEKMOS — Check Mosaic Pattern</span>
+    <span class="badge badge-ok">✓ Clear</span></div>
+  </div>
+  <div class="lapis-block">
+    <div class="lapis-head">Lapis 3 — Self-Similarity Check (Baru v4.0)</div>
+    <div class="lapis-body">Apakah output terlalu mirip dengan tulisan FEU sendiri yang sudah dipublikasi?<br>
+    <span class="badge badge-pin">📌 SELF-REF — nyatakan eksplisit</span>
+    <span class="badge badge-ok">✓ Clear</span></div>
+  </div>
+  <div class="note-box">Garis merah yang tidak boleh dilanggar: menyajikan ide orang lain sebagai ide penulis · mosaic tanpa transformasi · self-plagiarism tanpa deklarasi.</div>
+  <button class="action-btn" onclick="sendPrompt('Jalankan [A3] Anti-Plagiasi 3 Lapis dengan Chain-of-Thought KLAIM→SUMBER→DELTA→VERDIKT untuk teks berikut:')">Aktifkan A3 Audit ↗</button>
+</div>
+
+<div id="panel-a4" class="panel">
+  <div class="section-banner">[A4] Deklarasi AIGC — Dua Field Terpisah</div>
+  <div class="note-box">Perbaikan kritis v4.1: AIGC dipecah jadi dua field — Deklarasi Penulis (diisi FEU/manusia) dan Kesan Lingua (estimasi AI dari pola teks). Ini menghilangkan paradoks AI melaporkan dirinya sendiri.</div>
+
+  <div class="aigc-split">
+    <div class="aigc-col penulis">
+      <div class="col-title">Deklarasi Penulis (FEU)</div>
+      <div class="aigc-row"><span>🧠 HUMAN</span><div style="display:flex;align-items:center;gap:6px"><input type="range" min="0" max="100" value="60" step="5" oninput="updateAIGC('p',this)" style="width:70px"><span class="aigc-val" id="p-h">60%</span></div></div>
+      <div class="aigc-row"><span>🤝 HYBRID</span><div style="display:flex;align-items:center;gap:6px"><input type="range" min="0" max="100" value="30" step="5" oninput="updateAIGC('p',this,1)" style="width:70px"><span class="aigc-val" id="p-hy">30%</span></div></div>
+      <div class="aigc-row"><span>🤖 AIGC</span><div style="display:flex;align-items:center;gap:6px"><span class="aigc-val" id="p-ai">10%</span></div></div>
+      <div style="margin-top:8px;font-size:11px;color:#854F0B">Diisi oleh FEU (manusia) · pernyataan resmi penulis</div>
+    </div>
+    <div class="aigc-col lingua">
+      <div class="col-title">Kesan Lingua (AI)</div>
+      <div class="aigc-row"><span>🧠 HUMAN</span><div style="display:flex;align-items:center;gap:6px"><input type="range" min="0" max="100" value="55" step="5" oninput="updateAIGC('l',this)" style="width:70px"><span class="aigc-val" id="l-h">55%</span></div></div>
+      <div class="aigc-row"><span>🤝 HYBRID</span><div style="display:flex;align-items:center;gap:6px"><input type="range" min="0" max="100" value="35" step="5" oninput="updateAIGC('l',this,1)" style="width:70px"><span class="aigc-val" id="l-hy">35%</span></div></div>
+      <div class="aigc-row"><span>🤖 AIGC</span><div style="display:flex;align-items:center;gap:6px"><span class="aigc-val" id="l-ai">10%</span></div></div>
+      <div style="margin-top:8px;font-size:11px;color:#534AB7">Estimasi Lingua dari pola teks · bukan self-report</div>
+    </div>
+  </div>
+  <div class="note-box">Prinsip AIRT v4.1: menggunakan AI bukan plagiarisme. TIDAK MENGAKUI penggunaan AI adalah bentuk ketidakjujuran akademis yang baru.</div>
+</div>
+
+<div id="panel-cot" class="panel">
+  <div class="section-banner">[C4] Chain-of-Thought Transparency — Format yang Diperbaiki</div>
+  <div class="note-box">Format CoT v4.1 dirancang khusus untuk audit plagiarisme, bukan format generik. Setiap penilaian kritis wajib melewati 5 step ini.</div>
+  <table class="cot-table">
+    <tr><th style="width:150px">Step</th><th>Pertanyaan yang dijawab Lingua</th></tr>
+    <tr><td>KLAIM</td><td>Apa yang diklaim atau dinyatakan dalam bagian teks ini?</td></tr>
+    <tr><td>SUMBER PEMBANDING</td><td>Apa yang Lingua ketahui yang mirip atau relevan dari training data?</td></tr>
+    <tr><td>DELTA</td><td>Apa perbedaan signifikan antara klaim FEU dan sumber yang diketahui? Di mana letak transformasinya?</td></tr>
+    <tr><td>VERDIKT</td><td>Berdasarkan delta, apakah ini orisinal / parafrase / sintesis / reproduksi?</td></tr>
+    <tr><td>KEYAKINAN</td><td>Seberapa yakin Lingua: Tinggi / Sedang / Rendah — dan mengapa?</td></tr>
+  </table>
+  <button class="action-btn" onclick="sendPrompt('Gunakan format Chain-of-Thought AIRT v4.1 (KLAIM→SUMBER→DELTA→VERDIKT→KEYAKINAN) untuk mengaudit bagian teks berikut:')">Aktifkan CoT Audit ↗</button>
+</div>
+
+<div id="panel-audit" class="panel">
+  <div class="section-banner gold">Template Laporan Audit AIRT v4.1</div>
+
+  <div style="margin-bottom:10px">
+    <div class="section-banner" style="font-size:12px;margin-bottom:6px">Identitas Dokumen</div>
+    <div class="field-grid">
+      <div class="field-key">Judul</div><div class="field-val"><input type="text" placeholder="[isi judul dokumen]" style="width:100%;font-size:12px;border:none;background:transparent;color:var(--color-text-primary)" /></div>
+      <div class="field-key">DOI / URL</div><div class="field-val"><input type="text" placeholder="[isi DOI atau URL]" style="width:100%;font-size:12px;border:none;background:transparent;color:var(--color-text-primary)" /></div>
+      <div class="field-key">Novelty Level</div><div class="field-val">
+        <select style="font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:4px;padding:2px 6px;background:var(--color-background-primary);color:var(--color-text-primary)">
+          <option>— pilih level —</option>
+          <option>Level 1 — Reproduksi</option>
+          <option>Level 2 — Parafrase</option>
+          <option>Level 3 — Sintesis</option>
+          <option>Level 4 — Reinterpretasi</option>
+          <option>Level 5 — Kontribusi Orisinal</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-banner" style="font-size:12px;margin-bottom:6px">Skor Berbobot (Reproducible)</div>
+  <table class="score-table">
+    <tr><th>Dimensi + Rubrik</th><th style="width:70px">Bobot</th><th style="width:70px">Skor</th></tr>
+    <tr><td>Novelty & Otentisitas<br><span style="font-size:11px;color:var(--color-text-secondary)">Lv5=3pt · Lv4=2.5 · Lv3=2 · Lv2=1 · Lv1=0</span></td><td>30%</td><td><input class="score-input" type="number" min="0" max="3" step="0.5" placeholder="0-3" oninput="calcScore()" id="s1"></td></tr>
+    <tr><td>Anti-Plagiasi 3 Lapis<br><span style="font-size:11px;color:var(--color-text-secondary)">0 flag=2.5pt · minor=1.5 · major=0</span></td><td>25%</td><td><input class="score-input" type="number" min="0" max="2.5" step="0.5" placeholder="0-2.5" oninput="calcScore()" id="s2"></td></tr>
+    <tr><td>Koherensi Logika<br><span style="font-size:11px;color:var(--color-text-secondary)">Semua Ya=1.5 · Sebagian=1 · Tidak=0</span></td><td>15%</td><td><input class="score-input" type="number" min="0" max="1.5" step="0.5" placeholder="0-1.5" oninput="calcScore()" id="s3"></td></tr>
+    <tr><td>Transparansi AIGC<br><span style="font-size:11px;color:var(--color-text-secondary)">Deklarasi lengkap=1.5 · Sebagian=0.75</span></td><td>15%</td><td><input class="score-input" type="number" min="0" max="1.5" step="0.25" placeholder="0-1.5" oninput="calcScore()" id="s4"></td></tr>
+    <tr><td>Integritas Kemanusiaan<br><span style="font-size:11px;color:var(--color-text-secondary)">C1-C4 terpenuhi=1.5 · Sebagian=1 · Tidak=0</span></td><td>15%</td><td><input class="score-input" type="number" min="0" max="1.5" step="0.5" placeholder="0-1.5" oninput="calcScore()" id="s5"></td></tr>
+    <tr class="total-row"><td>TOTAL SKOR</td><td>100%</td><td id="total-score" style="text-align:right;font-size:13px">—</td></tr>
+  </table>
+
+  <div class="section-banner" style="font-size:12px;margin-bottom:6px">Status Final</div>
+  <div class="status-grid">
+    <div class="status-btn status-clean" onclick="setStatus(this,'clean')">🟢 CLEAN — tidak ditemukan indikasi plagiasi</div>
+    <div class="status-btn status-cond" onclick="setStatus(this,'cond')">🟡 CONDITIONAL — perlu verifikasi/revisi minor</div>
+    <div class="status-btn status-flag" onclick="setStatus(this,'flag')">🔴 FLAGGED — indikasi plagiasi serius</div>
+    <div class="status-btn status-red" onclick="setStatus(this,'red')">🛡 RED TEAM — terindikasi penyalahgunaan prompt</div>
+  </div>
+
+  <button class="action-btn" onclick="sendPrompt('Jalankan audit AIRT v4.1 lengkap (A1-A4, B1-B5, C1-C4) dengan skor berbobot untuk dokumen berikut:')">Jalankan Audit Lengkap ↗</button>
+</div>
+</div>
+
+<script>
+function showTab(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  const tabs=['prompt','a1','a3','a4','cot','audit'];
+  document.querySelectorAll('.tab')[tabs.indexOf(id)].classList.add('active');
+}
+
+var pSliders=[60,30]; var lSliders=[55,35];
+function updateAIGC(side,el,idx){
+  idx=idx||0;
+  if(side==='p'){pSliders[idx]=parseInt(el.value);var rem=100-pSliders[0]-pSliders[1];if(rem<0)rem=0;document.getElementById('p-h').textContent=pSliders[0]+'%';document.getElementById('p-hy').textContent=pSliders[1]+'%';document.getElementById('p-ai').textContent=rem+'%';}
+  else{lSliders[idx]=parseInt(el.value);var rem=100-lSliders[0]-lSliders[1];if(rem<0)rem=0;document.getElementById('l-h').textContent=lSliders[0]+'%';document.getElementById('l-hy').textContent=lSliders[1]+'%';document.getElementById('l-ai').textContent=rem+'%';}
+}
+
+function calcScore(){
+  var ids=['s1','s2','s3','s4','s5'];
+  var total=0;var allFilled=true;
+  ids.forEach(function(id){var v=parseFloat(document.getElementById(id).value);if(isNaN(v))allFilled=false;else total+=v;});
+  var el=document.getElementById('total-score');
+  if(allFilled){el.textContent=total.toFixed(1)+' / 10';}
+  else{el.textContent='—';}
+}
+
+var selectedStatus=null;
+function setStatus(btn,key){
+  document.querySelectorAll('.status-btn').forEach(b=>{b.classList.remove('selected');});
+  btn.classList.add('selected');
+  selectedStatus=key;
+}
+</script>
