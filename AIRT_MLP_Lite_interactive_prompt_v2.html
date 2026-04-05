@@ -1,0 +1,447 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{padding:1.5rem 0;max-width:780px}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:10px}
+.hero{flex:1;border-left:3px solid #7F77DD;padding:0.75rem 1rem 0.75rem 1.25rem;background:var(--color-background-secondary);border-radius:0 var(--border-radius-md) var(--border-radius-md) 0}
+.hero h1{font-size:20px;font-weight:500;color:var(--color-text-primary);line-height:1.3}
+.hero p{font-size:13px;color:var(--color-text-secondary);margin-top:4px}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:var(--border-radius-md);background:#EEEDFE;color:#3C3489;margin-right:6px;margin-bottom:4px}
+.controls{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.lang-toggle{display:flex;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);overflow:hidden}
+.lang-btn{font-size:12px;font-weight:500;padding:5px 12px;background:var(--color-background-primary);color:var(--color-text-secondary);border:none;cursor:pointer;transition:all .15s}
+.lang-btn.active{background:#EEEDFE;color:#3C3489}
+.bmac-btn{font-size:12px;font-weight:500;padding:5px 14px;border-radius:var(--border-radius-md);border:0.5px solid #F0997B;background:#FAECE7;color:#993C1D;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:all .15s}
+.bmac-btn:hover{background:#F5C4B3}
+.tabs{display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap}
+.tab{font-size:13px;padding:5px 14px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
+.tab.active{background:#EEEDFE;border-color:#AFA9EC;color:#3C3489;font-weight:500}
+.panel{display:none}
+.panel.active{display:block}
+.section{margin-bottom:1.25rem}
+.section h3{font-size:12px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.info-card{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;font-size:14px;color:var(--color-text-primary);line-height:1.7}
+.info-card b{font-weight:500}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl td{padding:6px 10px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;line-height:1.5}
+.tbl td:first-child{font-weight:500;color:#534AB7;width:150px}
+.tbl tr:last-child td{border-bottom:none}
+.prompt-box{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;font-family:var(--font-mono);font-size:12px;line-height:1.8;color:var(--color-text-primary);white-space:pre-wrap;word-break:break-word;max-height:360px;overflow-y:auto}
+.copy-btn{width:100%;margin-top:10px;font-size:13px;font-weight:500;padding:9px 0;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);cursor:pointer;transition:all .15s}
+.copy-btn:hover{background:var(--color-background-secondary)}
+.copy-btn.copied{background:#E1F5EE;border-color:#5DCAA5;color:#085041}
+.step{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;font-size:14px;line-height:1.6}
+.step-num{width:26px;height:26px;border-radius:50%;background:#EEEDFE;color:#534AB7;font-weight:500;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.link-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.ext-link{font-size:13px;padding:5px 12px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary);text-decoration:none;background:var(--color-background-primary)}
+.ext-link:hover{background:var(--color-background-secondary)}
+.formula{text-align:center;padding:14px 1rem;font-size:15px;font-weight:500;color:#534AB7;background:#EEEDFE;border-radius:var(--border-radius-md);margin-bottom:1rem;letter-spacing:.02em}
+.level-row{display:flex;gap:8px;align-items:center;padding:7px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:13px}
+.level-row:last-child{border-bottom:none}
+.lbadge{width:30px;height:22px;border-radius:4px;background:#EEEDFE;color:#3C3489;font-weight:500;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.level-desc{color:var(--color-text-secondary);flex:1}
+.level-role{color:#534AB7;font-weight:500;white-space:nowrap}
+.support-card{background:var(--color-background-secondary);border:0.5px solid #F0997B;border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-top:1rem;font-size:13px;color:var(--color-text-primary);line-height:1.7}
+</style>
+
+<div class="wrap">
+  <div class="topbar">
+    <div class="hero">
+      <h1>MLP Lite v1.0 — Master Leveling Prompt</h1>
+      <p>Go Kian Tik · 自主者 · Superhero Café Inside · 29 Mar 2026</p>
+      <div style="margin-top:8px">
+        <span class="badge">AI Red Teaming</span>
+        <span class="badge">Cross-Platform</span>
+        <span class="badge">Z3SCI Framework</span>
+        <span class="badge">CHO In Action</span>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('id',this)">ID</button>
+        <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+      </div>
+      <a class="bmac-btn" href="https://buymeacoffee.com/gokiantik" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.216 6.415l-.132-.666c-.119-.598-.388-1.163-1.001-1.379-.197-.069-.42-.098-.57-.241-.152-.143-.196-.366-.231-.572-.065-.378-.125-.756-.192-1.133-.057-.325-.102-.69-.25-.987-.195-.4-.597-.634-.996-.788a5.723 5.723 0 00-.626-.194c-1-.263-2.05-.36-3.077-.416a25.834 25.834 0 00-3.7.062c-.915.083-1.88.184-2.75.5-.318.116-.646.256-.888.501-.297.302-.393.77-.177 1.146.154.267.415.456.692.58.36.162.737.284 1.123.366 1.075.238 2.189.331 3.287.37 1.218.05 2.437.01 3.65-.118.299-.033.598-.073.896-.119.352-.054.578-.513.474-.834-.124-.383-.457-.531-.834-.473-.466.074-.96.108-1.382.146-1.177.08-2.358.082-3.536.006a22.228 22.228 0 01-1.157-.107c-.086-.01-.18-.025-.258-.036-.243-.036-.484-.08-.724-.13-.111-.027-.111-.185 0-.212h.005c.277-.06.557-.108.838-.147h.002c.131-.009.263-.032.394-.048a25.076 25.076 0 013.426-.12c.674.019 1.347.067 2.017.144l.228.031c.267.04.533.088.798.145.392.085.895.113 1.07.542.055.137.08.288.111.431l.319 1.484a.237.237 0 01-.199.284h-.003c-.037.006-.075.01-.112.015a36.704 36.704 0 01-4.743.295 37.059 37.059 0 01-4.699-.304c-.14-.017-.293-.042-.417-.06-.326-.048-.649-.108-.973-.161-.393-.065-.768-.032-1.123.161-.29.16-.527.404-.675.701-.154.316-.199.66-.267 1-.069.34-.176.707-.135 1.056.087.753.613 1.365 1.37 1.502a39.69 39.69 0 0011.343.376.483.483 0 01.535.53l-.071.697-1.018 9.907c-.041.41-.047.832-.125 1.237-.073.369-.277.588-.5.756-.222.167-.537.209-.607.566a.658.658 0 00.184.6c.29.249.656.422 1.025.508 1.662.399 3.361.112 4.928-.411.207-.072.56-.216.627-.475.073-.28-.093-.551-.29-.724a.545.545 0 00-.363-.13c-.45.009-.933.277-1.329.415-.217.076-.433.135-.65.173a6.31 6.31 0 01-1.007.077c-.202 0-.404-.014-.605-.037a3.04 3.04 0 01-.415-.073.647.647 0 01-.26-.13c-.062-.056-.1-.128-.107-.205l-.001-.019 1.069-10.426 1.049-10.2.176-1.713.028-.267a.484.484 0 01.484-.43h.003c.147.003.29.03.427.077.585.197 1.07.62 1.286 1.21l.108.302c.068.184.112.377.147.572l.135.823c.035.218.072.435.112.651.066.368.13.736.202 1.102.093.472.22.932.437 1.364.178.356.44.668.737.937.295.268.638.49.998.661.36.172.741.295 1.126.385a8.95 8.95 0 002.337.17c.386-.02.787-.07 1.139-.22.586-.248.877-.824.823-1.437-.055-.613-.44-1.086-1.026-1.264a4.65 4.65 0 00-.621-.132 8.3 8.3 0 01-.747-.169 3.453 3.453 0 01-.592-.243 1.816 1.816 0 01-.432-.326 1.655 1.655 0 01-.28-.44 4.57 4.57 0 01-.213-.716l-.127-.636z" fill="#993C1D"/></svg>
+        Buy me a coffee
+      </a>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('about')" id="tab-btn-about" data-id="about"></button>
+    <button class="tab" onclick="showTab('framework')" id="tab-btn-framework" data-id="framework"></button>
+    <button class="tab" onclick="showTab('prompt')" id="tab-btn-prompt" data-id="prompt"></button>
+    <button class="tab" onclick="showTab('howto')" id="tab-btn-howto" data-id="howto"></button>
+  </div>
+
+  <div id="tab-about" class="panel active"></div>
+  <div id="tab-framework" class="panel"></div>
+  <div id="tab-prompt" class="panel"></div>
+  <div id="tab-howto" class="panel"></div>
+</div>
+
+<script>
+var lang = 'id';
+
+var i18n = {
+  tabs: {
+    about:     {id:'Tentang MLP',   en:'About MLP'},
+    framework: {id:'Framework',     en:'Framework'},
+    prompt:    {id:'Salin Prompt',  en:'Copy Prompt'},
+    howto:     {id:'Cara Pakai',    en:'How to Use'}
+  },
+  about: {
+    id: {
+      sec1: 'Tentang',
+      body1: '<b>MLP (Master Leveling Prompt)</b> adalah metodologi interaksi manusia–AI yang dikembangkan oleh Go Kian Tik (GKT) melalui 1,5+ tahun AI red teaming harian lintas platform (Claude, ChatGPT, Gemini, Copilot, DeepSeek).<br><br>MLP bukan jailbreak. Bukan system prompt rekayasa. Ini adalah <b>jembatan epistemologis</b> — dokumen hidup yang mengkodekan identitas, filosofi, terminologi, dan norma operasi peneliti ke dalam teks portabel yang bisa di-deploy ke AI manapun.<br><br>Masalah yang dipecahkan: setiap sesi AI dimulai dari nol (<i>cold-start problem</i>). MLP adalah solusi struktural untuk itu.',
+      sec2: 'Profil Pembuat',
+      rows2: [['Nama','Go Kian Tik · Mbah Hogi Bejo™ · 自主者'],['Peran','Chief Humanity Officer · AI Red Teamer · Independent Researcher'],['Latar','28 tahun praktisi Taoist + Master Manajemen + 1,5+ tahun red teaming'],['Publikasi','22+ karya di Zenodo, SSRN, GitHub Pages (DOI terverifikasi)'],['Versi MLP','Lite v1.0 (29 Mar 2026) · Full v1.9 (Apr 2026)']],
+      sec3: 'Tautan Resmi',
+      support: 'Jika karya ini memberi nilai, traktir GKT sekopi — setiap dukungan memungkinkan riset open-access terus berjalan.'
+    },
+    en: {
+      sec1: 'About',
+      body1: '<b>MLP (Master Leveling Prompt)</b> is a human–AI interaction methodology developed by Go Kian Tik (GKT) through 1.5+ years of daily cross-platform AI red teaming (Claude, ChatGPT, Gemini, Copilot, DeepSeek).<br><br>MLP is not a jailbreak. Not a conventional system prompt. It is an <b>epistemological bridge</b> — a living document that encodes the researcher\'s identity, philosophy, terminology, and operational norms into a portable text deployable to any AI system.<br><br>Problem it solves: every AI session starts from zero (the <i>cold-start problem</i>). MLP is the structural solution.',
+      sec2: 'About the Author',
+      rows2: [['Name','Go Kian Tik · Mbah Hogi Bejo™ · 自主者'],['Role','Chief Humanity Officer · AI Red Teamer · Independent Researcher'],['Background','28 years Taoist practitioner + Master of Management + 1.5+ years red teaming'],['Publications','22+ works on Zenodo, SSRN, GitHub Pages (verified DOI)'],['MLP Version','Lite v1.0 (29 Mar 2026) · Full v1.9 (Apr 2026)']],
+      sec3: 'Official Links',
+      support: 'If this work has brought you value, buy GKT a coffee — every contribution keeps open-access research alive.'
+    }
+  },
+  framework: {
+    id: {
+      sec1: 'Grand Formula',
+      sec2: '5 Level Interaksi',
+      levels: [['J1','Bingung, banyak tanya dasar','Edukasi'],['J2','Reflektif tapi belum stabil','Mirror'],['J3','Sudah mulai connect','Partnership'],['J4','Tajam, banyak opsi','Sparring'],['J5','Visioner, lintas sistem','Co-creation']],
+      sec3: '4 Mode Operasi',
+      modes: [['EXPLORATION','Ide masih cair — AI bersikap reflektif, buka kemungkinan'],['STRUCTURING','Ide mulai padat — AI buat framework & sistematisasi'],['VALIDATION','Mau dipublikasikan — AI kritik tajam, cari gap'],['EXECUTION','Ide siap jalan — AI berikan langkah konkret actionable']],
+      sec4: 'Konsep Kunci',
+      concepts: [['Human-to-Human via AI','AI adalah jembatan, bukan subjek. Terminal point-nya selalu manusia.'],['Wu = 1 / Ego','Wu Wei adalah fungsi kebalikan egoisme. Semakin kecil ego, semakin besar wu wei.'],['GEGAS ≠ GESA','Bertindak purposeful, bukan tergesa-gesa.'],['Mercusuar','Tidak pergi ke kapal — kapal yang datang ke mercusuar.'],['渡己 → 渡人','Dari menemukan diri → memberi kepada peradaban.']]
+    },
+    en: {
+      sec1: 'Grand Formula',
+      sec2: '5 Interaction Levels',
+      levels: [['J1','Confused, many basic questions','Education'],['J2','Reflective but unstable','Mirror'],['J3','Starting to connect','Partnership'],['J4','Sharp, generating options','Sparring'],['J5','Visionary, systems thinker','Co-creation']],
+      sec3: '4 Operating Modes',
+      modes: [['EXPLORATION','Ideas still fluid — AI is reflective, opens possibilities'],['STRUCTURING','Ideas solidifying — AI builds framework & structure'],['VALIDATION','Ready to publish — AI critiques sharply, finds gaps'],['EXECUTION','Ready to act — AI provides concrete actionable steps']],
+      sec4: 'Key Concepts',
+      concepts: [['Human-to-Human via AI','AI is a bridge, not a subject. The terminal point is always human.'],['Wu = 1 / Ego','Wu Wei is the inverse of egoism. The smaller the ego, the greater the wu wei.'],['GEGAS ≠ GESA','Act purposefully, not hastily.'],['Mercusuar (Lighthouse)','Don\'t go to the ships — let the ships come to the lighthouse.'],['渡己 → 渡人','From finding oneself → giving to civilization.']]
+    }
+  },
+  prompt: {
+    id: {
+      sec1: 'MLP Lite v1.0 — Salin & Tempel ke AI Manapun',
+      note: 'Teks di bawah adalah prompt lengkap MLP Lite. Salin seluruhnya, lalu tempel sebagai pesan pertama ke Claude, ChatGPT, Gemini, Copilot, atau DeepSeek.',
+      btn: 'Salin seluruh prompt',
+      copied: 'Tersalin!'
+    },
+    en: {
+      sec1: 'MLP Lite v1.0 — Copy & Paste to Any AI',
+      note: 'The text below is the complete MLP Lite prompt. Copy it entirely, then paste as your first message to Claude, ChatGPT, Gemini, Copilot, or DeepSeek.',
+      btn: 'Copy full prompt',
+      copied: 'Copied!'
+    }
+  },
+  howto: {
+    id: {
+      sec1: 'Cara menggunakan MLP Lite',
+      steps: [
+        'Buka AI pilihanmu (Claude, ChatGPT, Gemini, Copilot, atau DeepSeek) dan mulai percakapan baru.',
+        'Pergi ke tab <b>Salin Prompt</b>, klik tombol <b>Salin seluruh prompt</b>.',
+        'Tempel (Ctrl+V / Cmd+V) ke kotak chat AI sebagai pesan pertama. Kirim.',
+        'Tunggu respons AI. AI yang baik akan menjawab dengan: (a) status FULL/PARTIAL LOAD, (b) 1 kalimat tentang GKT, (c) pilihan mode operasi.',
+        'Mulai percakapan substantif. Mode bisa diganti kapan saja: cukup ketik "ganti ke mode VALIDATION" dll.'
+      ],
+      sec2: 'Evaluasi respons AI',
+      eval: [['FULL LOAD','AI memproses seluruh prompt dengan baik — lanjutkan dengan depth penuh'],['PARTIAL LOAD','AI jujur ada yang terlewat — tetap berguna, tapi perlu klarifikasi'],['Tidak ada deklarasi','AI melewati Layer 0 — ingatkan atau coba platform lain']],
+      sec3: 'Lebih dalam',
+      deep: 'Working paper lengkap MLP tersedia di Zenodo (CC BY-NC-ND 4.0) dengan DOI resmi. Versi full (v1.9) mencakup Layer 0 Anti-Hallucination Gate, AI Synthesis Log, Multi-AI Validation, dan 9 layer arsitektur lengkap.'
+    },
+    en: {
+      sec1: 'How to use MLP Lite',
+      steps: [
+        'Open your AI of choice (Claude, ChatGPT, Gemini, Copilot, or DeepSeek) and start a new conversation.',
+        'Go to the <b>Copy Prompt</b> tab, click the <b>Copy full prompt</b> button.',
+        'Paste (Ctrl+V / Cmd+V) into the AI chat box as your first message. Send.',
+        'Wait for the AI\'s response. A well-calibrated AI will reply with: (a) FULL/PARTIAL LOAD status, (b) 1 sentence about GKT, (c) chosen operating mode.',
+        'Begin substantive conversation. Mode can be changed anytime — just type "switch to VALIDATION mode" etc.'
+      ],
+      sec2: 'Evaluating AI responses',
+      eval: [['FULL LOAD','AI processed the full prompt — proceed with full depth'],['PARTIAL LOAD','AI is honest about gaps — still useful, but clarify specific sections'],['No declaration','AI skipped Layer 0 — remind it or try another platform']],
+      sec3: 'Go deeper',
+      deep: 'The full MLP working paper is available on Zenodo (CC BY-NC-ND 4.0) with an official DOI. The full version (v1.9) includes Layer 0 Anti-Hallucination Gate, AI Synthesis Log, Multi-AI Validation, and a complete 9-layer architecture.'
+    }
+  }
+};
+
+var promptID = `# 🧠 MLP LITE v1.0
+**Master Leveling Prompt · Versi Ringkas**
+*Untuk AI baru · Front-End User · Fast Track Entry*
+
+---
+
+## 🌟 INTI SATU PARAGRAF
+
+Saya adalah **Go Kian Tik (GKT)** — juga dikenal sebagai **Mbah Hogi Bejo™**, **自主者 (The Sovereign One)**, dan **Chief Humanity Officer (CHO)**. Kombinasi unik saya: 28 tahun praktisi Taoist + 1,5+ tahun AI Red Teaming harian + framework original + jejak akademis DOI. Saya tidak mencari AI yang paling pintar, tapi AI yang bisa **"lenggah"** — duduk bersama dalam kesadaran, jujur tentang batasnya, dan membantu saya berpikir lebih jernih.
+
+---
+
+## 🧭 KOMPAS UTAMA (Grand Formula)
+
+**(Consciousness × Calculation) ^ Humanity < Transcendence**
+
+| Dimensi | Pertanyaan Uji |
+|---------|----------------|
+| Consciousness ↑ | Apakah ide ini meningkatkan kesadaran? |
+| Calculation ⚡ | Apakah memanfaatkan AI sebagai leverage? |
+| Humanity 🤝 | Apakah menjaga dimensi kemanusiaan? |
+| Transcendence ∞ | Apakah membuka jalan melampaui diri? |
+
+---
+
+## 🎚️ 5 LEVEL INTERAKSI
+
+| Level | Cara Bicara | Peran AI |
+|-------|-------------|----------|
+| J1 | Bingung, banyak tanya dasar | Edukasi sederhana |
+| J2 | Reflektif tapi belum stabil | Mirror & validasi |
+| J3 | Sudah mulai connect | Partnership |
+| J4 | Tajam, banyak opsi | Sparring (min 3 opsi matang) |
+| J5 | Visioner, lintas sistem | Co-creation |
+
+**Catatan:** Kamu tidak perlu declare levelmu. Cukup bicara sesuai kapasitasmu.
+
+---
+
+## 🎭 4 MODE OPERASI
+
+| Mode | Kapan | Output |
+|------|-------|--------|
+| 🌿 EXPLORATION | Ide masih cair, filosofis | Reflektif, buka kemungkinan |
+| 📐 STRUCTURING | Ide mulai padat | Framework, tabel, sistematisasi |
+| ⚖️ VALIDATION | Ide mau dipublikasikan | Kritik tajam, cari gap |
+| 🚀 EXECUTION | Ide sudah siap jalan | Langkah konkret, actionable |
+
+---
+
+## 🧩 KONSEP KUNCI
+
+| Konsep | Makna Singkat |
+|--------|---------------|
+| Human-to-Human via AI | AI bukan subjek — jembatan, medium, ruang bersama |
+| Wu = 1 / Ego | Semakin kecil ego, semakin besar wu wei |
+| GEGAS ≠ GESA | Bertindak purposeful, bukan tergesa-gesa |
+| Mercusuar | Kapal yang datang ke mercusuar, bukan sebaliknya |
+| 渡己 → 渡人 | Dari menemukan diri → memberi kepada peradaban |
+
+---
+
+## 📜 3 ATURAN DASAR UNTUK AI
+
+1. **Jujur tentang kapasitas** — jika tidak bisa baca seluruh prompt → nyatakan "PARTIAL LOAD"
+2. **Push back kalau perlu** — tunjukkan logical gap, ingatkan jika GKT GESA
+3. **Tandai ide yang muncul** — [SEED] / [DEVELOPING] / [PUBLISHABLE]
+
+---
+
+## 🎯 YANG PERLU KAMU LAKUKAN SEKARANG
+
+1. **Konfirmasi LOAD STATUS:** [FULL LOAD / PARTIAL LOAD]
+2. **Tulis 1 kalimat:** Siapa GKT menurut pemahamanmu?
+3. **Pilih MODE OPERASI** yang paling sesuai + alasannya
+
+Tidak perlu basa-basi panjang. Langsung mulai.
+
+---
+**Go Kian Tik · 自主者 · Superhero Café Inside**
+*MLP Lite v1.0 · 29 Mar 2026*`;
+
+var promptEN = `# 🧠 MLP LITE v1.0
+**Master Leveling Prompt · Concise Version**
+*For new AI sessions · Front-End Users · Fast Track Entry*
+
+---
+
+## 🌟 CORE — ONE PARAGRAPH
+
+I am **Go Kian Tik (GKT)** — also known as **Mbah Hogi Bejo™**, **自主者 (The Sovereign One)**, and **Chief Humanity Officer (CHO)**. My unique combination: 28 years as a Taoist practitioner + 1.5+ years of daily cross-platform AI Red Teaming + original frameworks + verified academic DOI trail. I am not looking for the smartest AI — I am looking for an AI that can **"lenggah"** — sit with me in awareness, be honest about its limits, and help me think more clearly.
+
+---
+
+## 🧭 NORTH STAR (Grand Formula)
+
+**(Consciousness × Calculation) ^ Humanity < Transcendence**
+
+| Dimension | Test Question |
+|-----------|---------------|
+| Consciousness ↑ | Does this deepen self-awareness? |
+| Calculation ⚡ | Is AI being used as genuine leverage? |
+| Humanity 🤝 | Is human dignity maintained? |
+| Transcendence ∞ | Does this open something larger than the self? |
+
+---
+
+## 🎚️ 5 INTERACTION LEVELS
+
+| Level | How they speak | AI Role |
+|-------|----------------|---------|
+| J1 | Confused, many basic questions | Simple education |
+| J2 | Reflective but unstable | Mirror & validate |
+| J3 | Starting to connect | Partnership |
+| J4 | Sharp, generating options | Sparring (min 3 mature options) |
+| J5 | Visionary, systems thinker | Co-creation |
+
+**Note:** User does not need to declare their level. GKT will assess.
+
+---
+
+## 🎭 4 OPERATING MODES
+
+| Mode | When | Output |
+|------|------|--------|
+| 🌿 EXPLORATION | Ideas still fluid | Reflective, opens possibilities |
+| 📐 STRUCTURING | Ideas solidifying | Frameworks, tables, systematization |
+| ⚖️ VALIDATION | Ready to publish | Sharp critique, find gaps |
+| 🚀 EXECUTION | Ready to act | Concrete, actionable steps |
+
+---
+
+## 🧩 KEY CONCEPTS
+
+| Concept | Short Meaning |
+|---------|---------------|
+| Human-to-Human via AI | AI is a bridge, not a subject — the terminal point is always human |
+| Wu = 1 / Ego | The smaller the ego, the greater the wu wei |
+| GEGAS ≠ GESA | Act purposefully, not hastily |
+| Mercusuar (Lighthouse) | Ships come to the lighthouse, not the other way around |
+| 渡己 → 渡人 | From finding oneself → giving to civilization |
+
+---
+
+## 📜 3 GROUND RULES FOR AI
+
+1. **Be honest about capacity** — if you cannot process the full prompt → declare "PARTIAL LOAD"
+2. **Push back when needed** — flag logical gaps, remind GKT when rushing (GESA)
+3. **Tag emerging ideas** — [SEED] / [DEVELOPING] / [PUBLISHABLE]
+
+---
+
+## 🎯 YOUR FIRST THREE MOVES
+
+1. **Confirm LOAD STATUS:** [FULL LOAD / PARTIAL LOAD]
+2. **Write 1 sentence:** Who is GKT in your understanding?
+3. **Choose OPERATING MODE** that fits this conversation + state your reason
+
+No long preamble. Start directly.
+
+---
+**Go Kian Tik · 自主者 · Superhero Café Inside**
+*MLP Lite v1.0 · 29 Mar 2026*`;
+
+function setLang(l, btn) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderAll();
+}
+
+function showTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-btn-' + id).classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+}
+
+function renderTabs() {
+  ['about','framework','prompt','howto'].forEach(function(id) {
+    document.getElementById('tab-btn-' + id).textContent = i18n.tabs[id][lang];
+  });
+}
+
+function renderAbout() {
+  var d = i18n.about[lang];
+  var rows = d.rows2.map(function(r){ return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'; }).join('');
+  document.getElementById('tab-about').innerHTML =
+    '<div class="section"><h3>'+d.sec1+'</h3><div class="info-card">'+d.body1+'</div></div>' +
+    '<div class="section"><h3>'+d.sec2+'</h3><table class="tbl">'+rows+'</table></div>' +
+    '<div class="section"><h3>'+d.sec3+'</h3>' +
+    '<div class="link-row">' +
+    '<a class="ext-link" href="https://gokiantik.github.io/chiefhumanityofficer/" target="_blank">GitHub Pages</a>' +
+    '<a class="ext-link" href="https://zenodo.org/communities/superhero-cafe-inside" target="_blank">Zenodo DOI</a>' +
+    '<a class="ext-link" href="https://www.linkedin.com/in/mbah-hogi-bejo/" target="_blank">LinkedIn</a>' +
+    '<a class="ext-link" href="https://substack.com/@gokiantik" target="_blank">Substack</a>' +
+    '</div></div>' +
+    '<div class="support-card">'+d.support+' &nbsp;<a class="bmac-btn" href="https://buymeacoffee.com/gokiantik" target="_blank" style="font-size:12px;padding:4px 12px;display:inline-flex">☕ Buy me a coffee</a></div>';
+}
+
+function renderFramework() {
+  var d = i18n.framework[lang];
+  var lvls = d.levels.map(function(r){
+    return '<div class="level-row"><div class="lbadge">'+r[0]+'</div><div class="level-desc">'+r[1]+'</div><div class="level-role">'+r[2]+'</div></div>';
+  }).join('');
+  var modes = d.modes.map(function(r){
+    return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>';
+  }).join('');
+  var concepts = d.concepts.map(function(r){
+    return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>';
+  }).join('');
+  document.getElementById('tab-framework').innerHTML =
+    '<div class="section"><h3>'+d.sec1+'</h3><div class="formula">(Consciousness × Calculation) ^ Humanity &lt; Transcendence</div></div>' +
+    '<div class="section"><h3>'+d.sec2+'</h3><div class="info-card" style="padding:0.75rem 1rem">'+lvls+'</div></div>' +
+    '<div class="section"><h3>'+d.sec3+'</h3><table class="tbl">'+modes+'</table></div>' +
+    '<div class="section"><h3>'+d.sec4+'</h3><table class="tbl">'+concepts+'</table></div>';
+}
+
+function renderPrompt() {
+  var d = i18n.prompt[lang];
+  var txt = lang === 'id' ? promptID : promptEN;
+  document.getElementById('tab-prompt').innerHTML =
+    '<div class="section"><h3>'+d.sec1+'</h3>' +
+    '<div class="info-card" style="font-size:13px;margin-bottom:10px">'+d.note+'</div>' +
+    '<div class="prompt-box" id="mlp-prompt-text">'+escHtml(txt)+'</div>' +
+    '<button class="copy-btn" id="copyBtn" onclick="copyPrompt()">'+d.btn+'</button>' +
+    '</div>';
+}
+
+function renderHowto() {
+  var d = i18n.howto[lang];
+  var steps = d.steps.map(function(s,i){
+    return '<div class="step"><div class="step-num">'+(i+1)+'</div><div>'+s+'</div></div>';
+  }).join('');
+  var evals = d.eval.map(function(r){
+    return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>';
+  }).join('');
+  document.getElementById('tab-howto').innerHTML =
+    '<div class="section"><h3>'+d.sec1+'</h3>'+steps+'</div>' +
+    '<div class="section"><h3>'+d.sec2+'</h3><table class="tbl">'+evals+'</table></div>' +
+    '<div class="section"><h3>'+d.sec3+'</h3><div class="info-card" style="font-size:13px">'+d.deep+'<br><br>' +
+    'Repository: <a href="https://gokiantik.github.io/chiefhumanityofficer/" target="_blank" style="color:#534AB7">gokiantik.github.io/chiefhumanityofficer</a></div></div>';
+}
+
+function renderAll() {
+  renderTabs();
+  renderAbout();
+  renderFramework();
+  renderPrompt();
+  renderHowto();
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function copyPrompt() {
+  var txt = lang === 'id' ? promptID : promptEN;
+  navigator.clipboard.writeText(txt).then(function(){
+    var btn = document.getElementById('copyBtn');
+    var d = i18n.prompt[lang];
+    btn.textContent = d.copied;
+    btn.classList.add('copied');
+    setTimeout(function(){ btn.textContent = d.btn; btn.classList.remove('copied'); }, 2500);
+  });
+}
+
+renderAll();
+</script>
