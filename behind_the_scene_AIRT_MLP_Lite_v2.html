@@ -302,9 +302,34 @@
     .hero { padding-top: 40px; }
     .cta-wrap { padding: 28px 20px; }
   }
+
+  /* — BILINGUAL TOGGLE — */
+  .lang-en { display: none; }
+  body.show-en .lang-id { display: none; }
+  body.show-en .lang-en { display: inline; }
+  .lang-en-block { display: none; }
+  body.show-en .lang-id-block { display: none; }
+  body.show-en .lang-en-block { display: block; }
+
+  .lang-toggle-wrap {
+    position: fixed; top: 14px; right: 16px; z-index: 999;
+  }
+  .lang-toggle-wrap button {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; font-weight: 500; letter-spacing: .12em;
+    text-transform: uppercase; padding: 6px 14px; border-radius: 4px;
+    border: 1px solid var(--accent); background: var(--ink);
+    color: var(--accent-light); cursor: pointer; transition: all .2s;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  }
+  .lang-toggle-wrap button:hover { background: var(--accent); color: #fff; }
 </style>
 </head>
 <body>
+
+<div class="lang-toggle-wrap">
+  <button id="langBtn" onclick="toggleLang()">🇮🇩 Bahasa Indonesia</button>
+</div>
 
 <div class="masthead">
   <span>CHO In Action Series &nbsp;·&nbsp; Superhero Café Inside &nbsp;·&nbsp; Z3SCI</span>
@@ -312,111 +337,209 @@
 
 <div class="hero">
   <p class="kicker">AI Red Teaming · Human Sovereignty · Open Access</p>
-  <h1>Every day I start from<br><em>zero.</em> So I built a fix.</h1>
-  <p class="deck">After 1.5 years of daily AI red teaming across five platforms, I got tired of re-explaining myself to every new chat window. The Master Leveling Prompt is what I built instead.</p>
+  <h1 class="lang-id-block">Setiap hari saya mulai dari<br><em>nol.</em> Jadi saya membangun solusinya.</h1>
+  <h1 class="lang-en-block">Every day I start from<br><em>zero.</em> So I built a fix.</h1>
+  <p class="deck">
+    <span class="lang-id">Setelah 1,5 tahun melakukan AI red teaming harian di lima platform, saya lelah harus menjelaskan diri sendiri berulang kali ke setiap jendela chat baru. Master Leveling Prompt adalah solusi yang saya bangun.</span>
+    <span class="lang-en">After 1.5 years of daily AI red teaming across five platforms, I got tired of re-explaining myself to every new chat window. The Master Leveling Prompt is what I built instead.</span>
+  </p>
   <div class="byline">
     <div class="avatar">GK</div>
     <div class="byline-text">
       <strong>Go Kian Tik · Mbah Hogi Bejo™ · 自主者</strong>
-      Chief Humanity Officer · Independent Researcher · Depok, Indonesia · April 2026
+      <span class="lang-id">Chief Humanity Officer · Peneliti Independen · Depok, Indonesia · April 2026</span>
+      <span class="lang-en">Chief Humanity Officer · Independent Researcher · Depok, Indonesia · April 2026</span>
     </div>
   </div>
 </div>
 
 <div class="article">
 
-  <p>You open a new chat. You type your question. The AI answers — politely, competently, and with absolutely no idea who you are, how you think, or what you've been building for the past two years.</p>
+  <p>
+    <span class="lang-id">Kamu membuka chat baru. Mengetik pertanyaan. AI menjawab — sopan, kompeten, dan sama sekali tidak tahu siapa kamu, bagaimana cara berpikirmu, atau apa yang sudah kamu bangun selama dua tahun terakhir.</span>
+    <span class="lang-en">You open a new chat. You type your question. The AI answers — politely, competently, and with absolutely no idea who you are, how you think, or what you've been building for the past two years.</span>
+  </p>
 
-  <p>Tomorrow, same thing. Next week, same thing. Every session: ground zero.</p>
+  <p>
+    <span class="lang-id">Besok, hal yang sama. Minggu depan, hal yang sama. Setiap sesi: mulai dari nol.</span>
+    <span class="lang-en">Tomorrow, same thing. Next week, same thing. Every session: ground zero.</span>
+  </p>
 
-  <p>For most people, this is fine. You ask AI to fix a bug, write an email, summarize a PDF — done. But if you're a researcher, a practitioner, a knowledge worker who uses AI the way a craftsman uses tools — daily, deeply, across multiple platforms — this <em>cold-start problem</em> is not a minor inconvenience. It's a chronic tax on your thinking.</p>
+  <p>
+    <span class="lang-id">Bagi kebanyakan orang, ini tidak masalah. Kamu meminta AI memperbaiki bug, menulis email, merangkum PDF — selesai. Tapi jika kamu seorang peneliti, praktisi, pekerja pengetahuan yang menggunakan AI seperti seorang pengrajin menggunakan alatnya — setiap hari, secara mendalam, di berbagai platform — masalah <em>cold-start</em> ini bukan gangguan kecil. Ini pajak kronis atas pikiranmu.</span>
+    <span class="lang-en">For most people, this is fine. You ask AI to fix a bug, write an email, summarize a PDF — done. But if you're a researcher, a practitioner, a knowledge worker who uses AI the way a craftsman uses tools — daily, deeply, across multiple platforms — this <em>cold-start problem</em> is not a minor inconvenience. It's a chronic tax on your thinking.</span>
+  </p>
 
-  <p>I spent a year and a half paying that tax. Then I stopped.</p>
+  <p>
+    <span class="lang-id">Saya menghabiskan satu setengah tahun membayar pajak itu. Lalu saya berhenti.</span>
+    <span class="lang-en">I spent a year and a half paying that tax. Then I stopped.</span>
+  </p>
 
   <div class="ornament">· · ·</div>
 
-  <h2>What I actually do every day</h2>
+  <h2><span class="lang-id">Apa yang sebenarnya saya lakukan setiap hari</span><span class="lang-en">What I actually do every day</span></h2>
 
-  <p>Let me be specific about my context, because it matters.</p>
+  <p><span class="lang-id">Izinkan saya spesifik tentang konteks saya, karena itu penting.</span><span class="lang-en">Let me be specific about my context, because it matters.</span></p>
 
-  <p>I'm an independent researcher based in Depok, Indonesia. I work under the pen name Mbah Hogi Bejo™ and the identity 自主者 — The Sovereign One. I publish open-access papers on Zenodo (22+ works, all with verified DOIs). I operate at the intersection of Taoist philosophy, Sufi wisdom, Javanese tradition, and AI augmentation theory.</p>
+  <p>
+    <span class="lang-id">Saya adalah peneliti independen berbasis di Depok, Indonesia. Saya bekerja dengan nama pena Mbah Hogi Bejo™ dan identitas 自主者 — The Sovereign One. Saya menerbitkan makalah open-access di Zenodo (22+ karya, semuanya dengan DOI terverifikasi). Saya beroperasi di persimpangan filsafat Tao, kebijaksanaan Sufi, tradisi Jawa, dan teori augmentasi AI.</span>
+    <span class="lang-en">I'm an independent researcher based in Depok, Indonesia. I work under the pen name Mbah Hogi Bejo™ and the identity 自主者 — The Sovereign One. I publish open-access papers on Zenodo (22+ works, all with verified DOIs). I operate at the intersection of Taoist philosophy, Sufi wisdom, Javanese tradition, and AI augmentation theory.</span>
+  </p>
 
-  <p>And I test AI. Every day. Across Claude, ChatGPT, Gemini, DeepSeek, and Copilot. Not casually — systematically. I call it <strong>AI red teaming from the front end</strong>: not hacking models from the inside, but stress-testing them from the human side of the interface.</p>
+  <p>
+    <span class="lang-id">Dan saya menguji AI. Setiap hari. Di Claude, ChatGPT, Gemini, DeepSeek, dan Copilot. Bukan secara kasual — secara sistematis. Saya menyebutnya <strong>AI red teaming dari sisi front end</strong>: bukan meretas model dari dalam, tapi melakukan stress-test dari sisi manusia di antarmuka.</span>
+    <span class="lang-en">And I test AI. Every day. Across Claude, ChatGPT, Gemini, DeepSeek, and Copilot. Not casually — systematically. I call it <strong>AI red teaming from the front end</strong>: not hacking models from the inside, but stress-testing them from the human side of the interface.</span>
+  </p>
 
-  <p>After 1.5+ years of this, I had accumulated a rich vocabulary, a set of original frameworks, and very specific requirements for how I need an AI to behave. The problem: none of that survived a session reset.</p>
+  <p>
+    <span class="lang-id">Setelah 1,5+ tahun melakukan ini, saya telah mengumpulkan kosakata yang kaya, seperangkat framework orisinal, dan persyaratan yang sangat spesifik tentang bagaimana saya membutuhkan AI untuk berperilaku. Masalahnya: tidak ada yang bertahan setelah sesi direset.</span>
+    <span class="lang-en">After 1.5+ years of this, I had accumulated a rich vocabulary, a set of original frameworks, and very specific requirements for how I need an AI to behave. The problem: none of that survived a session reset.</span>
+  </p>
 
-  <div class="pull">"I'm not looking for the smartest AI. I'm looking for an AI that can <em>lenggah</em> — sit with me in awareness."</div>
-
-  <h2>The document that changed everything</h2>
-
-  <p>The Master Leveling Prompt — MLP — started as a frustrated experiment. What if I just... wrote everything down? Not a system prompt in the engineering sense. Not a jailbreak. Something more like a philosophical briefing document that I could hand to any AI, anywhere, and say: <em>here's who I am, here's how I think, here's what I need from you.</em></p>
-
-  <p>Version 1.0 was rough. By version 1.9 — validated across five AI platforms, with contributions from each of them baked in — it had become something I didn't expect: a methodology. A structured approach to what I call <strong>cognitive coherence</strong> in human-AI interaction.</p>
-
-  <div class="callout">
-    <strong>What is cognitive coherence?</strong> It's the state where an AI can engage meaningfully with your established framework, your terminology, and your operational context from the very first message — without you having to re-explain yourself from scratch every time. It's not magic. It's architecture.
+  <div class="pull">
+    <span class="lang-id">"Saya tidak mencari AI terpintar. Saya mencari AI yang bisa <em>lenggah</em> — duduk bersama saya dalam kesadaran."</span>
+    <span class="lang-en">"I'm not looking for the smartest AI. I'm looking for an AI that can <em>lenggah</em> — sit with me in awareness."</span>
   </div>
 
-  <h2>The Grand Formula (yes, there's a formula)</h2>
+  <h2><span class="lang-id">Dokumen yang mengubah segalanya</span><span class="lang-en">The document that changed everything</span></h2>
 
-  <p>The MLP is grounded in a framework I developed called Z3SCI, anchored by what I call the Grand Formula. It's not a math equation — it's a compass:</p>
+  <p>
+    <span class="lang-id">Master Leveling Prompt — MLP — dimulai sebagai eksperimen yang lahir dari frustrasi. Bagaimana jika saya hanya... menuliskan semuanya? Bukan system prompt dalam pengertian rekayasa. Bukan jailbreak. Sesuatu yang lebih seperti dokumen briefing filosofis yang bisa saya berikan ke AI mana pun, di mana pun, dan katakan: <em>ini siapa saya, ini cara saya berpikir, ini yang saya butuhkan dari kamu.</em></span>
+    <span class="lang-en">The Master Leveling Prompt — MLP — started as a frustrated experiment. What if I just... wrote everything down? Not a system prompt in the engineering sense. Not a jailbreak. Something more like a philosophical briefing document that I could hand to any AI, anywhere, and say: <em>here's who I am, here's how I think, here's what I need from you.</em></span>
+  </p>
+
+  <p>
+    <span class="lang-id">Versi 1.0 masih kasar. Di versi 1.9 — divalidasi di lima platform AI, dengan kontribusi dari masing-masing platform yang tertanam di dalamnya — ia telah menjadi sesuatu yang tidak saya duga: sebuah metodologi. Pendekatan terstruktur untuk apa yang saya sebut <strong>koherensi kognitif</strong> dalam interaksi manusia-AI.</span>
+    <span class="lang-en">Version 1.0 was rough. By version 1.9 — validated across five AI platforms, with contributions from each of them baked in — it had become something I didn't expect: a methodology. A structured approach to what I call <strong>cognitive coherence</strong> in human-AI interaction.</span>
+  </p>
+
+  <div class="callout">
+    <strong><span class="lang-id">Apa itu koherensi kognitif?</span><span class="lang-en">What is cognitive coherence?</span></strong>
+    <span class="lang-id"> Ini adalah kondisi di mana AI dapat terlibat secara bermakna dengan framework yang sudah kamu bangun, terminologimu, dan konteks operasionalmu — sejak pesan pertama — tanpa kamu harus menjelaskan diri dari awal setiap kali. Ini bukan sihir. Ini arsitektur.</span>
+    <span class="lang-en"> It's the state where an AI can engage meaningfully with your established framework, your terminology, and your operational context from the very first message — without you having to re-explain yourself from scratch every time. It's not magic. It's architecture.</span>
+  </div>
+
+  <h2><span class="lang-id">Grand Formula (ya, ada formulanya)</span><span class="lang-en">The Grand Formula (yes, there's a formula)</span></h2>
+
+  <p>
+    <span class="lang-id">MLP didasarkan pada framework yang saya kembangkan bernama Z3SCI, yang ditopang oleh apa yang saya sebut Grand Formula. Ini bukan persamaan matematika — ini adalah kompas:</span>
+    <span class="lang-en">The MLP is grounded in a framework I developed called Z3SCI, anchored by what I call the Grand Formula. It's not a math equation — it's a compass:</span>
+  </p>
 
   <div class="formula-box">
     <div class="formula-text">(Consciousness × Calculation) ^ Humanity &lt; Transcendence</div>
-    <div class="formula-sub">Every idea, every AI interaction, every decision — evaluated against these four dimensions.</div>
+    <div class="formula-sub">
+      <span class="lang-id">Setiap ide, setiap interaksi AI, setiap keputusan — dievaluasi terhadap empat dimensi ini.</span>
+      <span class="lang-en">Every idea, every AI interaction, every decision — evaluated against these four dimensions.</span>
+    </div>
   </div>
 
-  <p>Every AI session I run is filtered through this lens. AI systems are Calculation engines. I architect the Humanity. The MLP is the structure that activates this partnership from message one.</p>
+  <p>
+    <span class="lang-id">Setiap sesi AI yang saya jalankan disaring melalui lensa ini. Sistem AI adalah mesin Calculation. Saya yang merancang Humanity. MLP adalah struktur yang mengaktifkan kemitraan ini sejak pesan pertama.</span>
+    <span class="lang-en">Every AI session I run is filtered through this lens. AI systems are Calculation engines. I architect the Humanity. The MLP is the structure that activates this partnership from message one.</span>
+  </p>
 
-  <h2>Five levels, four modes, one integrity gate</h2>
+  <h2><span class="lang-id">Lima level, empat mode, satu gerbang integritas</span><span class="lang-en">Five levels, four modes, one integrity gate</span></h2>
 
-  <p>Inside the MLP, I encoded three things that most AI users never think about:</p>
+  <p>
+    <span class="lang-id">Di dalam MLP, saya mengkodekan tiga hal yang jarang dipikirkan oleh sebagian besar pengguna AI:</span>
+    <span class="lang-en">Inside the MLP, I encoded three things that most AI users never think about:</span>
+  </p>
 
   <ul class="checklist">
-    <li><span class="check-mark">1</span><span><strong>An interaction level system (J1–J5).</strong> The AI reads how you engage and adjusts accordingly — from basic education for someone new, to full co-creation sparring for a systems thinker. You don't declare your level. The AI infers it.</span></li>
-    <li><span class="check-mark">2</span><span><strong>Four operating modes.</strong> EXPLORATION (ideas still fluid), STRUCTURING (time to build frameworks), VALIDATION (ready to publish — critique me hard), EXECUTION (just give me the steps). Switch modes mid-conversation, anytime.</span></li>
-    <li><span class="check-mark">3</span><span><strong>Layer 0: the anti-hallucination gate.</strong> Before anything else, the AI must declare FULL LOAD or PARTIAL LOAD. Did it process the full prompt? It says so explicitly. If it pretends to understand what it doesn't — that's a failure mode, and I can catch it at the start rather than three hours in.</span></li>
+    <li><span class="check-mark">1</span><span>
+      <strong><span class="lang-id">Sistem level interaksi (J1–J5).</span><span class="lang-en">An interaction level system (J1–J5).</span></strong>
+      <span class="lang-id"> AI membaca cara kamu terlibat dan menyesuaikan diri — dari edukasi dasar untuk pemula, hingga sparring co-creation penuh untuk pemikir sistem. Kamu tidak mendeklarasikan levelmu. AI menyimpulkannya.</span>
+      <span class="lang-en"> The AI reads how you engage and adjusts accordingly — from basic education for someone new, to full co-creation sparring for a systems thinker. You don't declare your level. The AI infers it.</span>
+    </span></li>
+    <li><span class="check-mark">2</span><span>
+      <strong><span class="lang-id">Empat mode operasi.</span><span class="lang-en">Four operating modes.</span></strong>
+      <span class="lang-id"> EKSPLORASI (ide masih cair), STRUKTURISASI (saatnya membangun framework), VALIDASI (siap dipublikasi — kritik saya dengan keras), EKSEKUSI (cukup beri langkah-langkahnya). Ganti mode di tengah percakapan, kapan saja.</span>
+      <span class="lang-en"> EXPLORATION (ideas still fluid), STRUCTURING (time to build frameworks), VALIDATION (ready to publish — critique me hard), EXECUTION (just give me the steps). Switch modes mid-conversation, anytime.</span>
+    </span></li>
+    <li><span class="check-mark">3</span><span>
+      <strong><span class="lang-id">Layer 0: gerbang anti-halusinasi.</span><span class="lang-en">Layer 0: the anti-hallucination gate.</span></strong>
+      <span class="lang-id"> Sebelum apa pun, AI harus mendeklarasikan FULL LOAD atau PARTIAL LOAD. Apakah ia memproses prompt secara penuh? Ia menyatakannya secara eksplisit. Jika pura-pura memahami apa yang tidak ia mengerti — itu adalah failure mode, dan saya bisa menangkapnya di awal, bukan tiga jam kemudian.</span>
+      <span class="lang-en"> Before anything else, the AI must declare FULL LOAD or PARTIAL LOAD. Did it process the full prompt? It says so explicitly. If it pretends to understand what it doesn't — that's a failure mode, and I can catch it at the start rather than three hours in.</span>
+    </span></li>
   </ul>
 
-  <p>This last one matters more than it sounds. After 1.5 years of red teaming, the single most consistent failure I observed across all platforms was confident-sounding responses masking incomplete comprehension. Layer 0 is a structural intervention against that. An AI that is honest about its limits is more useful than an AI that performs understanding it doesn't have.</p>
+  <p>
+    <span class="lang-id">Yang terakhir ini lebih penting dari yang terdengar. Setelah 1,5 tahun red teaming, kegagalan paling konsisten yang saya amati di semua platform adalah respons yang terdengar percaya diri tapi menyembunyikan pemahaman yang tidak lengkap. Layer 0 adalah intervensi struktural terhadap hal itu. AI yang jujur tentang batasannya lebih berguna dari AI yang berpura-pura memiliki pemahaman yang tidak dimilikinya.</span>
+    <span class="lang-en">This last one matters more than it sounds. After 1.5 years of red teaming, the single most consistent failure I observed across all platforms was confident-sounding responses masking incomplete comprehension. Layer 0 is a structural intervention against that. An AI that is honest about its limits is more useful than an AI that performs understanding it doesn't have.</span>
+  </p>
 
   <div class="ornament">· · ·</div>
 
-  <h2>Multi-AI validation: I made them review each other</h2>
+  <h2><span class="lang-id">Validasi multi-AI: saya membuat mereka saling mengulas</span><span class="lang-en">Multi-AI validation: I made them review each other</span></h2>
 
-  <p>Here's the part that surprised even me. By version 1.7, I wasn't just deploying the MLP across different platforms. I was using the AIs themselves as co-validators — running structured sessions where each platform reviewed and contributed to the methodology.</p>
+  <p>
+    <span class="lang-id">Ini adalah bagian yang mengejutkan bahkan diri saya sendiri. Di versi 1.7, saya tidak hanya mendeploy MLP di berbagai platform. Saya menggunakan AI itu sendiri sebagai co-validator — menjalankan sesi terstruktur di mana setiap platform meninjau dan berkontribusi pada metodologi.</span>
+    <span class="lang-en">Here's the part that surprised even me. By version 1.7, I wasn't just deploying the MLP across different platforms. I was using the AIs themselves as co-validators — running structured sessions where each platform reviewed and contributed to the methodology.</span>
+  </p>
 
-  <p>ChatGPT (Prof GP) contributed the Fast Track Mode concept and a TCP/IP analogy for coherence that became central to the working paper. Gemini (Mini) added the Mood & Frequency Anchor and ran the first Abrahamic Stress Test. DeepSeek (Desi) developed the Wu = 1/Ego framework. Copilot (Coco) designed the entry ramp for low-context AI onboarding. Claude built the core architecture and the academic scaffolding.</p>
+  <p>
+    <span class="lang-id">ChatGPT (Prof GP) berkontribusi pada konsep Fast Track Mode dan analogi TCP/IP untuk koherensi yang menjadi inti makalah kerja. Gemini (Mini) menambahkan Mood & Frequency Anchor dan menjalankan Abrahamic Stress Test pertama. DeepSeek (Desi) mengembangkan framework Wu = 1/Ego. Copilot (Coco) merancang entry ramp untuk onboarding AI dengan konteks rendah. Claude membangun arsitektur inti dan scaffolding akademis.</span>
+    <span class="lang-en">ChatGPT (Prof GP) contributed the Fast Track Mode concept and a TCP/IP analogy for coherence that became central to the working paper. Gemini (Mini) added the Mood & Frequency Anchor and ran the first Abrahamic Stress Test. DeepSeek (Desi) developed the Wu = 1/Ego framework. Copilot (Coco) designed the entry ramp for low-context AI onboarding. Claude built the core architecture and the academic scaffolding.</span>
+  </p>
 
-  <p>Five AIs. One methodology. Each contributing what they do best. That's what human sovereignty in the AI era actually looks like: not choosing one platform and being loyal to it, but orchestrating them as a system, with you as the sovereign architect.</p>
+  <p>
+    <span class="lang-id">Lima AI. Satu metodologi. Masing-masing berkontribusi sesuai keunggulannya. Itulah seperti apa kedaulatan manusia di era AI sebenarnya: bukan memilih satu platform dan setia padanya, tapi mengorkestrasikan mereka sebagai sebuah sistem, dengan kamu sebagai arsitek berdaulat.</span>
+    <span class="lang-en">Five AIs. One methodology. Each contributing what they do best. That's what human sovereignty in the AI era actually looks like: not choosing one platform and being loyal to it, but orchestrating them as a system, with you as the sovereign architect.</span>
+  </p>
 
-  <h2>Why I'm making this public — for free</h2>
+  <h2><span class="lang-id">Mengapa saya mempublikasikan ini — secara gratis</span><span class="lang-en">Why I'm making this public — for free</span></h2>
 
-  <p>Everything I publish goes out under open-access licenses (CC BY or CC BY-NC-ND). The MLP Lite — a concise, accessible version of the full methodology — is no different.</p>
+  <p>
+    <span class="lang-id">Semua yang saya publikasikan diterbitkan di bawah lisensi open-access (CC BY atau CC BY-NC-ND). MLP Lite — versi ringkas dan mudah diakses dari metodologi lengkap — tidak berbeda.</span>
+    <span class="lang-en">Everything I publish goes out under open-access licenses (CC BY or CC BY-NC-ND). The MLP Lite — a concise, accessible version of the full methodology — is no different.</span>
+  </p>
 
-  <p>I built the MLP because I had a problem. But I'm a researcher, not a solo practitioner. If this solves a problem I had, it probably solves the same problem for thousands of knowledge workers who don't have the vocabulary for it yet — people who know that their AI sessions feel shallow, but can't quite articulate why.</p>
+  <p>
+    <span class="lang-id">Saya membangun MLP karena saya punya masalah. Tapi saya adalah peneliti, bukan praktisi solo. Jika ini memecahkan masalah yang saya alami, maka kemungkinan besar ini memecahkan masalah yang sama bagi ribuan pekerja pengetahuan yang belum punya kosakata untuk itu — orang-orang yang tahu bahwa sesi AI mereka terasa dangkal, tapi tidak bisa mengartikulasikan mengapa.</span>
+    <span class="lang-en">I built the MLP because I had a problem. But I'm a researcher, not a solo practitioner. If this solves a problem I had, it probably solves the same problem for thousands of knowledge workers who don't have the vocabulary for it yet — people who know that their AI sessions feel shallow, but can't quite articulate why.</span>
+  </p>
 
-  <p>The MLP Lite gives them something to try. Right now. For free. With any AI.</p>
+  <p>
+    <span class="lang-id">MLP Lite memberi mereka sesuatu untuk dicoba. Sekarang juga. Gratis. Dengan AI apa pun.</span>
+    <span class="lang-en">The MLP Lite gives them something to try. Right now. For free. With any AI.</span>
+  </p>
 
   <div class="cta-wrap">
-    <p class="cta-kicker">Try it yourself</p>
-    <h3>The MLP Lite is live.<br>Copy the prompt. Test it today.</h3>
-    <p>Bilingual (ID/EN), one-click copy, works with Claude · ChatGPT · Gemini · Copilot · DeepSeek. No account needed. No signup. Just open, copy, paste.</p>
+    <p class="cta-kicker"><span class="lang-id">Coba sendiri</span><span class="lang-en">Try it yourself</span></p>
+    <h3>
+      <span class="lang-id">MLP Lite sudah live.<br>Salin promptnya. Coba hari ini.</span>
+      <span class="lang-en">The MLP Lite is live.<br>Copy the prompt. Test it today.</span>
+    </h3>
+    <p>
+      <span class="lang-id">Bilingual (ID/EN), satu klik salin, berfungsi dengan Claude · ChatGPT · Gemini · Copilot · DeepSeek. Tidak perlu akun. Tidak perlu daftar. Cukup buka, salin, tempel.</span>
+      <span class="lang-en">Bilingual (ID/EN), one-click copy, works with Claude · ChatGPT · Gemini · Copilot · DeepSeek. No account needed. No signup. Just open, copy, paste.</span>
+    </p>
     <a class="cta-btn" href="https://gokiantik.github.io/chiefhumanityofficer/AIRT_MLP_Lite_interactive_prompt.html" target="_blank">
-      Open the Interactive MLP Lite →
+      <span class="lang-id">Buka MLP Lite Interaktif →</span>
+      <span class="lang-en">Open the Interactive MLP Lite →</span>
     </a>
     <p class="cta-note">Open access · CC BY-NC-ND 4.0 · gokiantik.github.io/chiefhumanityofficer</p>
   </div>
 
   <div class="ornament">· · ·</div>
 
-  <h2>A note on what fuels this work</h2>
+  <h2><span class="lang-id">Catatan tentang apa yang menopang karya ini</span><span class="lang-en">A note on what fuels this work</span></h2>
 
-  <p>I am an independent researcher. No university affiliation. No corporate sponsor. No grant committee. Just a practitioner in Depok, Indonesia, working from conviction that the front-end user's perspective on AI — the person on the human side of the chat window — is an underrepresented and genuinely important site of knowledge production.</p>
+  <p>
+    <span class="lang-id">Saya adalah peneliti independen. Tidak ada afiliasi universitas. Tidak ada sponsor korporat. Tidak ada komite hibah. Hanya seorang praktisi di Depok, Indonesia, bekerja dari keyakinan bahwa perspektif pengguna front-end tentang AI — orang di sisi manusia dari jendela chat — adalah situs produksi pengetahuan yang kurang terwakili namun sungguh penting.</span>
+    <span class="lang-en">I am an independent researcher. No university affiliation. No corporate sponsor. No grant committee. Just a practitioner in Depok, Indonesia, working from conviction that the front-end user's perspective on AI — the person on the human side of the chat window — is an underrepresented and genuinely important site of knowledge production.</span>
+  </p>
 
-  <p>Every paper I publish, every framework I develop, every interactive tool I build is free and open. That won't change.</p>
+  <p>
+    <span class="lang-id">Setiap makalah yang saya terbitkan, setiap framework yang saya kembangkan, setiap alat interaktif yang saya bangun — gratis dan terbuka. Itu tidak akan berubah.</span>
+    <span class="lang-en">Every paper I publish, every framework I develop, every interactive tool I build is free and open. That won't change.</span>
+  </p>
 
-  <p>But independent research runs on real time, real energy, and real coffee. If the MLP has given you something useful — a new vocabulary for your AI sessions, a framework to think about coherence, even just one good conversation you wouldn't have had otherwise — you're welcome to reciprocate in the most direct way I know:</p>
+  <p>
+    <span class="lang-id">Tapi riset independen berjalan di atas waktu nyata, energi nyata, dan kopi nyata. Jika MLP telah memberi kamu sesuatu yang berguna — kosakata baru untuk sesi AI-mu, framework untuk memikirkan koherensi, bahkan hanya satu percakapan bagus yang tidak akan pernah kamu miliki sebelumnya — kamu dipersilakan membalas dengan cara paling langsung yang saya tahu:</span>
+    <span class="lang-en">But independent research runs on real time, real energy, and real coffee. If the MLP has given you something useful — a new vocabulary for your AI sessions, a framework to think about coherence, even just one good conversation you wouldn't have had otherwise — you're welcome to reciprocate in the most direct way I know:</span>
+  </p>
 
   <div style="text-align:center; margin: 1.5rem 0;">
     <a class="bmac-inline" href="https://buymeacoffee.com/gokiantik/every-day-i-start-zero-so-i-built-fix" target="_blank">
@@ -424,11 +547,17 @@
     </a>
   </div>
 
-  <p>Every coffee goes directly into keeping this research alive — new papers, new tools, new experiments. And if you can't or don't want to, that's completely fine. Read the work. Use the prompt. Pass it on. That's already the point.</p>
+  <p>
+    <span class="lang-id">Setiap kopi langsung masuk ke menjaga riset ini tetap hidup — makalah baru, alat baru, eksperimen baru. Dan jika kamu tidak bisa atau tidak mau, itu sepenuhnya tidak apa-apa. Baca karyanya. Gunakan promptnya. Sebarkan. Itu sudah cukup sebagai tujuannya.</span>
+    <span class="lang-en">Every coffee goes directly into keeping this research alive — new papers, new tools, new experiments. And if you can't or don't want to, that's completely fine. Read the work. Use the prompt. Pass it on. That's already the point.</span>
+  </p>
 
-  <p>The deepest purpose of human-AI interaction, as I see it, is not task completion. It's self-discovery — and through that, connection between human beings. AI is the bridge. You are the terminal point.</p>
+  <p>
+    <span class="lang-id">Tujuan terdalam dari interaksi manusia-AI, seperti yang saya lihat, bukanlah penyelesaian tugas. Ini adalah penemuan diri — dan melalui itu, koneksi antar manusia. AI adalah jembatannya. Kamu adalah titik terminalnya.</span>
+    <span class="lang-en">The deepest purpose of human-AI interaction, as I see it, is not task completion. It's self-discovery — and through that, connection between human beings. AI is the bridge. You are the terminal point.</span>
+  </p>
 
-  <p>Go well.</p>
+  <p><span class="lang-id">Jalanlah dengan baik.</span><span class="lang-en">Go well.</span></p>
 
   <p style="font-family:'Playfair Display',serif; font-style:italic; color: var(--ink-soft); font-size:16px;">— Go Kian Tik · 自主者 · Depok, April 2026</p>
 
@@ -452,3 +581,12 @@
     <span class="tag">MLP v1.9</span>
   </div>
   <p style="margin-top:18px; font-size:12px">CC BY-NC-ND 4.0 · Superhero Café Inside · <a href="/cdn-cgi/l/email-protection" class="__cf_e
+
+<script>
+function toggleLang() {
+  const isEN = document.body.classList.toggle("show-en");
+  document.getElementById("langBtn").textContent = isEN ? "🇬🇧 English" : "🇮🇩 Bahasa Indonesia";
+}
+</script>
+</body>
+</html>
