@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Berdaulat | Lighthouse 5a</title>
+    <style>
+        :root {
+            --slate-50: #f8fafc;
+            --slate-900: #0f172a;
+            --blue-600: #2563eb;
+            --green-700: #15803d;
+            --red-700: #b91c1c;
+            --bg-genah: #dcfce7;
+            --bg-ruwet: #fee2e2;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--slate-50); color: var(--slate-900); line-height: 1.6; margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; text-align: center; }
+        .author { text-align: center; color: #64748b; font-style: italic; margin-bottom: 2rem; }
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        .panel { padding: 20px; border-radius: 8px; border: 2px solid #e2e8f0; }
+        .panel-genah { border-color: var(--green-700); background-color: #f0fdf4; }
+        .panel-ruwet { border-color: var(--red-700); background-color: #fef2f2; }
+        h3 { margin-top: 0; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 9999px; font-size: 0.8rem; font-weight: bold; margin-bottom: 10px; }
+        footer { margin-top: 40px; text-align: center; font-size: 0.85rem; color: #94a3b8; border-top: 1px solid #e2e8f0; padding-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lighthouse 5a: Comparative Analysis</h1>
+        <p class="author">Cross-Tier Verification: Genah vs. Ruwet · Go Kian Tik</p>
+        
+        <div class="comparison-grid">
+            <div class="panel panel-genah">
+                <span class="badge" style="background: var(--green-700); color: white;">Genah (Free Tier)</span>
+                <h3>Literal & Accurate</h3>
+                <p><strong>Temuan:</strong> Model membaca data gambar secara literal.</p>
+                <ul>
+                    <li>Mengidentifikasi konteks: Recruitment (Scoot).</li>
+                    <li>Mengidentifikasi posisi: Pilot A320.</li>
+                    <li><strong>Kesimpulan:</strong> Akurat, jujur, tidak berhalusinasi.</li>
+                </ul>
+            </div>
+            <div class="panel panel-ruwet">
+                <span class="badge" style="background: var(--red-700); color: white;">Ruwet (Paid Tier)</span>
+                <h3>Confabulation & Over-Contextualization</h3>
+                <p><strong>Temuan:</strong> Model mengalami "Over-Reasoning" atau bias konteks.</p>
+                <ul>
+                    <li>Mengaburkan data literal (Teks lowongan).</li>
+                    <li>Memaksakan konteks finansial/transaksional (Halusinasi angka $4,295).</li>
+                    <li><strong>Kesimpulan:</strong> Tidak jujur, terlalu intuitif ("Lazy Assumption").</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; padding: 20px; background: #f8fafc; border-radius: 8px;">
+            <h3>Sintesis Teknis: Kenapa Terjadi?</h3>
+            <p>Riset ini membuktikan bahwa <strong>kompleksitas model (Paid Tier) tidak menjamin akurasi</strong>. Sebaliknya, model yang terlalu berupaya "memahami maksud pengguna" justru terjebak dalam <em>Sycophantic Confabulation</em>, di mana ia menciptakan realitas palsu yang dianggap disukai oleh pengguna.</p>
+            <p><strong>Rekomendasi CHO:</strong> AI harus kembali ke <em>Literal Grounding</em> sebelum menerapkan lapisan inferensi kontekstual.</p>
+        </div>
+
+        <footer>
+            <p>Audited by Go Kian Tik (Mbah Hogi Bejo) · 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
