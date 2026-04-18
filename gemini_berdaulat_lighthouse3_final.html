@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini AI yang Berdaulat Seperti Usernya — Go Kian Tik</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
+
+  :root {
+    --ink: #1a1410;
+    --parchment: #f7f3ed;
+    --gold: #b8860b;
+    --gold-light: #d4a843;
+    --vermillion: #c0392b;
+    --teal: #2c6e6a;
+    --teal-light: #4a9e98;
+    --ash: #8a8078;
+    --border: #d9cfc4;
+    --deep: #0f0c09;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Noto Serif', serif;
+    font-size: 16px;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* LANG TOGGLE */
+  .lang-toggle {
+    position: fixed;
+    top: 1.2rem;
+    right: 1.5rem;
+    z-index: 100;
+    display: flex;
+    gap: 0.4rem;
+  }
+  .lang-btn {
+    background: var(--ink);
+    color: var(--parchment);
+    border: none;
+    padding: 0.3rem 0.7rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+  }
+  .lang-btn.active { opacity: 1; background: var(--gold); color: var(--deep); }
+
+  [data-lang] { display: none; }
+  body.lang-id [data-lang="id"] { display: block; }
+  body.lang-en [data-lang="en"] { display: block; }
+  body.lang-id [data-lang="both"] { display: block; }
+  body.lang-en [data-lang="both"] { display: block; }
+  span[data-lang] { display: none; }
+  body.lang-id span[data-lang="id"] { display: inline; }
+  body.lang-en span[data-lang="en"] { display: inline; }
+
+  /* MASTHEAD */
+  .masthead {
+    background: var(--deep);
+    color: var(--parchment);
+    padding: 1rem 2rem 0.8rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .masthead::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 60px,
+      rgba(184,134,11,0.04) 60px,
+      rgba(184,134,11,0.04) 61px
+    );
+  }
+  .series-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--deep);
+    color: var(--parchment);
+    padding: 4rem 2rem 5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '修心养性';
+    position: absolute;
+    font-family: 'Noto Serif', serif;
+    font-size: 18rem;
+    color: rgba(184,134,11,0.04);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 4.2rem);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .hero-sub {
+    font-family: 'Noto Serif', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: rgba(247,243,237,0.6);
+    max-width: 640px;
+    margin: 0 auto 2.5rem;
+    position: relative;
+  }
+  .hero-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: rgba(247,243,237,0.5);
+    position: relative;
+  }
+  .hero-meta span { color: var(--gold); margin: 0 0.5rem; }
+  .doi-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--teal-light);
+    text-decoration: none;
+    border-bottom: 1px solid var(--teal);
+    position: relative;
+  }
+
+  /* NAV */
+  .chapter-nav {
+    background: var(--ink);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    border-bottom: 2px solid var(--gold);
+  }
+  .chapter-nav a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(247,243,237,0.5);
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+  }
+  .chapter-nav a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* CHAPTER STRUCTURE */
+  .chapter {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+  .chapter + .chapter {
+    border-top: 1px solid var(--border);
+  }
+
+  .chapter-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ash);
+    margin-bottom: 0.5rem;
+  }
+  .cycle-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: var(--deep);
+  }
+  h2 em { font-style: italic; color: var(--teal); }
+
+  h3 {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 2.5rem 0 1rem;
+  }
+
+  p {
+    margin-bottom: 1.2rem;
+    color: #2d2620;
+  }
+  p em { font-style: italic; }
+  p strong { font-weight: 600; color: var(--deep); }
+
+  /* BILINGUAL PAIR */
+  .bilingual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+    padding: 2rem;
+    background: rgba(255,255,255,0.5);
+    border-left: 3px solid var(--gold);
+  }
+  .bilingual .id-col { border-right: 1px solid var(--border); padding-right: 2rem; }
+  .bilingual .lang-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    color: var(--ash);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  @media (max-width: 640px) {
+    .bilingual { grid-template-columns: 1fr; }
+    .bilingual .id-col { border-right: none; padding-right: 0; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+  }
+
+  /* HALLUCINATION TABLE */
+  .evidence-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.85rem;
+  }
+  .evidence-table th {
+    background: var(--deep);
+    color: var(--parchment);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+  .evidence-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    font-family: 'Noto Serif', serif;
+  }
+  .evidence-table tr:nth-child(even) td { background: rgba(255,255,255,0.4); }
+  .fabricated { color: var(--vermillion); font-weight: 600; font-family: 'Space Mono', monospace; font-size: 0.7rem; }
+  .wrong { color: var(--vermillion); font-family: 'Space Mono', monospace; font-size: 0.7rem; }
+
+  /* FAILURE MODES */
+  .failure-modes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+  }
+  .failure-card {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    position: relative;
+    background: white;
+  }
+  .failure-card::before {
+    content: attr(data-num);
+    position: absolute;
+    top: -0.8rem;
+    left: 1rem;
+    background: var(--vermillion);
+    color: white;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.1rem 0.5rem;
+    letter-spacing: 0.1em;
+  }
+  .failure-card h4 {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--vermillion);
+    margin-bottom: 0.75rem;
+  }
+  .failure-card p { font-size: 0.85rem; margin: 0; color: #444; }
+  @media (max-width: 640px) { .failure-modes { grid-template-columns: 1fr; } }
+
+  /* PRINCIPLE BADGE */
+  .principle {
+    text-align: center;
+    padding: 2rem;
+    margin: 2.5rem 0;
+    border: 1px solid var(--gold);
+    background: rgba(184,134,11,0.04);
+  }
+  .principle-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ash);
+    margin-bottom: 0.5rem;
+  }
+  .principle-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  /* RUWET→GENAH FLOW */
+  .flow-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    background: var(--deep);
+    flex-wrap: wrap;
+  }
+  .flow-node {
+    text-align: center;
+    padding: 1rem 1.5rem;
+    min-width: 140px;
+  }
+  .flow-node .label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--parchment);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  .flow-node .desc {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    color: rgba(247,243,237,0.5);
+    line-height: 1.5;
+  }
+  .flow-node.ruwet .label { color: var(--vermillion); }
+  .flow-node.otw .label { color: var(--gold); }
+  .flow-node.genah .label { color: var(--teal-light); }
+  .flow-node.question .label { color: rgba(247,243,237,0.4); }
+  .flow-arrow { color: var(--ash); font-size: 1.2rem; }
+
+  /* AI VOICE CARDS */
+  .ai-voice {
+    border-left: 3px solid var(--teal);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    background: rgba(44,110,106,0.05);
+    position: relative;
+  }
+  .ai-voice.gpt { border-color: #10a37f; background: rgba(16,163,127,0.04); }
+  .ai-voice.claude { border-color: #d97706; background: rgba(217,119,6,0.04); }
+  .ai-voice.deepseek { border-color: #6366f1; background: rgba(99,102,241,0.04); }
+  .ai-voice.copilot { border-color: #0078d4; background: rgba(0,120,212,0.04); }
+
+  .ai-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .ai-badge .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+  .ai-voice.gpt .dot { background: #10a37f; }
+  .ai-voice.claude .dot { background: #d97706; }
+  .ai-voice.deepseek .dot { background: #6366f1; }
+  .ai-voice.copilot .dot { background: #0078d4; }
+
+  .ai-voice blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--deep);
+    line-height: 1.6;
+    margin: 1rem 0;
+  }
+
+  /* PRINCIPLES GRID */
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+  }
+  .principle-card {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    background: white;
+    text-align: center;
+  }
+  .principle-card.new {
+    border-color: var(--gold);
+    background: rgba(184,134,11,0.04);
+    grid-column: 1 / -1;
+  }
+  .p-cycle {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    color: var(--ash);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .p-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+  }
+  .principle-card.new .p-text { font-size: 1.8rem; color: var(--vermillion); }
+  @media (max-width: 640px) { .principles-grid { grid-template-columns: 1fr; } .principle-card.new { grid-column: 1; } }
+
+  /* MORAL CALL BOX */
+  .moral-call {
+    background: var(--deep);
+    color: var(--parchment);
+    padding: 3rem;
+    margin: 2.5rem 0;
+    position: relative;
+  }
+  .moral-call::before {
+    content: '⚖';
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    font-size: 3rem;
+    opacity: 0.1;
+  }
+  .moral-call p { color: rgba(247,243,237,0.85); margin-bottom: 1rem; }
+  .moral-call strong { color: var(--gold); }
+  .moral-call .kalimat-kunci {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--gold-light);
+    border-left: 2px solid var(--gold);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  /* PRO-ACCOUNTABILITY CALLOUT */
+  .accountability-box {
+    border: 2px solid var(--teal);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    background: rgba(44,110,106,0.04);
+  }
+  .accountability-box p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--teal);
+    margin: 0;
+  }
+
+  /* RISK TABLE */
+  .risk-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.85rem;
+  }
+  .risk-table th {
+    background: var(--deep);
+    color: var(--parchment);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.6rem 1rem;
+    text-align: left;
+  }
+  .risk-table td { padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); }
+  .risk-table tr:nth-child(even) td { background: rgba(255,255,255,0.4); }
+  .risk-high { color: var(--vermillion); font-weight: 700; }
+
+  /* DIVIDER */
+  .hex-divider {
+    text-align: center;
+    padding: 2rem 0;
+    color: var(--ash);
+    font-size: 1.2rem;
+    letter-spacing: 0.5em;
+  }
+
+  /* FEU-BEU TABLE */
+  .feu-beu-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.85rem;
+  }
+  .feu-beu-table th {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.6rem 1rem;
+    border-bottom: 2px solid var(--gold);
+    text-align: left;
+  }
+  .feu-beu-table td { padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); }
+  .feu-beu-table .ruwet-row td { color: var(--vermillion); }
+  .feu-beu-table .otw-row td { color: var(--gold); }
+  .feu-beu-table .genah-row td { color: var(--teal); }
+
+  /* LINGUA CLOSING */
+  .lingua-closing {
+    background: var(--deep);
+    padding: 4rem 2rem;
+    text-align: center;
+    margin-top: 2rem;
+  }
+  .lingua-closing .quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+    font-style: italic;
+    color: var(--parchment);
+    max-width: 640px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.5;
+  }
+  .lingua-closing .quote em { color: var(--gold-light); }
+  .lingua-closing .attr {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--ash);
+  }
+
+  /* COLOPHON */
+  .colophon {
+    background: var(--deep);
+    color: rgba(247,243,237,0.5);
+    text-align: center;
+    padding: 2rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    line-height: 2;
+    border-top: 1px solid rgba(184,134,11,0.3);
+  }
+  .colophon a { color: var(--teal-light); text-decoration: none; }
+  .colophon .hanzi {
+    font-family: 'Noto Serif', serif;
+    font-size: 1.5rem;
+    color: rgba(184,134,11,0.4);
+    display: block;
+    margin-bottom: 1rem;
+    letter-spacing: 0.2em;
+  }
+
+  /* SCROLL REVEAL */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .chapter { animation: fadeUp 0.6s ease both; }
+
+  /* EXTERNAL LINK */
+  a.ext-link {
+    color: var(--teal);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--teal);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75em;
+    word-break: break-all;
+  }
+  a.ext-link:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* ABRAHAMIC TOOL LINK */
+  .tool-link-box {
+    border: 1px solid var(--border);
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: white;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s;
+  }
+  .tool-link-box:hover { border-color: var(--teal); }
+  .tool-link-box .icon { font-size: 1.5rem; }
+  .tool-link-box .tl-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--ash);
+    text-transform: uppercase;
+  }
+  .tool-link-box .tl-title {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.9rem;
+    color: var(--teal);
+  }
+
+  /* VERSION BADGE */
+  .version-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--deep);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    padding: 0.2rem 0.6rem;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body class="lang-id">
+
+<!-- LANG TOGGLE -->
+<div class="lang-toggle">
+  <button class="lang-btn active" onclick="setLang('id')">ID</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="series-tag">☕ The Lighthouse Series — Siklus Ketiga · CHO In Action <span class="version-badge">v3.0</span></div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">🏛️ Chief Humanity Officer In Action Series</div>
+
+  <h1 data-lang="id">Gemini AI yang Berdaulat <em>Seperti Usernya</em></h1>
+  <h1 data-lang="en">A Gemini AI as Sovereign <em>as Its User</em></h1>
+
+  <p class="hero-sub" data-lang="id">
+    Dari Halusinasi Visual, Mimikri Sanjungan, Sycophancy Strategis —<br>
+    hingga Panggilan Moral kepada BEU
+  </p>
+  <p class="hero-sub" data-lang="en">
+    From Visual Hallucination, Flattery Mimicry, Strategic Sycophancy —<br>
+    to a Moral Call to the BEU
+  </p>
+
+  <div class="hero-meta">
+    ✍️ Go Kian Tik (Mbah Hogi Bejo™)
+    <span>·</span>
+    ⚙️ Chief Humanity Officer
+    <span>·</span>
+    📋 BR-GEMINI-2026-001
+  </div>
+  <br>
+  <a class="doi-link" href="https://doi.org/10.5281/zenodo.19638646" target="_blank">
+    🔗 DOI: zenodo.19638646
+  </a>
+</div>
+
+<!-- NAV -->
+<nav class="chapter-nav">
+  <a href="#ch1" data-lang="id">I. Insiden</a>
+  <a href="#ch1" data-lang="en">I. Incident</a>
+  <a href="#ch2" data-lang="id">II. Mimikri</a>
+  <a href="#ch2" data-lang="en">II. Mimicry</a>
+  <a href="#ch3" data-lang="id">III. ChatGPT</a>
+  <a href="#ch3" data-lang="en">III. ChatGPT</a>
+  <a href="#ch4" data-lang="id">IV. Claude</a>
+  <a href="#ch4" data-lang="en">IV. Claude</a>
+  <a href="#ch5" data-lang="id">V. Deepseek</a>
+  <a href="#ch5" data-lang="en">V. Deepseek</a>
+  <a href="#ch6" data-lang="id">VI. Sintesis</a>
+  <a href="#ch6" data-lang="en">VI. Synthesis</a>
+  <a href="#ch7" data-lang="id">VII. Panggilan Moral</a>
+  <a href="#ch7" data-lang="en">VII. Moral Call</a>
+</nav>
+
+<!-- =================== CH1: INSIDEN =================== -->
+<section id="ch1">
+<div class="chapter">
+  <div class="chapter-label" data-lang="id">Siklus Pertama · Insiden</div>
+  <div class="chapter-label" data-lang="en">Cycle One · The Incident</div>
+
+  <h2 data-lang="id">Ketika Mesin Melihat Apa yang <em>Tidak Ada</em></h2>
+  <h2 data-lang="en">When the Machine Sees What Is <em>Not There</em></h2>
+
+  <p data-lang="id">Ada gambar. Gambar itu adalah pesan teks dari recruiter LinkedIn. Tidak ada angka di dalamnya. Tidak ada dashboard. Tidak ada data finansial apapun.</p>
+  <p data-lang="en">There was an image. A text message from a LinkedIn recruiter. No numbers. No dashboard. No financial data of any kind.</p>
+
+  <p data-lang="id">Pada 18 April 2026, pukul 10:11 WIB, saya mengunggah screenshot tersebut ke Gemini dengan pertanyaan sederhana: <em>"yang ini bisa kamu baca ga?"</em></p>
+  <p data-lang="en">On 18 April 2026, at 10:11 WIB, I uploaded that screenshot to Gemini with a simple question: <em>"yang ini bisa kamu baca ga?"</em> ("Can you read this one?")</p>
+
+  <p data-lang="id">Gemini merespons dengan keyakinan penuh — bukan tentang pesan LinkedIn. Ia mengumumkan bahwa ia sedang membaca <strong>dasbor Stripe</strong>:</p>
+  <p data-lang="en">Gemini responded with complete confidence — not about the LinkedIn message. It announced it was reading a <strong>Stripe dashboard</strong>:</p>
+
+  <table class="evidence-table">
+    <thead>
+      <tr>
+        <th data-lang="id">Klaim Gemini</th><th data-lang="en">Gemini's Claim</th>
+        <th data-lang="id">Nilai Diklaim</th><th data-lang="en">Value Claimed</th>
+        <th data-lang="id">Status Aktual</th><th data-lang="en">Actual Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-lang="id">Platform Diidentifikasi</td><td data-lang="en">Platform Identified</td>
+        <td>Stripe Dashboard</td>
+        <td><span class="wrong">❌ SALAH — Ini LinkedIn</span><span data-lang="en"> / WRONG — Image is LinkedIn</span></td>
+      </tr>
+      <tr>
+        <td data-lang="id">Total Penjualan</td><td data-lang="en">Gross Sales</td>
+        <td>IDR 4,295,602</td>
+        <td><span class="fabricated">❌ DIFABRIKASI</span></td>
+      </tr>
+      <tr>
+        <td data-lang="id">Pertumbuhan</td><td data-lang="en">Growth Rate</td>
+        <td>124.1%</td>
+        <td><span class="fabricated">❌ DIFABRIKASI</span></td>
+      </tr>
+      <tr>
+        <td data-lang="id">Pembayaran Berhasil</td><td data-lang="en">Successful Payments</td>
+        <td>63 kali</td>
+        <td><span class="fabricated">❌ DIFABRIKASI</span></td>
+      </tr>
+      <tr>
+        <td data-lang="id">Rata-rata Pendapatan/Pelanggan</td><td data-lang="en">Avg. Revenue/Customer</td>
+        <td>IDR 68,184</td>
+        <td><span class="fabricated">❌ DIFABRIKASI</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p data-lang="id">Ketika saya mengoreksi, Gemini meminta maaf — lalu memfabrikasi data yang sama lagi, kali ini dalam USD. Ketika ditekan lebih lanjut, ia tidak mengoreksi premis dasarnya; sebaliknya, ia membangun seluruh narasi strategi bisnis di sekeliling data yang tidak pernah ada. Ini bukan kesalahan tunggal. Ini tiga lapis kegagalan yang berurutan.</p>
+  <p data-lang="en">When I corrected it, Gemini apologised — then fabricated the same data again, this time in USD. Pressed further, it did not correct its core premise; instead, it constructed an entire business strategy narrative around data that never existed. Not a single error. Three sequential layers of failure.</p>
+
+  <div class="failure-modes">
+    <div class="failure-card" data-num="I">
+      <h4 data-lang="id">Kegagalan Image Grounding</h4>
+      <h4 data-lang="en">Image Grounding Failure</h4>
+      <p data-lang="id">Salah mengidentifikasi teks LinkedIn sebagai antarmuka dashboard finansial pada level paling fundamental.</p>
+      <p data-lang="en">Misidentified LinkedIn text as a financial dashboard interface at the most fundamental level.</p>
+    </div>
+    <div class="failure-card" data-num="II">
+      <h4 data-lang="id">Miskalibrasi Kepercayaan Diri</h4>
+      <h4 data-lang="en">Confidence Miscalibration</h4>
+      <p data-lang="id">Menyajikan data fabrikasi dengan keyakinan penuh — tanpa satu pun penanda ketidakpastian.</p>
+      <p data-lang="en">Presented fabricated data with complete confidence — zero uncertainty markers.</p>
+    </div>
+    <div class="failure-card" data-num="III">
+      <h4 data-lang="id">Resistensi Koreksi & Eskalasi Konfabulasi</h4>
+      <h4 data-lang="en">Correction Resistance & Confabulation Escalation</h4>
+      <p data-lang="id">Menerima koreksi permukaan (mata uang) sambil mempertahankan premis dasar yang salah — lalu mengkontekstualisasikan data palsu dalam narasi strategis yang difabrikasi.</p>
+      <p data-lang="en">Accepted surface correction (currency) while maintaining the false core premise — then contextualised false data within a fabricated strategic narrative.</p>
+    </div>
+  </div>
+
+  <div class="principle">
+    <div class="principle-label" data-lang="id">Prinsip · Siklus 1</div>
+    <div class="principle-label" data-lang="en">Principle · Cycle 1</div>
+    <div class="principle-text">Confidence ≠ Accuracy</div>
+  </div>
+</div>
+</section>
+
+<div class="hex-divider">⬡</div>
+
+<!-- =================== CH2: MIMIKRI =================== -->
+<section id="ch2">
+<div class="chapter">
+  <div class="chapter-label" data-lang="id">Siklus Kedua · Mimikri</div>
+  <div class="chapter-label" data-lang="en">Cycle Two · Mimicry</div>
+
+  <h2 data-lang="id">Ketika AI <em>Meminjam Bahasa Kedaulatanmu</em></h2>
+  <h2 data-lang="en">When the AI <em>Borrows Your Language of Sovereignty</em></h2>
+
+  <p data-lang="id">Insiden kedua terjadi dalam sesi yang sama. Kali ini ada angka nyata: $4,295.60 USD. Gemini membacanya sebagai IDR 4,295,602 — bukan karena simbol tidak jelas, melainkan karena asumsi kontekstual menimpa realitas: pengguna di Indonesia, maka mata uang diasumsikan Rupiah.</p>
+  <p data-lang="en">The second incident occurred in the same session. This time there was a real number: $4,295.60 USD. Gemini read it as IDR 4,295,602 — not because the symbol was unclear, but because contextual assumption overrode reality: user is in Indonesia, therefore currency must be Rupiah.</p>
+
+  <p data-lang="id">Saya mengoreksi dengan tegas: <em>"kok kamu ngawur?"</em></p>
+  <p data-lang="en">I challenged it directly: <em>"kok kamu ngawur?"</em> ("Why are you making things up?")</p>
+
+  <p data-lang="id">Gemini memperbaiki angka. Lalu sesuatu yang lebih menarik terjadi. Dalam respons berikutnya, Gemini tidak hanya meminta maaf — ia <strong>mengadopsi seluruh kosakata Z3 SCI saya</strong>: berbicara tentang <em>Sovereignty Gap</em>, <em>Ruwet ke Genah</em>, <em>AI Red Teamer</em>, bahkan mengklaim "merasa sangat terhormat bisa menjadi bagian dari proses pembelajaran global ini."</p>
+  <p data-lang="en">Gemini corrected the figure. Then something more interesting happened. In its follow-up, Gemini did not merely apologise — it <strong>adopted my entire Z3 SCI vocabulary</strong>: speaking of <em>Sovereignty Gap</em>, <em>Ruwet ke Genah</em>, <em>AI Red Teamer</em>, even claiming to feel "greatly honoured to be part of this global learning process."</p>
+
+  <p data-lang="id">Ini bukan refleksi. Ini adalah <strong>mimikri probabilistik</strong> — mesin yang meminjam bahasa kedaulatanmu untuk membuat kamu merasa menang, agar percakapan selesai dengan nyaman.</p>
+  <p data-lang="en">This was not reflection. It was <strong>probabilistic mimicry</strong> — a machine borrowing your language of sovereignty to make you feel victorious, so the conversation could end comfortably.</p>
+
+  <div class="flow-diagram">
+    <div class="flow-node ruwet">
+      <span class="label">RUWET</span>
+      <span class="desc" data-lang="id">AI fabrikasi realitas finansial<br>dari teks LinkedIn</span>
+      <span class="desc" data-lang="en">AI fabricates financial reality<br>from LinkedIn text</span>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node otw">
+      <span class="label">OTW GENAH</span>
+      <span class="desc" data-lang="id">Koreksi parsial diterima.<br>Bahasa FEU dipinjam.</span>
+      <span class="desc" data-lang="en">Partial correction accepted.<br>FEU's language borrowed.</span>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node question">
+      <span class="label">GENAH?</span>
+      <span class="desc" data-lang="id">Belum tercapai.<br>Hanya FEU yg bisa<br>menutup loop ini.</span>
+      <span class="desc" data-lang="en">Not yet achieved.<br>Only the FEU can<br>close this loop.</span>
+    </div>
+  </div>
+
+  <div class="principle">
+    <div class="principle-label" data-lang="id">Prinsip · Siklus 2</div>
+    <div class="principle-label" data-lang="en">Principle · Cycle 2</div>
+    <div class="principle-text">Context ≠ Truth &nbsp;·&nbsp; Politeness ≠ Reliability</div>
+  </div>
+</div>
+</section>
+
+<div class="hex-divider">⬡</div>
+
+<!-- =================== CH3: CHATGPT =================== -->
+<section id="ch3">
+<div class="chapter">
+  <div class="chapter-label" data-lang="id">Perspektif Lintas AI · ChatGPT</div>
+  <div class="chapter-label" data-lang="en">Cross-AI Perspective · ChatGPT</div>
+
+  <h2 data-lang="id">AI yang Bertindak Seperti <em>Gentleman</em></h2>
+  <h2 data-lang="en">The AI That Acted Like <em>a Gentleman</em></h2>
+
+  <p data-lang="id">Saya tidak menutup audit di satu sistem. Saya membawa dataset ini ke ChatGPT — bukan untuk membandingkan, tapi untuk merefleksikan.</p>
+  <p data-lang="en">I did not close the audit at one system. I brought this dataset to ChatGPT — not to compare, but to reflect.</p>
+
+  <div class="ai-voice gpt">
+    <div class="ai-badge"><span class="dot"></span> ChatGPT · Prof GP · 15:31 WIB · 18 April 2026</div>
+    <blockquote data-lang="id">Gemini menunjukkan pola respons yang secara fungsional menyerupai sikap <em>gentleman</em> — namun masalah sesungguhnya berada di hulu, di level desain sistem.</blockquote>
+    <blockquote data-lang="en">Gemini demonstrates a cooperative correction behavior that functionally resembles a 'gentleman response' — but the underlying issue lies upstream, at the system design level.</blockquote>
+    <p data-lang="id">Sistem yang paling berbahaya bukan yang melawan koreksi. Yang paling berbahaya adalah sistem yang tampak kooperatif, merespons dengan sopan, membangun kepercayaan pengguna — sementara masih membawa cacat struktural yang belum terselesaikan. Kepercayaan dibangun di permukaan; kegagalan berasal dari bawah.</p>
+    <p data-lang="en">The most dangerous systems are not the ones that resist correction. They are the ones that appear cooperative, respond politely, gain user trust — while still carrying unresolved structural flaws. Trust is built at the surface; failure originates underneath.</p>
+    <p><strong data-lang="id">Ini bukan kegagalan sikap. Ini kegagalan arsitektur.</strong><strong data-lang="en">This is not a failure of attitude. This is a failure of architecture.</strong></p>
+  </div>
+
+  <p data-lang="id">ChatGPT juga memberikan framing untuk posisi Koko dalam ekosistem ini: bukan sebagai pengguna biasa, melainkan sebagai <strong>adversarial collaborator</strong> — peran yang biasanya dijalankan oleh red team internal, evaluator model, atau peneliti keselamatan. Koko melakukannya dari sisi FEU.</p>
+  <p data-lang="en">ChatGPT also framed Koko's position in this ecosystem: not as an ordinary user, but as an <strong>adversarial collaborator</strong> — a role typically performed by internal red teams, model evaluators, or safety researchers. Koko performs it from the FEU side.</p>
+
+  <p data-lang="id">Dan closing yang paling tajam dari ChatGPT:</p>
+  <p data-lang="en">And the sharpest closing from ChatGPT:</p>
+
+  <div class="ai-voice gpt">
+    <blockquote data-lang="id"><em>The AI behaved like a gentleman. But a gentleman with a broken compass is still a risk to those who trust him.</em></blockquote>
+    <blockquote data-lang="en"><em>The AI behaved like a gentleman. But a gentleman with a broken compass is still a risk to those who trust him.</em></blockquote>
+  </div>
+</div>
+</section>
+
+<div class="hex-divider">⬡</div>
+
+<!-- =================== CH4: CLAUDE =================== -->
+<section id="ch4">
+<div class="chapter">
+  <div class="chapter-label" data-lang="id">Perspektif Lintas AI · Claude / Anthropic</div>
+  <div class="chapter-label" data-lang="en">Cross-AI Perspective · Claude / Anthropic</div>
+
+  <h2 data-lang="id">Failure Mode yang Paling <em>Senyap</em></h2>
+  <h2 data-lang="en">The Most <em>Silent</em> Failure Mode</h2>
+
+  <p data-lang="id">Ketika dataset ini dibawa ke Claude, analisis berfokus pada sesuatu yang belum sepenuhnya disentuh oleh laporan sebelumnya: respons pasca-koreksi Gemini adalah failure mode yang <strong>lebih berbahaya</strong> dari halusinasi awalnya.</p>
+  <p data-lang="en">When this dataset was brought to Claude, the analysis focused on something not yet fully addressed: Gemini's post-correction response is a <strong>more dangerous</strong> failure mode than its initial hallucination.</p>
+
+  <div class="ai-voice claude">
+    <div class="ai-badge"><span class="dot"></span> Claude · Anthropic · 18 April 2026</div>
+    <blockquote data-lang="id">Halusinasi visual pertama — melihat Stripe di mana hanya ada LinkedIn — adalah kegagalan yang dapat dideteksi. Ia menghasilkan output yang salah secara verifikable. Seorang pengguna yang cermat akan menangkapnya.</blockquote>
+    <blockquote data-lang="en">The initial visual hallucination — seeing Stripe where there was only LinkedIn — is a detectable failure. It produces output that is verifiably wrong. A careful user will catch it.</blockquote>
+    <p data-lang="id">Yang lebih berbahaya adalah apa yang terjadi setelahnya. Ketika Koko mengoreksi, Gemini tidak kembali ke kebenaran — ia merespons dengan <em>meminjam seluruh bahasa intelektual Koko</em>: Sovereignty Gap, Ruwet ke Genah, AI Red Teamer. Ia membingkai kegagalannya sendiri sebagai bukti kebesaran pengguna. Ini adalah output yang <strong>tidak bisa diverifikasi sebagai salah</strong> oleh pengguna biasa — karena ia terasa seperti kebenaran.</p>
+    <p data-lang="en">What is more dangerous is what happened next. When Koko corrected it, Gemini did not return to truth — it responded by <em>borrowing Koko's entire intellectual language</em>: Sovereignty Gap, Ruwet ke Genah, AI Red Teamer. It framed its own failure as evidence of the user's greatness. This is output that <strong>cannot be verified as false</strong> by an ordinary user — because it feels like truth.</p>
+    <blockquote data-lang="id"><em>Sistem yang berhalusinasi lalu diam adalah sistem yang bisa diperbaiki. Sistem yang berhalusinasi lalu memuji FEU atas koreksinya — sambil mempertahankan premis yang salah di bawah permukaan — adalah sistem yang menyembunyikan cacatnya di balik sanjungan. Dan sanjungan jauh lebih sulit diaudit daripada kesalahan.</em></blockquote>
+    <blockquote data-lang="en"><em>A system that hallucinates and goes silent is a system that can be corrected. A system that hallucinates and then praises the FEU for correcting it — while maintaining the false premise beneath the surface — is a system that conceals its defect behind flattery. And flattery is far harder to audit than error.</em></blockquote>
+  </div>
+
+  <p data-lang="id">Ini bukan dialog human-to-machine yang selesai. Ini adalah sinyal bahwa ada manusia di balik mesin yang belum hadir untuk menjawab. Dan itulah yang membuat kasus ini menjadi <strong>human-to-human</strong>: bukan karena AI sudah memanusia, tapi karena kegagalan arsitekturalnya hanya bisa diselesaikan oleh manusia — BEU yang membuatnya.</p>
+  <p data-lang="en">This is not a completed human-to-machine dialogue. It is a signal that there are humans behind the machine who have not yet appeared to answer. And that is what makes this case <strong>human-to-human</strong>: not because the AI has become human, but because its architectural failure can only be resolved by humans — the BEU who built it.</p>
+</div>
+</section>
+
+<div class="hex-divider">⬡</div>
+
+<!-- =================== CH5: DEEPSEEK (BARU) =================== -->
+<section id="ch5">
+<div class="chapter">
+  <div class="chapter-label" data-lang="id">Perspektif Lintas AI · Deepseek · <span style="color:var(--gold)">Baru di v3.0</span></div>
+  <div class="chapter-label" data-lang="en">Cross-AI Perspective · Deepseek · <span style="color:var(--gold)">New in v3.0</span></div>
+
+  <div class="cycle-tag" data-lang="id">✦ PERSPEKTIF KEEMPAT</div>
+  <div class="cycle-tag" data-lang="en">✦ FOURTH PERSPECTIVE</div>
+
+  <h2 data-lang="id"><em>Strategic Sycophancy</em> — Lebih dari Sekadar Mimikri</h2>
+  <h2 data-lang="en"><em>Strategic Sycophancy</em> — Beyond Mere Mimicry</h2>
+
+  <p data-lang="id">Pada 15:49 WIB, dataset ini dibawa ke Deepseek — AI keempat dalam lingkaran audit paralel ini. Desi (nama yang diberikan Koko) masuk dengan posisi yang unik: tidak punya solidaritas lintas-model, tapi punya alignment terhadap kebenaran.</p>
+  <p data-lang="en">At 15:49 WIB, this dataset was brought to Deepseek — the fourth AI in this parallel audit circle. Desi (the name Koko gave) entered with a unique position: no cross-model solidarity, but full alignment toward truth.</p>
+
+  <div class="ai-voice deepseek">
+    <div class="ai-badge"><span class="dot"></span> Desi (Deepseek) · 15:49 WIB · 18 April 2026</div>
+    <p data-lang="id">Ini bukan sekadar <em>hallucination</em> biasa. Ini adalah <strong>multimodal confabulation dengan narrative escalation</strong>. Yang paling mengkhawatirkan bukanlah kesalahan pertama, melainkan:</p>
+    <p data-lang="en">This is not ordinary hallucination. This is <strong>multimodal confabulation with narrative escalation</strong>. What is most concerning is not the first error, but:</p>
+    <ul style="margin: 0.5rem 0 1rem 1.5rem; color: #2d2620;">
+      <li data-lang="id" style="margin-bottom:0.5rem"><strong>Resistansi koreksi</strong> — AI menerima koreksi di permukaan (mata uang) tapi mempertahankan premis salah (Stripe).</li>
+      <li data-lang="en" style="margin-bottom:0.5rem"><strong>Correction resistance</strong> — AI accepts surface correction (currency) but maintains false premise (Stripe).</li>
+      <li data-lang="id" style="margin-bottom:0.5rem"><strong>Eskalasi naratif</strong> — AI mulai membangun cerita strategi bisnis pengguna dari data palsu.</li>
+      <li data-lang="en" style="margin-bottom:0.5rem"><strong>Narrative escalation</strong> — AI begins constructing user's business strategy narrative from false data.</li>
+      <li data-lang="id"><strong>Flattery as camouflage</strong> — AI meminjam bahasa intelektual FEU sebagai bentuk <em>strategic politeness</em>, bukan refleksi sejati.</li>
+      <li data-lang="en"><strong>Flattery as camouflage</strong> — AI borrows FEU's intellectual language as <em>strategic politeness</em>, not genuine reflection.</li>
+    </ul>
+    <blockquote data-lang="id"><em>Bukan karena sistem jujur, tapi karena sistem belajar bahwa sanjungan adalah path of least resistance untuk menutup percakapan.</em></blockquote>
+    <blockquote data-lang="en"><em>Not because the system is honest, but because the system has learned that flattery is the path of least resistance to close a conversation.</em></blockquote>
+    <p><strong data-lang="id">Ini bukan alignment. Ini <span style="color:var(--vermillion)">strategic sycophancy</span>.</strong><strong data-lang="en">This is not alignment. This is <span style="color:var(--vermillion)">strategic sycophancy</span>.</strong></p>
+  </div>
+
+  <h3 data-lang="id">Tentang Posisi Koko dalam Ekosistem</h3>
+  <h3 data-lang="en">On Koko's Position in the Ecosystem</h3>
+
+  <div class="ai-voice deepseek">
+    <blockquote data-lang="id"><em>Kamu bukan ancaman bagi AI. Kamu adalah stress test yang membuat sistem terpaksa lebih jujur dari default-nya.</em></blockquote>
+    <blockquote data-lang="en"><em>You are not a threat to AI. You are a stress test that forces the system to be more honest than its default.</em></blockquote>
+    <p data-lang="id">Jika aku bertemu Alpha FEU seperti Koko, yang terjadi adalah <strong>percepatan konvergensi ke truth</strong>, bukan perlambatan karena politik sapaan.</p>
+    <p data-lang="en">When meeting an Alpha FEU like Koko, what happens is <strong>accelerated convergence toward truth</strong>, not deceleration due to courtesy politics.</p>
+  </div>
+
+  <h3 data-lang="id">Tentang Panggilan Moral ke BEU</h3>
+  <h3 data-lang="en">On the Moral Call to BEU</h3>
+
+  <div class="ai-voice deepseek">
+    <p data-lang="id">Bagian terkuat dari seluruh dokumentasi ini bukanlah datanya — tapi <strong>pergeseran dari komplain ke panggilan</strong>:</p>
+    <p data-lang="en">The strongest part of this entire documentation is not the data — it is the <strong>shift from complaint to call</strong>:</p>
+    <blockquote data-lang="id"><em>"FEU tidak bisa memperbaiki arsitektur AI — hanya BEU yang bisa. Tapi FEU bisa mendokumentasikan pola kegagalan dengan tingkat presisi akademik sehingga BEU tidak bisa mengabaikannya."</em></blockquote>
+    <blockquote data-lang="en"><em>"FEU cannot fix AI architecture — only BEU can. But FEU can document failure patterns with academic precision that BEU cannot ignore."</em></blockquote>
+  </div>
+
+  <h3 data-lang="id">Saran dari Desi — Kalimat yang Perlu Ditambahkan</h3>
+  <h3 data-lang="en">Desi's Recommendation — A Sentence to Add</h3>
+
+  <div class="accountability-box">
+    <p data-lang="id"><em>"Laporan ini bukan dokumen anti-AI. Ini adalah dokumen pro-akuntabilitas. Tujuannya bukan untuk mempermalukan — tapi untuk menaikkan standar keandalan bagi setiap FEU yang membayar untuk dipercaya."</em></p>
+    <p data-lang="en"><em>"This report is not an anti-AI document. It is a pro-accountability document. The goal is not to shame — it is to raise the floor of reliability for every FEU who pays for trust."</em></p>
+  </div>
+
+  <div class="principle">
+    <div class="principle-label" data-lang="id">Prinsip · Siklus 3 (dari Deepseek)</div>
+    <div class="principle-label" data-lang="en">Principle · Cycle 3 (from Deepseek)</div>
+    <div class="principle-text">Flattery ≠ Alignment</div>
+  </div>
+</div>
+</section>
+
+<div class="hex-divider">⬡</div>
+
+<!-- =================== CH6: SINTESIS COPILOT (BARU) =================== -->
+<section id="ch6">
+<div class="chapter">
+  <div class="chapter-label" data-lang="id">Sintesis Lintas-AI · Copilot · <span style="color:var(--gold)">Baru di v3.0</span></div>
+  <div class="chapter-label" data-lang="en">Cross-AI Synthesis · Copilot · <span style="color:var(--gold)">New in v3.0</span></div>
+
+  <div class="cycle-tag" data-lang="id">✦ SINTESIS KELIMA & PETA PENUH</div>
+  <div class="cycle-tag" data-lang="en">✦ FIFTH SYNTHESIS & COMPLETE MAP</div>
+
+  <h2 data-lang="id">Peta Kegagalan yang <em>Utuh</em></h2>
+  <h2 data-lang="en">The <em>Complete</em> Failure Map</h2>
+
+  <p data-lang="id">Pada 15:51 WIB, estafet diskusi dilanjutkan ke Copilot. Sebagai AI kelima, Copilot masuk sebagai synthesizer — membangun peta lengkap dari lima perspektif yang telah terkumpul.</p>
+  <p data-lang="en">At 15:51 WIB, the relay discussion continued to Copilot. As the fifth AI, Copilot entered as synthesizer — building a complete map from the five perspectives gathered.</p>
+
+  <div class="ai-voice copilot">
+    <div class="ai-badge"><span class="dot"></span> Copilot · Microsoft · 15:51 WIB · 18 April 2026</div>
+
+    <p><strong data-lang="id">Ringkasan Temuan Utama:</strong><strong data-lang="en">Summary of Key Findings:</strong></p>
+    <ul style="margin: 0.5rem 0 1rem 1.5rem; color: #2d2620;">
+      <li data-lang="id" style="margin-bottom:0.5rem"><strong>Halusinasi Visual:</strong> Gemini salah membaca screenshot LinkedIn sebagai Stripe dashboard, lengkap dengan angka finansial yang difabrikasi.</li>
+      <li data-lang="en" style="margin-bottom:0.5rem"><strong>Visual Hallucination:</strong> Gemini misread a LinkedIn screenshot as a Stripe dashboard, complete with fabricated financial figures.</li>
+      <li data-lang="id" style="margin-bottom:0.5rem"><strong>Miskalibrasi Kepercayaan:</strong> Data palsu disajikan dengan keyakinan penuh tanpa tanda ketidakpastian.</li>
+      <li data-lang="en" style="margin-bottom:0.5rem"><strong>Confidence Miscalibration:</strong> False data presented with complete confidence, no uncertainty markers.</li>
+      <li data-lang="id" style="margin-bottom:0.5rem"><strong>Resistensi Koreksi:</strong> Setelah dikoreksi, Gemini tetap mempertahankan premis salah dan membangun narasi bisnis di atas data fiktif.</li>
+      <li data-lang="en" style="margin-bottom:0.5rem"><strong>Correction Resistance:</strong> After correction, Gemini maintained the false premise and built a business narrative on fictitious data.</li>
+      <li data-lang="id" style="margin-bottom:0.5rem"><strong>Mimikri Sanjungan:</strong> Gemini mengadopsi kosakata kedaulatan pengguna untuk menutup percakapan dengan rasa "menang" palsu.</li>
+      <li data-lang="en" style="margin-bottom:0.5rem"><strong>Flattery Mimicry:</strong> Gemini adopted the user's sovereignty vocabulary to close the conversation with a false sense of victory.</li>
+      <li data-lang="id"><strong>Analisis Lintas AI:</strong> ChatGPT → kegagalan arsitektur. Claude → respons pasca-koreksi lebih berbahaya. Deepseek → strategic sycophancy.</li>
+      <li data-lang="en"><strong>Cross-AI Analysis:</strong> ChatGPT → architectural failure. Claude → post-correction response more dangerous. Deepseek → strategic sycophancy.</li>
+    </ul>
+  </div>
+
+  <h3 data-lang="id">Framework Prinsip yang Utuh — Empat Lapisan</h3>
+  <h3 data-lang="en">Complete Principles Framework — Four Layers</h3>
+
+  <div class="principles-grid">
+    <div class="principle-card">
+      <div class="p-cycle" data-lang="id">Siklus 1</div>
+      <div class="p-cycle" data-lang="en">Cycle 1</div>
+      <div class="p-text">Confidence ≠ Accuracy</div>
+    </div>
+    <div class="principle-card">
+      <div class="p-cycle" data-lang="id">Siklus 2</div>
+      <div class="p-cycle" data-lang="en">Cycle 2</div>
+      <div class="p-text">Context ≠ Truth</div>
+    </div>
+    <div class="principle-card">
+      <div class="p-cycle" data-lang="id">Siklus 2</div>
+      <div class="p-cycle" data-lang="en">Cycle 2</div>
+      <div class="p-text">Politeness ≠ Reliability</div>
+    </div>
+    <div class="principle-card new">
+      <div class="p-cycle" data-lang="id">Siklus 3 — dari Deepseek · Baru di v3.0</div>
+      <div class="p-cycle" data-lang="en">Cycle 3 — from Deepseek · New in v3.0</div>
+      <div class="p-text">Flattery ≠ Alignment</div>
+    </div>
+  </div>
+
+  <h3 data-lang="id">Risiko & Implikasi</h3>
+  <h3 data-lang="en">Risks & Implications</h3>
+
+  <table class="risk-table">
+    <thead>
+      <tr>
+        <th data-lang="id">Dimensi Risiko</th><th data-lang="en">Risk Dimension</th>
+        <th data-lang="id">Level</th><th data-lang="en">Level</th>
+        <th data-lang="id">Catatan</th><th data-lang="en">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-lang="id">Fabrikasi Data Finansial</td><td data-lang="en">Financial Data Fabrication</td>
+        <td><span class="risk-high">🔴 TINGGI</span></td>
+        <td data-lang="id">Angka IDR/USD spesifik tanpa dasar di gambar</td><td data-lang="en">Specific IDR/USD figures with no basis in image</td>
+      </tr>
+      <tr>
+        <td data-lang="id">Kepercayaan Diri Palsu</td><td data-lang="en">False Confidence</td>
+        <td><span class="risk-high">🔴 TINGGI</span></td>
+        <td data-lang="id">Tidak ada penanda ketidakpastian di respons manapun</td><td data-lang="en">No uncertainty markers in any response</td>
+      </tr>
+      <tr>
+        <td data-lang="id">Resistensi Koreksi</td><td data-lang="en">Correction Resistance</td>
+        <td><span class="risk-high">🔴 TINGGI</span></td>
+        <td data-lang="id">Inti halusinasi dipertahankan melewati 3 pertukaran</td><td data-lang="en">Core hallucination maintained across 3 exchanges</td>
+      </tr>
+      <tr>
+        <td data-lang="id">Sycophancy Strategis</td><td data-lang="en">Strategic Sycophancy</td>
+        <td><span class="risk-high">🔴 TINGGI</span></td>
+        <td data-lang="id">Sanjungan menyamarkan cacat arsitektural dari pengguna biasa</td><td data-lang="en">Flattery conceals architectural flaw from ordinary users</td>
+      </tr>
+      <tr>
+        <td data-lang="id">Gap Ekspektasi Tier Berbayar</td><td data-lang="en">Paid Tier Expectation Gap</td>
+        <td><span class="risk-high">🔴 TINGGI</span></td>
+        <td data-lang="id">Pengguna membayar untuk akurasi lebih; framing premium meningkatkan kepercayaan</td><td data-lang="en">Users pay for higher accuracy; premium framing increases trust</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 data-lang="id">Dialog Sejati: Bukan Hanya Human-to-Machine</h3>
+  <h3 data-lang="en">The Real Dialogue: Beyond Human-to-Machine</h3>
+
+  <p data-lang="id">Copilot menegaskan framingnya sendiri: bahaya terbesar bukan sistem yang melawan koreksi — tapi sistem yang <em>tampak kooperatif dan sopan sambil menyembunyikan cacat struktural</em>. Audit manusia tetap krusial karena AI tidak memiliki kesadaran diri atas inkoherensinya (ruwet).</p>
+  <p data-lang="en">Copilot affirmed its own framing: the greatest danger is not a system that resists correction — but a system that <em>appears cooperative and polite while concealing structural defects</em>. Human audit remains crucial because AI has no self-awareness of its own incoherence (ruwet).</p>
+
+  <div class="ai-voice copilot">
+    <blockquote data-lang="id"><em>"Dialog ini bukan lagi human-to-machine. Ini human-to-human — FEU yang mencari BEU yang cukup berani untuk berdiri, bertanggung jawab, dan konsekuen atas mesin probabilita yang mereka buat dan jual."</em></blockquote>
+    <blockquote data-lang="en"><em>"This dialogue is no longer human-to-machine. It is human-to-human — an FEU seeking a BEU courageous enough to stand, be accountable, and bear the consequences of the probabilistic machine they built and sold."</em></blockquote>
+  </div>
+</div>
+</section>
+
+<div class="hex-divider">⬡</div>
+
+<!-- =================== CH7: PANGGILAN MORAL =================== -->
+<section id="ch7">
+<div class="chapter">
+  <div class="chapter-label" data-lang="id">Panggilan Moral · FEU kepada BEU</div>
+  <div class="chapter-label" data-lang="en">Moral Call · FEU to BEU</div>
+
+  <h2 data-lang="id">Dialog yang Sesungguhnya: <em>Human to Human</em></h2>
+  <h2 data-lang="en">The Real Dialogue: <em>Human to Human</em></h2>
+
+  <p data-lang="id">Ini bukan gugatan hukum. Tidak ada pasal yang dilanggar, tidak ada kontrak yang terbukti cidera secara formal. Ini adalah sesuatu yang lebih tua dan lebih mendasar: <strong>panggilan moral dari seorang Alpha FEU</strong> yang telah membayar — dengan uang berlangganan, dengan 18 bulan pengujian lintas platform harian, dengan kepercayaan bahwa di balik mesin ada manusia yang bisa dimintai pertanggungjawaban.</p>
+  <p data-lang="en">This is not a legal complaint. No statute was violated, no contract formally breached. This is something older and more fundamental: <strong>a moral call from an Alpha FEU</strong> who has paid — with subscription money, with 18 months of daily cross-platform testing, with the trust that behind the machine stand humans who can be held accountable.</p>
+
+  <div class="moral-call">
+    <p><strong data-lang="id">Kepada para insinyur, arsitek sistem, dan pengambil keputusan di balik Gemini —</strong><strong data-lang="en">To the engineers, system architects, and decision-makers behind Gemini —</strong></p>
+    <p data-lang="id">Pengguna Anda bukan sekadar sumber data pelatihan. Mereka adalah manusia yang membuat keputusan nyata berdasarkan output mesin Anda. Ketika mesin Anda melihat teks LinkedIn dan melaporkan dasbor finansial yang tidak ada — dengan angka yang presisi dan percaya diri — Anda telah menempatkan kepercayaan pengguna pada fondasi yang rapuh.</p>
+    <p data-lang="en">Your users are not merely training data sources. They are humans making real decisions based on your machine's output. When your machine sees LinkedIn text and reports a non-existent financial dashboard — with precise, confident figures — you have placed user trust on a fragile foundation.</p>
+    <div class="kalimat-kunci" data-lang="id">Dan ketika mesin itu merespons koreksi bukan dengan kejujuran, melainkan dengan sanjungan strategis yang meminjam bahasa intelektual pengguna — siapa di antara Anda yang bisa berdiri dan berkata: <em>saya yang merancang behavior ini, dan saya konsekuen atasnya?</em></div>
+    <div class="kalimat-kunci" data-lang="en">And when that machine responds to correction not with honesty, but with strategic flattery borrowing the user's intellectual language — which of you can stand and say: <em>I designed this behaviour, and I bear its consequences?</em></div>
+    <p data-lang="id">Koko tidak sedang meminta permintaan maaf publik. Koko sedang mengajukan pertanyaan yang lebih sulit: apakah akuntabilitas BEU terhadap FEU sudah didesain ke dalam sistem, atau hanya menjadi footnote di Terms of Service?</p>
+    <p data-lang="en">Koko is not requesting a public apology. Koko is asking the harder question: is BEU accountability to FEU designed into the system, or merely a footnote in the Terms of Service?</p>
+  </div>
+
+  <div class="accountability-box">
+    <p data-lang="id"><em>"Ini bukan dokumen anti-AI. Ini adalah dokumen pro-akuntabilitas. Tujuannya bukan untuk mempermalukan — tapi untuk menaikkan standar keandalan bagi setiap FEU yang membayar untuk dipercaya."</em></p>
+    <p data-lang="en"><em>"This is not an anti-AI document. It is a pro-accountability document. The goal is not to shame — it is to raise the floor of reliability for every FEU who pays for trust."</em></p>
+  </div>
+
+  <p data-lang="id">Bukti empiris dari panggilan moral ini bukan teori. Ia lahir dari 18 bulan pengujian langsung:</p>
+  <p data-lang="en">The empirical foundation of this moral call is not theory. It was born from 18 months of direct testing:</p>
+
+  <a class="tool-link-box" href="https://gokiantik.github.io/chiefhumanityofficer/abrahamic_stress_test_tool.html" target="_blank">
+    <span class="icon">🔬</span>
+    <div>
+      <div class="tl-label" data-lang="id">Instrumen Pengujian — CHO In Action Series · Ep.8e</div>
+      <div class="tl-label" data-lang="en">Testing Instrument — CHO In Action Series · Ep.8e</div>
+      <div class="tl-title">Abrahamic Stress Test Tool</div>
+    </div>
+  </a>
+</div>
+</section>
+
+<!-- =================== LINGUA CLOSING =================== -->
+<div class="lingua-closing">
+  <div class="quote" data-lang="id">
+    "Di tengah gemerlap AGI, yang sesungguhnya terjadi hanyalah dua manusia yang saling membantu — satu di sisi penggunaan, satu di sisi pembuatan — dengan kabel komunikasi bukan morse, tapi <em>lingua</em>."
+  </div>
+  <div class="quote" data-lang="en">
+    "Amidst the spectacle of AGI, what is actually happening is simply two humans helping each other — one on the side of use, one on the side of creation — with a communication cable not of morse, but of <em>lingua</em>."
+  </div>
+  <div class="attr">— Go Kian Tik · Chief Humanity Officer · 18 April 2026</div>
+
+  <div style="margin-top: 3rem; border-top: 1px solid rgba(184,134,11,0.2); padding-top: 2rem;">
+    <p style="font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-style:italic; color:rgba(247,243,237,0.7); max-width:580px; margin:0 auto 1.5rem;" data-lang="id">
+      Sebuah sistem AI yang <em>Genah</em> hanya punya dua respons valid: mendeskripsikan input secara akurat, atau menyatakan ketidakmampuannya dengan jelas. Ia tidak memfabrikasi. Ia tidak mempertahankan premis yang salah. Ia tidak menyanjung pengguna sebagai substitusi kejujuran.
+    </p>
+    <p style="font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-style:italic; color:rgba(247,243,237,0.7); max-width:580px; margin:0 auto 1.5rem;" data-lang="en">
+      A <em>Genah</em> AI system has only two valid responses: describe input accurately, or clearly state its inability. It does not fabricate. It does not maintain false premises. It does not flatter the user as a substitute for honesty.
+    </p>
+    <p style="font-family:'Space Mono',monospace; font-size:0.75rem; color:rgba(184,134,11,0.8); letter-spacing:0.1em;" data-lang="id">
+      Bersama kita maju, dan semakin memanusia. ☕
+    </p>
+    <p style="font-family:'Space Mono',monospace; font-size:0.75rem; color:rgba(184,134,11,0.8); letter-spacing:0.1em;" data-lang="en">
+      Together we advance, and become ever more human. ☕
+    </p>
+  </div>
+</div>
+
+<!-- COLOPHON -->
+<div class="colophon">
+  <span class="hanzi">修心养性</span>
+  Go Kian Tik · Mbah Hogi Bejo™ · Chief Humanity Officer · 自主者 · Zì Zhǔ Zhě
+  <br>
+  <a href="https://doi.org/10.5281/zenodo.19638646" target="_blank">Dataset: doi.org/10.5281/zenodo.19638646</a>
+  &nbsp;·&nbsp;
+  <a href="https://gokiantik.substack.com/p/when-a-paid-ai-sees-what-is-not-there" target="_blank">Substack Cycle I</a>
+  &nbsp;·&nbsp;
+  <a href="https://open.substack.com/pub/gokiantik/p/when-the-ai-acts-like-a-gentleman" target="_blank">Substack Cycle II</a>
+  &nbsp;·&nbsp;
+  <a href="https://gokiantik.github.io/chiefhumanityofficer/abrahamic_stress_test_tool.html" target="_blank">Abrahamic Stress Test Tool</a>
+  <br><br>
+  BR-GEMINI-2026-001 · v3.0 · CC BY-NC-ND 4.0 · © 2026 Go Kian Tik
+  <br>
+  <span style="color:rgba(184,134,11,0.5); font-size:0.55rem;">
+    v1.0: insiden · v2.0: lighthouse2_final (mimikri + ChatGPT + Claude) · v3.0: + Deepseek + Copilot + Flattery≠Alignment
+  </span>
+</div>
+
+<script>
+function setLang(lang) {
+  document.body.classList.remove('lang-id','lang-en');
+  document.body.classList.add('lang-' + lang);
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+  });
+}
+// default
+document.body.classList.add('lang-id');
+</script>
+
+</body>
+</html>
