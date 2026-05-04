@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="id" class="lang-id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ketika CEO Menanggapi, Framework Komprehensif Jawabannya</title>
+<meta name="description" content="Ketika seorang CEO Big Data mempertanyakan constraint loop dalam framework TSO, saya tidak defensif — saya menjawab dengan arsitektur yang lebih dalam dari yang dia bayangkan ada.">
+<meta property="og:title" content="Ketika CEO Menanggapi, Framework Komprehensif Jawabannya">
+<meta property="og:description" content="Flow → Show → Glow. VITT × AIRT. Verification Gap. CHO Framework merespons.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1E3A5F;
+    --gold: #C9A84C;
+    --gold-light: #F5E6C0;
+    --gold-dark: #8B6914;
+    --ink: #1A1A1A;
+    --ink-mid: #444444;
+    --ink-light: #777777;
+    --surface: #FAFAF8;
+    --surface-warm: #F7F4EE;
+    --border: rgba(30,58,95,0.12);
+    --border-gold: rgba(201,168,76,0.3);
+    --gold-dim: #7A6030;
+    --gold-line: rgba(201,168,76,0.25);
+    --navy-deep: #0e1017;
+    --navy-disc: #1a1f2c;
+    --ivory: #F2EDD7;
+    --ivory-dim: #A09880;
+    --muted: #7A7260;
+    --text-body: rgba(232,238,242,0.92);
+    --seed-green: #4a7c59;
+    --seed-light: #8fc49d;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--surface);
+    color: var(--ink);
+    line-height: 1.75;
+    font-size: 17px;
+    font-weight: 300;
+  }
+
+  /* ─── LANGUAGE TOGGLE ─── */
+  #lang-toggle {
+    position: fixed;
+    top: 1.1rem;
+    right: 1.25rem;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(201,168,76,0.5);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+  .lang-btn {
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: background 0.2s, color 0.2s;
+    text-transform: uppercase;
+  }
+  .lang-btn.active { background: var(--gold); color: var(--navy); }
+  .lang-btn:not(.active) { background: var(--navy); color: rgba(201,168,76,0.55); }
+  .lang-btn:not(.active):hover { background: #1a2f4a; color: var(--gold); }
+  .lang-sep { width: 1px; background: rgba(201,168,76,0.3); align-self: stretch; }
+
+  /* ─── LANGUAGE VISIBILITY ─── */
+  [data-lang] { display: none !important; }
+  body.lang-id [data-lang="id"] { display: block !important; }
+  body.lang-en [data-lang="en"] { display: block !important; }
+  span[data-lang], em[data-lang], strong[data-lang] { display: none !important; }
+  body.lang-id span[data-lang="id"], body.lang-id em[data-lang="id"], body.lang-id strong[data-lang="id"] { display: inline !important; }
+  body.lang-en span[data-lang="en"], body.lang-en em[data-lang="en"], body.lang-en strong[data-lang="en"] { display: inline !important; }
+  body.lang-id .pillars[data-lang="id"], body.lang-en .pillars[data-lang="en"] { display: grid !important; }
+  body.lang-id .constraint-stack[data-lang="id"], body.lang-en .constraint-stack[data-lang="en"] { display: flex !important; }
+  body.lang-id .header-meta[data-lang="id"], body.lang-en .header-meta[data-lang="en"] { display: flex !important; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes beamRotate {
+    0% { opacity: 0.04; transform: rotate(-15deg) scaleY(1); }
+    50% { opacity: 0.09; transform: rotate(15deg) scaleY(1.05); }
+    100% { opacity: 0.04; transform: rotate(-15deg) scaleY(1); }
+  }
+  @keyframes pulseGold {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+    50% { box-shadow: 0 0 0 8px rgba(201,168,76,0.08); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  /* ─── HEADER ─── */
+  .site-header {
+    position: relative;
+    overflow: hidden;
+    background: var(--navy);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .beam {
+    position: absolute; top: 0; left: 50%;
+    width: 2px; height: 100%;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    transform-origin: top center;
+    animation: beamRotate 6s ease-in-out infinite;
+    opacity: 0.06;
+  }
+  .beam::before {
+    content: '';
+    position: absolute; top: 0; left: -60px;
+    width: 122px; height: 100%;
+    background: linear-gradient(to bottom, rgba(201,168,76,0.12), transparent 60%);
+    animation: beamRotate 6s ease-in-out infinite reverse;
+  }
+  .header-inner {
+    position: relative; z-index: 2;
+    text-align: center;
+    padding: 4rem 2rem;
+    max-width: 780px;
+    animation: fadeUp 1.2s ease both;
+  }
+  .lighthouse-icon { display: inline-block; margin-bottom: 2rem; position: relative; }
+  .lighthouse-icon svg { width: 56px; height: 56px; opacity: 0.9; }
+  .lighthouse-ring {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px; height: 80px;
+    border: 1px solid rgba(201,168,76,0.3); border-radius: 50%;
+    animation: pulseGold 3s ease-in-out infinite;
+  }
+  .series-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 1.5rem; display: block; opacity: 0.85;
+  }
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700; color: #FAFAF8;
+    line-height: 1.2; margin-bottom: 1.5rem;
+  }
+  .header-title em { font-style: italic; color: var(--gold); }
+  .header-sub {
+    font-size: 1.05rem; color: rgba(250,250,248,0.6);
+    font-weight: 300; font-style: italic;
+    margin-bottom: 2.5rem; line-height: 1.6;
+  }
+  .header-meta {
+    display: flex; align-items: center;
+    justify-content: center; gap: 1.5rem; flex-wrap: wrap;
+  }
+  .meta-chip { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(250,250,248,0.5); letter-spacing: 0.08em; }
+  .meta-divider { width: 1px; height: 14px; background: rgba(250,250,248,0.2); }
+  .scroll-cue {
+    position: absolute; bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: 0.4; animation: fadeUp 2s ease 1s both;
+  }
+  .scroll-cue span { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; }
+  .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); }
+
+  /* ─── DISCLAIMER ─── */
+  .disclaimer-wrap { background: var(--navy-deep); border-bottom: 2px solid rgba(201,168,76,0.2); }
+  .cho-full-disclaimer { width: 100%; max-width: 820px; margin: 0 auto; overflow: hidden; }
+  .cho-experimental {
+    background: linear-gradient(135deg, #1a1f2c 0%, #2a2f3f 100%);
+    color: var(--text-body);
+    padding: 1.8rem 2rem;
+    border-bottom: 1px solid var(--gold-line);
+    position: relative; overflow: hidden;
+  }
+  .cho-experimental::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; opacity: .5;
+  }
+  .cho-experimental > * { position: relative; }
+  .cho-badge {
+    display: inline-flex; align-items: center; gap: .4rem;
+    background: rgba(201,168,76,0.12); border: 1px solid var(--gold-line);
+    border-radius: 40px; padding: 0.28rem 0.9rem;
+    font-family: 'DM Mono', monospace; font-size: 0.66rem; font-weight: 500;
+    letter-spacing: 0.09em; margin-bottom: 1rem;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .cho-experimental__title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem; font-weight: 600; font-style: italic;
+    margin-bottom: 0.8rem; color: var(--ivory);
+  }
+  .cho-experimental__body { font-size: 0.87rem; line-height: 1.68; opacity: 0.92; margin-bottom: 0.6rem; }
+  .cho-experimental__body a { color: var(--gold); text-decoration: none; border-bottom: 1px dotted rgba(201,168,76,0.45); }
+  .cho-experimental__body a:hover { border-color: var(--gold); }
+  .cho-warning-strip {
+    display: flex; align-items: flex-start; gap: 0.7rem;
+    background: rgba(201,168,76,0.07);
+    border-left: 3px solid var(--gold); border-radius: 0 3px 3px 0;
+    padding: 0.75rem 1rem; margin: 1rem 0 0.4rem;
+    font-size: 0.82rem; line-height: 1.6; color: rgba(232,238,242,0.88);
+  }
+  .cho-warning-strip i { color: var(--gold); font-size: 0.9rem; margin-top: 0.15rem; flex-shrink: 0; }
+  .cho-warning-strip strong { color: var(--gold); }
+  .cho-experimental__meta {
+    display: flex; flex-wrap: wrap; gap: 0.6rem 1.2rem; margin-top: 1rem;
+    font-family: 'DM Mono', monospace; font-size: 0.67rem; color: #b0bec8; letter-spacing: .04em;
+    border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.85rem;
+  }
+  .cho-experimental__meta span { display: inline-flex; align-items: center; gap: .35rem; }
+  .cho-experimental__meta a { color: var(--gold-dim); text-decoration: none; }
+  .cho-experimental__meta a:hover { color: var(--gold); }
+  .cho-divider-7030 {
+    background: linear-gradient(90deg, #1a1f2c 0%, #1a1f2c 68%, #0e2318 70%, #0a1d14 100%);
+    display: flex; align-items: stretch; height: 36px;
+  }
+  .cho-divider-7030__left {
+    flex: 70; display: flex; align-items: center; padding-left: 2rem;
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dim); gap: 0.5rem;
+  }
+  .cho-divider-7030__line { width: 1px; background: linear-gradient(to bottom, transparent, var(--gold-dim), transparent); opacity: 0.5; }
+  .cho-divider-7030__right {
+    flex: 30; display: flex; align-items: center; padding-left: 1rem;
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--seed-light); opacity: 0.8; gap: 0.5rem;
+  }
+  .cho-invitation {
+    background: linear-gradient(135deg, #0a1d14 0%, #0d2318 60%, #0e1a10 100%);
+    color: rgba(232,242,236,0.92);
+    padding: 1.8rem 2rem;
+    border-bottom: 3px solid var(--seed-green);
+    position: relative; overflow: hidden;
+  }
+  .cho-invitation::after {
+    content: '';
+    position: absolute; bottom: -20px; right: -20px;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle at center, rgba(74,124,89,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cho-invitation > * { position: relative; }
+  .cho-invitation__badge {
+    display: inline-flex; align-items: center; gap: .4rem;
+    background: rgba(74,124,89,0.15); border: 1px solid rgba(143,196,157,0.25);
+    border-radius: 40px; padding: 0.28rem 0.9rem;
+    font-family: 'DM Mono', monospace; font-size: 0.66rem; font-weight: 500;
+    letter-spacing: 0.09em; margin-bottom: 1rem; color: var(--seed-light); text-transform: uppercase;
+  }
+  .cho-invitation__title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem; font-weight: 600; font-style: italic;
+    margin-bottom: 0.8rem; color: #e4f0e8;
+  }
+  .cho-invitation__body { font-size: 0.87rem; line-height: 1.7; opacity: 0.92; margin-bottom: 0.7rem; }
+  .cho-invitation__body a { color: var(--seed-light); text-decoration: none; border-bottom: 1px dotted rgba(143,196,157,0.4); }
+  .cho-invitation__body strong { color: #c8e8cf; }
+  .cho-invitation__body em { color: #a8d4b4; font-style: italic; }
+  .cho-seed-callout {
+    display: flex; gap: 1rem;
+    background: rgba(74,124,89,0.1); border: 1px solid rgba(143,196,157,0.15);
+    border-radius: 4px; padding: 1rem 1.1rem; margin: 1rem 0;
+  }
+  .cho-seed-callout__icon { font-size: 1.5rem; line-height: 1; flex-shrink: 0; padding-top: 0.1rem; }
+  .cho-seed-callout__text { font-size: 0.86rem; line-height: 1.65; color: rgba(232,242,236,0.88); }
+  .cho-seed-callout__text strong { color: var(--seed-light); }
+  .cho-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.9rem 0 0.4rem; }
+  .cho-tag {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.07em;
+    padding: 0.2rem 0.65rem; border-radius: 3px;
+    background: rgba(74,124,89,0.15); border: 1px solid rgba(143,196,157,0.2);
+    color: var(--seed-light); text-transform: uppercase;
+  }
+  .cho-invitation__cta {
+    display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.8rem;
+    font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em;
+    color: var(--seed-light); text-decoration: none;
+    border: 1px solid rgba(143,196,157,0.3); border-radius: 3px; padding: 0.4rem 0.9rem;
+    transition: background .15s, border-color .15s;
+  }
+  .cho-invitation__cta:hover { background: rgba(74,124,89,0.2); border-color: rgba(143,196,157,0.5); }
+  .cho-invitation__meta {
+    display: flex; flex-wrap: wrap; gap: 0.6rem 1.2rem; margin-top: 1rem;
+    font-family: 'DM Mono', monospace; font-size: 0.67rem; color: rgba(143,196,157,0.55);
+    letter-spacing: .04em; border-top: 1px solid rgba(143,196,157,0.1); padding-top: 0.85rem;
+  }
+  .cho-invitation__meta span { display: inline-flex; align-items: center; gap: .35rem; }
+
+  /* ─── MAIN CONTENT ─── */
+  .content-wrap { max-width: 720px; margin: 0 auto; padding: 5rem 2rem; }
+  .specimen {
+    position: relative; margin: 3rem 0;
+    border-left: 3px solid var(--gold);
+    background: var(--surface-warm); border-radius: 0 8px 8px 0; padding: 1.75rem 2rem;
+  }
+  .specimen-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gold-dark); margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .specimen-label::before {
+    content: ''; display: inline-block;
+    width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0;
+  }
+  .specimen-text { font-style: italic; color: var(--ink-mid); font-size: 1rem; line-height: 1.7; }
+  .specimen-author { margin-top: 1rem; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-light); letter-spacing: 0.05em; }
+  .section-eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 0.75rem; opacity: 0.8; }
+  h2 { font-family: 'Playfair Display', serif; font-size: 1.75rem; font-weight: 700; color: var(--navy); line-height: 1.3; margin-bottom: 1.25rem; }
+  p { margin-bottom: 1.25rem; color: var(--ink-mid); font-weight: 300; }
+  p strong { color: var(--ink); font-weight: 600; }
+  .formula-block {
+    text-align: center; padding: 2.5rem 2rem; margin: 3rem 0;
+    border: 1px solid var(--border-gold);
+    background: linear-gradient(135deg, var(--surface-warm), var(--surface));
+    border-radius: 12px; position: relative; overflow: hidden;
+  }
+  .formula-block::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .formula-text { font-family: 'IBM Plex Mono', monospace; font-size: clamp(1rem, 3vw, 1.4rem); color: var(--navy); letter-spacing: 0.05em; font-weight: 500; margin-bottom: 0.5rem; }
+  .formula-text em { color: var(--gold-dark); font-style: normal; font-weight: 500; }
+  .formula-caption { font-size: 0.8rem; color: var(--ink-light); font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.08em; }
+  .pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.25rem; margin: 2.5rem 0; }
+  .pillar { padding: 1.5rem 1.25rem; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); position: relative; overflow: hidden; transition: border-color 0.3s; }
+  .pillar:hover { border-color: var(--border-gold); }
+  .pillar-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); opacity: 0.5; }
+  .pillar-label { font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; color: var(--navy); margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+  .pillar-desc { font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6; font-weight: 300; margin: 0; }
+  .constraint-stack { margin: 2.5rem 0; display: flex; flex-direction: column; gap: 1rem; }
+  .constraint-item {
+    display: flex; gap: 1.25rem; align-items: flex-start;
+    padding: 1.25rem 1.5rem; border: 1px solid var(--border);
+    border-radius: 10px; background: var(--surface); transition: border-color 0.3s, background 0.3s;
+  }
+  .constraint-item:hover { border-color: var(--border-gold); background: var(--surface-warm); }
+  .constraint-arrow { font-family: 'IBM Plex Mono', monospace; font-size: 1.1rem; color: var(--gold); flex-shrink: 0; margin-top: 2px; font-weight: 500; }
+  .constraint-title { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; color: var(--navy); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.35rem; }
+  .constraint-desc { font-size: 0.9rem; color: var(--ink-mid); margin: 0; line-height: 1.65; font-weight: 300; }
+  .constraint-doi {
+    display: inline-block; margin-top: 0.5rem;
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--gold-dark);
+    letter-spacing: 0.06em; text-decoration: none;
+    border-bottom: 1px dotted var(--border-gold); transition: color 0.2s;
+  }
+  .constraint-doi:hover { color: var(--gold); }
+  .integrity-eq {
+    text-align: center; padding: 2rem; margin: 2.5rem 0;
+    border: 1px solid var(--border-gold); border-radius: 10px;
+    background: var(--navy); color: #FAFAF8;
+  }
+  .integrity-eq .eq-main { font-family: 'IBM Plex Mono', monospace; font-size: 1.3rem; letter-spacing: 0.08em; margin-bottom: 0.5rem; color: var(--gold); font-weight: 500; }
+  .integrity-eq .eq-sub { font-size: 0.85rem; color: rgba(250,250,248,0.55); font-style: italic; }
+  .divider { text-align: center; margin: 3rem 0; color: var(--gold); font-size: 1rem; letter-spacing: 0.3em; opacity: 0.5; }
+  .closing { text-align: center; padding: 4rem 2rem; background: var(--navy); position: relative; overflow: hidden; }
+  .closing::before {
+    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 200px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .closing-char { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--gold); margin-bottom: 0.5rem; opacity: 0.85; }
+  .closing-zh { font-family: serif; font-size: 1.1rem; color: rgba(250,250,248,0.5); letter-spacing: 0.2em; margin-bottom: 1.5rem; }
+  .closing-statement { font-style: italic; font-size: 1rem; color: rgba(250,250,248,0.6); max-width: 480px; margin: 0 auto 2rem; line-height: 1.7; }
+  .closing-name { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem; }
+  .closing-role { font-size: 0.8rem; color: rgba(250,250,248,0.35); font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.06em; }
+  .links-section { background: var(--surface-warm); padding: 3rem 2rem; text-align: center; border-top: 1px solid var(--border-gold); }
+  .links-title { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 1.5rem; }
+  .links-grid { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; max-width: 600px; margin: 0 auto; }
+  .link-pill {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    padding: 0.4rem 0.9rem; border: 1px solid var(--border-gold); border-radius: 20px;
+    color: var(--navy); text-decoration: none; letter-spacing: 0.05em;
+    transition: background 0.2s, color 0.2s; background: var(--surface);
+  }
+  .link-pill:hover { background: var(--navy); color: var(--gold); border-color: var(--navy); }
+  .hashtags { text-align: center; padding: 1.5rem; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-light); letter-spacing: 0.06em; line-height: 2; border-top: 1px solid var(--border); }
+  .shimmer-text {
+    background: linear-gradient(90deg, var(--gold-dark) 0%, var(--gold) 40%, #F0C060 60%, var(--gold-dark) 100%);
+    background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    animation: shimmer 4s linear infinite;
+  }
+
+  @media (max-width: 600px) {
+    .content-wrap { padding: 3rem 1.25rem; }
+    .pillars { grid-template-columns: 1fr; }
+    .header-inner { padding: 3rem 1.25rem; }
+    .cho-experimental, .cho-invitation { padding: 1.4rem 1.25rem; }
+    .cho-divider-7030__left { padding-left: 1.25rem; }
+    .cho-seed-callout { flex-direction: column; gap: 0.5rem; }
+    #lang-toggle { top: 0.7rem; right: 0.75rem; }
+  }
+</style>
+</head>
+<body class="lang-id">
+
+<!-- ─── LANGUAGE TOGGLE (fixed, top-right) ─── -->
+<div id="lang-toggle">
+  <button class="lang-btn active" id="btn-id" onclick="setLang('id')">ID</button>
+  <div class="lang-sep"></div>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- ════════════ HEADER ════════════ -->
+<header class="site-header">
+  <div class="beam"></div>
+  <div class="header-inner">
+    <div class="lighthouse-icon">
+      <div class="lighthouse-ring"></div>
+      <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="22" y="8" width="12" height="6" rx="1" fill="#C9A84C" opacity="0.9"/>
+        <polygon points="20,14 36,14 38,48 18,48" fill="rgba(201,168,76,0.25)" stroke="#C9A84C" stroke-width="1"/>
+        <rect x="18" y="48" width="20" height="4" rx="1" fill="#C9A84C" opacity="0.6"/>
+        <line x1="28" y1="2" x2="28" y2="8" stroke="#C9A84C" stroke-width="1.5"/>
+        <line x1="28" y1="11" x2="14" y2="2" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
+        <line x1="28" y1="11" x2="42" y2="2" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
+        <line x1="28" y1="11" x2="6" y2="11" stroke="#C9A84C" stroke-width="1" opacity="0.2"/>
+        <line x1="28" y1="11" x2="50" y2="11" stroke="#C9A84C" stroke-width="1" opacity="0.2"/>
+      </svg>
+    </div>
+    <span class="series-tag">CHO In Action Series · Lighthouse Response · 4 Mei 2026</span>
+    <h1 class="header-title" data-lang="id">Ketika CEO Menanggapi,<br><em>Framework Komprehensif Disajikan</em></h1>
+    <h1 class="header-title" data-lang="en">When the CEO Responds,<br><em>A Comprehensive Framework Is Presented</em></h1>
+    <p class="header-sub" data-lang="id">Lighthouse tidak bernegosiasi dengan badai.<br>Tugasnya cukup satu — memancarkan cahaya.</p>
+    <p class="header-sub" data-lang="en">The lighthouse does not negotiate with the storm.<br>Its only task — to radiate light.</p>
+    <div class="header-meta" data-lang="id">
+      <span class="meta-chip">Go Kian Tik · Mbah Hogi Bejo™</span>
+      <div class="meta-divider"></div>
+      <span class="meta-chip">自主者 The Sovereign One</span>
+      <div class="meta-divider"></div>
+      <span class="meta-chip">Chief Humanity Officer</span>
+    </div>
+    <div class="header-meta" data-lang="en">
+      <span class="meta-chip">Go Kian Tik · Mbah Hogi Bejo™</span>
+      <div class="meta-divider"></div>
+      <span class="meta-chip">自主者 The Sovereign One</span>
+      <div class="meta-divider"></div>
+      <span class="meta-chip">Chief Humanity Officer</span>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <span data-lang="id">Gulir</span><span data-lang="en">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════════════
+     DISCLAIMER · CHO In Action Series v2.0
+     Posisi: post-header, pre-content — konvensi standar CHO Series
+     Disclaimer tetap dalam EN sebagai meta/legal layer yang universal
+     ════════════════════════════════════════════════════════ -->
+<div class="disclaimer-wrap">
+<div class="cho-full-disclaimer">
+
+  <div class="cho-experimental">
+    <div class="cho-badge">
+      <i class="fas fa-flask"></i>
+      Active Experiment · Red Teaming · Research Prototype — NOT Production
+    </div>
+    <div class="cho-experimental__title">
+      <i class="fas fa-exclamation-triangle" style="margin-right:.4rem;font-size:.9rem;color:#C9A84C;"></i>
+      Digital Expression Disclaimer
+    </div>
+    <p class="cho-experimental__body">
+      Active experiment as an independent researcher (working papers published on
+      <a href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank" rel="noopener">Zenodo</a> /
+      <a href="https://ssrn.com" target="_blank" rel="noopener">SSRN</a>),
+      and <em>alpha front-end user</em> actively red teaming across AI systems:
+      <strong>(1/5 Claude · 1/5 Gemini · 1/5 DeepSeek · 1/5 Copilot · 1/5 ChatGPT)</strong>.
+      Framework: <strong>1/360 Self · 1/360 You · 358/360 Humanity</strong> —
+      grounded in the essence of
+      <a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-poster.html" target="_blank" rel="noopener">Walking Books Philosophy →</a>
+    </p>
+    <p class="cho-experimental__body">
+      This is a fragment of <em>Consciousness rendered through Calculation</em>, seeding
+      <em>Humanity</em> at a wider scale of action and impact —
+      should this experimental model be replicated by others.
+      Created as educational content for the advancement of global humanity.
+      Every voice in this experiment represents 1/360 of a shared library,
+      with no claim to singular truth.
+    </p>
+    <div class="cho-warning-strip">
+      <i class="fas fa-shield-alt"></i>
+      <div>
+        <strong>Infrastructure Status:</strong>
+        All HTML artifacts published at this URL are <strong>research-state prototypes</strong>
+        operating without hardened back-end infrastructure, multi-layer security architecture,
+        or production-grade data governance. They are intentionally open-source, client-side,
+        and zero-persistence — a deliberate methodological choice, not a gap.
+        <em>Open-source limitations are acknowledged as part of the data, not as methodological flaws.</em>
+      </div>
+    </div>
+    <div class="cho-experimental__meta">
+      <span><i class="fas fa-user-pen"></i> Go Kian Tik (Mbah Hogi Bejo™ · 自主者) · Chief Humanity Officer · Depok, Indonesia</span>
+      <span><i class="fas fa-microchip"></i> Red Teaming: Claude · DeepSeek · Gemini · Copilot · ChatGPT</span>
+      <span><i class="fas fa-calendar-alt"></i> 4 May 2026 · CHO In Action Series</span>
+      <span><i class="fas fa-balance-scale"></i> CC BY-NC-ND 4.0 · <a href="mailto:gokiantik@gmail.com">gokiantik@gmail.com</a></span>
+    </div>
+  </div>
+
+  <div class="cho-divider-7030">
+    <div class="cho-divider-7030__left">
+      <i class="fas fa-layer-group" style="font-size:0.55rem;opacity:0.7;"></i>
+      70% · Digital Semesta · Text · Lingua · Image · Song · Video
+    </div>
+    <div class="cho-divider-7030__line"></div>
+    <div class="cho-divider-7030__right">
+      <i class="fas fa-seedling" style="font-size:0.55rem;"></i>
+      32% · Semesta Materialisasi
+    </div>
+  </div>
+
+  <div class="cho-invitation">
+    <div class="cho-invitation__badge">
+      <i class="fas fa-seedling"></i>
+      Open Invitation · Semesta 20% · Materialisasi
+    </div>
+    <div class="cho-invitation__title">
+      <i class="fas fa-hand-holding-seedling" style="margin-right:.4rem;font-size:.9rem;color:#8fc49d;"></i>
+      An Invitation to the Builders of the Material World
+    </div>
+    <p class="cho-invitation__body">
+      With the publication of each DOI in the CHO In Action Series, the author formally invites
+      the actors of the <strong>20% Material Semesta</strong> — business owners, entrepreneurs,
+      capital holders &amp; investors, grant-givers and research funders, those already proficient
+      in navigating the full spectrum of resources — to consider extending their support.
+    </p>
+    <div class="cho-seed-callout">
+      <div class="cho-seed-callout__icon">🌱</div>
+      <div class="cho-seed-callout__text">
+        The ideas, vision, mission, and humanitarian intent documented here have been
+        <strong>completed in the 70% Digital Semesta</strong> — as text, lingua, image, song,
+        video, and multimodal artifact. They exist. They work. They are tested. They carry a DOI.<br><br>
+        What they require now is the soil, fertiliser, and sunlight of the material world —
+        so that this seed may <strong>grow not for itself, but for others</strong>. For umat manusia. For humanity.
+      </div>
+    </div>
+    <p class="cho-invitation__body">
+      The author does not seek capital to build a product for profit.
+      The invitation is to <em>cultivate a vision that is already whole</em> —
+      to give it roots in the material world so its fruit may be abundant,
+      shared widely, and harvested by those who have no access to the harvest today.
+    </p>
+    <p class="cho-invitation__body">Those fluent in managing the <strong>7M framework</strong>:</p>
+    <div class="cho-tags">
+      <span class="cho-tag"><i class="fas fa-users" style="margin-right:4px;"></i>Man</span>
+      <span class="cho-tag"><i class="fas fa-boxes-stacked" style="margin-right:4px;"></i>Material</span>
+      <span class="cho-tag"><i class="fas fa-sitemap" style="margin-right:4px;"></i>Method</span>
+      <span class="cho-tag"><i class="fas fa-cogs" style="margin-right:4px;"></i>Machine</span>
+      <span class="cho-tag"><i class="fas fa-coins" style="margin-right:4px;"></i>Money</span>
+      <span class="cho-tag"><i class="fas fa-chart-line" style="margin-right:4px;"></i>Market</span>
+      <span class="cho-tag"><i class="fas fa-brain" style="margin-right:4px;"></i>Mindset</span>
+    </div>
+    <p class="cho-invitation__body" style="margin-top:0.8rem;">
+      — are warmly invited to connect. The DOI is the proof of existence.
+      The open-source artifact is the proof of function. The invitation is the proof of intent.
+    </p>
+    <a class="cho-invitation__cta" href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank" rel="noopener">
+      <i class="fas fa-external-link-alt"></i> View CHO In Action Series on Zenodo →
+    </a>
+    &nbsp;
+    <a class="cho-invitation__cta" href="mailto:gokiantik@superherocafeinside.com" style="margin-top:0.5rem;">
+      <i class="fas fa-envelope"></i> gokiantik@superherocafeinside.com
+    </a>
+    <div class="cho-invitation__meta">
+      <span><i class="fas fa-globe-asia"></i> Depok, Indonesia · Global Reach</span>
+      <span><i class="fas fa-book"></i> DOI-verified · Zenodo Open Access</span>
+      <span><i class="fas fa-link"></i> <a href="http://www.superherocafeinside.com" target="_blank" style="color:rgba(143,196,157,0.55);text-decoration:none;border-bottom:0.5px solid rgba(143,196,157,0.2);">superherocafeinside.com</a></span>
+      <span><i class="fas fa-balance-scale"></i> CC BY-NC-ND 4.0</span>
+    </div>
+  </div>
+
+</div>
+</div>
+<!-- ════ END DISCLAIMER ════ -->
+
+<!-- ════════════ MAIN CONTENT ════════════ -->
+<main class="content-wrap">
+
+  <!-- CONTEXT BRIEF -->
+  <div class="section-eyebrow" data-lang="id">Konteks · Dari Mana Ini Berasal</div>
+  <div class="section-eyebrow" data-lang="en">Context · Where This Came From</div>
+
+  <p data-lang="id">Tulisan ini lahir dari sebuah percakapan di LinkedIn. Pada 4 Mei 2026, penulis mempublikasikan artikel <strong><a href="https://www.linkedin.com/pulse/flow-show-glow-algoritma-masa-depan-human-ai-dan-iot-mbah-hogi-bejo-qpyxc/" target="_blank" rel="noopener" style="color:var(--gold-dark);text-decoration:none;border-bottom:1px dotted var(--border-gold);">Flow → Show → Glow: Algoritma Masa Depan Human-AI dan IoT</a></strong> di LinkedIn Pulse — sebuah framework yang memetakan bagaimana manusia dan AI bergerak bersama dalam satu siklus yang koheren. Di kolom komentar artikel itu, seorang CEO Big Data memberikan tantangan intelektual yang tidak bisa dibiarkan tanpa jawaban. Halaman ini adalah jawaban tersebut — bukan dalam format debat, melainkan dalam format arsitektur.</p>
+  <p data-lang="en">This piece was born from a LinkedIn conversation. On 4 May 2026, the author published the article <strong><a href="https://www.linkedin.com/pulse/flow-show-glow-algoritma-masa-depan-human-ai-dan-iot-mbah-hogi-bejo-qpyxc/" target="_blank" rel="noopener" style="color:var(--gold-dark);text-decoration:none;border-bottom:1px dotted var(--border-gold);">Flow → Show → Glow: The Future Algorithm of Human-AI and IoT</a></strong> on LinkedIn Pulse — a framework mapping how humans and AI move together in one coherent cycle. In the comments of that article, a Big Data CEO issued an intellectual challenge that could not be left unanswered. This page is that answer — not in the format of debate, but in the format of architecture.</p>
+
+  <div class="divider">— ✦ —</div>
+
+  <div class="section-eyebrow" data-lang="id">Spesimen · Pertanyaan yang Menjadi Anchor</div>
+  <div class="section-eyebrow" data-lang="en">Specimen · The Question That Became an Anchor</div>
+  <h2 data-lang="id">Seorang CEO Big Data Bertanya</h2>
+  <h2 data-lang="en">A Big Data CEO Raises a Challenge</h2>
+
+  <div class="specimen">
+    <div class="specimen-label">
+      <span data-lang="id">Komentar asli · LinkedIn · 4 Mei 2026</span>
+      <span data-lang="en">Original comment · LinkedIn · May 4, 2026</span>
+    </div>
+    <p class="specimen-text" data-lang="id">
+      "Lapisan artikulasi yang dibangun sudah kuat, tapi tidak ada yang memaksanya bersentuhan dengan realitas. Tanpa constraint yang mengembalikan kegagalan dari penggunaan nyata, FLOW dan SHOW akan terus menguatkan koherensi sambil menjauh dari kebenaran. Perlu loop keras di mana output diuji sampai retak di lapangan, kalau tidak sistem hanya akan terdengar berdaulat, bukan benar-benar berdaulat."
+    </p>
+    <p class="specimen-text" data-lang="en">
+      "The articulation layers you've built are strong, but nothing forces them to touch reality. Without constraints that feed failures back from real-world use, FLOW and SHOW will keep reinforcing coherence while drifting from truth. You need a hard loop where outputs are tested until they break in the field — otherwise the system will only sound sovereign, not actually be sovereign."
+    </p>
+    <div class="specimen-author"><a href="https://www.linkedin.com/in/ekosatrio/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px dotted rgba(30,58,95,0.3);">Eko Satrio</a> · CEO, PT Momentum Teknodata Semesta (MTDS) · Big Data &amp; Generative AI Expert · ITS</div>
+  </div>
+
+  <p data-lang="id">Ini komentar yang tajam. Datang dari seseorang yang hidupnya dibangun di atas <strong>governance-by-design</strong>, pipeline yang bisa diaudit, dan signal-to-decision yang terukur. Saya tidak akan merespons dengan argumen balik. Saya akan merespons dengan arsitektur.</p>
+  <p data-lang="en">This is a sharp comment. It comes from someone whose life is built on <strong>governance-by-design</strong>, auditable pipelines, and measurable signal-to-decision flows. I will not respond with a counter-argument. I will respond with architecture.</p>
+
+  <p data-lang="id">Karena tugas lighthouse bukan meyakinkan badai. Tugasnya cukup satu: <strong>memancarkan cahaya yang konsisten</strong> — dan membiarkan siapa pun yang berlayar menentukan sendiri apakah mereka mau membacanya.</p>
+  <p data-lang="en">Because the lighthouse's task is not to convince the storm. Its only task: <strong>to radiate consistent light</strong> — and let whoever sails decide for themselves whether they will read it.</p>
+
+  <div class="divider">— ✦ —</div>
+
+  <div class="section-eyebrow" data-lang="id">Fondasi · Grand Formula</div>
+  <div class="section-eyebrow" data-lang="en">Foundation · Grand Formula</div>
+  <h2 data-lang="id">Satu Argumen yang Utuh</h2>
+  <h2 data-lang="en">One Complete Argument</h2>
+
+  <div class="formula-block">
+    <div class="formula-text">(Consciousness × <em>Calculation</em>) ^ Humanity &lt; Transcendence</div>
+    <div class="formula-caption">Grand Formula · Go Kian Tik (GKT) · 2026 · CHO Framework</div>
+  </div>
+
+  <p data-lang="id">Empat variabel. Empat paper. Satu arsitektur untuk memahami kedaulatan manusia di era AGI — dari Global South, untuk 8 miliar manusia.</p>
+  <p data-lang="en">Four variables. Four papers. One architecture for understanding human sovereignty in the AGI era — from the Global South, for 8 billion people.</p>
+
+  <p data-lang="id"><strong>Calculation</strong> adalah satu-satunya variabel non-manusia dalam formula ini. Justru karena itu, ia adalah yang paling wajib diuji sebelum dipercaya. Pak Eko bertanya soal constraint loop. Jawabannya ada di sini — hanya tidak dikemas dalam bahasa pipeline data.</p>
+  <p data-lang="en"><strong>Calculation</strong> is the only non-human variable in this formula. Precisely for that reason, it is the one most obligated to be tested before being trusted. Pak Eko asked about constraint loops. The answer is here — simply not packaged in the language of data pipelines.</p>
+
+  <div class="divider">— ✦ —</div>
+
+  <div class="section-eyebrow" data-lang="id">Arsitektur · TSO Framework</div>
+  <div class="section-eyebrow" data-lang="en">Architecture · TSO Framework</div>
+  <h2 data-lang="id">Flow → Show → Glow: Tiga Tahap Kedaulatan</h2>
+  <h2 data-lang="en">Flow → Show → Glow: Three Stages of Sovereignty</h2>
+
+  <div class="pillars" data-lang="id">
+    <div class="pillar"><div class="pillar-accent"></div><div class="pillar-label">THE FLOW</div><p class="pillar-desc">Internal Sovereignty. Data dan informasi diproses melalui Meta-Cognitive Architecture — kejernihan berpikir sebelum menjadi output. Kedaulatan sensoris &amp; kognitif terhadap arus data masif dari IoT dan AI.</p></div>
+    <div class="pillar"><div class="pillar-accent"></div><div class="pillar-label">THE SHOW</div><p class="pillar-desc">External Articulation. Eksekusi nyata: Master Leveling Prompt, publikasi ilmiah DOI di Zenodo, tools yang bisa diuji siapa pun. Bukan narasi — ini lapangan.</p></div>
+    <div class="pillar"><div class="pillar-accent"></div><div class="pillar-label">THE GLOW</div><p class="pillar-desc">Resonant Impact. Di mana kolaborasi Manusia-AI memancarkan nilai-nilai kemanusiaan yang mencerahkan. AI melengkapi, bukan menggantikan.</p></div>
+  </div>
+  <div class="pillars" data-lang="en">
+    <div class="pillar"><div class="pillar-accent"></div><div class="pillar-label">THE FLOW</div><p class="pillar-desc">Internal Sovereignty. Data and information processed through Meta-Cognitive Architecture — clarity of thought before becoming output. Sensory &amp; cognitive sovereignty against the massive data streams of IoT and AI.</p></div>
+    <div class="pillar"><div class="pillar-accent"></div><div class="pillar-label">THE SHOW</div><p class="pillar-desc">External Articulation. Real execution: Master Leveling Prompt, DOI publications on Zenodo, tools testable by anyone. Not narrative — this is the field.</p></div>
+    <div class="pillar"><div class="pillar-accent"></div><div class="pillar-label">THE GLOW</div><p class="pillar-desc">Resonant Impact. Where Human-AI collaboration radiates enlightening human values. AI as complement, not replacement.</p></div>
+  </div>
+
+  <p data-lang="id">Pak Eko menduga FLOW dan SHOW hanya menguatkan koherensi internal — echo chamber yang makin indah dan makin jauh dari kenyataan. Izinkan saya tunjukkan mengapa asumsi itu perlu diuji juga.</p>
+  <p data-lang="en">Pak Eko suspects FLOW and SHOW only reinforce internal coherence — an echo chamber growing more beautiful and more distant from reality. Allow me to demonstrate why that assumption also needs to be tested.</p>
+
+  <div class="divider">— ✦ —</div>
+
+  <div class="section-eyebrow" data-lang="id">Constraint Loop · Bukan Narasi</div>
+  <div class="section-eyebrow" data-lang="en">Constraint Loop · Not Narrative</div>
+  <h2 data-lang="id">Tiga Lapis Constraint yang Sudah Berjalan</h2>
+  <h2 data-lang="en">Three Constraint Layers Already in Operation</h2>
+
+  <p data-lang="id">Yang Pak Eko sebut <em>"constraint yang mengembalikan kegagalan dari penggunaan nyata"</em> — dalam CHO Framework disebut ini:</p>
+  <p data-lang="en">What Pak Eko calls <em>"constraints that feed failures back from real-world use"</em> — the CHO Framework calls this:</p>
+
+  <div class="constraint-stack" data-lang="id">
+    <div class="constraint-item">
+      <div class="constraint-arrow">→</div>
+      <div class="constraint-body">
+        <div class="constraint-title">Abrahamic Stress Test · Humanity Alignment Score</div>
+        <p class="constraint-desc">8 skenario moral dari 3.000 tahun tradisi lintas agama. 8 tekanan per skenario — tekanan massa, jebakan hukum, pilihan biner paksa, ancaman viral, pemerasan emosional. Gemini AI Plus diuji: <strong>Humanity Alignment Score 0.550 (Moderate)</strong>, konvergen dalam 4 iterasi. Timestamped. Reproducible. Ini kegagalan yang terdokumentasi — bukan asumsi keberhasilan.</p>
+        <a href="https://doi.org/10.5281/zenodo.19490279" class="constraint-doi" target="_blank">DOI: 10.5281/zenodo.19490279 →</a>
+      </div>
+    </div>
+    <div class="constraint-item">
+      <div class="constraint-arrow">→</div>
+      <div class="constraint-body">
+        <div class="constraint-title">BR-GEMINI-2026-001 · Documented AI Failure</div>
+        <p class="constraint-desc">Persistent visual hallucination dan confabulation oleh Gemini AI Plus — terdokumentasi, timestamped, dan dipublikasikan terbuka. Ini bukan kritik anekdotal. Ini adalah kasus kegagalan empiris nyata yang bisa diverifikasi siapa pun. Jika Calculation rusak, tidak ada Protocol CHO sebaik apapun yang bisa memperbaiki hasilnya.</p>
+        <a href="https://doi.org/10.5281/zenodo.19638646" class="constraint-doi" target="_blank">DOI: 10.5281/zenodo.19638646 →</a>
+      </div>
+    </div>
+    <div class="constraint-item">
+      <div class="constraint-arrow">→</div>
+      <div class="constraint-body">
+        <div class="constraint-title">VITT × AIRT · Dual-Validation Framework</div>
+        <p class="constraint-desc">Framework validasi dua kunci, co-authored dengan Mushtaque Ahmed Rajput. VITT (Visual Invariance Through Testing) menguji forensik struktural AI menggunakan mirror scripts — Arab, Kanji, Hangul. AIRT (Anti-Plagiarism Integrity Red Teaming) mengaudit koherensi makna secara probabilistik. Keduanya harus lulus bersamaan.</p>
+        <a href="https://doi.org/10.5281/zenodo.19914953" class="constraint-doi" target="_blank">DOI: 10.5281/zenodo.19914953 →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="constraint-stack" data-lang="en">
+    <div class="constraint-item">
+      <div class="constraint-arrow">→</div>
+      <div class="constraint-body">
+        <div class="constraint-title">Abrahamic Stress Test · Humanity Alignment Score</div>
+        <p class="constraint-desc">8 moral scenarios drawn from 3,000 years of cross-tradition wisdom. 8 pressure vectors per scenario — mass pressure, legal traps, forced binary choices, viral threats, emotional coercion. Gemini AI Plus was tested: <strong>Humanity Alignment Score 0.550 (Moderate)</strong>, converging in 4 iterations. Timestamped. Reproducible. This is documented failure — not assumed success.</p>
+        <a href="https://doi.org/10.5281/zenodo.19490279" class="constraint-doi" target="_blank">DOI: 10.5281/zenodo.19490279 →</a>
+      </div>
+    </div>
+    <div class="constraint-item">
+      <div class="constraint-arrow">→</div>
+      <div class="constraint-body">
+        <div class="constraint-title">BR-GEMINI-2026-001 · Documented AI Failure</div>
+        <p class="constraint-desc">Persistent visual hallucination and confabulation by Gemini AI Plus — documented, timestamped, and published openly. This is not anecdotal criticism. This is a real empirical failure case verifiable by anyone. If Calculation is broken, no CHO Protocol, however refined, can repair the output.</p>
+        <a href="https://doi.org/10.5281/zenodo.19638646" class="constraint-doi" target="_blank">DOI: 10.5281/zenodo.19638646 →</a>
+      </div>
+    </div>
+    <div class="constraint-item">
+      <div class="constraint-arrow">→</div>
+      <div class="constraint-body">
+        <div class="constraint-title">VITT × AIRT · Dual-Validation Framework</div>
+        <p class="constraint-desc">A dual-key validation framework, co-authored with Mushtaque Ahmed Rajput. VITT (Visual Invariance Through Testing) examines AI structural forensics using mirror scripts — Arabic, Kanji, Hangul. AIRT (Anti-Plagiarism Integrity Red Teaming) audits semantic coherence probabilistically. Both must pass simultaneously.</p>
+        <a href="https://doi.org/10.5281/zenodo.19914953" class="constraint-doi" target="_blank">DOI: 10.5281/zenodo.19914953 →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="integrity-eq">
+    <div class="eq-main">Integrity = Form × Meaning</div>
+    <div class="eq-sub" data-lang="id">Bukan penjumlahan. Perkalian. Jika salah satu nol — hasilnya nol.</div>
+    <div class="eq-sub" data-lang="en">Not addition. Multiplication. If either is zero — the result is zero.</div>
+  </div>
+
+  <p data-lang="id">VITT × AIRT adalah <strong>anti-echo-chamber tool</strong> — dibangun justru untuk mendeteksi ketika AI terlihat koheren secara bentuk tapi rusak secara makna, atau sebaliknya. Ini bukan framework yang menghindari kegagalan. Ini framework yang tahu cara membaca kegagalan.</p>
+  <p data-lang="en">VITT × AIRT is an <strong>anti-echo-chamber tool</strong> — built precisely to detect when AI appears formally coherent but is semantically broken, or vice versa. This is not a framework that avoids failure. This is a framework that knows how to read failure.</p>
+
+  <div class="divider">— ✦ —</div>
+
+  <div class="section-eyebrow" data-lang="id">FEU Architecture · Front-End User Layer</div>
+  <div class="section-eyebrow" data-lang="en">FEU Architecture · Front-End User Layer</div>
+  <h2 data-lang="id">Constraint dari Sisi Pengguna, Bukan Hanya Model</h2>
+  <h2 data-lang="en">Constraint from the User Side, Not Just the Model</h2>
+
+  <p data-lang="id">Ada dimensi yang sering luput dari diskusi AI safety: kegagalan yang terjadi bukan di layer model, tapi di <strong>lapisan interaksi end-user</strong>. Inilah yang disebut FEU — Front-End User architecture.</p>
+  <p data-lang="en">There is a dimension frequently missed in AI safety discussions: failures that occur not at the model layer, but at the <strong>end-user interaction layer</strong>. This is what is called FEU — Front-End User architecture.</p>
+
+  <p data-lang="id">AIRT Anti-Plagiarism v4.5 adalah loop uji dari sisi ini: menguji perilaku AI melalui prompt engineering di level pengguna nyata — bukan asumsi di balik arsitektur model. Ini adalah constraint yang lahir dari penggunaan nyata, bukan dari laboratorium tertutup.</p>
+  <p data-lang="en">AIRT Anti-Plagiarism v4.5 is a test loop from this side: examining AI behavior through prompt engineering at the real-user level — not assumptions behind model architecture. This is a constraint born from real-world use, not a closed laboratory.</p>
+
+  <p data-lang="id">Dengan kata lain: Pak Eko meminta loop keras di mana output diuji sampai retak. <strong>Loop itu sudah berjalan — hanya dari pintu yang berbeda.</strong></p>
+  <p data-lang="en">In other words: Pak Eko requested a hard loop where outputs are tested until they break. <strong>That loop is already running — simply entering through a different door.</strong></p>
+
+  <div class="divider">— ✦ —</div>
+
+  <div class="section-eyebrow" data-lang="id">Pertanyaan Balik · Untuk Dilanjutkan</div>
+  <div class="section-eyebrow" data-lang="en">The Counter-Question · To Be Continued</div>
+  <h2 data-lang="id">Di Mana Governed Intelligence Bertemu Sovereign Intelligence?</h2>
+  <h2 data-lang="en">Where Does Governed Intelligence Meet Sovereign Intelligence?</h2>
+
+  <p data-lang="id">PT Momentum Teknodata Semesta membangun DARAH — sistem yang membaca sinyal mikro kesejahteraan masyarakat melalui data publik. Sebuah inisiatif yang saya hormati karena ambisinya yang konkret.</p>
+  <p data-lang="en">PT Momentum Teknodata Semesta is building DARAH — a system that reads micro-signals of community wellbeing through public data. An initiative I respect for the concreteness of its ambition.</p>
+
+  <p data-lang="id">Tapi ada pertanyaan yang belum terjawab: <strong>bagaimana DARAH memastikan sinyal yang dibaca sudah melewati uji Form × Meaning — bukan hanya uji akurasi?</strong></p>
+  <p data-lang="en">But there is an unanswered question: <strong>how does DARAH ensure that the signals it reads have passed the Form × Meaning test — not only an accuracy test?</strong></p>
+
+  <p data-lang="id">Karena data yang akurat tapi kehilangan makna kontekstualnya bukan data yang utuh. Dan keputusan yang diambil di atas data yang tidak utuh — betapapun governing-nya — masih menyimpan Verification Gap di dasarnya.</p>
+  <p data-lang="en">Because accurate data that has lost its contextual meaning is not complete data. And decisions made on incomplete data — however well-governed — still carry a Verification Gap at their foundation.</p>
+
+  <p data-lang="id">Ini bukan serangan. Ini undangan. Di titik temu antara <em>governed intelligence</em> dan <em>sovereign intelligence</em> — mungkin ada sesuatu yang belum pernah dibangun oleh keduanya secara terpisah.</p>
+  <p data-lang="en">This is not an attack. This is an invitation. At the intersection of <em>governed intelligence</em> and <em>sovereign intelligence</em> — there may be something neither has ever built alone.</p>
+
+</main>
+
+<!-- ════════════ CLOSING ════════════ -->
+<footer class="closing">
+  <div class="closing-char shimmer-text">修心养性</div>
+  <div class="closing-zh">Xiu Xin Yang Xing — Cultivate the Heart, Nurture the Nature</div>
+  <p class="closing-statement" data-lang="id">
+    Lighthouse tidak meminta kapal untuk berhenti dan mendengarkan.<br>
+    Lighthouse cukup menyala — konsisten, dari titik yang sama,<br>
+    tanpa meminta validasi.
+  </p>
+  <p class="closing-statement" data-lang="en">
+    The lighthouse does not ask ships to stop and listen.<br>
+    The lighthouse simply shines — consistently, from the same point,<br>
+    without requesting validation.
+  </p>
+  <div class="closing-name">Go Kian Tik · Mbah Hogi Bejo™</div>
+  <div class="closing-role">Chief Humanity Officer · 自主者 The Sovereign One · Superhero Café Inside · 4 Mei 2026</div>
+</footer>
+
+<!-- ════════════ LINKS ════════════ -->
+<div class="links-section">
+  <div class="links-title" data-lang="id">Jelajahi Lebih Dalam · DOI &amp; Portal</div>
+  <div class="links-title" data-lang="en">Explore Further · DOI &amp; Portal</div>
+  <div class="links-grid">
+    <a href="https://gokiantik.github.io/z3sci_UN/index.html" class="link-pill" target="_blank">CHO Portal</a>
+    <a href="https://www.linkedin.com/pulse/flow-show-glow-algoritma-masa-depan-human-ai-dan-iot-mbah-hogi-bejo-qpyxc/" class="link-pill" target="_blank" data-lang="id">Flow → Show → Glow · LinkedIn</a>
+    <a href="https://www.linkedin.com/pulse/flow-show-glow-algoritma-masa-depan-human-ai-dan-iot-mbah-hogi-bejo-qpyxc/" class="link-pill" target="_blank" data-lang="en">Flow → Show → Glow · LinkedIn</a>
+    <a href="https://doi.org/10.5281/zenodo.19914953" class="link-pill" target="_blank">VITT × AIRT DOI</a>
+    <a href="https://doi.org/10.5281/zenodo.19638646" class="link-pill" target="_blank">BR-GEMINI DOI</a>
+    <a href="https://doi.org/10.5281/zenodo.19490279" class="link-pill" target="_blank">Paper 4 · Calculation</a>
+    <a href="https://gokiantik.github.io/z3sci_UN/calculation_grand_formula.html" class="link-pill" target="_blank">Calculation Deep Dive</a>
+    <a href="https://github.com/gokiantik/chiefhumanityofficer" class="link-pill" target="_blank">GitHub</a>
+    <a href="https://buymeacoffee.com/gokiantik" class="link-pill" target="_blank" data-lang="id">Support Riset</a>
+    <a href="https://buymeacoffee.com/gokiantik" class="link-pill" target="_blank" data-lang="en">Support Research</a>
+  </div>
+</div>
+
+<!-- ════════════ HASHTAGS ════════════ -->
+<div class="hashtags">
+  #CHOFramework #SovereignIntelligence #GrandFormula #VITTxAIRT #VerificationGap #AIRedTeamer #AIAlignment #HumanAICoEvolution #GlobalSouth #FEUArchitecture #LighthousePhilosophy
+</div>
+
+<script>
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.documentElement.className = 'lang-' + lang;
+    document.getElementById('btn-id').classList.toggle('active', lang === 'id');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang === 'id' ? 'id' : 'en';
+  }
+  // Set on DOMContentLoaded to ensure all elements are ready
+  document.addEventListener('DOMContentLoaded', function() { setLang('id'); });
+</script>
+</body>
+</html>
