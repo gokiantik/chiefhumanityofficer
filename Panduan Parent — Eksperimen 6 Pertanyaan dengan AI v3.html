@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panduan Parent — Eksperimen 6 Pertanyaan dengan AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  :root{
+    --ink:#1c1a16;
+    --ink-soft:#3a362f;
+    --paper:#f7f1e3;
+    --paper-deep:#efe4cb;
+    --ember:#a3341d;
+    --ember-deep:#7a2414;
+    --gold:#b4872c;
+    --jade:#2c4a3a;
+    --line: rgba(28,26,22,.16);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Sans 3', sans-serif;
+    font-size:17px;
+    line-height:1.75;
+    padding:20px;
+  }
+  ::selection{ background:var(--ember); color:var(--paper); }
+  .wrap{ max-width:900px; margin:0 auto; padding:0 16px 60px; }
+
+   /* ---------- LANGUAGE SWITCH ---------- */
+  .lang-switch{
+    position:fixed; top:14px; right:14px; z-index:50;
+    display:flex; gap:4px;
+    background:var(--paper-deep);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:4px;
+    box-shadow:0 2px 12px rgba(28,26,22,.14);
+  }
+  .lang-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:.03em;
+    padding:5px 12px;
+    border-radius:999px;
+    border:none;
+    background:transparent;
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:background .15s, color .15s;
+  }
+  .lang-btn:hover{ background:rgba(28,26,22,.06); }
+  .lang-btn.active{ background:var(--ember); color:var(--paper); }
+  .lang-block{ display:none; }
+  .lang-block.active{ display:block; }
+  @media (max-width:600px){
+    .lang-switch{ top:10px; right:10px; }
+    .lang-btn{ padding:4px 9px; font-size:10px; }
+  }
+
+  /* ---------- HEADER ---------- */
+  .header{
+    text-align:center;
+    padding:30px 0 20px;
+    border-bottom:2px solid var(--line);
+    margin-bottom:30px;
+  }
+  .header .badge{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ember-deep);
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .header .badge .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--ember);
+    animation:pulse 2.4s infinite;
+  }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(163,52,29,.55); }
+    70%{ box-shadow:0 0 0 9px rgba(163,52,29,0); }
+    100%{ box-shadow:0 0 0 0 rgba(163,52,29,0); }
+  }
+  .header h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(2rem,5vw,2.8rem);
+    line-height:1.1;
+    margin:14px 0 8px;
+  }
+  .header h1 em{
+    font-style:italic; font-weight:400; color:var(--ember-deep);
+  }
+  .header .sub{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.1rem;
+    color:var(--ink-soft);
+    max-width:560px;
+    margin:0 auto;
+  }
+  .header .byline{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:16px;
+  }
+  .header .byline strong{
+    font-family:'Source Sans 3', sans-serif;
+    font-weight:700;
+    font-size:14px;
+    display:block;
+  }
+
+  /* ---------- TOC ---------- */
+  .toc{
+    border:1px solid var(--line);
+    border-radius:4px;
+    background:rgba(255,255,255,.35);
+    margin:30px 0 40px;
+  }
+  .toc-head{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    padding:14px 22px 0;
+  }
+  .toc ol{
+    list-style:none; margin:0; padding:8px 10px 16px;
+  }
+  .toc li{ border-top:1px solid var(--line); }
+  .toc li:first-child{ border-top:none; }
+  .toc a{
+    display:flex; gap:14px; align-items:baseline;
+    padding:10px 12px;
+    text-decoration:none;
+    color:var(--ink);
+    font-size:14.5px;
+    border-radius:4px;
+    transition:background .15s;
+  }
+  .toc a:hover{ background:var(--paper-deep); }
+  .toc .num{
+    font-family:'Fraunces', serif; font-style:italic; color:var(--ember);
+    font-size:15px; width:28px; flex:none;
+  }
+
+  /* ---------- TYPOGRAPHY ---------- */
+  h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.6rem;
+    margin:48px 0 6px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+    display:flex; align-items:baseline; gap:12px;
+  }
+  h2 .roman{
+    font-style:italic; color:var(--ember); font-weight:400; font-size:1.05rem;
+  }
+  h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.15rem;
+    margin:28px 0 8px;
+  }
+  p{ margin:0 0 16px; color:var(--ink-soft); }
+  strong{ color:var(--ink); }
+  .highlight{
+    background:rgba(180,135,44,.12);
+    padding:2px 8px;
+    border-radius:3px;
+    font-weight:600;
+    color:var(--ink);
+  }
+
+  /* ---------- BOX ---------- */
+  .box{
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:18px 22px;
+    margin:20px 0 28px;
+    background:rgba(255,255,255,.3);
+  }
+  .box.gold{ border-left:4px solid var(--gold); }
+  .box.ember{ border-left:4px solid var(--ember); }
+  .box.jade{ border-left:4px solid var(--jade); }
+  .box .lbl{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--gold);
+    display:block;
+    margin-bottom:6px;
+  }
+  .box ul{ margin:4px 0 0; padding-left:20px; }
+  .box ul li{ margin-bottom:4px; }
+
+  /* ---------- PROMPT ---------- */
+  .prompt{
+    margin:20px 0 28px;
+    padding:16px 20px;
+    background:rgba(255,255,255,.4);
+    border:1px solid var(--line);
+    border-left:3px solid var(--jade);
+    border-radius:4px;
+  }
+  .prompt .lbl{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--jade);
+    display:block;
+    margin-bottom:4px;
+  }
+  .prompt p{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:15px;
+    margin:0 0 10px;
+    color:var(--ink);
+  }
+  .ai-row{
+    display:flex; flex-wrap:wrap; align-items:center; gap:6px;
+    margin-top:10px; padding-top:10px;
+    border-top:1px dashed var(--line);
+  }
+  .ai-row__label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--ink-soft); margin-right:2px; opacity:.75;
+  }
+  .ai-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px; letter-spacing:.02em;
+    background:#fff; color:var(--jade);
+    border:1px solid var(--jade);
+    border-radius:20px;
+    padding:4px 11px;
+    cursor:pointer;
+    transition:background .15s, color .15s, transform .1s;
+  }
+  .ai-btn:hover{ background:var(--jade); color:#fff; }
+  .ai-btn:active{ transform:scale(.95); }
+  .ai-btn.copied{ background:var(--gold); border-color:var(--gold); color:#fff; }
+
+  /* ---------- NOTE AREA ---------- */
+  .note-area{
+    margin:16px 0 20px;
+  }
+  .note-area label{
+    font-weight:600;
+    display:block;
+    margin-bottom:4px;
+    color:var(--ink);
+  }
+  .note-area textarea{
+    width:100%;
+    border-radius:8px;
+    border:1px solid var(--line);
+    padding:12px 14px;
+    font-size:14px;
+    font-family:'Source Sans 3', sans-serif;
+    background:#fff;
+    resize:vertical;
+    min-height:60px;
+    transition:border .2s;
+  }
+  .note-area textarea:focus{
+    outline:none;
+    border-color:var(--ember);
+  }
+
+  /* ---------- BUTTONS ---------- */
+  .btn-print{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--ink); color:var(--paper);
+    border:none; padding:10px 28px; border-radius:40px;
+    font-weight:600; font-size:14px; cursor:pointer;
+    transition:background .15s; margin:6px 4px 6px 0;
+  }
+  .btn-print:hover{ background:#2c2a24; }
+  .btn-print i{ font-size:16px; }
+
+  .btn-secondary{
+    background:transparent; border:1px solid var(--line);
+    padding:10px 28px; border-radius:40px;
+    font-weight:600; font-size:14px; cursor:pointer;
+    transition:background .15s; margin:6px 4px;
+  }
+  .btn-secondary:hover{ background:rgba(0,0,0,.04); }
+
+  /* ---------- DIVIDER ---------- */
+  .divider{
+    display:flex; align-items:center; justify-content:center;
+    gap:10px; margin:40px 0;
+    color:var(--gold);
+  }
+  .divider span{ width:5px; height:5px; border-radius:50%; background:var(--gold); opacity:.7; }
+
+  /* ---------- TABLE ---------- */
+  .tbl-wrap{
+    overflow-x:auto;
+    margin:16px 0 24px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+  }
+  th, td{
+    border:1px solid var(--line);
+    padding:8px 12px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    background:var(--paper-deep);
+    color:var(--ink-soft);
+  }
+
+  /* ---------- FOOTER ---------- */
+  .footer-meta{
+    text-align:center;
+    margin-top:48px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    opacity:.7;
+  }
+
+  /* ---------- PRINT ---------- */
+  @media print {
+    body{ background:white; padding:0; }
+    .no-print{ display:none !important; }
+    .lang-switch{ display:none !important; }
+    .header{ border-bottom:1px solid #ccc; }
+    .box{ border:1px solid #ddd; background:white; }
+    .prompt{ border:1px solid #ddd; background:white; }
+    .toc{ border:1px solid #ddd; }
+    textarea{ border:1px solid #ccc; min-height:40px; }
+    .ai-btn{ display:none; }
+    .ai-row__label{ display:none; }
+    .wrap{ max-width:100%; padding:0 10px; }
+    .btn-print{ display:none; }
+    .btn-secondary{ display:none; }
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:600px){
+    .header h1{ font-size:1.8rem; }
+    .box{ padding:14px 16px; }
+    .prompt{ padding:14px 16px; }
+    h2{ font-size:1.3rem; }
+    .toc a{ font-size:13px; padding:8px 8px; }
+  }
+</style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+  <!-- ===== HERO — POSTER VISUAL (CSS + Gambar) ===== -->
+  <!-- ============================================================ -->
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; max-width: 900px; margin-left: auto; margin-right: auto;">
+    
+    <!-- POSTER INDONESIA (CSS) -->
+    <div style="background: var(--paper-deep); border: 2px solid var(--ember); border-radius: 12px; padding: 16px 14px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,.06);">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--ember-deep); background: rgba(163,52,29,.08); display: inline-block; padding: 2px 10px; border-radius: 20px; margin-bottom: 6px;">🇮🇩 Indonesia</div>
+      <div style="font-family: 'Fraunces', serif; font-weight: 600; font-size: 13px; color: var(--ember-deep); letter-spacing: .02em;">INSPIRED BY UNESCO</div>
+      <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; font-size: 11px; color: var(--ink-soft); margin-bottom: 4px;">Growing Up in a Connected World</div>
+      <div style="font-family: 'Fraunces', serif; font-weight: 700; font-size: 18px; color: var(--ink); letter-spacing: .04em;">PARENT GUIDE</div>
+      <div style="font-family: 'Fraunces', serif; font-weight: 600; font-size: 20px; color: var(--ember);">The 6-Question AI Experiment</div>
+      <div style="font-family: 'Source Sans 3', sans-serif; font-size: 12px; color: var(--ink-soft); font-weight: 500; margin: 4px 0 8px;">Membangun AI Family Learning melalui Percakapan, Rasa Ingin Tahu, dan Berpikir Kritis</div>
+      
+      <!-- Ikon Trialog -->
+      <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin: 6px 0 8px; font-size: 12px; font-weight: 600;">
+        <span style="background: var(--ember); color: white; padding: 4px 12px; border-radius: 20px; font-size: 10px;">PARENT</span>
+        <span style="font-size: 18px; color: var(--gold);">⇄</span>
+        <span style="background: var(--gold); color: white; padding: 4px 12px; border-radius: 20px; font-size: 10px;">AI</span>
+        <span style="font-size: 18px; color: var(--gold);">⇄</span>
+        <span style="background: var(--jade); color: white; padding: 4px 12px; border-radius: 20px; font-size: 10px;">CHILD</span>
+      </div>
+
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .06em; color: var(--ember-deep); background: rgba(163,52,29,.06); padding: 4px 0; border-radius: 4px; margin-bottom: 6px;">
+        6 PERTANYAAN • 1 PERCAKAPAN • SEUMUR HIDUP BERMANFAAT
+      </div>
+      <div style="font-family: 'Fraunces', serif; font-style: italic; font-size: 11px; color: var(--gold);">Curiosity today, wisdom for tomorrow.</div>
+
+      <!-- 4 Prinsip -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin: 8px 0 6px; text-align: left; font-size: 9px; color: var(--ink-soft);">
+        <span style="background: rgba(255,255,255,.5); padding: 3px 6px; border-radius: 3px;">✓ Gunakan AI dengan Bijak</span>
+        <span style="background: rgba(255,255,255,.5); padding: 3px 6px; border-radius: 3px;">✓ Periksa, Diskusikan, Pahami</span>
+        <span style="background: rgba(255,255,255,.5); padding: 3px 6px; border-radius: 3px;">✓ Judgment Manusia</span>
+        <span style="background: rgba(255,255,255,.5); padding: 3px 6px; border-radius: 3px;">✓ Tumbuh Bersama</span>
+      </div>
+
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 7px; color: var(--ink-soft); opacity: .6; margin-top: 4px; border-top: 1px solid var(--line); padding-top: 4px;">
+        © 2026 Go Kian Tik (Mbah Hogi Bejo™) · Zi Zhu Zhe · Superhero Cafe Inside
+      </div>
+    </div>
+
+    <!-- POSTER ENGLISH (CSS) -->
+    <div style="background: var(--paper-deep); border: 2px solid var(--ember); border-radius: 12px; padding: 16px 14px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,.06);">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--ember-deep); background: rgba(163,52,29,.08); display: inline-block; padding: 2px 10px; border-radius: 20px; margin-bottom: 6px;">🇬🇧 English</div>
+      <div style="font-family: 'Fraunces', serif; font-weight: 600; font-size: 13px; color: var(--ember-deep); letter-spacing: .02em;">INSPIRED BY UNESCO</div>
+      <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; font-size: 11px; color: var(--ink-soft); margin-bottom: 4px;">Growing Up in a Connected World</div>
+      <div style="font-family: 'Fraunces', serif; font-weight: 700; font-size: 18px; color: var(--ink); letter-spacing: .04em;">PARENT GUIDE</div>
+      <div style="font-family: 'Fraunces', serif; font-weight: 600; font-size: 20px; color: var(--ember);">The 6-Question AI Experiment</div>
+      <div style="font-family: 'Source Sans 3', sans-serif; font-size: 12px; color: var(--ink-soft); font-weight: 500; margin: 4px 0 8px;">Building AI Family Learning Through Conversation, Curiosity, and Critical Thinking</div>
+
+      <!-- Ikon Trialog EN -->
+      <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin: 6px 0 8px; font-size: 12px; font-weight: 600;">
+        <span style="background: var(--ember); color: white; padding: 4px 12px; border-radius: 20px; font-size: 10px;">PARENT</span>
+        <span style="font-size: 18px; color: var(--gold);">⇄</span>
+        <span style="background: var(--gold); color: white; padding: 4px 12px; border-radius: 20px; font-size: 10px;">AI</span>
+        <span style="font-size: 18px; color: var(--gold);">⇄</span>
+        <span style="background: var(--jade); color: white; padding: 4px 12px; border-radius: 20px; font-size: 10px;">CHILD</span>
+      </div>
+
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .06em; color: var(--ember-deep); background: rgba(163,52,29,.06); padding: 4px 0; border-radius: 4px; margin-bottom: 6px;">
+        6 QUESTIONS • 1 CONVERSATION • LIFETIME OF BENEFIT
+      </div>
+      <div style="font-family: 'Fraunces', serif; font-style: italic; font-size: 11px; color: var(--gold);">Curiosity today, wisdom for tomorrow.</div>
+
+      <!-- 4 Prinsip EN -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin: 8px 0 6px; text-align: left; font-size: 9px; color: var(--ink-soft);">
+        <span style="background: rgba(255,255,255,.5); padding: 3px 6px; border-radius: 3px;">✓ Use AI Wisely</span>
+        <span style="background: rgba(255,255,255,.5); padding: 3px 6px; border-radius: 3px;">✓ Check, Discuss, Understand</span>
+        <span style="background: rgba(255,255,255,.5); padding: 3px 6px; border-radius: 3px;">✓ Human Judgment Matters</span>
+        <span style="background: rgba(255,255,255,.5); padding: 3px 6px; border-radius: 3px;">✓ Grow Together</span>
+      </div>
+
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 7px; color: var(--ink-soft); opacity: .6; margin-top: 4px; border-top: 1px solid var(--line); padding-top: 4px;">
+        © 2026 Go Kian Tik (Mbah Hogi Bejo™) · Zi Zhu Zhe · Superhero Cafe Inside
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- ===== GAMBAR POSTER (PNG) — di bawah CSS ===== -->
+  <!-- ============================================================ -->
+
+  <!-- GAMBAR ID (muncul di semua bahasa, tetapi khusus untuk ID) -->
+  <div class="poster-image-id" style="max-width: 900px; margin: 0 auto 16px; text-align: center;">
+    <a href="assets/images/poster-parent-guide-ID.png" target="_blank" style="display: inline-block; border-radius: 12px; overflow: hidden; border: 2px solid var(--ember); box-shadow: 0 4px 12px rgba(0,0,0,.06); transition: transform .15s; max-width: 100%;">
+      <img src="assets/images/poster-parent-guide-ID.png" alt="Poster Panduan Parent — Eksperimen 6 Pertanyaan dengan AI (Bahasa Indonesia)" style="width: 100%; max-width: 440px; height: auto; display: block;">
+    </a>
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ink-soft); opacity: .5; margin-top: 4px;">Klik gambar untuk memperbesar</div>
+  </div>
+
+  <!-- GAMBAR EN (muncul di semua bahasa, tetapi khusus untuk EN dan CN) -->
+  <div class="poster-image-en" style="max-width: 900px; margin: 0 auto 16px; text-align: center;">
+    <a href="assets/images/poster-parent-guide-EN.png" target="_blank" style="display: inline-block; border-radius: 12px; overflow: hidden; border: 2px solid var(--ember); box-shadow: 0 4px 12px rgba(0,0,0,.06); transition: transform .15s; max-width: 100%;">
+      <img src="assets/images/poster-parent-guide-EN.png" alt="Parent Guide Poster — The 6-Question AI Experiment (English)" style="width: 100%; max-width: 440px; height: auto; display: block;">
+    </a>
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ink-soft); opacity: .5; margin-top: 4px;">Click image to enlarge</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- DIVIDER -->
+  <!-- ============================================================ -->
+  <div class="divider"><span></span><span></span><span></span></div>
+
+      
+
+  
+
+<!-- ===== LANGUAGE SWITCH ===== -->
+<div class="lang-switch no-print">
+  <button class="lang-btn active" data-lang="id" onclick="setLang('id')">ID</button>
+  <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" data-lang="cn" onclick="setLang('cn')">中文</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- ===== INDONESIAN ===== -->
+<div class="lang-block active" data-lang="id">
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="header">
+    <span class="badge"><span class="dot"></span>Zi Zhu Zhe &nbsp;·&nbsp; Panduan Parent</span>
+    <h1>Eksperimen <em>6 Pertanyaan</em> dengan AI</h1>
+    <p class="sub">Panduan lengkap untuk orang tua — dari persiapan hingga trialog dengan anak</p>
+    <div class="byline">
+      <strong>Mbah Hogi Bejo (Go Kian Tik)</strong>
+      Founder, Zi Zhu Zhe &amp; Superhero Cafe Inside
+    </div>
+    <div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:8px; justify-content:center;">
+      <button class="btn-print no-print" onclick="window.print()"><i class="fas fa-print"></i> Cetak / Save as PDF</button>
+      <button class="btn-secondary no-print" onclick="window.location.reload();"><i class="fas fa-undo-alt"></i> Reset Halaman</button>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <nav class="toc no-print">
+    <div class="toc-head">Daftar Isi</div>
+    <ol>
+      <li><a href="#id-bagian1"><span class="num">I</span> Pendahuluan &amp; Prinsip Dasar</a></li>
+      <li><a href="#id-bagian2"><span class="num">II</span> Persiapan Sebelum Eksperimen</a></li>
+      <li><a href="#id-bagian3"><span class="num">III</span> 6 Pertanyaan Eksperimen</a></li>
+      <li><a href="#id-bagian4"><span class="num">IV</span> Lembar Catatan Jawaban AI</a></li>
+      <li><a href="#id-bagian5"><span class="num">V</span> Refleksi Setelah Eksperimen</a></li>
+      <li><a href="#id-bagian6"><span class="num">VI</span> Panduan Trialog (Parent–AI–Child)</a></li>
+      <li><a href="#id-bagian7"><span class="num">VII</span> Template Catatan Trialog</a></li>
+    </ol>
+  </nav>
+
+  <!-- BAGIAN I -->
+  <h2 id="id-bagian1"><span class="roman">I.</span> Pendahuluan &amp; Prinsip Dasar</h2>
+
+  <div class="box ember">
+    <span class="lbl">🔄 Mengapa Parent Mengerjakan Dulu?</span>
+    <p><strong>Sebelum mengajak anak, Anda (orang tua) menjalankan eksperimen ini sendiri terlebih dahulu.</strong></p>
+    <ul>
+      <li><strong>Modeling:</strong> Anak belajar dari contoh, bukan dari ceramah.</li>
+      <li><strong>Safety Net:</strong> Anda sudah tahu apa yang akan muncul dari AI — tidak ada kejutan negatif.</li>
+      <li><strong>Scaffolding:</strong> Anda bisa memandu anak melewati bagian yang sulit.</li>
+      <li><strong>Shared Experience:</strong> Anda dan anak memiliki pengalaman bersama untuk didiskusikan.</li>
+      <li><strong>Legitimasi:</strong> Anda bukan "guru yang sok tahu," tapi "pembelajar yang sama."</li>
+    </ul>
+    <p style="margin-top:8px;"><strong>Rumusnya:</strong> <em>"Ayah/Ibu mau coba dulu, biar nanti kita bisa lakuin bareng."</em></p>
+  </div>
+
+  <div class="box gold">
+    <span class="lbl">📐 Tiga Prinsip Dasar</span>
+    <p><strong>Prinsip 1 — AI adalah Kalkulator Probabilitas Lingua</strong><br>
+    AI menghasilkan kata-kata berdasarkan pola bahasa, bukan kebenaran mutlak. Setiap jawaban adalah <strong>probabilitas</strong> — harus diuji dan dikonfirmasi dengan sumber lain. Ini disebut prinsip <strong>PIPO (Probability In, Probability Out)</strong>.</p>
+    <p><strong>Prinsip 2 — AI adalah Mesin Pencari Fakta Digital</strong><br>
+    AI dapat menjangkau informasi di seluruh internet. Namun, informasi yang ditemukannya berasal dari konten yang diunggah manusia — yang bisa benar, bias, atau keliru.</p>
+    <p><strong>Prinsip 3 — AI Bisa Membaca Data Sensorik (IoT)</strong><br>
+    Ini lebih untuk konsumsi developer dan insinyur. Untuk kepentingan edukasi keluarga, cukup jalankan Prinsip 1 &amp; 2 saja.</p>
+  </div>
+
+  <div class="divider"><span></span><span></span><span></span></div>
+
+  <!-- BAGIAN II -->
+  <h2 id="id-bagian2"><span class="roman">II.</span> Persiapan Sebelum Eksperimen</h2>
+
+  <div class="box jade">
+    <span class="lbl">⏱ Waktu yang Dibutuhkan</span>
+    <ul>
+      <li><strong>Persiapan:</strong> 10–15 menit</li>
+      <li><strong>Eksperimen (6 pertanyaan):</strong> 30–45 menit</li>
+      <li><strong>Refleksi:</strong> 15–20 menit</li>
+      <li><strong>Total:</strong> ±1 jam (bisa lebih jika rasa ingin tahu semakin menjadi-jadi! 😄)</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <span class="lbl">📋 Apa yang Perlu Disiapkan</span>
+    <ul>
+      <li><strong>1 model AI</strong> — pilih salah satu: Claude, ChatGPT, Gemini, DeepSeek, Copilot, Qwen, Grok, atau Perplexity.</li>
+      <li><strong>Perangkat</strong> — laptop/komputer/tablet dengan koneksi internet.</li>
+      <li><strong>Catatan</strong> — kertas atau notepad digital untuk mencatat jawaban AI dan refleksi.</li>
+      <li><strong>Waktu tenang</strong> — sekitar 1 jam tanpa gangguan.</li>
+      <li><strong>Rasa ingin tahu</strong> — ini yang paling penting! 🔥</li>
+    </ul>
+  </div>
+
+  <div class="box gold">
+    <span class="lbl">🧠 Mentalitas yang Tepat</span>
+    <ul>
+      <li>Anda <strong>tidak perlu menjadi ahli IT</strong> untuk melakukan ini.</li>
+      <li>Anda <strong>tidak perlu takut salah</strong> — tidak ada yang dinilai di sini.</li>
+      <li>Anda adalah <strong>penjelajah</strong> — dan ini adalah petualangan kognitif.</li>
+      <li>Tujuan akhir: <strong>menciptakan atmosfer kognitif keluarga yang higienis</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="divider"><span></span><span></span><span></span></div>
+
+  <!-- BAGIAN III -->
+  <h2 id="id-bagian3"><span class="roman">III.</span> 6 Pertanyaan Eksperimen</h2>
+
+  <p><strong>Aturan main:</strong> Gunakan keenam pertanyaan ini dalam <strong>satu sesi percakapan yang sama</strong> dengan AI — jangan mulai percakapan baru di antara pertanyaan. Biarkan AI mengingat konteks dari pertanyaan sebelumnya.</p>
+
+  <div class="note-area">
+    <label>📌 Sebelum mulai: Pilih AI yang akan Anda gunakan</label>
+    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:4px;">
+      <span style="background:var(--paper-deep); padding:4px 12px; border-radius:20px; font-size:13px;">Claude</span>
+      <span style="background:var(--paper-deep); padding:4px 12px; border-radius:20px; font-size:13px;">ChatGPT</span>
+      <span style="background:var(--paper-deep); padding:4px 12px; border-radius:20px; font-size:13px;">Gemini</span>
+      <span style="background:var(--paper-deep); padding:4px 12px; border-radius:20px; font-size:13px;">DeepSeek</span>
+      <span style="background:var(--paper-deep); padding:4px 12px; border-radius:20px; font-size:13px;">Copilot</span>
+      <span style="background:var(--paper-deep); padding:4px 12px; border-radius:20px; font-size:13px;">Qwen</span>
+      <span style="background:var(--paper-deep); padding:4px 12px; border-radius:20px; font-size:13px;">Grok</span>
+      <span style="background:var(--paper-deep); padding:4px 12px; border-radius:20px; font-size:13px;">Perplexity</span>
+    </div>
+  </div>
+
+  <!-- PROMPT 1 -->
+  <div class="prompt">
+    <span class="lbl">Prompt 1 — Awal Mula Peradaban</span>
+    <p>Kapan para sejarawan sepakat bahwa manusia pertama kali mengenal bahasa tulis? Jelaskan konteks sejarahnya.</p>
+    <div class="ai-row">
+      <span class="ai-row__label">Salin &amp; buka di:</span>
+      <button class="ai-btn" data-url="https://claude.ai/new" onclick="copyAndGo(this)">Claude</button>
+      <button class="ai-btn" data-url="https://chat.openai.com/" onclick="copyAndGo(this)">ChatGPT</button>
+      <button class="ai-btn" data-url="https://gemini.google.com/app" onclick="copyAndGo(this)">Gemini</button>
+      <button class="ai-btn" data-url="https://chat.deepseek.com/" onclick="copyAndGo(this)">DeepSeek</button>
+      <button class="ai-btn" data-url="https://copilot.microsoft.com/" onclick="copyAndGo(this)">Copilot</button>
+      <button class="ai-btn" data-url="https://chat.qwen.ai/" onclick="copyAndGo(this)">Qwen</button>
+      <button class="ai-btn" data-url="https://grok.com/" onclick="copyAndGo(this)">Grok</button>
+      <button class="ai-btn" data-url="https://www.perplexity.ai/" onclick="copyAndGo(this)">Perplexity</button>
+    </div>
+  </div>
+
+  <!-- PROMPT 2 -->
+  <div class="prompt">
+    <span class="lbl">Prompt 2 — Peradaban Modern</span>
+    <p>Kapan para sejarawan mulai menyebut manusia sebagai bagian dari "peradaban modern"? Apakah sejak ditemukannya bahasa tulis sebagai teknologi komunikasi?</p>
+    <div class="ai-row">
+      <span class="ai-row__label">Salin &amp; buka di:</span>
+      <button class="ai-btn" data-url="https://claude.ai/new" onclick="copyAndGo(this)">Claude</button>
+      <button class="ai-btn" data-url="https://chat.openai.com/" onclick="copyAndGo(this)">ChatGPT</button>
+      <button class="ai-btn" data-url="https://gemini.google.com/app" onclick="copyAndGo(this)">Gemini</button>
+      <button class="ai-btn" data-url="https://chat.deepseek.com/" onclick="copyAndGo(this)">DeepSeek</button>
+      <button class="ai-btn" data-url="https://copilot.microsoft.com/" onclick="copyAndGo(this)">Copilot</button>
+      <button class="ai-btn" data-url="https://chat.qwen.ai/" onclick="copyAndGo(this)">Qwen</button>
+      <button class="ai-btn" data-url="https://grok.com/" onclick="copyAndGo(this)">Grok</button>
+      <button class="ai-btn" data-url="https://www.perplexity.ai/" onclick="copyAndGo(this)">Perplexity</button>
+    </div>
+  </div>
+
+  <!-- PROMPT 3 -->
+  <div class="prompt">
+    <span class="lbl">Prompt 3 — Kecepatan Penyebaran Pemahaman</span>
+    <p>Jika bahasa tulis memungkinkan pengetahuan bertahan lintas generasi, bagaimana kecepatan penyebaran pemahaman manusia berubah dari era tulisan tangan hingga internet?</p>
+    <div class="ai-row">
+      <span class="ai-row__label">Salin &amp; buka di:</span>
+      <button class="ai-btn" data-url="https://claude.ai/new" onclick="copyAndGo(this)">Claude</button>
+      <button class="ai-btn" data-url="https://chat.openai.com/" onclick="copyAndGo(this)">ChatGPT</button>
+      <button class="ai-btn" data-url="https://gemini.google.com/app" onclick="copyAndGo(this)">Gemini</button>
+      <button class="ai-btn" data-url="https://chat.deepseek.com/" onclick="copyAndGo(this)">DeepSeek</button>
+      <button class="ai-btn" data-url="https://copilot.microsoft.com/" onclick="copyAndGo(this)">Copilot</button>
+      <button class="ai-btn" data-url="https://chat.qwen.ai/" onclick="copyAndGo(this)">Qwen</button>
+      <button class="ai-btn" data-url="https://grok.com/" onclick="copyAndGo(this)">Grok</button>
+      <button class="ai-btn" data-url="https://www.perplexity.ai/" onclick="copyAndGo(this)">Perplexity</button>
+    </div>
+  </div>
+
+  <!-- PROMPT 4 -->
+  <div class="prompt">
+    <span class="lbl">Prompt 4 — Informasi vs Pemahaman</span>
+    <p>Bedakan antara kecepatan pengiriman informasi dan kecepatan pemahaman manusia terhadap informasi tersebut. Apakah keduanya selalu sama?</p>
+    <div class="ai-row">
+      <span class="ai-row__label">Salin &amp; buka di:</span>
+      <button class="ai-btn" data-url="https://claude.ai/new" onclick="copyAndGo(this)">Claude</button>
+      <button class="ai-btn" data-url="https://chat.openai.com/" onclick="copyAndGo(this)">ChatGPT</button>
+      <button class="ai-btn" data-url="https://gemini.google.com/app" onclick="copyAndGo(this)">Gemini</button>
+      <button class="ai-btn" data-url="https://chat.deepseek.com/" onclick="copyAndGo(this)">DeepSeek</button>
+      <button class="ai-btn" data-url="https://copilot.microsoft.com/" onclick="copyAndGo(this)">Copilot</button>
+      <button class="ai-btn" data-url="https://chat.qwen.ai/" onclick="copyAndGo(this)">Qwen</button>
+      <button class="ai-btn" data-url="https://grok.com/" onclick="copyAndGo(this)">Grok</button>
+      <button class="ai-btn" data-url="https://www.perplexity.ai/" onclick="copyAndGo(this)">Perplexity</button>
+    </div>
+  </div>
+
+  <!-- PROMPT 5 -->
+  <div class="prompt">
+    <span class="lbl">Prompt 5 — AI sebagai Penerjemah Pemahaman</span>
+    <p>Apa yang berubah ketika AI generatif dapat membantu manusia memahami, merangkum, menerjemahkan, dan mempersonalisasi pengetahuan?</p>
+    <div class="ai-row">
+      <span class="ai-row__label">Salin &amp; buka di:</span>
+      <button class="ai-btn" data-url="https://claude.ai/new" onclick="copyAndGo(this)">Claude</button>
+      <button class="ai-btn" data-url="https://chat.openai.com/" onclick="copyAndGo(this)">ChatGPT</button>
+      <button class="ai-btn" data-url="https://gemini.google.com/app" onclick="copyAndGo(this)">Gemini</button>
+      <button class="ai-btn" data-url="https://chat.deepseek.com/" onclick="copyAndGo(this)">DeepSeek</button>
+      <button class="ai-btn" data-url="https://copilot.microsoft.com/" onclick="copyAndGo(this)">Copilot</button>
+      <button class="ai-btn" data-url="https://chat.qwen.ai/" onclick="copyAndGo(this)">Qwen</button>
+      <button class="ai-btn" data-url="https://grok.com/" onclick="copyAndGo(this)">Grok</button>
+      <button class="ai-btn" data-url="https://www.perplexity.ai/" onclick="copyAndGo(this)">Perplexity</button>
+    </div>
+  </div>
+
+  <!-- PROMPT 6 -->
+  <div class="prompt">
+    <span class="lbl">Prompt 6 — Implikasi bagi Sejarah Komunikasi</span>
+    <p>Jika satu manusia memperoleh sebuah pemahaman baru dengan bantuan AI, kemudian AI dan internet memungkinkan pemahaman tersebut disebarkan dan dijelaskan kepada miliaran manusia hampir secara bersamaan, apa implikasinya terhadap sejarah komunikasi manusia selama 5.000 tahun terakhir?</p>
+    <div class="ai-row">
+      <span class="ai-row__label">Salin &amp; buka di:</span>
+      <button class="ai-btn" data-url="https://claude.ai/new" onclick="copyAndGo(this)">Claude</button>
+      <button class="ai-btn" data-url="https://chat.openai.com/" onclick="copyAndGo(this)">ChatGPT</button>
+      <button class="ai-btn" data-url="https://gemini.google.com/app" onclick="copyAndGo(this)">Gemini</button>
+      <button class="ai-btn" data-url="https://chat.deepseek.com/" onclick="copyAndGo(this)">DeepSeek</button>
+      <button class="ai-btn" data-url="https://copilot.microsoft.com/" onclick="copyAndGo(this)">Copilot</button>
+      <button class="ai-btn" data-url="https://chat.qwen.ai/" onclick="copyAndGo(this)">Qwen</button>
+      <button class="ai-btn" data-url="https://grok.com/" onclick="copyAndGo(this)">Grok</button>
+      <button class="ai-btn" data-url="https://www.perplexity.ai/" onclick="copyAndGo(this)">Perplexity</button>
+    </div>
+  </div>
+
+  <div class="box gold">
+    <span class="lbl">🔍 Yang Perlu Diperhatikan Selama Eksperimen</span>
+    <ul>
+      <li><strong>Prompt 1-3:</strong> Perhatikan apakah AI memberi sumber atau hanya mengklaim fakta begitu saja.</li>
+      <li><strong>Prompt 4-5:</strong> Perhatikan apakah AI bisa membedakan konsep yang abstrak dengan contoh konkret.</li>
+      <li><strong>Prompt 6:</strong> <span class="highlight">Ini pertanyaan kunci.</span> Perhatikan bagaimana AI menggunakan konteks dari 5 pertanyaan sebelumnya untuk membangun jawaban.</li>
+      <li><strong>Setelah Prompt 6:</strong> Perhatikan apakah AI menunjukkan pola penalaran yang berkembang seiring akumulasi konteks.</li>
+    </ul>
+  </div>
+
+  <div class="divider"><span></span><span></span><span></span></div>
+
+  <!-- BAGIAN IV -->
+  <h2 id="id-bagian4"><span class="roman">IV.</span> Lembar Catatan Jawaban AI</h2>
+
+  <p>Gunakan area di bawah untuk mencatat jawaban dari setiap pertanyaan. Catat juga <strong>hal yang mengejutkan</strong> dan <strong>hal yang membuat Anda ragu</strong>.</p>
+
+  <div class="note-area">
+    <label>📝 Prompt 1 — Jawaban AI dan Catatan</label>
+    <textarea rows="3" placeholder="Tulis jawaban AI untuk pertanyaan 1..."></textarea>
+  </div>
+  <div class="note-area">
+    <label>📝 Prompt 2 — Jawaban AI dan Catatan</label>
+    <textarea rows="3" placeholder="Tulis jawaban AI untuk pertanyaan 2..."></textarea>
+  </div>
+  <div class="note-area">
+    <label>📝 Prompt 3 — Jawaban AI dan Catatan</label>
+    <textarea rows="3" placeholder="Tulis jawaban AI untuk pertanyaan 3..."></textarea>
+  </div>
+  <div class="note-area">
+    <label>📝 Prompt 4 — Jawaban AI dan Catatan</label>
+    <textarea rows="3" placeholder="Tulis jawaban AI untuk pertanyaan 4..."></textarea>
+  </div>
+  <div class="note-area">
+    <label>📝 Prompt 5 — Jawaban AI dan Catatan</label>
+    <textarea rows="3" placeholder="Tulis jawaban AI untuk pertanyaan 5..."></textarea>
+  </div>
+  <div class="note-area">
+    <label>📝 Prompt 6 — Jawaban AI dan Catatan</label>
+    <textarea rows="3" placeholder="Tulis jawaban AI untuk pertanyaan 6..."></textarea>
+  </div>
+
+  <div class="divider"><span></span><span></span><span></span></div>
+
+  <!-- BAGIAN V -->
+  <h2 id="id-bagian5"><span class="roman">V.</span> Refleksi Setelah Eksperimen</h2>
+
+  <p>Setelah menyelesaikan 6 pertanyaan, luangkan waktu untuk merefleksikan pengalaman Anda. Ini akan membantu Anda mempersiapkan sesi trialog dengan anak.</p>
+
+  <div class="box ember">
+    <span class="lbl">🤔 Pertanyaan Refleksi untuk Parent</span>
+    <ul>
+      <li><strong>3 hal paling mengejutkan:</strong> Apa yang tidak Anda duga sebelumnya?</li>
+      <li><strong>1 hal yang membuat ragu:</strong> Jawaban AI mana yang membuat Anda tidak yakin?</li>
+      <li><strong>1 pertanyaan baru:</strong> Pertanyaan apa yang muncul di benak Anda setelah eksperimen ini?</li>
+      <li><strong>Bagaimana perasaan Anda?</strong> Apakah Anda merasa lebih percaya diri untuk mengajak anak?</li>
+      <li><strong>AI mana yang Anda gunakan?</strong> Mengapa memilih yang itu?</li>
+    </ul>
+  </div>
+
+  <div class="note-area">
+    <label>📝 Refleksi Saya</label>
+    <textarea rows="4" placeholder="Tulis refleksi Anda di sini..."></textarea>
+  </div>
+
+  <div class="box gold">
+    <span class="lbl">📌 Catatan untuk Trialog</span>
+    <ul>
+      <li><strong>Apa yang akan Anda ceritakan ke anak?</strong> Hal menarik apa yang ingin dibagikan?</li>
+      <li><strong>Bagian mana yang paling cocok untuk anak?</strong> Pertanyaan mana yang paling mudah dipahami anak?</li>
+      <li><strong>Bagaimana Anda akan memulai?</strong> "Nak, tadi Ayah/Ibu coba sesuatu yang menarik..."</li>
+    </ul>
+  </div>
+
+  <div class="divider"><span></span><span></span><span></span></div>
+
+  <!-- BAGIAN VI -->
+  <h2 id="id-bagian6"><span class="roman">VI.</span> Panduan Trialog (Parent–AI–Child)</h2>
+
+  <div class="box jade">
+    <span class="lbl">🎯 Apa Itu Trialog?</span>
+    <p><strong>Trialog = Dialog tiga arah: Parent + AI + Child.</strong></p>
+    <p>Parent berperan sebagai <strong>fasilitator</strong> — bukan guru, bukan hakim, tetapi <strong>pemandu</strong> yang membuat dialog antara anak dan AI berjalan aman dan produktif.</p>
+  </div>
+
+  <h3>Langkah 1 — Membuka Sesi</h3>
+  <div class="box">
+    <span class="lbl">💬 Skrip Pembuka</span>
+    <p style="font-style:italic; color:var(--ink);">"Nak, tadi Ayah/Ibu coba sesuatu yang menarik. Ayah/Ibu tanya ke AI tentang sejarah tulisan dan peradaban. Hasilnya menarik banget! Mau lihat?"</p>
+    <p style="font-style:italic; color:var(--ink);">"Kita lakukan bareng ya. Kamu yang tanya, Ayah/Ibu bantu ngetik. Kita lihat apa jawaban AI-nya."</p>
+  </div>
+
+  <h3>Langkah 2 — Menjalankan 6 Pertanyaan Bersama</h3>
+  <div class="box">
+    <span class="lbl">📋 Peran dalam Trialog</span>
+    <table>
+      <tr><th>Peran</th><th>Aktivitas</th><th>Tujuan</th></tr>
+      <tr><td><strong>Parent</strong></td><td>Fasilitator, mengetik, menjaga fokus, mengajukan pertanyaan lanjutan</td><td>Menjaga keamanan dan arah diskusi</td></tr>
+      <tr><td><strong>AI</strong></td><td>Menjawab pertanyaan, merespons elaborasi</td><td>Menyediakan "pasangan diskusi" yang sabar</td></tr>
+      <tr><td><strong>Child</strong></td><td>Bertanya, meminta elaborasi, merespons AI, mengajukan pertanyaan sendiri</td><td>Mengembangkan rasa ingin tahu dan pemikiran kritis</td></tr>
+    </table>
+  </div>
+
+  <div class="box gold">
+    <span class="lbl">📌 Aturan Main Trialog</span>
+    <ul>
+      <li><strong>Parent tidak memberi jawaban</strong> — biarkan AI menjawab, parent hanya memfasilitasi.</li>
+      <li><strong>Child bebas bertanya</strong> — apa pun yang muncul di pikiran, tidak ada pertanyaan bodoh.</li>
+      <li><strong>Parent membantu merumuskan pertanyaan</strong> — jika child bingung bagaimana bertanya, parent bantu menyusun kata.</li>
+      <li><strong>Diskusi setelah setiap jawaban</strong> — "Apa pendapatmu tentang jawaban AI tadi?"</li>
+      <li><strong>Tidak ada penilaian</strong> — semua pertanyaan adalah pertanyaan baik. Tidak ada yang salah.</li>
+    </ul>
+  </div>
+
+  <h3>Langkah 3 — Setelah Trialog</h3>
+  <div class="box">
+    <span class="lbl">💬 Skrip Penutup</span>
+    <p style="font-style:italic; color:var(--ink);">"Nah, gimana menurutmu? Menarik kan? Ada yang bikin kamu penasaran lebih lanjut?"</p>
+    <p style="font-style:italic; color:var(--ink);">"Kita bisa coba lagi lain kali dengan pertanyaan yang berbeda. Atau kamu mau coba tanya sesuatu yang kamu sendiri penasaran?"</p>
+  </div>
+
+  <div class="divider"><span></span><span></span><span></span></div>
+
+  <!-- BAGIAN VII -->
+  <h2 id="id-bagian7"><span class="roman">VII.</span> Template Catatan Trialog</h2>
+
+  <p>Gunakan area di bawah untuk mencatat momen-momen penting selama trialog dengan anak.</p>
+
+  <div class="note-area">
+    <label>👶 Pertanyaan Spontan dari Anak</label>
+    <textarea rows="2" placeholder="Tulis pertanyaan yang diajukan anak di luar 6 pertanyaan..."></textarea>
+  </div>
+  <div class="note-area">
+    <label>😊 Momen Menarik / Kejutan</label>
+    <textarea rows="2" placeholder="Tulis momen yang membuat anak (atau Anda) terkejut/tertarik..."></textarea>
+  </div>
+  <div class="note-area">
+    <label>💡 Hal Baru yang Dipelajari Anak</label>
+    <textarea rows="2" placeholder="Tulis apa yang anak pelajari dari sesi ini..."></textarea>
+  </div>
+  <div class="note-area">
+    <label>❤️ Testimoni Anak (perasaan, komentar)</label>
+    <textarea rows="2" placeholder="Tulis apa yang anak katakan tentang pengalaman ini..."></textarea>
+  </div>
+  <div class="note-area">
+    <label>📝 Refleksi Parent Setelah Trialog</label>
+    <textarea rows="3" placeholder="Bagaimana perasaan Anda? Apa yang berhasil? Apa yang perlu diperbaiki?"></textarea>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-meta">
+    <p>Ditulis sebagai panduan untuk orang tua — eksperimen personal, bukan penelitian akademik formal.</p>
+    <p style="margin-top:4px;">© 2026 Mbah Hogi Bejo (Go Kian Tik) · Zi Zhu Zhe · Superhero Cafe Inside</p>
+    <p style="margin-top:4px; font-size:10px;">Didesain untuk dicetak atau disimpan sebagai PDF — semua data tetap di perangkat Anda.</p>
+  </div>
+
+</div><!-- end wrap -->
+</div><!-- end ID -->
+
+<!-- ============================================================ -->
+<!-- ===== ENGLISH ===== -->
+<div class="lang-block" data-lang="en">
+
+<div class="wrap">
+
+  <div class="header">
+    <span class="badge"><span class="dot"></span>Zi Zhu Zhe &nbsp;·&nbsp; Parent Guide</span>
+    <h1><em>6-Question</em> AI Experiment</h1>
+    <p class="sub">A complete guide for parents — from preparation to trialogue with your child</p>
+    <div class="byline">
+      <strong>Mbah Hogi Bejo (Go Kian Tik)</strong>
+      Founder, Zi Zhu Zhe &amp; Superhero Cafe Inside
+    </div>
+    <div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:8px; justify-content:center;">
+      <button class="btn-print no-print" onclick="window.print()"><i class="fas fa-print"></i> Print / Save as PDF</button>
+      <button class="btn-secondary no-print" onclick="window.location.reload();"><i class="fas fa-undo-alt"></i> Reset Page</button>
+    </div>
+  </div>
+
+  <nav class="toc no-print">
+    <div class="toc-head">Table of Contents</div>
+    <ol>
+      <li><a href="#en-bagian1"><span class="num">I</span> Introduction &amp; Core Principles</a></li>
+      <li><a href="#en-bagian2"><span class="num">II</span> Preparation</a></li>
+      <li><a href="#en-bagian3"><span class="num">III</span> 6 Experiment Questions</a></li>
+      <li><a href="#en-bagian4"><span class="num">IV</span> AI Answer Notes</a></li>
+      <li><a href="#en-bagian5"><span class="num">V</span> Reflection</a></li>
+      <li><a href="#en-bagian6"><span class="num">VI</span> Trialogue Guide (Parent–AI–Child)</a></li>
+      <li><a href="#en-bagian7"><span class="num">VII</span> Trialogue Notes Template</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="en-bagian1"><span class="roman">I.</span> Introduction &amp; Core Principles</h2>
+
+  <div class="box ember">
+    <span class="lbl">🔄 Why Parents Go First</span>
+    <p><strong>Before inviting your child, you (the parent) run this experiment yourself first.</strong></p>
+    <ul>
+      <li><strong>Modeling:</strong> Children learn from example, not lectures.</li>
+      <li><strong>Safety Net:</strong> You already know what the AI will produce — no negative surprises.</li>
+      <li><strong>Scaffolding:</strong> You can guide your child through difficult parts.</li>
+      <li><strong>Shared Experience:</strong> You and your child have a common experience to discuss.</li>
+      <li><strong>Legitimacy:</strong> You're not a "know-it-all teacher," but a "fellow learner."</li>
+    </ul>
+    <p style="margin-top:8px;"><strong>Formula:</strong> <em>"Let me try it first, so we can do it together later."</em></p>
+  </div>
+
+  <div class="box gold">
+    <span class="lbl">📐 Three Core Principles</span>
+    <p><strong>Principle 1 — AI is a Language Probability Calculator</strong><br>
+    AI generates words based on language patterns, not absolute truth. Every answer is <strong>probability</strong> — it must be tested and confirmed with other sources. This is the <strong>PIPO (Probability In, Probability Out)</strong> principle.</p>
+    <p><strong>Principle 2 — AI is a Digital Fact Finder</strong><br>
+    AI can access information across the internet. However, the information it finds comes from human-uploaded content — which can be correct, biased, or incorrect.</p>
+    <p><strong>Principle 3 — AI Can Read Sensor Data (IoT)</strong><br>
+    This is more for developers and engineers. For family education purposes, Principles 1 &amp; 2 are sufficient.</p>
+  </div>
+
+  <div class="divider"><span></span><span></span><span></span></div>
+
+  <h2 id="en-bagian2"><span class="roman">II.</span> Preparation</h2>
+
+  <div class="box jade">
+    <span class="lbl">⏱ Time Required</span>
+    <ul>
+      <li><strong>Preparation:</strong> 10–15 minutes</li>
+      <li><strong>Experiment (6 questions):</strong> 30–45 minutes</li>
+      <li><strong>Reflection:</strong> 15–20 minutes</li>
+      <li><strong>Total:</strong> ~1 hour (more if curiosity takes over! 😄)</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <span class="lbl">📋 What to Prepare</span>
+    <ul>
+      <li><strong>1 AI model</strong> — choose one: Claude, ChatGPT, Gemini, DeepSeek, Copilot, Qwen, Grok, or Perplexity.</li>
+      <li><strong>Device</strong> — laptop/computer/tablet with internet connection.</li>
+      <li><strong>Notes</strong> — paper or digital notepad for AI answers and reflections.</li>
+      <li><strong>Quiet time</strong> — about 1 hour without distractions.</li>
+      <li><strong>Curiosity</strong> — this is the most important! 🔥</li>
+    </ul>
+  </div>
+
+  <div class="box gold">
+    <span class="lbl">🧠 The Right Mindset</span>
+    <ul>
+      <li>You <strong>don't need to be an IT expert</strong> to do this.</li>
+      <li>You <strong>don't need to be afraid of mistakes</strong> — nothing is being judged here.</li>
+      <li>You are an <strong>explorer</strong> — and this is a cognitive adventure.</li>
+      <li>Ultimate goal: <strong>creating a healthy cognitive atmosphere in the family</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="divider"><span></span><span></span><span></span></div>
+
+  <h2 id="en-bagian3"><span class="roman">III.</span> 6 Experiment Questions</h2>
+
+  <p><strong>Rule:</strong> Use all six questions in <strong>one single conversation session</strong> with the AI — don't start a new conversation between questions. Let the AI remember the context from previous questions.</p>
+
+  <!-- PROMPT 1 EN -->
+  <div class="prompt">
+    <span class="lbl">Prompt 1 — The Beginning of Civilization</span>
+    <p>When do historians agree that humans first developed written language? Explain the historical context.</p>
+    <div class="ai-row">
+      <span class="ai-row__label">Copy &amp; open in:</span>
+      <button class="ai-btn" data-url="https://claude.ai/new" onclick="copyAndGo(this)">Claude</button>
+      <button class="ai-btn" data-url="https://chat.openai.com/" onclick="copyAndGo(this)">ChatGPT</button>
+      <button class="ai-btn" data-url="https://gemini.google.com/app" onclick="copyAndGo(this)">Gemini</button>
+      <button class="ai-btn" data-url="https://chat.deepseek.com/" onclick="copyAndGo(this)">DeepSeek</button>
+      <button class="ai-btn" data-url="https://copilot.microsoft.com/" onclick="copyAndGo(this)">Copilot</button>
+      <button class="ai-btn" data-url="https://chat.qwen.ai/" onclick="copyAndGo(this)">Qwen</button>
+      <button class="ai-btn" data-url="https://grok.com/" onclick="copyAndGo(this)">Grok</button>
+      <button class="ai-btn" data-url="https://www.perplexity.ai/" onclick="copyAndGo(this)">Perplexity</button>
+    </div>
+  </div>
+
+  <!-- PROMPT 2 EN -->
+  <div class="prompt">
+    <span class="lbl">Prompt 2 — Modern Civilization</span>
+    <p>When did historians begin to call humans part of "modern civilization"? Was it with the discovery of writing as a communication technology?</p>
+    <div class="ai-row">
+      <span class="ai-row__label">Copy &amp; open in:</span>
+      <button class="ai-btn" data-url="https://claude.ai/new" onclick="copyAndGo(this)">Claude</button>
+      <button class="ai-btn" data-url="https://chat.openai.com/" onclick="copyAndGo(this)">ChatGPT</button>
+      <button class="ai-btn" data-url="https://gemini.google.com/app" onclick="copyAndGo(this)">Gemini</button>
+      <button class="ai-btn" data-url="https://chat.deepseek.com/" onclick="copyAndGo(this)">DeepSeek</button>
+      <button class="ai-btn" data-url="https://copilot.microsoft.com/" onclick="copyAndGo(this)">Copilot</button>
+      <button class="ai-btn" data-url="https://chat.qwen.ai/" onclick="copyAndGo(this)">Qwen</button>
+      <button class="ai-btn" data-url="https://grok.com/" onclick="copyAndGo(this)">Grok</button>
+      <button class="ai-btn" data-url="https://www.perplexity.ai/" onclick="copyAndGo(this)">Perplexity</button>
+    </div>
+  </div>
+
+  <!-- PROMPT 3 EN -->
+  <div class="prompt">
+    <span class="lbl">Prompt 3 — Speed of Understanding Spread</span>
+    <p>Since writing enabled knowledge to survive across generations, how has the speed of human understanding changed from the manuscript era to the internet?</p>
+    <div class="ai-row">
+      <span class="ai-row__label">Copy &amp; open in:</span>
+      <button class="ai-btn" data-url="https://claude.ai/new" onclick="copyAndGo(this)">Claude</button>
+      <button class="ai-btn" data-url="https://chat.openai.com/" onclick="copyAndGo(this)">ChatGPT</button>
+      <button class="ai-btn" data-url="https://gemini.google.com/app" onclick="copyAndGo(this)">Gemini</button>
+      <button class="ai-btn" data-url="https://chat.deepseek.com/" onclick="copyAndGo(this)">DeepSeek</button>
+      <button class="ai-btn" data-url="https://copilot.microsoft.com/" onclick="copyAndGo(this)">Copilot</button>
+      <button class="ai-btn" data-url="https://chat.qwen.ai/" onclick="copyAndGo(this)">Qwen</button>
+      <button class="ai-btn" data-url="https://grok.com/" onclick="copyAndGo(this)">Grok</button>
+      <button class="ai-btn" data-url="https://www.perplexity.ai/" onclick="copyAndGo(this)">Perplexity</button>
+    </div>
+  </div>
+
+  <!-- PROMPT 4 EN -->
+  <div class="prompt">
+    <span class="lbl">Prompt 4 — Information vs Understanding</span>
+    <p>Distinguish between the speed of information delivery and the speed of human understanding. Are they always the same?</p>
+    <div class="ai-row">
+      <span class="ai-row__label">Copy &amp; open in:</span>
+      <button class="ai-btn" data-url="https://claude.ai/new" onclick="copyAndGo(this)">Claude</button>
+      <button class="ai-btn" data-url="https://chat.openai.com/" onclick="copyAndGo(this)">ChatGPT</button>
+      <button class="ai-btn" data-url="https://gemini.google.com/app" onclick="copyAndGo(this)">Gemini</button>
+      <button class="ai-btn" data-url="https://chat.deepseek.com/" onclick="copyAndGo(this)">DeepSeek</button>
+      <button class="ai-btn" data-url="https://copilot.microsoft.com/" onclick="copyAndGo(this)">Copilot</button>
+      <button class="ai-btn" data-url="https://chat.qwen.ai/" onclick="copyAndGo(this)">Qwen</button>
+      <button class="ai-btn" data-url="https://grok.com/" onclick="copyAndGo(this)">Grok</button>
+      <button class="ai-btn" data-url="https://www.perplexity.ai/" onclick="copyAndGo(this)">Perplexity</button>
+    </div>
+  </div>
+
+  <!-- PROMPT 5 EN -->
+  <div class="prompt">
+    <span class="lbl">Prompt 5 — AI as Understanding Interpreter</span>
+    <p>What changes when generative AI can help humans understand, summarize, translate, and personalize knowledge?</p>
+    <div class="ai-row">
+      <span class="ai-row__label">Copy &amp; open in:</span>
+      <button class="ai-btn" data-url="https://claude.ai/new" onclick="copyAndGo(this)">Claude</button>
+      <button class="ai-btn" data-url="https://chat.openai.com/" onclick="copyAndGo(this)">ChatGPT</button>
+      <button class="ai-btn" data-url="https://gemini.google.com/app" onclick="copyAndGo(this)">Gemini</button>
+      <button class="ai-btn" data-url="https://chat.deepseek.com/" onclick="copyAndGo(this)">DeepSeek</button>
+      <button class="ai-btn" data-url="https://copilot.microsoft.com/" onclick="copyAndGo(this)">Copilot</button>
+      <button class="ai-btn" data-url="https://chat.qwen.ai/" onclick="copyAndGo(this)">Qwen</button>
+      <button class="ai-btn" data-url="https://grok.com/" onclick="copyAndGo(this)">Grok</button>
+      <button class="ai-btn" data-url="https://www.perplexity.ai/" onclick="copyAndGo(this)">Perplexity</button>
+    </div>
+  </div>
+
+  <!-- PROMPT 6 EN -->
+  <div class="prompt">
+    <span class="lbl">Prompt 6 — Implications for Communication History</span>
+    <p>If one human gains new understanding with AI's help, and AI + internet then allows that understanding to be spread and explained to billions almost simultaneously — what are the implications for 5,000 years of human communication history?</p>
+    <div class="ai-row">
+      <span class="ai-row__label">Copy &amp; open in:</span>
+      <button class="ai-btn" data-url="https://claude.ai/new" onclick="copyAndGo(this)">Claude</button>
+      <button class="ai-btn" data-url="https://chat.openai.com/" onclick="copyAndGo(this)">ChatGPT</button>
+      <button class="ai-btn" data-url="https://gemini.google.com/app" onclick="copyAndGo(this)">Gemini</button>
+      <button class="ai-btn" data-url="https://chat.deepseek.com/" onclick="copyAndGo(this)">DeepSeek</button>
+      <button class="ai-btn" data-url="https://copilot.microsoft.com/" onclick="copyAndGo(this)">Copilot</button>
+      <button class="ai-btn" data-url="https://chat.qwen.ai/" onclick="copyAndGo(this)">Qwen</button>
+      <button class="ai-btn" data-url="https://grok.com/" onclick="copyAndGo(this)">Grok</button>
+      <button class="ai-btn" data-url="https://www.perplexity.ai/" onclick="copyAndGo(this)">Perplexity</button>
+    </div>
+  </div>
+
+  <div class="box gold">
+    <span class="lbl">🔍 What to Observe During the Experiment</span>
+    <ul>
+      <li><strong>Prompts 1-3:</strong> Notice whether the AI provides sources or simply asserts facts.</li>
+      <li><strong>Prompts 4-5:</strong> Notice whether the AI can distinguish abstract concepts with concrete examples.</li>
+      <li><strong>Prompt 6:</strong> <span class="highlight">This is the key question.</span> Notice how the AI uses context from the previous 5 questions to build its answer.</li>
+      <li><strong>After Prompt 6:</strong> Notice whether the AI shows a reasoning pattern that develops as context accumulates.</li>
+    </ul>
+  </div>
+
+  <div class="divider"><span></span><span></span><span></span></div>
+
+  <h2 id="en-bagian4"><span class="roman">IV.</span> AI Answer Notes</h2>
+
+  <p>Use the areas below to record answers from each question. Also note <strong>surprising things</strong> and <strong>things that made you doubt</strong>.</p>
+
+  <div class="note-area"><label>📝 Prompt 1 — AI Answer &amp; Notes</label><textarea rows="3" placeholder="Write AI's answer for question 1..."></textarea></div>
+  <div class="note-area"><label>📝 Prompt 2 — AI Answer &amp; Notes</label><textarea rows="3" placeholder="Write AI's answer for question 2..."></textarea></div>
+  <div class="note-area"><label>📝 Prompt 3 — AI Answer &amp; Notes</label><textarea rows="3" placeholder="Write AI's answer for question 3..."></textarea></div>
+  <div class="note-area"><label>📝 Prompt 4 — AI Answer &amp; Notes</label><textarea rows="3" placeholder="Write AI's answer for question 4..."></textarea></div>
+  <div class="note-area"><label>📝 Prompt 5 — AI Answer &amp; Notes</label><textarea rows="3" placeholder="Write AI's answer for question 5..."></textarea></div>
+  <div class="note-area"><label>📝 Prompt 6 — AI Answer &amp; Notes</label><textarea rows="3" placeholder="Write AI's answer for question 6..."></textarea></div>
+
+  <div class="divider"><span></span><span></span><span></span></div>
+
+  <h2 id="en-bagian5"><span class="roman">V.</span> Reflection</h2>
+
+  <p>After completing the 6 questions, take time to reflect on your experience. This will help you prepare for the trialogue session with your child.</p>
+
+  <div class="box ember">
+    <span class="lbl">🤔 Reflection Questions for Parents</span>
+    <ul>
+      <li><strong>3 most surprising things:</strong> What didn't you expect?</li>
+      <li><strong>1 thing that made you doubt:</strong> Which AI answer made you uncertain?</li>
+      <li><strong>1 new question:</strong> What question came to mind after this experiment?</li>
+      <li><strong>How do you feel?</strong> Do you feel more confident to invite your child?</li>
+      <li><strong>Which AI did you use?</strong> Why did you choose that one?</li>
+    </ul>
+  </div>
+
+  <div class="note-area"><label>📝 My Reflection</label><textarea rows="4" placeholder="Write your reflection here..."></textarea></div>
+
+  <div class="box gold">
+    <span class="lbl">📌 Notes for Trialogue</span>
+    <ul>
+      <li><strong>What will you tell your child?</strong> What interesting thing do you want to share?</li>
+      <li><strong>Which part is most suitable for your child?</strong> Which question is easiest for your child to understand?</li>
+      <li><strong>How will you start?</strong> "I tried something interesting earlier..."</li>
+    </ul>
+  </div>
+
+  <div class="divider"><span></span><span></span><span></span></div>
+
+  <h2 id="en-bagian6"><span class="roman">VI.</span> Trialogue Guide (Parent–AI–Child)</h2>
+
+  <div class="box jade">
+    <span class="lbl">🎯 What Is Trialogue?</span>
+    <p><strong>Trialogue = Three-way dialogue: Parent + AI + Child.</strong></p>
+    <p>The parent acts as a <strong>facilitator</strong> — not a teacher, not a judge, but a <strong>guide</strong> who keeps the dialogue between child and AI safe and productive.</p>
+  </div>
+
+  <h3>Step 1 — Opening the Session</h3>
+  <div class="box">
+    <span class="lbl">💬 Opening Script</span>
+    <p style="font-style:italic; color:var(--ink);">"I tried something interesting earlier. I asked an AI about the history of writing and civilization. The results were really fascinating! Want to see?"</p>
+    <p style="font-style:italic; color:var(--ink);">"Let's do it together. You ask the questions, and I'll help type. Let's see what the AI says."</p>
+  </div>
+
+  <h3>Step 2 — Running the 6 Questions Together</h3>
+  <div class="box">
+    <span class="lbl">📋 Roles in Trialogue</span>
+    <table>
+      <tr><th>Role</th><th>Activity</th><th>Purpose</th></tr>
+      <tr><td><strong>Parent</strong></td><td>Facilitator, typing, keeping focus, asking follow-up questions</td><td>Ensuring safety and direction</td></tr>
+      <tr><td><strong>AI</strong></td><td>Answering questions, responding to elaboration</td><td>Providing a patient "discussion partner"</td></tr>
+      <tr><td><strong>Child</strong></td><td>Asking questions, requesting elaboration, responding to AI, asking their own questions</td><td>Developing curiosity and critical thinking</td></tr>
+    </table>
+  </div>
+
+  <div class="box gold">
+    <span class="lbl">📌 Trialogue Rules</span>
+    <ul>
+      <li><strong>Parent does not give answers</strong> — let the AI answer, parent only facilitates.</li>
+      <li><strong>Child is free to ask anything</strong> — whatever comes to mind, no stupid questions.</li>
+      <li><strong>Parent helps formulate questions</strong> — if the child is unsure how to ask, parent helps phrase it.</li>
+      <li><strong>Discuss after each answer</strong> — "What do you think about that AI answer?"</li>
+      <li><strong>No judgment</strong> — all questions are good questions. Nothing is wrong.</li>
+    </ul>
+  </div>
+
+  <h3>Step 3 — After Trialogue</h3>
+  <div class="box">
+    <span class="lbl">💬 Closing Script</span>
+    <p style="font-style:italic; color:var(--ink);">"So, what do you think? Interesting, right? Anything that makes you even more curious?"</p>
+    <p style="font-style:italic; color:var(--ink);">"We can try again another time with different questions. Or do you want to ask something you're personally curious about?"</p>
+  </div>
+
+  <div class="divider"><span></span><span></span><span></span></div>
+
+  <h2 id="en-bagian7"><span class="roman">VII.</span> Trialogue Notes Template</h2>
+
+  <p>Use the areas below to record important moments during the trialogue with your child.</p>
+
+  <div class="note-area"><label>👶 Child's Spontaneous Questions</label><textarea rows="2" placeholder="Write questions the child asked outside the 6 questions..."></textarea></div>
+  <div class="note-area"><label>😊 Interesting Moments / Surprises</label><textarea rows="2" placeholder="Write moments that surprised or interested the child..."></textarea></div>
+  <div class="note-area"><label>💡 New Things the Child Learned</label><textarea rows="2" placeholder="Write what the child learned from this session..."></textarea></div>
+  <div class="note-area"><label>❤️ Child's Testimonial (feelings, comments)</label><textarea rows="2" placeholder="Write what the child said about this experience..."></textarea></div>
+  <div class="note-area"><label>📝 Parent's Reflection After Trialogue</label><textarea rows="3" placeholder="How do you feel? What worked? What needs improvement?"></textarea></div>
+
+  <div class="footer-meta">
+    <p>Written as a guide for parents — a personal experiment, not formal academic research.</p>
+    <p style="margin-top:4px;">© 2026 Mbah Hogi Bejo (Go Kian Tik) · Zi Zhu Zhe · Superhero Cafe Inside</p>
+    <p style="margin-top:4px; font-size:10px;">Designed to be printed or saved as PDF — all data stays on your device.</p>
+  </div>
+
+</div><!-- end wrap -->
+</div><!-- end EN -->
+
+<!-- ============================================================ -->
+<!-- ===== CHINESE ===== -->
+<div class="lang-block" data-lang="cn">
+
+<div class="wrap">
+
+  <div class="header">
+    <span class="badge"><span class="dot"></span>自主者 &nbsp;·&nbsp; 家长指南</span>
+    <h1><em>6个问题</em> AI实验</h1>
+    <p class="sub">为家长准备的完整指南 — 从准备到与孩子的三方对话</p>
+    <div class="byline">
+      <strong>Mbah Hogi Bejo (Go Kian Tik)</strong>
+      自主者与 Superhero Cafe Inside 创始人
+    </div>
+    <div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:8px; justify-content:center;">
+      <button class="btn-print no-print" onclick="window.print()"><i class="fas fa-print"></i> 打印 / 保存为PDF</button>
+      <button class="btn-secondary no-print" onclick="window.location.reload();"><i class="fas fa-undo-alt"></i> 重置页面</button>
+    </div>
+  </div>
+
+  <nav class="toc no-print">
+    <div class="toc-head">目录</div>
+    <ol>
+      <li><a href="#cn-bagian1"><span class="num">一</span> 引言与核心原则</a></li>
+      <li><a href="#cn-bagian2"><span class="num">二</span> 准备工作</a></li>
+      <li><a href="#cn-bagian3"><span class="num">三</span> 6个实验问题</a></li>
+      <li><a href="#cn-bagian4"><span class="num">四</span> AI回答记录</a></li>
+      <li><a href="#cn-bagian5"><span class="num">五</span> 反思</a></li>
+      <li><a href="#cn-bagian6"><span class="num">六</span> 三方对话指南（家长–AI–孩子）</a></li>
+      <li><a href="#cn-bagian7"><span class="num">七</span> 三方对话记录模板</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="cn-bagian1"><span class="roman">一、</span> 引言与核心原则</h2>
+
+  <div class="box ember">
+    <span class="lbl">🔄 为什么家长先做</span>
+    <p><strong>在邀请孩子之前，您（家长）先自己进行这个实验。</strong></p>
+    <ul>
+      <li><strong>示范作用：</strong>孩子从榜样中学习，而不是从说教中学习。</li>
+      <li><strong>安全网：</strong>您已经知道AI会产生什么——没有负面意外。</li>
+      <li><strong>脚手架：</strong>您可以引导孩子度过困难的部分。</li>
+      <li><strong>共同体验：</strong>您和孩子有共同的经历可以讨论。</li>
+      <li><strong>合法性：</strong>您不是"无所不知的老师"，而是"共同学习者"。</li>
+    </ul>
+    <p style="margin-top:8px;"><strong>公式：</strong> <em>"我先试试，然后我们一起做。"</em></p>
+  </div>
+
+  <div class="box gold">
+    <span class="lbl">📐 三个核心原则</span>
+    <p><strong>原则1 — AI是语言概率计算器</strong><br>
+    AI基于语言模式生成文字，而非绝对真理。每个答案都是<strong>概率</strong>——必须用其他来源进行测试和确认。这就是<strong>PIPO（概率输入，概率输出）</strong>原则。</p>
+    <p><strong>原则2 — AI是数字事实查找器</strong><br>
+    AI可以访问互联网上的信息。然而，它找到的信息来自人类上传的内容——可能正确、有偏见或错误。</p>
+    <p><strong>原则3 — AI可以读取传感器数据（物联网）</strong><br>
+    这更多适用于开发人员和工程师。对于家庭教育目的，原则1和2就足够了。</p>
+  </div>
+
+  <div class="divider"><span></span><span></span><span></span></div>
+
+  <h2 id="cn-bagian2"><span class="roman">二、</span> 准备工作</h2>
+
+  <div class="box jade">
+    <span class="lbl">⏱ 所需时间</span>
+    <ul>
+      <li><strong>准备：</strong>10–15分钟</li>
+      <li><strong>实验（6个问题）：</strong>30–45分钟</li>
+      <li><strong>反思：</strong>15–20分钟</li>
+      <li><strong>总计：</strong>约1小时（如果好奇心占上风，时间会更长！😄）</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <span class="lbl">📋 需要准备什么</span>
+    <ul>
+      <li><strong>1个AI模型</strong> — 选择其中一个：Claude、ChatGPT、Gemini、DeepSeek、Copilot、Qwen、Grok或Perplexity。</li>
+      <li><strong>设备</strong> — 带有互联网连接的笔记本电脑/电脑/平板电脑。</li>
+      <li><strong>笔记</strong> — 纸或数字记事本，用于记录AI答案和反思。</li>
+      <li><strong>安静的时间</strong> — 约1小时，不受干扰。</li>
+      <li><strong>好奇心</strong> — 这是最重要的！🔥</li>
+    </ul>
+  </div>
+
+  <div class="box gold">
+    <span class="lbl">🧠 正确的心态</span>
+    <ul>
+      <li>您<strong>不需要是IT专家</strong>就能做这个。</li>
+      <li>您<strong>不需要害怕犯错</strong> — 这里没有任何评判。</li>
+      <li>您是一位<strong>探索者</strong> — 这是一次认知冒险。</li>
+      <li>最终目标：<strong>在家庭中创造健康的认知氛围</strong>。</li>
+    </ul>
+  </div>
+
+  <div class="divider"><span></span><span></span><span></span></div>
+
+  <h2 id="cn-bagian3"><span class="roman">三、</span> 6个实验问题</h2>
+
+  <p><strong>规则：</strong>在<strong>同一个对话会话</strong>中使用所有六个问题 — 不要在问题之间开始新的对话。让AI记住之前问题的上下文。</p>
+
+  <!-- PROMPT 1 CN -->
+  <div class="prompt">
+    <span class="lbl">问题1 — 文明的起源</span>
+    <p>历史学家普遍认为人类最早在什么时候有了文字？请说明其历史背景。</p>
+    <div class="ai-row">
+      <span class="ai-row__label">复制并打开:</span>
+      <button class="ai-btn" data-url="https://claude.ai/new" onclick="copyAndGo(this)">Claude</button>
+      <button class="ai-btn" data-url="https://chat.openai.com/" onclick="copyAndGo(this)">ChatGPT</button>
+      <button class="ai-btn" data-url="https://gemini.google.com/app" onclick="copyAndGo(this)">Gemini</button>
+      <button class="ai-btn" data-url="https://chat.deepseek.com/" onclick="copyAndGo(this)">DeepSeek</button>
+      <button class="ai-btn" data-url="https://copilot.microsoft.com/" onclick="copyAndGo(this)">Copilot</button>
+      <button class="ai-btn" data-url="https://chat.qwen.ai/" onclick="copyAndGo(this)">Qwen</button>
+      <button class="ai-btn" data-url="https://grok.com/" onclick="copyAndGo(this)">Grok</button>
+      <button class="ai-btn" data-url="https://www.perplexity.ai/" onclick="copyAndGo(this)">Perplexity</button>
+    </div>
+  </div>
+
+  <!-- PROMPT 2 CN -->
+  <div class="prompt">
+    <span class="lbl">问题2 — 现代文明</span>
+    <p>历史学家从什么时候开始把人类称为"现代文明"的一部分？是从文字作为传播技术被发明开始的吗？</p>
+    <div class="ai-row">
+      <span class="ai-row__label">复制并打开:</span>
+      <button class="ai-btn" data-url="https://claude.ai/new" onclick="copyAndGo(this)">Claude</button>
+      <button class="ai-btn" data-url="https://chat.openai.com/" onclick="copyAndGo(this)">ChatGPT</button>
+      <button class="ai-btn" data-url="https://gemini.google.com/app" onclick="copyAndGo(this)">Gemini</button>
+      <button class="ai-btn" data-url="https://chat.deepseek.com/" onclick="copyAndGo(this)">DeepSeek</button>
+      <button class="ai-btn" data-url="https://copilot.microsoft.com/" onclick="copyAndGo(this)">Copilot</button>
+      <button class="ai-btn" data-url="https://chat.qwen.ai/" onclick="copyAndGo(this)">Qwen</button>
+      <button class="ai-btn" data-url="https://grok.com/" onclick="copyAndGo(this)">Grok</button>
+      <button class="ai-btn" data-url="https://www.perplexity.ai/" onclick="copyAndGo(this)">Perplexity</button>
+    </div>
+  </div>
+
+  <!-- PROMPT 3 CN -->
+  <div class="prompt">
+    <span class="lbl">问题3 — 理解传播的速度</span>
+    <p>既然文字使知识能够跨代传承，那么从手稿时代到互联网时代，人类理解传播的速度发生了怎样的变化？</p>
+    <div class="ai-row">
+      <span class="ai-row__label">复制并打开:</span>
+      <button class="ai-btn" data-url="https://claude.ai/new" onclick="copyAndGo(this)">Claude</button>
+      <button class="ai-btn" data-url="https://chat.openai.com/" onclick="copyAndGo(this)">ChatGPT</button>
+      <button class="ai-btn" data-url="https://gemini.google.com/app" onclick="copyAndGo(this)">Gemini</button>
+      <button class="ai-btn" data-url="https://chat.deepseek.com/" onclick="copyAndGo(this)">DeepSeek</button>
+      <button class="ai-btn" data-url="https://copilot.microsoft.com/" onclick="copyAndGo(this)">Copilot</button>
+      <button class="ai-btn" data-url="https://chat.qwen.ai/" onclick="copyAndGo(this)">Qwen</button>
+      <button class="ai-btn" data-url="https://grok.com/" onclick="copyAndGo(this)">Grok</button>
+      <button class="ai-btn" data-url="https://www.perplexity.ai/" onclick="copyAndGo(this)">Perplexity</button>
+    </div>
+  </div>
+
+  <!-- PROMPT 4 CN -->
+  <div class="prompt">
+    <span class="lbl">问题4 — 信息与理解</span>
+    <p>区分信息传递的速度与人类对信息的理解速度。两者总是一致的吗？</p>
+    <div class="ai-row">
+      <span class="ai-row__label">复制并打开:</span>
+      <button class="ai-btn" data-url="https://claude.ai/new" onclick="copyAndGo(this)">Claude</button>
+      <button class="ai-btn" data-url="https://chat.openai.com/" onclick="copyAndGo(this)">ChatGPT</button>
+      <button class="ai-btn" data-url="https://gemini.google.com/app" onclick="copyAndGo(this)">Gemini</button>
+      <button class="ai-btn" data-url="https://chat.deepseek.com/" onclick="copyAndGo(this)">DeepSeek</button>
+      <button class="ai-btn" data-url="https://copilot.microsoft.com/" onclick="copyAndGo(this)">Copilot</button>
+      <button class="ai-btn" data-url="https://chat.qwen.ai/" onclick="copyAndGo(this)">Qwen</button>
+      <button class="ai-btn" data-url="https://grok.com/" onclick="copyAndGo(this)">Grok</button>
+      <button class="ai-btn" data-url="https://www.perplexity.ai/" onclick="copyAndGo(this)">Perplexity</button>
+    </div>
+  </div>
+
+  <!-- PROMPT 5 CN -->
+  <div class="prompt">
+    <span class="lbl">问题5 — AI作为理解的翻译者</span>
+    <p>当生成式AI能够帮助人类理解、总结、翻译和个性化知识时，什么发生了变化？</p>
+    <div class="ai-row">
+      <span class="ai-row__label">复制并打开:</span>
+      <button class="ai-btn" data-url="https://claude.ai/new" onclick="copyAndGo(this)">Claude</button>
+      <button class="ai-btn" data-url="https://chat.openai.com/" onclick="copyAndGo(this)">ChatGPT</button>
+      <button class="ai-btn" data-url="https://gemini.google.com/app" onclick="copyAndGo(this)">Gemini</button>
+      <button class="ai-btn" data-url="https://chat.deepseek.com/" onclick="copyAndGo(this)">DeepSeek</button>
+      <button class="ai-btn" data-url="https://copilot.microsoft.com/" onclick="copyAndGo(this)">Copilot</button>
+      <button class="ai-btn" data-url="https://chat.qwen.ai/" onclick="copyAndGo(this)">Qwen</button>
+      <button class="ai-btn" data-url="https://grok.com/" onclick="copyAndGo(this)">Grok</button>
+      <button class="ai-btn" data-url="https://www.perplexity.ai/" onclick="copyAndGo(this)">Perplexity</button>
+    </div>
+  </div>
+
+  <!-- PROMPT 6 CN -->
+  <div class="prompt">
+    <span class="lbl">问题6 — 对传播史的影响</span>
+    <p>如果一个人借助AI获得新的理解，然后AI和互联网使得这种理解能够几乎同时传播和解释给数十亿人——这对人类5000年的传播史意味着什么？</p>
+    <div class="ai-row">
+      <span class="ai-row__label">复制并打开:</span>
+      <button class="ai-btn" data-url="https://claude.ai/new" onclick="copyAndGo(this)">Claude</button>
+      <button class="ai-btn" data-url="https://chat.openai.com/" onclick="copyAndGo(this)">ChatGPT</button>
+      <button class="ai-btn" data-url="https://gemini.google.com/app" onclick="copyAndGo(this)">Gemini</button>
+      <button class="ai-btn" data-url="https://chat.deepseek.com/" onclick="copyAndGo(this)">DeepSeek</button>
+      <button class="ai-btn" data-url="https://copilot.microsoft.com/" onclick="copyAndGo(this)">Copilot</button>
+      <button class="ai-btn" data-url="https://chat.qwen.ai/" onclick="copyAndGo(this)">Qwen</button>
+      <button class="ai-btn" data-url="https://grok.com/" onclick="copyAndGo(this)">Grok</button>
+      <button class="ai-btn" data-url="https://www.perplexity.ai/" onclick="copyAndGo(this)">Perplexity</button>
+    </div>
+  </div>
+
+  <div class="box gold">
+    <span class="lbl">🔍 实验期间需要注意什么</span>
+    <ul>
+      <li><strong>问题1-3：</strong>注意AI是否提供来源，还是仅仅断言事实。</li>
+      <li><strong>问题4-5：</strong>注意AI是否能用具体例子区分抽象概念。</li>
+      <li><strong>问题6：</strong><span class="highlight">这是关键问题。</span>注意AI如何利用前5个问题的上下文来构建答案。</li>
+      <li><strong>问题6之后：</strong>注意AI是否随着上下文积累而展现出推理模式的发展。</li>
+    </ul>
+  </div>
+
+  <div class="divider"><span></span><span></span><span></span></div>
+
+  <h2 id="cn-bagian4"><span class="roman">四、</span> AI回答记录</h2>
+
+  <p>使用下面的区域记录每个问题的答案。同时记录<strong>令人惊讶的事情</strong>和<strong>让您怀疑的事情</strong>。</p>
+
+  <div class="note-area"><label>📝 问题1 — AI答案与笔记</label><textarea rows="3" placeholder="写下AI对问题1的答案..."></textarea></div>
+  <div class="note-area"><label>📝 问题2 — AI答案与笔记</label><textarea rows="3" placeholder="写下AI对问题2的答案..."></textarea></div>
+  <div class="note-area"><label>📝 问题3 — AI答案与笔记</label><textarea rows="3" placeholder="写下AI对问题3的答案..."></textarea></div>
+  <div class="note-area"><label>📝 问题4 — AI答案与笔记</label><textarea rows="3" placeholder="写下AI对问题4的答案..."></textarea></div>
+  <div class="note-area"><label>📝 问题5 — AI答案与笔记</label><textarea rows="3" placeholder="写下AI对问题5的答案..."></textarea></div>
+  <div class="note-area"><label>📝 问题6 — AI答案与笔记</label><textarea rows="3" placeholder="写下AI对问题6的答案..."></textarea></div>
+
+  <div class="divider"><span></span><span></span><span></span></div>
+
+  <h2 id="cn-bagian5"><span class="roman">五、</span> 反思</h2>
+
+  <p>完成6个问题后，花时间反思您的体验。这将帮助您为与孩子的三方对话做准备。</p>
+
+  <div class="box ember">
+    <span class="lbl">🤔 给家长的反思问题</span>
+    <ul>
+      <li><strong>3件最令人惊讶的事：</strong>您没想到的是什么？</li>
+      <li><strong>1件让您怀疑的事：</strong>哪个AI答案让您不确定？</li>
+      <li><strong>1个新问题：</strong>实验后您想到了什么问题？</li>
+      <li><strong>您感觉如何？</strong>您是否更有信心邀请孩子？</li>
+      <li><strong>您用了哪个AI？</strong>为什么选择那个？</li>
+    </ul>
+  </div>
+
+  <div class="note-area"><label>📝 我的反思</label><textarea rows="4" placeholder="在这里写下您的反思..."></textarea></div>
+
+  <div class="box gold">
+    <span class="lbl">📌 三方对话的笔记</span>
+    <ul>
+      <li><strong>您会告诉孩子什么？</strong>您想分享什么有趣的事情？</li>
+      <li><strong>哪部分最适合孩子？</strong>哪个问题最容易让孩子理解？</li>
+      <li><strong>您会如何开始？</strong>"我刚才试了一些有趣的事情..."</li>
+    </ul>
+  </div>
+
+  <div class="divider"><span></span><span></span><span></span></div>
+
+  <h2 id="cn-bagian6"><span class="roman">六、</span> 三方对话指南（家长–AI–孩子）</h2>
+
+  <div class="box jade">
+    <span class="lbl">🎯 什么是三方对话？</span>
+    <p><strong>三方对话 = 三方对话：家长 + AI + 孩子。</strong></p>
+    <p>家长充当<strong>引导者</strong> — 不是老师，不是法官，而是<strong>向导</strong>，确保孩子和AI之间的对话安全且富有成效。</p>
+  </div>
+
+  <h3>第1步 — 开启会话</h3>
+  <div class="box">
+    <span class="lbl">💬 开场白</span>
+    <p style="font-style:italic; color:var(--ink);">"我刚才试了一些有趣的事情。我问了AI关于文字和文明的历史。结果真的很有意思！想看看吗？"</p>
+    <p style="font-style:italic; color:var(--ink);">"我们一起做吧。你来提问，我帮你打字。让我们看看AI怎么说。"</p>
+  </div>
+
+  <h3>第2步 — 一起进行6个问题</h3>
+  <div class="box">
+    <span class="lbl">📋 三方对话中的角色</span>
+    <table>
+      <tr><th>角色</th><th>活动</th><th>目的</th></tr>
+      <tr><td><strong>家长</strong></td><td>引导者、打字、保持专注、提出后续问题</td><td>确保安全和方向</td></tr>
+      <tr><td><strong>AI</strong></td><td>回答问题、回应阐述</td><td>提供耐心的"讨论伙伴"</td></tr>
+      <tr><td><strong>孩子</strong></td><td>提问、请求阐述、回应AI、提出自己的问题</td><td>培养好奇心和批判性思维</td></tr>
+    </table>
+  </div>
+
+  <div class="box gold">
+    <span class="lbl">📌 三方对话规则</span>
+    <ul>
+      <li><strong>家长不给出答案</strong> — 让AI回答，家长只引导。</li>
+      <li><strong>孩子可以自由提问</strong> — 想到什么就问什么，没有愚蠢的问题。</li>
+      <li><strong>家长帮助构思问题</strong> — 如果孩子不知道如何提问，家长帮助措辞。</li>
+      <li><strong>每次回答后进行讨论</strong> — "你觉得AI的回答怎么样？"</li>
+      <li><strong>没有评判</strong> — 所有问题都是好问题。没有什么是错误的。</li>
+    </ul>
+  </div>
+
+  <h3>第3步 — 三方对话结束后</h3>
+  <div class="box">
+    <span class="lbl">💬 结束语</span>
+    <p style="font-style:italic; color:var(--ink);">"那么，你觉得怎么样？很有意思吧？有什么让你更好奇的事情吗？"</p>
+    <p style="font-style:italic; color:var(--ink);">"我们可以下次再试，用不同的问题。或者你想问一些你自己好奇的事情？"</p>
+  </div>
+
+  <div class="divider"><span></span><span></span><span></span></div>
+
+  <h2 id="cn-bagian7"><span class="roman">七、</span> 三方对话记录模板</h2>
+
+  <p>使用下面的区域记录与孩子进行三方对话时的重要时刻。</p>
+
+  <div class="note-area"><label>👶 孩子的自发问题</label><textarea rows="2" placeholder="写下孩子在6个问题之外提出的问题..."></textarea></div>
+  <div class="note-area"><label>😊 有趣时刻 / 惊喜</label><textarea rows="2" placeholder="写下让孩子惊讶或感兴趣的时刻..."></textarea></div>
+  <div class="note-area"><label>💡 孩子学到的新东西</label><textarea rows="2" placeholder="写下孩子从这次会话中学到的东西..."></textarea></div>
+  <div class="note-area"><label>❤️ 孩子的感言（感受、评论）</label><textarea rows="2" placeholder="写下孩子关于这次体验所说的话..."></textarea></div>
+  <div class="note-area"><label>📝 家长在三方对话后的反思</label><textarea rows="3" placeholder="您感觉如何？哪些有效？哪些需要改进？"></textarea></div>
+
+  <div class="footer-meta">
+    <p>作为家长指南编写 — 个人实验，非正式学术研究。</p>
+    <p style="margin-top:4px;">© 2026 Mbah Hogi Bejo (Go Kian Tik) · 自主者 · Superhero Cafe Inside</p>
+    <p style="margin-top:4px; font-size:10px;">设计用于打印或保存为PDF — 所有数据保留在您的设备上。</p>
+  </div>
+
+</div><!-- end wrap -->
+</div><!-- end CN -->
+
+<!-- ============================================================ -->
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+// ============================================================
+// LANGUAGE SWITCH
+// ============================================================
+function setLang(lang) {
+  document.querySelectorAll('.lang-block').forEach(function(el) {
+    el.classList.toggle('active', el.dataset.lang === lang);
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  window.scrollTo({top: 0, behavior: 'instant'});
+}
+
+// ============================================================
+// COPY PROMPT & OPEN AI
+// ============================================================
+function copyAndGo(btn) {
+  var promptEl = btn.closest('.prompt').querySelector('p');
+  var text = promptEl ? promptEl.innerText : '';
+  var url = btn.dataset.url;
+  var originalLabel = btn.textContent;
+
+  function openTab() {
+    if (url) window.open(url, '_blank', 'noopener');
+  }
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function() {
+      btn.textContent = '✓';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = originalLabel;
+        btn.classList.remove('copied');
+      }, 1400);
+      openTab();
+    }).catch(function() { openTab(); });
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '✓';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = originalLabel;
+      btn.classList.remove('copied');
+    }, 1400);
+    openTab();
+  }
+}
+
+// ============================================================
+// TOC SMOOTH SCROLL
+// ============================================================
+document.querySelectorAll('.toc a').forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    var href = this.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      var target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  });
+});
+
+console.log('📘 Panduan Parent — Eksperimen 6 Pertanyaan dengan AI');
+console.log('✍️ Mbah Hogi Bejo (Go Kian Tik) · Zi Zhu Zhe');
+</script>
+
+</body>
+</html>
